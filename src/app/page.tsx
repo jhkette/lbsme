@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Login from "@/components/forms/Login";
 export default function Home() {
   return (
     
@@ -11,10 +12,9 @@ export default function Home() {
           <Image src="./images/home/Bird.svg" alt="Bird" width={500} height={500} className="mx-12" />
           </div>
           <div className="flex flex-col items-center justify-center h-screen  w-1/2">
-           <Image src="./images/home/imagelogo08.svg" alt="Logo" width={75} height={75} className="mb-4"/>  
-          <input type="text" placeholder="Enter your name" className="w-3/4 p-4 rounded-lg mb-4 text-lg border-1 border-black" />
-          <input type="email" placeholder="Enter your email address" className="w-3/4 p-4 rounded-lg mb-4 text-lg border-1 border-black" />
-          <input type="submit" value="Login" className="w-3/4 p-4 rounded-lg mb-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300" />
+           <Image src="./images/home/imagelogo08.svg" alt="Logo" width={75} height={75} className="mb-4"/> 
+           <h2 className="text-2xl font-bold text-lbtext mb-4 px-12 text-center">Log into your account</h2>
+           <Login />
           </div>
         </div>
 
