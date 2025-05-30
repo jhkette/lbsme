@@ -1,4 +1,4 @@
-import DashboardSubs from "@/components/DashboardSubs";
+import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
 import { format } from "date-fns";
 export default function Home() {
   const username = "Test user"; // Placeholder for username, can be replaced with actual user data
