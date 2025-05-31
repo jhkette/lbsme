@@ -15,7 +15,7 @@ export default function Login() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-fit mx-auto text-center">
       <input
         type="text"
         {...register("name")}

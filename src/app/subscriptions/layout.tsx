@@ -1,5 +1,5 @@
-import Header from "@/components/coreui/header";
-import Sidebar from "@/components/coreui/Sidebar";
+import Header from "@/components/lbcoreui/header";
+import Sidebar from "@/components/lbcoreui/Sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

@@ -26,7 +26,7 @@ function Header({ }) {
                     width={35}
                     height={35}
                     className="object-contain" />
-                <p> {username}</p>
+              
            <DropdownMenuComponent />
 
             </div>

@@ -17,37 +17,33 @@ import {
 
 export function DropdownMenuComponent() {
   return (
-    <DropdownMenu>
+    <DropdownMenu >
       <DropdownMenuTrigger asChild>
-        <Image
-          src="/chevron-down.svg"
-          alt="profile image"
-          width={25}
-          height={25}
-          className="object-contain"
-        />
+        <div className="flex items-center mt-2 gap-2 cursor-pointer hover:bg-lblgreen ease-in-out rounded-lg py-2 px-4">
+          Test User
+          <Image
+            src="/chevron-down.svg"
+            alt="profile image"
+            width={25}
+            height={25}
+            className="object-contain"
+          />
+        </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" 
-      align="start"
-  side="bottom"
- >
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent className="w-96 mr-4" align="start" side="bottom">
+        <DropdownMenuLabel>Profile</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
+            Personal details
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Billing
+            Connected bank accounts
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Settings
+            Subscription list
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Keyboard shortcuts
-            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
