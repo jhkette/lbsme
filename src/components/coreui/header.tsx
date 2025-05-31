@@ -1,6 +1,6 @@
 "use client";
 import Image from 'next/image'
-
+import { DropdownMenuComponent } from './DropDownMenu';
 function Header({ }) {
     const username = "Test user"; // Placeholder for username, can be replaced with actual user data
     return (
@@ -27,12 +27,7 @@ function Header({ }) {
                     height={35}
                     className="object-contain" />
                 <p> {username}</p>
-                <Image
-                    src="/chevron-down.svg"
-                    alt="profile image"
-                    width={25}
-                    height={25}
-                    className="object-contain" />
+           <DropdownMenuComponent />
 
             </div>
         </div>

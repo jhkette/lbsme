@@ -2,14 +2,14 @@
 import Image from "next/image";
 export default function Sidebar() {
   return (
-    <div className="bg-lbgreen w-36 h-dvh flex flex-col">
+    <div className="bg-lbgreen w-32 h-dvh flex flex-col">
       <nav>
         <ul className="flex flex-col justify-center ">
           <li
             className="p-6 flex flex-col items-center justify-center text-lbgreen text-lg cursor w-full bg-white ease-in-out"
             onClick={() => {}}
           >
-            <Image src="/Homegreen.svg" alt="list" width="36" height="36" />
+            <Image src="/Homegreen.svg" alt="list" width="32" height="32" />
             Home
           </li>
           <li
@@ -19,8 +19,8 @@ export default function Sidebar() {
             <Image
               src="/List.svg"
               alt="list"
-              width="36"
-              height="36"
+              width="32"
+              height="32"
               className="bg-lbgreen"
             />
             Subs
@@ -29,21 +29,21 @@ export default function Sidebar() {
             className="p-6 flex flex-col items-center justify-center text-white text-lg cursor hover:bg-white ease-in-out"
             onClick={() => {}}
           >
-            <Image src="/Activity.svg" alt="list" width="36" height="36" />
+            <Image src="/Activity.svg" alt="list" width="32" height="32" />
             Analytics
           </li>
           <li
             className="p-6 flex flex-col items-center justify-center text-white text-lg cursor hover:bg-white ease-in-out"
             onClick={() => {}}
           >
-            <Image src="/Dollar.svg" alt="list" width="36" height="36" />
+            <Image src="/Dollar.svg" alt="list" width="32" height="32" />
             Payments
           </li>
           <li
             className=" p-6 flex flex-col items-center justify-center text-white text-lg cursor hover:bg-white ease-in-out "
             onClick={() => {}}
           >
-            <Image src="/Tag.svg" alt="list" width="36" height="36" />
+            <Image src="/Tag.svg" alt="list" width="32" height="32" />
             Marketplace
           </li>
         </ul>

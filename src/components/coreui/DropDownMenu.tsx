@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -29,7 +30,7 @@ export function DropdownMenuComponent() {
       <DropdownMenuContent className="w-56" 
       align="start"
   side="bottom"
-  avoidCollisions={false}>
+ >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
