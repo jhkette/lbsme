@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 export default function Home() {
   const username = "Test user"; // Placeholder for username, can be replaced with actual user data
-  const date = new Date(2025, 4, 30); // May 30, 2025 (months are 0-indexed)
+  const date = new Date(); 
   const formattedDate = format(date, "EEEE, do MMMM yyyy");
   return (
     <div className="px-12 w-full">
