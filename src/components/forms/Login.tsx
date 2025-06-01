@@ -18,33 +18,38 @@ export default function Login() {
 
   const onSubmit: SubmitHandler<SignInData> = (data) => console.log(data);
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-fit mx-auto text-center">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full text-center flex flex-col items-center justify-center">
       <input
         type="text"
         {...register("email")}
         placeholder="Enter your name"
-        className="w-3/4 p-4 rounded-lg my-8 text-lg border-1 border-black"
+        className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
+       <div className=" w-3/4 h-4">
       {errors.email && (
-        <p className="text-red-500 text-sm mb-4">
+        <p className="text-red-500 text-sm">
           {errors.email.message}
         </p>
       )}
+      </div>
+      
       <input
         type="text"
         {...register("password")}
         placeholder="Enter your email address"
-        className="w-3/4 p-4 rounded-lg mb-8 text-lg border-1 border-black"
+        className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
+      <div className=" w-3/4 h-4">
       {errors.password && (
-        <p className="text-red-500 text-sm mb-4">
+        <p className="text-red-500 text-sm">
           {errors.password.message}
         </p>
       )}
+      </div>
       <input
         type="submit"
         value="Login"
-        className="w-3/4 p-4 rounded-lg mb-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+        className="w-3/4 p-4 rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
     </form>
   );
