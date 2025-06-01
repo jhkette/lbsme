@@ -1,30 +1,33 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { UserSchema, SignInData } from "@/schemas/signinSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type Inputs = {
-  name: string;
-  email: string;
-};
+
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    // watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+    setError,
+  } = useForm<SignInData>({
+    resolver: zodResolver(UserSchema)
+  } )
+
+
+  const onSubmit: SubmitHandler<SignInData> = (data) => console.log(data);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-fit mx-auto text-center">
       <input
         type="text"
-        {...register("name")}
+        {...register("email")}
         placeholder="Enter your name"
         className="w-3/4 p-4 rounded-lg my-8 text-lg border-1 border-black"
       />
       <input
         type="email"
-        {...register("email")}
+        {...register("password")}
         placeholder="Enter your email address"
         className="w-3/4 p-4 rounded-lg mb-8 text-lg border-1 border-black"
       />
