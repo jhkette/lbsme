@@ -13,7 +13,12 @@ export default function Login() {
     resolver: zodResolver(UserSchema),
   });
 
-  const onSubmit: SubmitHandler<SignInData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignInData> = (data) => {
+    if(errors.email || errors.password) {
+      console.log("There are errors in the form");
+    }
+    console.log(data);
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
