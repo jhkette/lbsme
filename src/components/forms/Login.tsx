@@ -25,12 +25,22 @@ export default function Login() {
         placeholder="Enter your name"
         className="w-3/4 p-4 rounded-lg my-8 text-lg border-1 border-black"
       />
+      {errors.email && (
+        <p className="text-red-500 text-sm mb-4">
+          {errors.email.message}
+        </p>
+      )}
       <input
-        type="email"
+        type="text"
         {...register("password")}
         placeholder="Enter your email address"
         className="w-3/4 p-4 rounded-lg mb-8 text-lg border-1 border-black"
       />
+      {errors.password && (
+        <p className="text-red-500 text-sm mb-4">
+          {errors.password.message}
+        </p>
+      )}
       <input
         type="submit"
         value="Login"
