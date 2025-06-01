@@ -4,7 +4,8 @@ export default function Sidebar() {
   return (
     <div className="bg-lbgreen w-32 h-dvh flex flex-col">
       <nav>
-        <ul className="flex flex-col justify-center ">
+        <ul className="flex flex-col min-h-[750px] justify-between">
+          <div>
           <li
             className="p-6 flex flex-col items-center justify-center text-lbgreen text-lg cursor w-full bg-white ease-in-out"
             onClick={() => {}}
@@ -46,6 +47,16 @@ export default function Sidebar() {
             <Image src="/Tag.svg" alt="list" width="32" height="32" />
             Marketplace
           </li>
+          </div>
+          <div className="" >
+           <li
+            className=" p-6 flex flex-col items-center justify-center text-white text-lg cursor hover:bg-white ease-in-out "
+            onClick={() => {}}
+          >
+            <Image src="/images/sidebar/help.svg" alt="list" width="32" height="32" />
+           Help
+          </li>
+          </div>
         </ul>
       </nav>
     </div>
