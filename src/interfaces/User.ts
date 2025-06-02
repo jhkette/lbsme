@@ -1,10 +1,12 @@
 interface User {
+  username: string;
   email: string;
   emailVerified: boolean;
   familyName: string;
   givenName: string;
-  termsAndConditions: string;
   phoneNumber?: string;
   postcode?: string;
+  termsAndConditions: boolean;
+  accessToken: string;
+  refreshToken: string;
 }
-export default User;
