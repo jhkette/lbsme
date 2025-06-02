@@ -1,14 +1,12 @@
-
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
-import Head from 'next/head';
+import Head from "next/head";
 import "./globals.css";
+import { UserProvider } from "@/contexts/UserContext/UserProvider";
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",
   subsets: ["latin"],
 });
-
-
 
 export const metadata: Metadata = {
   title: "Little Birdie",
@@ -21,13 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <html lang="en" className={`${mulishSans.variable} antialiased`}>
-     <Head>
+    <html lang="en" className={`${mulishSans.variable} antialiased`}>
+      <Head>
         <meta name="robots" content="noindex,nofollow" />
       </Head>
-      <body className="antialiased">
-        <main>{children}</main>
-      </body>
+      <UserProvider>
+        <body className="antialiased">
+          <main>{children}</main>
+        </body>
+      </UserProvider>
     </html>
   );
 }

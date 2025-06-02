@@ -27,6 +27,7 @@ export const handleLogin = async (email: string, password: string) => {
     if (result.error) {
       throw new Error(result.message);
     }
+    return result;
   } catch (error) {
     console.error("Login failed:", error);
   }

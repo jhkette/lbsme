@@ -26,7 +26,7 @@ PNPM is used to install dependencies. The easiest way to install pnpm itself is 
 
 ### Nextjs ###
 
-Nextjs is built on the react library. It features Server Side rendering (the site renders on the server as well as the clien) which improves SEO. It also features built in routing - so folder names can be used to create dynamic routes. It also allows the devloper to create backend API routes or server functions that are run on the server.[https://nextjs.org/](https://nextjs.org/)
+Nextjs is built on the react library. It features Server Side rendering (the site renders on the server as well as the clien) which improves SEO. It also features built in routing - so folder names can be used to create dynamic routes. It also allows the devloper to create backend API routes or server functions that are run on the server.[https://nextjs.org/](https://nextjs.org/). [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 
  ### Txailwind ###
@@ -48,35 +48,6 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
 * Repo owner or admin
 * Other community or team contactThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 

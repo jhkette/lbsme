@@ -1,42 +1,49 @@
 "use client";
-import {useState} from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon } from 'lucide-react'
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { handleLogin } from "@/actions/login";
-
-
-
+import { useUser } from "@/contexts/UserContext/UserProvider";
 export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors
+    clearErrors,
   } = useForm<SignInData>({
     resolver: zodResolver(UserSchema),
   });
 
-  const [showPassword, setShowPassword] = useState(false);// Toggle for password visibility
-  
+  const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+
   const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);  
-  }
-  
-  const type = showPassword ? 'text' : 'password'
-  const Icon = showPassword ?  EyeIcon : EyeOffIcon 
+    setShowPassword((prev) => !prev);
+  };
+  const { setUser } = useUser();
+  const type = showPassword ? "text" : "password";
+  const Icon = showPassword ? EyeIcon : EyeOffIcon;
 
   const onSubmit: SubmitHandler<SignInData> = async (data) => {
-    if(errors.email || errors.password) {
+    if (errors.email || errors.password) {
       console.log("There are errors in the form");
       return;
     }
     clearErrors();
-    console.log(data);
-    console.log(process.env.NEXT_PUBLIC_LOGIN_URL, process.env.NEXT_PUBLIC_ENCRYPTION_KEY);
-    const logdata = await  handleLogin(data.email, data.password)
-    console.log("Login data:", logdata);
+    const logdata = await handleLogin(data.email, data.password);
+    setUser({
+      username: logdata.username || "",
+      email: logdata.email || "",
+      emailVerified: logdata.emailVerified || false,
+      familyName: logdata.familyName || "",
+      givenName: logdata.givenName || "",
+      phoneNumber: logdata.phoneNumber || "",
+      postcode: logdata.postcode || "",
+      termsAndConditions: logdata.termsAndConditions || false,
+      accessToken: logdata.access_token || "",
+      refreshToken: logdata.refreshToken || "",
+    });
   };
   return (
     <form
@@ -54,7 +61,6 @@ export default function Login() {
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
       </div>
-
       <input
         type={type}
         {...register("password")}
@@ -62,14 +68,12 @@ export default function Login() {
         className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
       <button
-        type='button'
-        className='absolute right-28  cursor-pointer'
+        type="button"
+        className="absolute right-28  cursor-pointer"
         onClick={togglePasswordVisibility}
       >
-        <Icon className='stroke-muted-foreground size-8' />
+        <Icon className="stroke-muted-foreground size-8" />
       </button>
-    
-      
       <div className=" w-3/4 h-4">
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
