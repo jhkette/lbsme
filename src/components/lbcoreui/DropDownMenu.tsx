@@ -22,7 +22,7 @@ export function DropdownMenuComponent() {
         <div className="flex items-center mt-2 gap-2 cursor-pointer hover:bg-lblgreen ease-in-out rounded-lg py-2 px-4">
           Test User
           <Image
-            src="/chevron-down.svg"
+            src="/images/header/chevron-down.svg"
             alt="profile image"
             width={25}
             height={25}
