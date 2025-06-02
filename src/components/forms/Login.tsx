@@ -1,4 +1,5 @@
 "use client";
+import {useState} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,15 +11,22 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
     setError,
+    clearErrors
   } = useForm<SignInData>({
     resolver: zodResolver(UserSchema),
   });
 
+  const [passwordVisible, setPasswordVisible] = useState(false);// Toggle for password visibility
+  
+  const togglePasswordVisibility = () => {
+
+  }
   const onSubmit: SubmitHandler<SignInData> = async (data) => {
     if(errors.email || errors.password) {
       console.log("There are errors in the form");
       return;
     }
+    clearErrors();
     console.log(data);
   //   try {
   //     const loginUrl = process.env.LOGIN_URL;
@@ -66,9 +74,9 @@ export default function Login() {
       </div>
 
       <input
-        type="hidden"
+        type="password"
         {...register("password")}
-        placeholder="Enter your email address"
+        placeholder="Enter your littlebirdie password"
         className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
       <div className=" w-3/4 h-4">
