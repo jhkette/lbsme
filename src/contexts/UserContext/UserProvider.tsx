@@ -1,16 +1,17 @@
+"use client";
 import { createContext, useState, useContext, ReactNode } from 'react';
 
 interface User {
-  username: string;
+  username?: string;
   email: string;
-  emailVerified: boolean;
+  emailVerified?: boolean;
   familyName: string;
   givenName: string;
   phoneNumber: string;
-  postcode: string;
-  termsAndConditions: boolean;
-  accessToken: string;
-  refreshToken: string;
+  postcode?: string;
+  termsAndConditions?: boolean;
+  accessToken?: string;
+  refreshToken?: string;
 }
 
 interface UserContextType {

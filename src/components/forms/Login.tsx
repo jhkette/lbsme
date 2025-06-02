@@ -32,17 +32,15 @@ export default function Login() {
     }
     clearErrors();
     const logdata = await handleLogin(data.email, data.password);
+    console.log("Login data:", logdata);
     setUser({
-      username: logdata.username || "",
-      email: logdata.email || "",
-      emailVerified: logdata.emailVerified || false,
-      familyName: logdata.familyName || "",
-      givenName: logdata.givenName || "",
-      phoneNumber: logdata.phoneNumber || "",
-      postcode: logdata.postcode || "",
-      termsAndConditions: logdata.termsAndConditions || false,
-      accessToken: logdata.access_token || "",
-      refreshToken: logdata.refreshToken || "",
+      username: logdata.data.username || "",
+      email: logdata.data.email || "",
+      emailVerified: logdata.data.emailVerified || false,
+      familyName: logdata.data.familyName || "",
+      givenName: logdata.data.givenName || "",
+      phoneNumber: logdata.data.phoneNumber || "",
+      postcode: logdata.data.postcode || ""
     });
   };
   return (
