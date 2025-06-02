@@ -3,6 +3,8 @@ import {useState} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { EyeIcon, EyeOffIcon } from 'lucide-react'
+
 import { AES } from "crypto-js";
 
 export default function Login() {
@@ -10,17 +12,20 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
     clearErrors
   } = useForm<SignInData>({
     resolver: zodResolver(UserSchema),
   });
 
-  const [passwordVisible, setPasswordVisible] = useState(false);// Toggle for password visibility
+  const [showPassword, setShowPassword] = useState(false);// Toggle for password visibility
   
   const togglePasswordVisibility = () => {
-
+    setShowPassword((prev) => !prev);  
   }
+  
+  const type = showPassword ? 'text' : 'password'
+  const Icon = showPassword ?  EyeIcon : EyeOffIcon 
+
   const onSubmit: SubmitHandler<SignInData> = async (data) => {
     if(errors.email || errors.password) {
       console.log("There are errors in the form");
@@ -59,7 +64,7 @@ export default function Login() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full text-center flex flex-col items-center justify-center"
+      className="w-full text-center flex flex-col items-center justify-center relative"
     >
       <input
         type="email"
@@ -74,11 +79,20 @@ export default function Login() {
       </div>
 
       <input
-        type="password"
+        type={type}
         {...register("password")}
         placeholder="Enter your littlebirdie password"
         className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
+      <button
+        type='button'
+        className='absolute right-28  cursor-pointer'
+        onClick={togglePasswordVisibility}
+      >
+        <Icon className='stroke-muted-foreground size-8' />
+      </button>
+    
+      
       <div className=" w-3/4 h-4">
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
