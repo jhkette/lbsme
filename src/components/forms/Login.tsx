@@ -4,8 +4,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
+import { handleLogin } from "@/actions/login";
 
-import { AES } from "crypto-js";
+
 
 export default function Login() {
   const {
@@ -33,33 +34,9 @@ export default function Login() {
     }
     clearErrors();
     console.log(data);
-  //   try {
-  //     const loginUrl = process.env.LOGIN_URL;
-  //     if (!loginUrl) {
-  //       throw new Error("LOGIN_URL environment variable is not defined");
-  //     }
-  //     const encryptionKey = process.env.ENCRYPTION_KEY;
-  //     if (!encryptionKey) {
-  //       throw new Error("ENCRYPTION_KEY environment variable is not defined");
-  //     }
-  //     const res = await fetch(loginUrl, {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         email: data.email,
-  //         password: AES.encrypt(data.password, encryptionKey).toString(),
-  //       }),
-  //     });
-
-  //     const result = await res.json();
-
-  //     if (result.error) {
-  //       throw new Error(result.message);
-  //     }
-  // }
-  //   catch (error) {
-  //     console.error("Login failed:", error);
-    
-  //   }
+    console.log(process.env.NEXT_PUBLIC_LOGIN_URL, process.env.NEXT_PUBLIC_ENCRYPTION_KEY);
+    const logdata = await  handleLogin(data.email, data.password)
+    console.log("Login data:", logdata);
   };
   return (
     <form
@@ -69,7 +46,7 @@ export default function Login() {
       <input
         type="email"
         {...register("email")}
-        placeholder="Enter your name"
+        placeholder="Enter your email address"
         className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
       <div className=" w-3/4 h-4">
@@ -81,7 +58,7 @@ export default function Login() {
       <input
         type={type}
         {...register("password")}
-        placeholder="Enter your littlebirdie password"
+        placeholder="Enter your Littlebirdie password"
         className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
       />
       <button
