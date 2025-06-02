@@ -7,7 +7,7 @@ export type SignInData = {
   };
  
 export const UserSchema:  ZodType<SignInData> = z.object({ 
-  email: z.string().min(3, "Username must be at least 3 characters long"),
+  email: z.string().email( "Please enter a valid email address"),
   
   password: z.string().min(3, "password must be at least 3 characters long"),
 });
