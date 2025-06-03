@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function DashboardSubs() {
+ 
 
   const subscriptions = 12; // Placeholder for total subscriptions, can be replaced with actual data
   const monthlySpending = 250; // Placeholder for monthly spending, can be replaced with actual data
