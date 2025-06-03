@@ -11,7 +11,9 @@ export const handleLogin = async (email: string, password: string) => {
     const encryptionKey = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
     if (!encryptionKey) {
       throw new Error("environment variable is not defined");
+
     }
+    (await cookies()).delete("token"); // Clear any existing token cookie
     // post request to the login URL with encrypted password and email
     const res = await fetch(loginUrl, {
       method: "POST",

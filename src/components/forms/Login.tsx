@@ -9,6 +9,7 @@ import { handleLogin } from "@/actions/login";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import { cn } from "@/lib/utils";
 
+
 export default function Login() {
   const {
     register,
@@ -23,13 +24,15 @@ export default function Login() {
   const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
   const [loading, setLoading] = useState(false); // State to manage loading /not loading
   
+  // get user data from UserContext
+  const { setUser } = useUser();
   // next/navigatation setup to move to dashboard after login
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-  const { setUser } = useUser();
+  
   const type = showPassword ? "text" : "password";
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
 

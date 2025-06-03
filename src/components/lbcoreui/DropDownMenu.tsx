@@ -16,40 +16,46 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 export function DropdownMenuComponent() {
-
   const { user } = useUser();
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="flex items-center mt-2 gap-2 cursor-pointer hover:bg-lblgreen ease-in-out rounded-lg py-2 px-4">
           {user?.givenName} {user?.familyName}
-          <Image
-            src="/images/header/chevron-down.svg"
-            alt="profile image"
-            width={25}
-            height={25}
-            className="object-contain"
-          />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-96 mr-4" align="start" side="bottom">
-        <DropdownMenuLabel>Profile</DropdownMenuLabel>
+      <DropdownMenuContent className="w-100 mx-4" align="start" side="bottom">
+        <DropdownMenuLabel>
+          <div className="w-full flex flex-row items-end-safe">
+            <h3 className="text-2xl text-lbgreen block pb-4">Profile</h3>
+            <Image
+              src="/lbgraphic.png"
+              alt="profile image"
+              width={500}
+              height={200}
+              className="w-full h-auto object-contain block p-4"
+            />
+          </div>
+        </DropdownMenuLabel>
+
         <DropdownMenuGroup>
+        
           <DropdownMenuItem className="text-lg">
             Personal details
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-lg">
-            Connected bank accounts
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
+
           <DropdownMenuItem className="text-lg">
             Subscription list
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-lg">
+            Saving history at glance
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-lg text-gray-400">
+            Security
+          </DropdownMenuLabel>
           <DropdownMenuItem className="text-lg">Team</DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>

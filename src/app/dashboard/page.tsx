@@ -14,7 +14,7 @@ export default function Home() {
         height={300}
         width={500}
         alt="graphic"
-        className="absolute -top-1 right-40"
+        className="absolute -top-3 z-0 right-40"
       />
       <DashboardSubs />
     </div>

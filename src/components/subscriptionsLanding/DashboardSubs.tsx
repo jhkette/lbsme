@@ -9,7 +9,7 @@ export default function DashboardSubs() {
   const expectedMonthlySavings = 50; // Placeholder for expected monthly savings, can be replaced with actual data
   const expectedYearlySavings = 600; // Placeholder for expected yearly savings, can be replaced with actual data
   return (
-    <div className='flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 w-full h-36'>
+    <div className='flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 w-full h-36 z-1' >
         <div className='flex flex-col justify-center items-center w-1/5'>
             <p className='text-4xl font-semibold py-2'>{subscriptions}</p>
             <p className='text-lg font-base'>Subscriptions</p>
