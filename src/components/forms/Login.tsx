@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
 import { handleLogin } from "@/actions/login";
 import { useUser } from "@/contexts/UserContext/UserProvider";
+import { cn } from "@/lib/utils";
+import { set } from "date-fns";
 export default function Login() {
   const {
     register,
@@ -17,6 +20,11 @@ export default function Login() {
   });
 
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+  const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
+  const [loading, setLoading] = useState(false); // State to manage loading /not loading
+  
+  // next/navigatation setup to move to dashboard after login
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -26,13 +34,21 @@ export default function Login() {
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
 
   const onSubmit: SubmitHandler<SignInData> = async (data) => {
+    setLoading(true); // Set loading state to true
     if (errors.email || errors.password) {
       console.log("There are errors in the form");
       return;
     }
-    clearErrors();
+    clearErrors(); // clear any previous errors
+    setLoginError(null); // Clear previous login error
     const logdata = await handleLogin(data.email, data.password);
     console.log("Login data:", logdata);
+    if (logdata.error) {
+      console.log("Login failed:", logdata.error);
+      setLoginError("Login failed. Please check your credentials.");
+      setLoading(false); // Set loading state to false
+      return;
+    }
     setUser({
       username: logdata.data.username || "",
       email: logdata.data.email || "",
@@ -40,8 +56,10 @@ export default function Login() {
       familyName: logdata.data.familyName || "",
       givenName: logdata.data.givenName || "",
       phoneNumber: logdata.data.phoneNumber || "",
-      postcode: logdata.data.postcode || ""
+      postcode: logdata.data.postcode || "",
     });
+     setLoading(false); // Set loading state to false after successful login
+    router.push("/dashboard");
   };
   return (
     <form
@@ -49,10 +67,13 @@ export default function Login() {
       className="w-full text-center flex flex-col items-center justify-center relative"
     >
       <input
-        type="email"
+        type="text"
         {...register("email")}
         placeholder="Enter your email address"
-        className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
+        className={cn(
+          "w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black",
+          errors.email ? "bg-red-100" : ""
+        )}
       />
       <div className=" w-3/4 h-4">
         {errors.email && (
@@ -63,11 +84,14 @@ export default function Login() {
         type={type}
         {...register("password")}
         placeholder="Enter your Littlebirdie password"
-        className="w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black"
+        className={cn(
+          "w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black",
+          errors.password ? "bg-red-100" : ""
+        )}
       />
       <button
         type="button"
-        className="absolute right-28  cursor-pointer"
+        className="absolute right-28 mb-4  cursor-pointer"
         onClick={togglePasswordVisibility}
       >
         <Icon className="stroke-muted-foreground size-8" />
@@ -82,6 +106,14 @@ export default function Login() {
         value="Login"
         className="w-3/4 p-4 rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
+      { loading &&
+         <Loader
+        className="size-8 text-lbgreen animate-spin"/>
+      }
+     
+      <div className=" w-3/4 h-4">
+        {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
+      </div>
     </form>
   );
 }
