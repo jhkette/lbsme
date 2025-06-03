@@ -22,12 +22,13 @@ export const handleLogin = async (email: string, password: string) => {
     });
 
     const result = await res.json();
-    (await cookies()).set("data", JSON.stringify(result));
+   
     console.log("Login result:", result);
 
     if (result.error) {
       return { error: result.error };
     }
+     (await cookies()).set("token", JSON.stringify(result.data.access_token));
     return result;
   } catch (error) {
     console.error("Login failed:", error);
