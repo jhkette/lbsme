@@ -1,18 +1,14 @@
 "use client";
 import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
-import { format } from "date-fns";
+
 import Image from "next/image";
-import { useUser } from "@/contexts/UserContext/UserProvider";
+
+import IntroHome from "@/components/lbcoreui/IntroHome";
 export default function Home() {
-  const username = "Test user"; // Placeholder for username, can be replaced with actual user data
-  const date = new Date();
-  const formattedDate = format(date, "EEEE, do MMMM yyyy");
-  const { user } = useUser();
 
   return (
     <div className="px-12 w-full my-12 relative">
-      <h1 className="font-bold text-5xl my-8 text-lbtext">Hello {user?.givenName} {user?.familyName},</h1>
-      <p className="my-8 text-lg text-gray-700">Today is {formattedDate}</p>
+      <IntroHome/>
       <Image
         src="/lbgraphic.png"
         height={300}

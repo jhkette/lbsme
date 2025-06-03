@@ -14,13 +14,15 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
+import { useUser } from "@/contexts/UserContext/UserProvider";
 export function DropdownMenuComponent() {
+
+  const { user } = useUser();
   return (
     <DropdownMenu >
       <DropdownMenuTrigger asChild>
         <div className="flex items-center mt-2 gap-2 cursor-pointer hover:bg-lblgreen ease-in-out rounded-lg py-2 px-4">
-          Test User
+          {user?.givenName} {user?.familyName}
           <Image
             src="/images/header/chevron-down.svg"
             alt="profile image"
