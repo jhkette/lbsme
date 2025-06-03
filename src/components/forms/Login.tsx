@@ -106,9 +106,9 @@ export default function Login() {
         value="Login"
         className="w-3/4 p-4 rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
-      { loading &&
+      { loading  &&
          <Loader
-        className="size-8 text-lbgreen animate-spin"/>
+        className="size-8  absolute top-82 text-lbgreen animate-spin"/>
       }
      
       <div className=" w-3/4 h-4">
