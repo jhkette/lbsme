@@ -67,6 +67,13 @@ export function DropdownMenuComponent() {
             alt="user icon" className="inline-block mr-4" />
             Saving history at glance
           </DropdownMenuItem>
+           <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/door-open.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />
+            Logout
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
