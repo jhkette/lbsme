@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import Link from "next/link";
+
 export function DropdownMenuComponent() {
   const { user } = useUser();
   return (
@@ -44,14 +45,26 @@ export function DropdownMenuComponent() {
             ACCOUNT
           </DropdownMenuLabel>
         
-          <DropdownMenuItem className="text-lg">
-            Personal details
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/user.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />
+           Personal details
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="text-lg">
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/link.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />
             Subscription list
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-lg">
+           <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/list.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />
             Saving history at glance
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -60,7 +73,11 @@ export function DropdownMenuComponent() {
            <DropdownMenuLabel className="text-sm text-gray-400">
             SECURITY
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg">Change password</DropdownMenuItem>
+            <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/link.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />Change password</DropdownMenuItem>
      
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
@@ -68,24 +85,44 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             SUPPORT
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg">Help</DropdownMenuItem>
+            <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/buoy.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />Help</DropdownMenuItem>
      
         </DropdownMenuGroup>
          <DropdownMenuSeparator />
           <DropdownMenuGroup>
      <DropdownMenuLabel className="text-sm text-gray-400">
-            SUPPORT
+            SOCIAL
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg">Reccomend a friend</DropdownMenuItem>
-        <DropdownMenuItem className="text-lg">Follow us on facebook</DropdownMenuItem>
+           <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/user-plus.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />Reccomend a friend</DropdownMenuItem>
+         <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/fb.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />Follow us on facebook</DropdownMenuItem>
         </DropdownMenuGroup>
           <DropdownMenuSeparator />
              <DropdownMenuGroup>
              <DropdownMenuLabel className="text-sm text-gray-400">
             LEGAL
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg">Terms & Conditions</DropdownMenuItem>
-        <DropdownMenuItem className="text-lg">Privacy Policy</DropdownMenuItem>
+           <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/file.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />Terms & Conditions</DropdownMenuItem>
+         <DropdownMenuItem className="text-lg flex items-center">
+            <Image src={"./images/dropdownmenu/file.svg"}
+            height={25}
+            width={25}
+            alt="user icon" className="inline-block mr-4" />Privacy Policy</DropdownMenuItem>
         </DropdownMenuGroup>
      
       </DropdownMenuContent>
