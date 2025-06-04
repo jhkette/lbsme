@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext/UserProvider";
+import Link from "next/link";
 export function DropdownMenuComponent() {
   const { user } = useUser();
   return (
