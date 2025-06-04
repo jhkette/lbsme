@@ -25,13 +25,13 @@ function Header({}) {
           />
         </div>
       </Link>
-      <div className="flex items-center justify-end gap-2">
+      <div className="flex items-center justify-end items-center gap-2 ">
         <Image
           src="/User.svg"
           alt="profile image"
-          width={35}
-          height={35}
-          className="object-contain"
+          width={45}
+          height={45}
+          className="object-contain bg-gray-100 rounded-3xl p-2"
         />
 
         <DropdownMenuComponent />

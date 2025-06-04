@@ -21,14 +21,14 @@ export function DropdownMenuComponent() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center mt-2 gap-2 cursor-pointer hover:bg-lblgreen ease-in-out rounded-lg py-2 px-4">
+        <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 ease-in-out rounded-lg py-2 px-4">
           {user?.givenName} {user?.familyName}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-100 mx-4" align="start" side="bottom">
         <DropdownMenuLabel>
           <div className="w-full flex flex-row items-end-safe">
-            <h3 className="text-2xl text-lbgreen block pb-4">Profile</h3>
+            <h3 className="text-3xl text-lbgreen block pb-4">Profile</h3>
             <Image
               src="/lbgraphic.png"
               alt="profile image"
@@ -40,6 +40,9 @@ export function DropdownMenuComponent() {
         </DropdownMenuLabel>
 
         <DropdownMenuGroup>
+              <DropdownMenuLabel className="text-sm text-gray-400">
+            ACCOUNT
+          </DropdownMenuLabel>
         
           <DropdownMenuItem className="text-lg">
             Personal details
@@ -54,35 +57,37 @@ export function DropdownMenuComponent() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-lg text-gray-400">
-            Security
+           <DropdownMenuLabel className="text-sm text-gray-400">
+            SECURITY
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg">Team</DropdownMenuItem>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem className="text-lg">Email</DropdownMenuItem>
-                <DropdownMenuItem className="text-lg">Message</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-lg">More...</DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-          <DropdownMenuItem className="text-lg">
-            New Team
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <DropdownMenuItem className="text-lg">Change password</DropdownMenuItem>
+     
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-lg">GitHub</DropdownMenuItem>
-        <DropdownMenuItem className="text-lg"> Support</DropdownMenuItem>
-        <DropdownMenuItem disabled>API</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-lg">
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+         <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-sm text-gray-400">
+            SUPPORT
+          </DropdownMenuLabel>
+          <DropdownMenuItem className="text-lg">Help</DropdownMenuItem>
+     
+        </DropdownMenuGroup>
+         <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+     <DropdownMenuLabel className="text-sm text-gray-400">
+            SUPPORT
+          </DropdownMenuLabel>
+          <DropdownMenuItem className="text-lg">Reccomend a friend</DropdownMenuItem>
+        <DropdownMenuItem className="text-lg">Follow us on facebook</DropdownMenuItem>
+        </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+             <DropdownMenuGroup>
+             <DropdownMenuLabel className="text-sm text-gray-400">
+            LEGAL
+          </DropdownMenuLabel>
+          <DropdownMenuItem className="text-lg">Terms & Conditions</DropdownMenuItem>
+        <DropdownMenuItem className="text-lg">Privacy Policy</DropdownMenuItem>
+        </DropdownMenuGroup>
+     
       </DropdownMenuContent>
     </DropdownMenu>
   );
