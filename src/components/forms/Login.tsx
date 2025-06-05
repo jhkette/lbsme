@@ -9,7 +9,6 @@ import { handleLogin } from "@/actions/login";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import { cn } from "@/lib/utils";
 
-
 export default function Login() {
   const {
     register,
@@ -19,23 +18,21 @@ export default function Login() {
   } = useForm<SignInData>({
     resolver: zodResolver(UserSchema),
   });
-  const router = useRouter(); // Next.js router for navigation
+  const router = useRouter(); 
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
   const [loading, setLoading] = useState(false); // State to manage loading /not loading
-  
+
   // get user data from UserContext
-  const { user, setUser } = useUser();
-  // next/navigatation setup to move to dashboard after login
-  
+  const { setUser } = useUser();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-  
+
   const type = showPassword ? "text" : "password";
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
- 
+
   // Function to handle form submission
   // It uses the handleLogin function to authenticate the user
   // and updates the user context with the logged-in user's data
@@ -55,21 +52,19 @@ export default function Login() {
       setLoading(false); // Set loading state to false
       return;
     }
-   const newUser = {
-    username: logdata.data.username || "",
-    email: logdata.data.email || "",
-    emailVerified: logdata.data.emailVerified || false,
-    familyName: logdata.data.familyName || "",
-    givenName: logdata.data.givenName || "",
-    phoneNumber: logdata.data.phoneNumber || "",
-    postcode: logdata.data.postcode || "",
-  };
+    const newUser = {
+      username: logdata.data.username || "",
+      email: logdata.data.email || "",
+      emailVerified: logdata.data.emailVerified || false,
+      familyName: logdata.data.familyName || "",
+      givenName: logdata.data.givenName || "",
+      phoneNumber: logdata.data.phoneNumber || "",
+      postcode: logdata.data.postcode || "",
+    };
 
-  setUser(newUser); // Update the context
-  setLoading(false);
-
-  router.push("/dashboard");
-   
+    setUser(newUser); // Update the context
+    setLoading(false);
+    router.push("/dashboard");
   };
   return (
     <form
@@ -116,11 +111,10 @@ export default function Login() {
         value="Login"
         className="w-3/4 p-4 rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
-      { loading  &&
-         <Loader
-        className="size-8  absolute top-82 text-lbgreen animate-spin"/>
-      }
-     
+      {loading && (
+        <Loader className="size-8  absolute top-82 text-lbgreen animate-spin" />
+      )}
+
       <div className=" w-3/4 h-4">
         {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
       </div>

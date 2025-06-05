@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// Middleware to protect dashboard routes
+// and redirect unauthenticated users to the login page
 export function middleware(req: NextRequest) {
-  console.log('Middleware triggered for:', req.nextUrl.pathname);
-  const token = req.cookies.get('token')?.value;
-  const user = req.cookies.get('user')?.value;
 
+  const token = req.cookies.get('token')?.value;
+  
   const isDashboard = req.nextUrl.pathname.startsWith('/dashboard');
 
   if (isDashboard && !token) {

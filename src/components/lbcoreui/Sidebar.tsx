@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import SidebarItem from "@/components/lbcoreui/SidebarItem";
 export default function Sidebar() {
   return (
@@ -10,8 +10,6 @@ export default function Sidebar() {
           <SidebarItem
             iconName="homegreen.svg"
             label="Home"/>
-
-            
            <SidebarItem
             iconName="List.svg"
             label="subs"/>

@@ -16,8 +16,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import Link from "next/link";
-
+import { logOut } from "@/actions/logOut";
 export function DropdownMenuComponent() {
+  const handleLogout = async () => {
+    await logOut();         // server action clears cookies
+    window.location.href = "/"; // client-side redirect
+  };
   const { user } = useUser();
   return (
     <DropdownMenu>
@@ -41,97 +45,136 @@ export function DropdownMenuComponent() {
         </DropdownMenuLabel>
 
         <DropdownMenuGroup>
-              <DropdownMenuLabel className="text-sm text-gray-400">
+          <DropdownMenuLabel className="text-sm text-gray-400">
             ACCOUNT
           </DropdownMenuLabel>
-        
+
           <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/user.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />
-           Personal details
+            <Image
+              src={"/images/dropdownmenu/user.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Personal details
           </DropdownMenuItem>
 
           <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/link.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />
+            <Image
+              src={"/images/dropdownmenu/link.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
             Subscription list
           </DropdownMenuItem>
-           <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/list.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/list.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
             Saving history at glance
           </DropdownMenuItem>
-           <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/door-open.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer" onClick={handleLogout}>
+            <Image
+              src={"/images/dropdownmenu/door-open.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
             Logout
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-           <DropdownMenuLabel className="text-sm text-gray-400">
+          <DropdownMenuLabel className="text-sm text-gray-400">
             SECURITY
           </DropdownMenuLabel>
-            <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/link.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />Change password</DropdownMenuItem>
-     
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/link.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Change password
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-         <DropdownMenuGroup>
+        <DropdownMenuGroup>
           <DropdownMenuLabel className="text-sm text-gray-400">
             SUPPORT
           </DropdownMenuLabel>
-            <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/buoy.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />Help</DropdownMenuItem>
-     
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/buoy.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Help
+          </DropdownMenuItem>
         </DropdownMenuGroup>
-         <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-     <DropdownMenuLabel className="text-sm text-gray-400">
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-sm text-gray-400">
             SOCIAL
           </DropdownMenuLabel>
-           <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/user-plus.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />Reccomend a friend</DropdownMenuItem>
-         <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/fb.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />Follow us on facebook</DropdownMenuItem>
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/user-plus.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Reccomend a friend
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/fb.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Follow us on facebook
+          </DropdownMenuItem>
         </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-             <DropdownMenuGroup>
-             <DropdownMenuLabel className="text-sm text-gray-400">
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="text-sm text-gray-400">
             LEGAL
           </DropdownMenuLabel>
-           <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/file.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />Terms & Conditions</DropdownMenuItem>
-         <DropdownMenuItem className="text-lg flex items-center">
-            <Image src={"./images/dropdownmenu/file.svg"}
-            height={25}
-            width={25}
-            alt="user icon" className="inline-block mr-4" />Privacy Policy</DropdownMenuItem>
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/file.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Terms & Conditions
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-lg flex items-center">
+            <Image
+              src={"/images/dropdownmenu/file.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Privacy Policy
+          </DropdownMenuItem>
         </DropdownMenuGroup>
-     
       </DropdownMenuContent>
     </DropdownMenu>
   );

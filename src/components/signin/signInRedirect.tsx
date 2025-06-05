@@ -1,11 +1,11 @@
 "use client";
-
 import { useEffect } from "react";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 
 // SignInRedirect component checks if the user is logged in
-// and redirects them to the dashboard if they are.
-// it nested on the login page to handle redirection after login
+// and redirects them to the dashboard if they are. Its
+// it nested on the login page so that when a user visits the site - if they have logged in before,
+// they are redirected to the dashboard.
 // its purpose is to prevent logged-in users from viewing the login page
 export default function SignInRedirect() {
   const { user } = useUser();
