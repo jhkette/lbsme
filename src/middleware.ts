@@ -6,13 +6,6 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
   const user = req.cookies.get('user')?.value;
 
-  const isHome = req.nextUrl.pathname === '/';
-  console.log(isHome, req.nextUrl.pathname)
-  if (isHome && token && user) {
-    const dashboardUrl = new URL('/dashboard', req.url);
-    return NextResponse.redirect(dashboardUrl);
-  }
-
   const isDashboard = req.nextUrl.pathname.startsWith('/dashboard');
 
   if (isDashboard && !token) {

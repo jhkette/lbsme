@@ -55,16 +55,20 @@ export default function Login() {
       setLoading(false); // Set loading state to false
       return;
     }
-    setUser({
-      username: logdata.data.username || "",
-      email: logdata.data.email || "",
-      emailVerified: logdata.data.emailVerified || false,
-      familyName: logdata.data.familyName || "",
-      givenName: logdata.data.givenName || "",
-      phoneNumber: logdata.data.phoneNumber || "",
-      postcode: logdata.data.postcode || "",
-    });
-    setLoading(false); // Set loading state to false
+   const newUser = {
+    username: logdata.data.username || "",
+    email: logdata.data.email || "",
+    emailVerified: logdata.data.emailVerified || false,
+    familyName: logdata.data.familyName || "",
+    givenName: logdata.data.givenName || "",
+    phoneNumber: logdata.data.phoneNumber || "",
+    postcode: logdata.data.postcode || "",
+  };
+
+  setUser(newUser); // Update the context
+  setLoading(false);
+
+  router.push("/dashboard");
    
   };
   return (

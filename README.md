@@ -17,12 +17,18 @@ This README would normally document whatever steps are necessary to get your app
 * How to run tests
 * Deployment instructions
 
-## Dependencies  ##
+## Configuration  ##
+
+### Folder structure ###
 
 
 ### pnpm ###
 
 PNPM is used to install dependencies. The easiest way to install pnpm itself is ``npm install -g pnpm@latest-10``. There is further guidance [here](https://pnpm.io/installation) if needed.  
+
+## Dependencies  ##
+
+
 
 ### Nextjs ###
 
