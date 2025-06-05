@@ -19,15 +19,15 @@ export default function Login() {
   } = useForm<SignInData>({
     resolver: zodResolver(UserSchema),
   });
-
+  const router = useRouter(); // Next.js router for navigation
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
   const [loading, setLoading] = useState(false); // State to manage loading /not loading
   
   // get user data from UserContext
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   // next/navigatation setup to move to dashboard after login
-  const router = useRouter();
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -64,8 +64,8 @@ export default function Login() {
       phoneNumber: logdata.data.phoneNumber || "",
       postcode: logdata.data.postcode || "",
     });
-     setLoading(false); // Set loading state to false after successful login
-    router.push("/dashboard");
+    setLoading(false); // Set loading state to false
+   
   };
   return (
     <form

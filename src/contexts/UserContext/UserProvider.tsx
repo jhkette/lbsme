@@ -1,31 +1,44 @@
 "use client";
-import { createContext, useState, useContext, ReactNode } from "react";
-
-interface User {
-  username?: string;
-  email: string;
-  emailVerified?: boolean;
-  familyName: string;
-  givenName: string;
-  phoneNumber: string;
-  postcode?: string;
-  termsAndConditions?: boolean;
-  accessToken?: string;
-  refreshToken?: string;
-}
+import {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
+import { getUser } from "@/actions/getUser";
+import { setUserCookie } from "@/actions/setUserCookie";
+import { UserInterface } from "@/interfaces/User";
 
 interface UserContextType {
-  user: User | null;
-  setUser: (userData: User) => void;
+  user: UserInterface | null;
+  setUser: (userData: UserInterface) => void;
   clearUser: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUserState] = useState<User | null>(null);
+  const [user, setUserState] = useState<UserInterface | null>(null);
 
-  const setUser = (userData: User) => {
+ useEffect(() => {
+  const fetchUser = async () => {
+    const currentUser = await getUser();
+    console.log("Fetched user:", currentUser);
+    if (currentUser) {
+      setUserState(currentUser);
+    }
+  };
+  fetchUser();
+}, []);
+
+  useEffect(() => {
+    if (user) {
+      setUserCookie(user);
+    }
+  }, [user]);
+
+  const setUser = (userData: UserInterface) => {
     setUserState(userData);
   };
 

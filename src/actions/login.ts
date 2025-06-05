@@ -5,7 +5,7 @@ import { AES } from "crypto-js";
 /**
  * Handles user login by sending a POST request to the login URL with encrypted credentials.
  * It sets a cookie with the access token if the login is successful.
- *
+ * it then returns the result of the login attempt.
  * @param {string} email - The user's email address.
  * @param {string} password - The user's password.
  * @returns {Promise<{ error?: string } | any>} - Returns an object with an error message or the result of the login.
@@ -39,7 +39,9 @@ export const handleLogin = async (email: string, password: string) => {
     if (result.error) {
       return { error: result.error };
     }
+    (await cookies()).set("user", JSON.stringify(result.data));
      (await cookies()).set("token", JSON.stringify(result.data.access_token));
+     
     return result;
   } catch (error) {
     console.error("Login failed:", error);

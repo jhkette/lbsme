@@ -16,13 +16,15 @@ export default function SidebarItem({ iconName, label }: SidebarItemProps) {
     : `/images/sidebar/${iconName}`;
 
   return (
+    <Link href={label ==="Home" ? "/dashboard":`/dashboard/${label.toLowerCase()}`}>
     <li
       className="p-6 flex flex-col items-center justify-center text-white text-lg cursor w-full border-1 border-r-1 border-lbgreen hover:bg-white hover:text-lbgreen ease-in-out"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <Image src={imageSrc} alt={label} width={32} height={32} />
-      <Link href={`dashboard/${label.toLowerCase()}`}>{label}</Link>
+      {label}
     </li>
+    </Link>
   );
 }

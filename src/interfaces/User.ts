@@ -1,4 +1,4 @@
-interface User {
+export interface UserInterface {
   username: string;
   email: string;
   emailVerified: boolean;
@@ -6,7 +6,7 @@ interface User {
   givenName: string;
   phoneNumber?: string;
   postcode?: string;
-  termsAndConditions: boolean;
-  accessToken: string;
-  refreshToken: string;
+  termsAndConditions?: boolean;
+  accessToken?: string;
+  refreshToken?: string;
 }
