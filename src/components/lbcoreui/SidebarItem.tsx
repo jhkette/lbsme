@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -21,7 +22,7 @@ export default function SidebarItem({ iconName, label }: SidebarItemProps) {
       onMouseLeave={() => setHover(false)}
     >
       <Image src={imageSrc} alt={label} width={32} height={32} />
-      {label}
+      <Link href={`dashboard/${label.toLowerCase()}`}>{label}</Link>
     </li>
   );
 }

@@ -35,7 +35,10 @@ export default function Login() {
   
   const type = showPassword ? "text" : "password";
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
-
+ 
+  // Function to handle form submission
+  // It uses the handleLogin function to authenticate the user
+  // and updates the user context with the logged-in user's data
   const onSubmit: SubmitHandler<SignInData> = async (data) => {
     setLoading(true); // Set loading state to true
     if (errors.email || errors.password) {
