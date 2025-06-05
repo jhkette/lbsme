@@ -21,14 +21,21 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Folder structure ###
 src 
---actions\ 
---app\
---components\
---contexts\
---interfaces\
---lib\
---schemas\
-middleware.ts\
+--actions  
+
+--app  
+
+--components  
+
+--contexts  
+
+--interfaces  
+
+--lib  
+
+--schemas  
+
+middleware.ts
 
 ### pnpm ###
 
