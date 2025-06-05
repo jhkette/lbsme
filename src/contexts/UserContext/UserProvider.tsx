@@ -21,16 +21,16 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUserState] = useState<UserInterface | null>(null);
 
- useEffect(() => {
-  const fetchUser = async () => {
-    const currentUser = await getUser();
-    console.log("Fetched user:", currentUser);
-    if (currentUser) {
-      setUserState(currentUser);
-    }
-  };
-  fetchUser();
-}, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getUser();
+      console.log("Fetched user:", currentUser);
+      if (currentUser) {
+        setUserState(currentUser);
+      }
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     if (user) {
