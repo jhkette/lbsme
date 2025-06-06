@@ -19,9 +19,16 @@ This README would normally document whatever steps are necessary to get your app
 
 ## Set up ##
 
+To get a development version of the project please run the command below with the Docker daemon running on your computer.
+
 ```docker-compose up --build```
 
-To get a development version of the project please run the above command with the Docker daemon running on your computer.
+To runa an interactive shell:
+
+Run docker ps to find your container name
+```docker ps``
+Then run the below command to start an interactive shell
+```docker exec -it my-lbsme-container sh```
 
 Alternatively - if you don't want to use docker run:
 
