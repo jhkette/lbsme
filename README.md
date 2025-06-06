@@ -19,6 +19,13 @@ This README would normally document whatever steps are necessary to get your app
 
 ## Set up ##
 
+```docker-compose up --build```
+
+To get a development version of the project please run the above command with the Docker daemon running on your computer.
+
+Alternatively - if you don't want to use docker run:
+
+```pnpm run dev```
 
 
 ## Configuration  ##
