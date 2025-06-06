@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DropdownMenuComponent } from "./DropDownMenu";
-function Header({}) {
+export default function Header({}) {
   const username = "Test user"; // Placeholder for username, can be replaced with actual user data
   return (
     <div className="h-24 w-full  border-b-1 border-cyan-500 flex items-center justify-between px-12 bg-white">
@@ -40,4 +40,4 @@ function Header({}) {
   );
 }
 
-export default Header;
+

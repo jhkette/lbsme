@@ -2,7 +2,7 @@
 import Header from "@/components/lbcoreui/Header";
 import Sidebar from "@/components/lbcoreui/Sidebar";
 import { useUser } from "@/contexts/UserContext/UserProvider";
-import { useEffect } from "react";
+
 import { useRouter } from 'next/navigation';
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
