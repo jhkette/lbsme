@@ -1,5 +1,5 @@
 "use client";
-import Header from "@/components/lbcoreui/Header";
+import HeaderDashboard from "@/components/lbcoreui/HeaderDashboard";
 import Sidebar from "@/components/lbcoreui/Sidebar";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 
@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   // )
   return (
     <div className="flex flex-col items-start  min-h-screen bg-gray-100">
-      <Header />
+      <HeaderDashboard />
       <div className="flex flex-row w-full">
         <Sidebar />
         {children}
