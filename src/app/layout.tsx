@@ -21,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${mulishSans.variable} antialiased`}>
       <Head>
+        {/* temp hide from search engines */}
         <meta name="robots" content="noindex,nofollow" />
       </Head>
       <UserProvider>

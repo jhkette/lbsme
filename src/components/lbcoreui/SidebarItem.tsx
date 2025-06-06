@@ -22,7 +22,7 @@ export default function SidebarItem({ iconName, label }: SidebarItemProps) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Image src={imageSrc} alt={label} width={32} height={32} />
+      <Image src={imageSrc} alt={label} width={28} height={28} />
       {label}
     </li>
     </Link>
