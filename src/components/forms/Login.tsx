@@ -76,7 +76,7 @@ export default function Login() {
         {...register("email")}
         placeholder="Enter your email address"
         className={cn(
-          "w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black",
+          "w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-gray-400",
           errors.email ? "bg-red-100" : ""
         )}
       />
@@ -90,7 +90,7 @@ export default function Login() {
         {...register("password")}
         placeholder="Enter your Littlebirdie password"
         className={cn(
-          "w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-black",
+          "w-3/4 p-4 rounded-lg my-4 text-lg border-1 border-gray-400",
           errors.password ? "bg-red-100" : ""
         )}
       />

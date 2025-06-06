@@ -3,14 +3,14 @@
 
 import { cookies } from "next/headers";
 
-export async function getUser() {
+export async function getToken() {
   const cookieStore = await cookies();
-  const userCookie = cookieStore.get("user");
+  const userToken = cookieStore.get("token");
 
-  if (!userCookie) return null;
+  if (!userToken) return null;
 
   try {
-    return JSON.parse(userCookie.value);
+    return JSON.parse(userToken.value);
   } catch {
     return null;
   }

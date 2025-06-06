@@ -19,8 +19,8 @@ export default function Home() {
           <Image
             src="./images/home/Bird.svg"
             alt="Bird"
-            width={500}
-            height={500}
+            width={450}
+            height={450}
             className="mx-12"
           />
         </div>
@@ -36,6 +36,7 @@ export default function Home() {
             Log into your account
           </h2>
           <Login />
+          {/* this redirects user to "/" if they are not logged in */}
           <SignInRedirect />
         </div>
       </div>
