@@ -10,7 +10,8 @@
 !.yarn/releases
 !.yarn/versions
 auth.txt
-
+subscribe.txt
+*.txt
 # testing
 /coverage
 
