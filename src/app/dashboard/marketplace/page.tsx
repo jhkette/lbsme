@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { sanityFetch } from "@/sanity/lib/live"
 export default function Marketplace() {
   return (
     <div className="px-12 w-full my-12 relative">
