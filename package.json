@@ -16,6 +16,7 @@
     "@portabletext/react": "^3.2.1",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@sanity/client": "^7.5.0",
+    "@sanity/icons": "^3.7.0",
     "@sanity/image-url": "1",
     "@sanity/vision": "^3.91.0",
     "aws-amplify": "^6.15.0",
