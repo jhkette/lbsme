@@ -1,0 +1,105 @@
+query getSubscriptionSpendings($from: String!, $to: String!, $category: String!) {
+  getSubscriptionSpendings(from: $from, to: $to, category: $category) {
+    barChartData {
+      averageCost
+      data {
+        period
+        value
+      }
+      maxCost
+      middleCost
+    }
+    cost {
+      monthly
+      weekly
+      yearly
+    }
+    currency
+    lineChartData {
+      period
+      value
+    }
+    potentialSavings {
+      monthly
+      weekly
+      yearly
+    }
+    spendingsDifference {
+      dataAvailable
+      value
+    }
+    subscriptionsCount
+    subscriptions {
+      category {
+        PK
+        SK
+        category
+        searchCategory
+        searchSubCategory
+        subCategory
+      }
+      dates {
+        endsInDays
+        endsInPercent
+        lastPaymentDate
+        renewalDate
+      }
+      freeTrial
+      merchant {
+        icon
+        id
+        name
+      }
+      costs {
+        amount
+        average_monthly
+        monthly
+        priceChange
+        totalSpent
+        yearly
+      }
+      paymentMethod
+      providerName
+      subscriptionId
+      type
+    }
+  }
+}
+
+query getUserCategories {
+  getUserCategories {
+    PK
+    SK
+    name
+    searchName
+  }
+}
+
+query getUpcomingRenewals {
+  getUpcomingRenewals {
+    amount
+    currency
+    dates {
+      lastPayment
+      renewal
+      renewalTimestamp
+    }
+    merchant {
+      icon
+      id
+      name
+    }
+    provider
+  }
+}
+
+query getTopDeals {
+  getTopDeals {
+    currency
+    description
+    logo
+    name
+    price
+    url
+  }
+}

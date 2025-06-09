@@ -1,0 +1,59 @@
+query getSubscriptions(
+  $status: SubscriptionStatusEnum!
+  $category: String
+  $sortKey: SubscriptionsSortKeyEnum
+  $limit: Int
+  $nextToken: Int
+) {
+  getSubscriptions(
+    status: $status
+    category: $category
+    sortKey: $sortKey
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    subscriptions {
+      category {
+        PK
+        SK
+        category
+        searchCategory
+        searchSubCategory
+        subCategory
+      }
+      dates {
+        endsInDays
+        endsInPercent
+        lastPaymentDate
+        renewalDate
+      }
+      freeTrial
+      merchant {
+        icon
+        id
+        name
+      }
+      cancellationStatus
+      displayName
+      monthlyCost
+      paymentMethod
+      priceChange
+      providerName
+      subscriptionId
+      type
+      saveUp
+    }
+    nextToken
+  }
+}
+
+
+
+query getBankAccountDaysLeft {
+  getBankAccount {
+    linkDetails {
+      daysLeft
+    }
+    status
+  }
+}

@@ -75,6 +75,9 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
  I have used [shadcn](https://ui.shadcn.com/) for extra ui components. These are incredibly easy to add and match the style of the UI. Simply go the website and click the component you wish to add and follow the installation commands. THe shadcn components are located in the @/components/ui folder. Other core ui components are located in @/components/core/ui
 
+ ### Sanity.io ###
+
+ Sanity headless cms is used to store content in relationship to deals.
 
 ### Contribution guidelines ###
 
