@@ -11,7 +11,7 @@ export const dealOffer = defineType({
       name: "dealName",
       type: "string",
       description: "Name of the deal i.e, Sky Full Fibre 150",
-       validation: (Rule) => Rule.required().error("Deal name is required"),
+      validation: (Rule) => Rule.required().error("Deal name is required"),
     }),
     defineField({
       name: "dealType",
@@ -19,14 +19,13 @@ export const dealOffer = defineType({
       title: "Deal Type",
       validation: (Rule) => Rule.required().error("Deal type is required"),
       description:
-        "Is this a special deal, switch and save or price comparison?",
+        "Is this a switch and save or price comparison feature?",
       options: {
         list: [
-          { title: "Special Deals", value: "special deals" },
-          { title: "Switch and Save", value: "switch and save" },
-          { title: "Price comparison", value: "price comparison" },
+          { title: "Special Deals & Trials", value: "special deals" },
+          { title: "Switch & Save", value: "switch and save" },
         ],
-      
+
         layout: "dropdown", // Optional: can be "dropdown" instead
       },
     }),
@@ -35,14 +34,16 @@ export const dealOffer = defineType({
       name: "dealGenre",
       type: "string",
       title: "Deal Genre",
-        description:
-        "Is this boradband, insurance or energy?",
+      description: "Is this boradband, insurance or energy?",
       validation: (Rule) => Rule.required().error("Deal genre is required"),
       options: {
         list: [
           { title: "Broadband", value: "broadband" },
           { title: "Insurance", value: "insurance" },
           { title: "Energy", value: "energy" },
+          { title: "Services", value: "services" },
+          { title: "Software", value: "software" },
+          { title: "Finance", value: "finance" },
         ],
         layout: "dropdown", // Optional: can be "dropdown" instead
       },
