@@ -22,7 +22,8 @@ export const dealOffer = defineType({
         "Is this a switch and save or price comparison feature?",
       options: {
         list: [
-          { title: "Special Deals & Trials", value: "special deals" },
+          { title: "Free trials", value: "Free trials" },
+          { title: "Subscription deals", value: "subscription deals" },
           { title: "Switch & Save", value: "switch and save" },
         ],
 
@@ -44,15 +45,12 @@ export const dealOffer = defineType({
           { title: "Services", value: "services" },
           { title: "Software", value: "software" },
           { title: "Finance", value: "finance" },
+           { title: "Other", value: "other" },
         ],
         layout: "dropdown", // Optional: can be "dropdown" instead
       },
     }),
 
-    defineField({
-      name: "category",
-      type: "string",
-    }),
     defineField({
       name: "description",
       type: "blockContent",
