@@ -11,12 +11,12 @@ export const PROJECT_QUERY = defineQuery(`*[_type == "project"]{
     link { code, visit }
   }`);
 
-export const PROJECT_BY_ID_QUERY = defineQuery(`*[_type == "project" && _id == $id][0]{
-    _id,
-    projectName,
-    techstack,
-    description,
-    projectImage,
-    category,
-    link { code, visit }
-  }`);
+export const SINGLE_PROJECT_QUERY = (id: string) => defineQuery(`*[_type == "project" && _id == $id][0]{
+  _id,
+  projectName,
+  techstack,
+  description,
+  projectImage,
+  category,
+  link { code, visit }
+}`);
