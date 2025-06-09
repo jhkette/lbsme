@@ -1,22 +1,24 @@
 import { defineQuery } from "next-sanity";
 
 
-export const PROJECT_QUERY = defineQuery(`*[_type == "project"]{
+export const DEAL_QUERY = defineQuery(`*[_type == "dealOffer"]{
     _id,
-    projectName,
-    techstack,
+    dealName,
+    dealSnippet,
+    dealType,
+    dealGenre,
     description,
-    projectImage,
+    dealImage,
     category,
     link { code, visit }
   }`);
 
-export const SINGLE_PROJECT_QUERY = (id: string) => defineQuery(`*[_type == "project" && _id == $id][0]{
-  _id,
-  projectName,
-  techstack,
-  description,
-  projectImage,
-  category,
-  link { code, visit }
-}`);
+// export const SINGLE_PROJECT_QUERY = (id: string) => defineQuery(`*[_type == "project" && _id == $id][0]{
+//   _id,
+//   projectName,
+//   techstack,
+//   description,
+//   projectImage,
+//   category,
+//   link { code, visit }
+// }`);

@@ -1,7 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
-export default function Marketplace() {
+import { DealOffer} from "@/sanity/types";
+import { DEAL_QUERY } from "@/sanity/queries";
+export default async function Marketplace() {
+
+  const {data: deals} = await sanityFetch({query: DEAL_QUERY})
+  console.log("Deals fetched:", deals);
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
       <h1 className="font-bold text-4xl my-8 text-lbtext">Marketplace</h1>
