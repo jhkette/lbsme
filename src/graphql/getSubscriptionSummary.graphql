@@ -1,0 +1,17 @@
+
+  query getSubscriptionsSummary($from: String!, $to: String!) {
+    getSubscriptionsSummary(from: $from, to: $to) {
+      totalSpent
+      usersAverageSpent
+      currency
+      categories {
+        icon
+        name
+        share
+        spent
+        usersAverage
+        usersShare
+      }
+    }
+  }
+
