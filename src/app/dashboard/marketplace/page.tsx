@@ -3,7 +3,7 @@ import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
 export default function Marketplace() {
   return (
-    <div className="px-12 w-full flex flex-col my-12 relative">
+    <div className="px-16 w-full flex flex-col mt-12 relative">
       <h1 className="font-bold text-4xl my-8 text-lbtext">Marketplace</h1>
       <Image
         src="/lbgraphic.png"
@@ -17,10 +17,7 @@ export default function Marketplace() {
         <div className="w-full bg-gray-200 rounded-t-lg p-3">
           <h2 className="text-2xl text-lbtext">Free Trials</h2>
         </div>
-        <div className="flex flex-row py-12 rounded-b-lg  bg-white justify-between items-end w-full ">
-
-        </div>
-        
+        <div className="flex flex-row py-12 rounded-b-lg  bg-white justify-between items-end w-full "></div>
       </section>
       <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-8">
         <div className="w-full bg-gray-200 rounded-t-lg p-3">
@@ -33,12 +30,8 @@ export default function Marketplace() {
         <div className="w-full bg-gray-200 rounded-t-lg p-3">
           <h2 className="text-2xl text-lbtext">Switch & Save</h2>
         </div>
-        <div className="flex flex-row py-12 rounded-b-lg  bg-white justify-between items-end w-full ">
-
-        </div>
-        
+        <div className="flex flex-row py-12 rounded-b-lg  bg-white justify-between items-end w-full "></div>
       </section>
-     
     </div>
   );
 }

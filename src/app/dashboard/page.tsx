@@ -7,7 +7,7 @@ import IntroHome from "@/components/lbcoreui/IntroHome";
 export default function Home() {
 
   return (
-    <div className="px-12 w-full my-12 relative">
+    <div className="px-16 w-full mt-12 relative">
       <IntroHome/>
       <Image
         src="/lbgraphic.png"

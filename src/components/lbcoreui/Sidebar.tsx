@@ -3,7 +3,7 @@
 import SidebarItem from "@/components/lbcoreui/SidebarItem";
 export default function Sidebar() {
   return (
-    <div className="bg-lbgreen w-28 h-dvh flex flex-col">
+    <div className="bg-lbgreen w-28 h-screen flex flex-col">
       <nav>
         <ul className="flex flex-col min-h-[750px] justify-between">
           <div>

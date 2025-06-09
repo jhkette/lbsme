@@ -14,12 +14,18 @@ export const dealOffer = defineType({
       validation: (Rule) => Rule.required().error("Deal name is required"),
     }),
     defineField({
+      name: "dealSnippet",
+      title: "Deal Snippet",
+      type: "string",
+      description: "snippet of the deal, i.e, 'Get 150Mbps for £25/month'",
+      validation: (Rule) => Rule.required().error("Deal snippet is required"),
+    }),
+    defineField({
       name: "dealType",
       type: "string",
       title: "Deal Type",
       validation: (Rule) => Rule.required().error("Deal type is required"),
-      description:
-        "Is this a switch and save or price comparison feature?",
+      description: "Is this a switch and save or price comparison feature?",
       options: {
         list: [
           { title: "Free trials", value: "Free trials" },
@@ -45,7 +51,7 @@ export const dealOffer = defineType({
           { title: "Services", value: "services" },
           { title: "Software", value: "software" },
           { title: "Finance", value: "finance" },
-           { title: "Other", value: "other" },
+          { title: "Other", value: "other" },
         ],
         layout: "dropdown", // Optional: can be "dropdown" instead
       },
