@@ -15,6 +15,7 @@
     "@aws-sdk/types": "^3.821.0",
     "@hookform/resolvers": "^5.0.1",
     "@portabletext/react": "^3.2.1",
+    "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@sanity/client": "^7.5.0",
     "@sanity/icons": "^3.7.0",
