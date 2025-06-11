@@ -224,7 +224,7 @@ export type AllSanitySchemaTypes = DealOffer | BlockContent | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries.ts
 // Variable: SUBSCRIPTION_DEAL_QUERY
-// Query: *[_type == "dealOffer" && dealType == "subscription deals"]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    link { code, visit }  }
+// Query: *[_type == "dealOffer" && (dealType == "subscription deals" || dealType == "free trials")]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    }
 export type SUBSCRIPTION_DEAL_QUERYResult = Array<{
   _id: string;
   dealName: string | null;
@@ -275,14 +275,9 @@ export type SUBSCRIPTION_DEAL_QUERYResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
-  category: null;
-  link: null;
 }>;
-// Variable: TRIALS_DEAL_QUERY
-// Query: *[_type == "dealOffer" && dealType == "free trials"]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    link { code, visit }  }
-export type TRIALS_DEAL_QUERYResult = Array<never>;
 // Variable: SWITCH_DEAL_QUERY
-// Query: *[_type == "dealOffer" && dealType == "switch"]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    link { code, visit }  }
+// Query: *[_type == "dealOffer" && dealType == "switch"]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,     }
 export type SWITCH_DEAL_QUERYResult = Array<never>;
 // Variable: FAQ_QUERY
 // Query: *[_type == "FAQs"]| order(_createdAt asc){  _id,  faqQuestion,  faqAnswer,  tag}
@@ -292,9 +287,8 @@ export type FAQ_QUERYResult = Array<never>;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"dealOffer\" && dealType == \"subscription deals\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    link { code, visit }\n  }": SUBSCRIPTION_DEAL_QUERYResult;
-    "*[_type == \"dealOffer\" && dealType == \"free trials\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    link { code, visit }\n  }": TRIALS_DEAL_QUERYResult;
-    "*[_type == \"dealOffer\" && dealType == \"switch\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    link { code, visit }\n  }": SWITCH_DEAL_QUERYResult;
+    "*[_type == \"dealOffer\" && (dealType == \"subscription deals\" || dealType == \"free trials\")]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n  \n  }": SUBSCRIPTION_DEAL_QUERYResult;
+    "*[_type == \"dealOffer\" && dealType == \"switch\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n   \n  }": SWITCH_DEAL_QUERYResult;
     "*[_type == \"FAQs\"]| order(_createdAt asc){\n  _id,\n  faqQuestion,\n  faqAnswer,\n  tag\n}": FAQ_QUERYResult;
   }
 }

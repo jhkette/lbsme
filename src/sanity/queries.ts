@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 
-export const SUBSCRIPTION_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && dealType == "subscription deals"]{
+export const SUBSCRIPTION_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && (dealType == "subscription deals" || dealType == "free trials")]{
     _id,
     dealName,
     dealSnippet,
@@ -9,21 +9,10 @@ export const SUBSCRIPTION_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && de
     dealGenre,
     description,
     dealImage,
-    category,
-    link { code, visit }
+  
   }`);
 
-  export const TRIALS_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && dealType == "free trials"]{
-    _id,
-    dealName,
-    dealSnippet,
-    dealType,
-    dealGenre,
-    description,
-    dealImage,
-    category,
-    link { code, visit }
-  }`);
+
 
     export const SWITCH_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && dealType == "switch"]{
     _id,
@@ -34,7 +23,7 @@ export const SUBSCRIPTION_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && de
     description,
     dealImage,
     category,
-    link { code, visit }
+   
   }`);
 
 

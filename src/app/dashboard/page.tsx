@@ -25,10 +25,10 @@ export default function Home() {
       <IntroHome/>
       <Image
         src="/lbgraphic.png"
-        height={300}
-        width={500}
+        height={250}
+        width={400}
         alt="graphic"
-        className="absolute -top-3 z-0 right-40"
+        className="absolute top-6 z-0 right-40"
       />
       <DashboardSubs />
     </div>
