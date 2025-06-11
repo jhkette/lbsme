@@ -13,7 +13,7 @@ import { AES } from "crypto-js";
 export const handleLogin = async (email: string, password: string) => {
   try {
     // Ensure that the environment variables are defined
-    const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL;
+    const loginUrl = process.env.LOGIN_URL;
     if (!loginUrl) {
       throw new Error("environment variable is not defined");
     }
