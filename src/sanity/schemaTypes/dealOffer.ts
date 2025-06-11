@@ -28,9 +28,9 @@ export const dealOffer = defineType({
       description: "Is this a switch and save or price comparison feature?",
       options: {
         list: [
-          { title: "Free trials", value: "Free trials" },
+          { title: "Free trials", value: "free trials" },
           { title: "Subscription deals", value: "subscription deals" },
-          { title: "Switch & Save", value: "switch and save" },
+          { title: "Switch & Save", value: "switch" },
         ],
 
         layout: "dropdown", // Optional: can be "dropdown" instead

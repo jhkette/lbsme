@@ -3,9 +3,9 @@
 import SidebarItem from "@/components/lbcoreui/SidebarItem";
 export default function Sidebar() {
   return (
-    <div className="bg-lbgreen w-28 h-screen flex flex-col">
+    <div className="bg-lbgreen w-28 min-h-screen flex flex-col min-h-screen">
       <nav>
-        <ul className="flex flex-col min-h-[750px] justify-between">
+        <ul className="flex flex-col h-full justify-between">
           <div>
           <SidebarItem
             iconName="homegreen.svg"
