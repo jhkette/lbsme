@@ -1,6 +1,7 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
+
 export const faqs = defineType({
   name: "FAQs",
   title: "Frequently Asked Questions",
@@ -20,15 +21,17 @@ export const faqs = defineType({
       name: "faqAnswer",
       title: "FAQ Answer",
       description: "Answer to the FAQ question",
-      validation: (Rule) => Rule.required().error("FAQ answer is required"),
       type: "blockContent",
+      validation: (Rule) => Rule.required().error("FAQ answer is required"),
+      
     }),
     defineField({
       name: "tag",
-      title: "tag",
+      title: "the tag for the q and a",
       description: "Tag for the FAQ",
+       type: "string",
       validation: (Rule) => Rule.required().error("FAQ tag is required"),
-      type: "string",
+     
     }),
   ],
 });

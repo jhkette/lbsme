@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import {
   Accordion,
@@ -6,18 +5,22 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import HelpAccordion from "@/components/faqs/HelpAccordion";
+import { FAQ_QUERYResult } from "@/interfaces/FAQQueryResult";
+import { PortableText } from "@portabletext/react"; // assuming you're using this
 
-
-
-import { FAQ_QUERYResult } from "@/sanity/types";
-
-
-export default function AccordionWrapper({faqs}: { faqs: FAQ_QUERYResult }) {
-    console.log(faqs);
+export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {
   return (
     <Accordion type="single" collapsible className="w-full text-lg">
-      <HelpAccordion question="test" answer="test" />
+      {faqs.map((faq) => (
+        <AccordionItem key={faq._id} value={faq._id}>
+          <AccordionTrigger className="text-lg text-lb-gray">
+            {faq.faqQuestion}
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-4 text-balance text-lg">
+            <PortableText value={faq.faqAnswer} />
+          </AccordionContent>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 }

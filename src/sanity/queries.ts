@@ -13,17 +13,11 @@ export const DEAL_QUERY = defineQuery(`*[_type == "dealOffer"]{
     link { code, visit }
   }`);
 
-// export const SINGLE_PROJECT_QUERY = (id: string) => defineQuery(`*[_type == "project" && _id == $id][0]{
-//   _id,
-//   projectName,
-//   techstack,
-//   description,
-//   projectImage,
-//   category,
-//   link { code, visit }
-// }`);
-export const FAQ_QUERY = defineQuery(`*[_type == "FAQs"]{
-    _id,
-    faqQuestion,
-    faqAnswer
-  }`);
+
+
+export const FAQ_QUERY = defineQuery(`*[_type == "FAQs"]| order(_createdAt desc){
+  _id,
+  faqQuestion,
+  faqAnswer,
+  tag
+}`);
