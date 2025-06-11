@@ -12,9 +12,9 @@ export const faqs = defineType({
       title: "FAQ Question",
       type: "string",
       description: "Name of the deal i.e, Sky Full Fibre 150",
-      validation: (Rule) => Rule.required().error("faq question name is required"),
+      validation: (Rule) =>
+        Rule.required().error("faq question name is required"),
     }),
-   
 
     defineField({
       name: "faqAnswer",
@@ -30,6 +30,5 @@ export const faqs = defineType({
       validation: (Rule) => Rule.required().error("FAQ tag is required"),
       type: "string",
     }),
-   
   ],
 });
