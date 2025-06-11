@@ -1,12 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
-import { DealOffer } from "@/sanity/types";
-import { SUBSCRIPTION_DEAL_QUERY } from "@/sanity/queries";
+import { SUBSCRIPTION_DEAL_QUERY, SWITCH_DEAL_QUERY } from "@/sanity/queries";
 import DealItem from "@/components/deals/DealItem";
 import DealSubscriptionMore from "@/components/deals/DealSubscriptionMore";
+import DealSubscriptionSwitchMore from "@/components/deals/DealSubscriptionSwitchMore";
 export default async function Marketplace() {
   const { data: subscriptionDeals } = await sanityFetch({ query: SUBSCRIPTION_DEAL_QUERY });
+    const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
+
+    
 
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
@@ -37,7 +40,11 @@ export default async function Marketplace() {
           <h2 className="text-xl text-lbtext">Switch & Save</h2>
         </div>
         <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-between items-end w-full ">
-           <DealSubscriptionMore />
+           {switchDeals.map((deal) => (
+            //@ts-ignore
+            <DealItem key={deal._id} deal={deal} />
+          ))}
+           <DealSubscriptionSwitchMore />
         </div>
       </section>
     </div>

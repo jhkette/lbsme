@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { FAQ_QUERYResult } from "@/interfaces/FAQQueryResult";
 import { PortableText } from "@portabletext/react"; // assuming you're using this
+import "@/styles/faqstyles.css"
 
 export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {
   return (
@@ -17,7 +18,9 @@ export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {
             {faq.faqQuestion}
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-4 text-balance text-lg">
+            <div className="faq-rich-text">
             <PortableText value={faq.faqAnswer} />
+            </div>
           </AccordionContent>
         </AccordionItem>
       ))}

@@ -25,7 +25,7 @@ export default function Sidebar() {
             label="Marketplace"/>
       
           </div>
-          <div className="" >
+          <div className="mt-16" >
             <SidebarItem
             iconName="help.svg"
             label="Help"/>
