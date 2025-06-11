@@ -22,3 +22,8 @@ export const DEAL_QUERY = defineQuery(`*[_type == "dealOffer"]{
 //   category,
 //   link { code, visit }
 // }`);
+export const FAQ_QUERY = defineQuery(`*[_type == "FAQs"]{
+    _id,
+    faqQuestion,
+    faqAnswer
+  }`);

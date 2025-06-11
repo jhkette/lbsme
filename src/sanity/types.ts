@@ -223,9 +223,9 @@ export type SanityAssetSourceData = {
 export type AllSanitySchemaTypes = DealOffer | BlockContent | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries.ts
-// Variable: PROJECT_QUERY
+// Variable: DEAL_QUERY
 // Query: *[_type == "dealOffer"]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    link { code, visit }  }
-export type PROJECT_QUERYResult = Array<{
+export type DEAL_QUERYResult = Array<{
   _id: string;
   dealName: string | null;
   dealSnippet: string | null;
@@ -278,11 +278,15 @@ export type PROJECT_QUERYResult = Array<{
   category: null;
   link: null;
 }>;
+// Variable: FAQ_QUERY
+// Query: *[_type == "FAQs"]{    _id,    faqQuestion,    faqAnswer  }
+export type FAQ_QUERYResult = Array<never>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"dealOffer\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    link { code, visit }\n  }": PROJECT_QUERYResult;
+    "*[_type == \"dealOffer\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    link { code, visit }\n  }": DEAL_QUERYResult;
+    "*[_type == \"FAQs\"]{\n    _id,\n    faqQuestion,\n    faqAnswer\n  }": FAQ_QUERYResult;
   }
 }
