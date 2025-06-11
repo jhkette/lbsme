@@ -1,6 +1,7 @@
 import { type SchemaTypeDefinition } from 'sanity'
 import { blockContentType } from './blockContentType'
-import { dealOffer } from './dealOffer'
+import { dealOffer} from './dealOffer'
+import { faqs } from './faqs'
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [ blockContentType, dealOffer],
+  types: [ blockContentType, dealOffer, faqs ],
 }

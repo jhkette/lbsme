@@ -23,6 +23,13 @@ export const faqs = defineType({
       validation: (Rule) => Rule.required().error("FAQ answer is required"),
       type: "blockContent",
     }),
+    defineField({
+      name: "tag",
+      title: "tag",
+      description: "Tag for the FAQ",
+      validation: (Rule) => Rule.required().error("FAQ tag is required"),
+      type: "string",
+    }),
    
   ],
 });

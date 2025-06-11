@@ -3,7 +3,7 @@ import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { DealOffer} from "@/sanity/types";
 import { DEAL_QUERY } from "@/sanity/queries";
-import DealItem from "@/components/lbcoreui/DealItem";
+import DealItem from "@/components/deals/DealItem";
 export default async function Marketplace() {
 
   const {data: deals} = await sanityFetch({query: DEAL_QUERY})
