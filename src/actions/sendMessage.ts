@@ -12,7 +12,7 @@ interface MailOptions {
     text: string;
 }
 
-async function sendMessage(email: string, name: string, message: string): Promise<any> {
+export async function sendMessage(email: string, name: string, message: string): Promise<any> {
 
     const mailOptions: MailOptions = {
         from: email,

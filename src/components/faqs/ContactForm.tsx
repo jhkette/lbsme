@@ -3,7 +3,8 @@
 import React,{useState} from 'react'
 import Image from 'next/image';
 import { Loader } from "lucide-react"
-
+import toast from 'react-hot-toast';
+import { sendMessage } from '@/actions/sendMessage';
 export default function ContactForm() {
      const [values, setValues] = useState({
         name: "",
@@ -14,11 +15,14 @@ export default function ContactForm() {
     const [success, setSuccess] = useState(false);
      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log(values)
 
-        // if (!values.name.trim() || !values.email.trim() || !values.message.trim()) {
-        //     toast.warning("Empty Fields!")
-        //     return false;
-        // }
+        if (!values.name.trim() || !values.email.trim() || !values.message.trim()) {
+            // toast("Empty Fields!")
+            return false;
+        }
+        // toast("success")
+        toast.success("Message sent")
 
         // setLoading(true);
         // axios.post("/api/mail", {
@@ -66,7 +70,7 @@ export default function ContactForm() {
                 </div>
                 
                 <Image unoptimized={true} quality={100} alt="contact" src="/images/home/Bird.svg" className=" w-2/8 h-full ml-32 object-cover" width={500} height={500} />
-                
+                 
             </div>
   )
 }

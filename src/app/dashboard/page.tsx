@@ -3,6 +3,7 @@ import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
 //import { format } from 'date-fns'; // add later
 import Image from "next/image";
 
+
 import IntroHome from "@/components/lbcoreui/IntroHome";
 export default function Home() {
  //const formatDate = (date: Date) => format(date, 'yyyy-MM-dd');
@@ -31,6 +32,7 @@ export default function Home() {
         className="absolute top-6 z-0 right-40"
       />
       <DashboardSubs />
+      
     </div>
   );
 }
