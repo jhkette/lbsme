@@ -10,7 +10,7 @@ function IntroHome() {
       <h1 className="font-bold text-4xl my-8 text-lbtext">
         Hello {user?.givenName} {user?.familyName},
       </h1>
-      <p className="my-8 text-lg text-lbtextgrey">Today is {formattedDate}</p>
+      <p className="my-8 text-lg text-lbtextdark">Today is {formattedDate}</p>
     </div>
   );
 }

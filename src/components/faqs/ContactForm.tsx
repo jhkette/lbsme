@@ -52,9 +52,9 @@ export default function ContactForm() {
        <div className="w-full  mx-auto my-8 flex justify-start items-center">
         <div className="w-full md:w-1/2">
                     <h3 className="text-3xl text-lbgreen font-semibold my-12">Contact us</h3>
-                    <p className="text-lbtextgrey text-lg mb-4">If you have further queries please contact us</p>
+                    <p className="text-lbtextdark text-lg mb-4">If you have further queries please contact us</p>
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl text-lbtextgrey">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl text-lbtextdark">
                         <input onChange={handleChange} required value={values.name} name="name" type="text" placeholder='Full Name *' className="p-2 rounded-lg my-4 text-lg border-1 border-gray-400 placeholder-gray-400" />
                         <input onChange={handleChange} required value={values.email} name="email" type="email" placeholder='Email *' className="p-2 rounded-lg my-4 text-lg border-1 border-gray-400 placeholder-gray-400"  />
                         <textarea onChange={handleChange} required value={values.message} name="message" rows={4} placeholder='Message *' className="p-2 rounded-lg my-4 text-lg border-1 border-gray-400 placeholder-gray-400 " />

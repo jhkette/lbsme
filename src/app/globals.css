@@ -21,6 +21,7 @@
     --color-lbgray: #EDECEC;
     --color-lblgreen:#c4f9ff;
     --color-lbtextgrey:#787787;
+    --color-lbtextdark:#323F4B;
 }
 
 @theme inline {

@@ -14,10 +14,10 @@ export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {
     <Accordion type="single" collapsible className="w-full text-lg">
       {faqs.map((faq) => (
         <AccordionItem key={faq._id} value={faq._id}>
-          <AccordionTrigger className="text-lg text-lbtextgrey">
+          <AccordionTrigger className="text-lg text-lbtextdark">
             {faq.faqQuestion}
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4 text-lbtextgrey text-balance text-lg">
+          <AccordionContent className="flex flex-col gap-4 text-lbtextdark text-balance text-lg">
             <div className="faq-rich-text">
             <PortableText value={faq.faqAnswer} />
             </div>
