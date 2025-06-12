@@ -20,6 +20,7 @@
    --color-lbblue: #DFE9F2;
     --color-lbgray: #EDECEC;
     --color-lblgreen:#c4f9ff;
+    --color-lbtextgrey:#787787;
 }
 
 @theme inline {
