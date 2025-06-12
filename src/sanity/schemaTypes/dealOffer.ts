@@ -73,6 +73,7 @@ export const dealOffer = defineType({
     defineField({
       name: "dealImage",
       type: "image",
+      description: "try to ensure the image has a rectangle proportions - with the longest side at the bottom",
       options: {
         hotspot: true,
       },

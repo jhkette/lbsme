@@ -25,10 +25,10 @@ export default function DealItem({ deal }: DealItemProps) {
       <Image
         src={url}
         alt={deal.dealName || ""}
-        width={80}
-        height={80} // This can be an estimate. Real size adjusts automatically
+        width={60}
+        height={60} // This can be an estimate. Real size adjusts automatically
         style={{ height: "auto" }} // Maintain proportions
-        className="rounded ml-auto mt-12 mr-2" // Optional styling
+        className="rounded ml-auto mt-6 mr-2" // Optional styling
       />
     </div>
   );
