@@ -1,3 +1,4 @@
+"use server";
 import { transporter } from "@/lib/transporter";
 interface SendMessageParams {
     email: string;
@@ -12,7 +13,7 @@ interface MailOptions {
     text: string;
 }
 
-export async function sendMessage(email: string, name: string, message: string): Promise<any> {
+export async function sendMessage(name: string, email: string,  message: string): Promise<any> {
 
     const mailOptions: MailOptions = {
         from: email,
@@ -20,22 +21,23 @@ export async function sendMessage(email: string, name: string, message: string):
         subject: `${name.toUpperCase()} sent you a message from Portfolio`,
         text: message,
     };
+    console.log(mailOptions)
     await new Promise<void>((resolve, reject) => {
         // verify connection configuration
-        transporter.verify(function (error: Error, success: any) {
+        transporter.verify(function (error: Error | null, success: true) {
             if (error) {
                 console.log(error);
                 reject(error);
             } else {
                 console.log("Server is ready to take our messages");
-                resolve(success);
+                resolve();
             }
         });
     });
     try {
         await new Promise<void>((resolve, reject) => {
             // send mail
-            transporter.sendMail(mailOptions, (err: Error, info: any) => {
+            transporter.sendMail(mailOptions, (err: Error|null, info: any) => {
                 if (err) {
                     console.error(err);
                     reject(err);
