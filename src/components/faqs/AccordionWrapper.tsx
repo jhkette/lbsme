@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FAQ_QUERYResult } from "@/interfaces/FAQQueryResult";
-import { PortableText } from "@portabletext/react"; // assuming you're using this
+import { PortableText } from "@portabletext/react"; 
 import "@/styles/faqstyles.css"
 
 export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {

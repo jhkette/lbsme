@@ -14,6 +14,7 @@ type Deal = {
 export default async function Marketplace() {
   const { data: subscriptionDeals } = await sanityFetch({ query: SUBSCRIPTION_DEAL_QUERY });
   const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
+  console.log(switchDeals, "SWITCH DEALS")
 
     
 
@@ -45,12 +46,12 @@ export default async function Marketplace() {
         <div className="w-full bg-lbgray rounded-t-lg p-2">
           <h2 className="text-xl text-lbtext">Switch & Save</h2>
         </div>
-        <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-between items-end w-full ">
+        <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-start items-end w-full ">
            {switchDeals.filter((deal: Deal) => deal.featured === true).map((deal: Deal) => (
             //@ts-ignore
             <DealItem key={deal._id} deal={deal} />
           ))}
-           <DealSubscriptionSwitchMore />
+      
         </div>
       </section>
     </div>

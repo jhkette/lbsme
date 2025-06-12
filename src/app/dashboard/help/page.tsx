@@ -1,8 +1,7 @@
-
-
 import { FAQ_QUERY } from "@/sanity/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 import ContactForm from "@/components/faqs/ContactForm";
+
 
 import AccordionWrapper from "@/components/faqs/AccordionWrapper";
 

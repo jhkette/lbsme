@@ -11,6 +11,7 @@
     --color-foreground: var(--foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
+    
   }
 
 }
@@ -22,6 +23,7 @@
     --color-lblgreen:#c4f9ff;
     --color-lbtextgrey:#787787;
     --color-lbtextdark:#323F4B;
+    --color-lblightblue:#F2F7FB;
 }
 
 @theme inline {
@@ -144,19 +146,4 @@
 
   }
 
-}
-
-@keyframes shake {
-  0% {
-    margin-left: 0rem;
-  }
-  25% {
-    margin-left: 0.5rem;
-  }
-  75% {
-    margin-left: -0.5rem;
-  }
-  100% {
-    margin-left: 0rem;
-  }
 }
