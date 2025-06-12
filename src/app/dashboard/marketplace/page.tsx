@@ -5,9 +5,15 @@ import { SUBSCRIPTION_DEAL_QUERY, SWITCH_DEAL_QUERY } from "@/sanity/queries";
 import DealItem from "@/components/deals/DealItem";
 import DealSubscriptionMore from "@/components/deals/DealSubscriptionMore";
 import DealSubscriptionSwitchMore from "@/components/deals/DealSubscriptionSwitchMore";
+type Deal = {
+  _id: string;
+  // Add other properties as needed based on your deal structure
+  [key: string]: any;
+};
+
 export default async function Marketplace() {
   const { data: subscriptionDeals } = await sanityFetch({ query: SUBSCRIPTION_DEAL_QUERY });
-    const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
+  const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
 
     
 
@@ -27,7 +33,7 @@ export default async function Marketplace() {
           <h2 className="text-xl text-lbtext">Special deals & Free Trials</h2>
         </div>
         <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-start items-end w-full ">
-          {subscriptionDeals.map((deal) => (
+          {subscriptionDeals.filter((deal: Deal) => deal.featured === true).map((deal: Deal) => (
             //@ts-ignore
             <DealItem key={deal._id} deal={deal} />
           ))}
@@ -40,7 +46,7 @@ export default async function Marketplace() {
           <h2 className="text-xl text-lbtext">Switch & Save</h2>
         </div>
         <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-between items-end w-full ">
-           {switchDeals.map((deal) => (
+           {switchDeals.filter((deal: Deal) => deal.featured === true).map((deal: Deal) => (
             //@ts-ignore
             <DealItem key={deal._id} deal={deal} />
           ))}

@@ -9,6 +9,7 @@ export const SUBSCRIPTION_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && (d
     dealGenre,
     description,
     dealImage,
+    featured
   
   }`);
 
