@@ -1,10 +1,6 @@
 "use server";
 import { transporter } from "@/lib/transporter";
-interface SendMessageParams {
-    email: string;
-    name: string;
-    message: string;
-}
+
 
 interface MailOptions {
     from: string;
@@ -21,7 +17,7 @@ export async function sendMessage(name: string, email: string,  message: string)
         subject: `${name.toUpperCase()} sent you a message from Portfolio`,
         text: message,
     };
-    console.log(mailOptions)
+  
     await new Promise<void>((resolve, reject) => {
         // verify connection configuration
         transporter.verify(function (error: Error | null, success: true) {
@@ -29,7 +25,7 @@ export async function sendMessage(name: string, email: string,  message: string)
                 console.log(error);
                 reject(error);
             } else {
-                console.log("Server is ready to take our messages");
+               
                 resolve();
             }
         });
@@ -42,7 +38,7 @@ export async function sendMessage(name: string, email: string,  message: string)
                     console.error(err);
                     reject(err);
                 } else {
-                    console.log(info);
+                   
                     resolve(info);
                 }
             });

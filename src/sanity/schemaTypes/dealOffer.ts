@@ -14,6 +14,15 @@ export const dealOffer = defineType({
       validation: (Rule) => Rule.required().error("Deal name is required"),
     }),
     defineField({
+      name: "featured",
+      type: "boolean",
+
+      description:
+        "Is this a featured deal or not. Featured will appear on the landing marketplace page",
+      validation: (Rule) =>
+        Rule.required().error("Deal featured value is correct"),
+    }),
+    defineField({
       name: "dealSnippet",
       title: "Deal Snippet",
       type: "string",
@@ -82,4 +91,7 @@ export const dealOffer = defineType({
       description: "Link to the deal page if available",
     }),
   ],
+  initialValue: {
+    featured: false,
+  },
 });

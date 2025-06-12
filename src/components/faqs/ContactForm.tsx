@@ -91,10 +91,10 @@ export default function ContactForm() {
           />
           <button
             disabled={loading}
-            className="px-4 py-2 bg-lbgreen hover:bg-blue-700 transition-colors text-white rounded-lg disabled:cursor-not-allowed self-start"
+            className="px-4 py-2 bg-lbgreen hover:bg-blue-700 transition-colors min-w-48 text-white rounded-lg disabled:cursor-not-allowed self-start"
           >
             {loading ? (
-              <Loader className="size-8  absolute top-82 text-lbgreen animate-spin" />
+               "Sending..."
             ) : (
               "Send message"
             )}
@@ -107,7 +107,7 @@ export default function ContactForm() {
         quality={100}
         alt="contact"
         src="/images/home/Bird.svg"
-        className=" w-2/8 h-full ml-32 object-cover"
+        className=" w-2/8 h-full ml-32 mt-16 object-cover"
         width={500}
         height={500}
       />
