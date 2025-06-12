@@ -20,6 +20,7 @@ export type DealOffer = {
   _updatedAt: string;
   _rev: string;
   dealName?: string;
+  slug: string
   dealSnippet?: string;
   dealType?: "Free trials" | "subscription deals" | "switch and save";
   dealGenre?: "broadband" | "insurance" | "energy" | "services" | "software" | "finance" | "other";
@@ -224,9 +225,69 @@ export type AllSanitySchemaTypes = DealOffer | BlockContent | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries.ts
 // Variable: SUBSCRIPTION_DEAL_QUERY
-// Query: *[_type == "dealOffer" && (dealType == "subscription deals" || dealType == "free trials")]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    }
+// Query: *[_type == "dealOffer" && (dealType == "subscription deals" || dealType == "free trials")]{    _id,    dealName,    slug,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    featured,    link    }
 export type SUBSCRIPTION_DEAL_QUERYResult = Array<{
   _id: string;
+  dealName: string | null;
+  slug: null;
+  dealSnippet: string | null;
+  dealType: "Free trials" | "subscription deals" | "switch and save" | null;
+  dealGenre: "broadband" | "energy" | "finance" | "insurance" | "other" | "services" | "software" | null;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }> | null;
+  dealImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  featured: null;
+  link: string | null;
+}>;
+// Variable: SWITCH_DEAL_QUERY
+// Query: *[_type == "dealOffer" && dealType == "switch"]{    _id,    dealName,    slug,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    featured,    link  }
+export type SWITCH_DEAL_QUERYResult = Array<never>;
+// Variable: DEAL_QUERY
+// Query: *[_type == "dealOffer" && slug.current == $slug[0]]{     _id,     slug,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    featured,    link    }
+export type DEAL_QUERYResult = Array<{
+  _id: string;
+  slug: null;
   dealName: string | null;
   dealSnippet: string | null;
   dealType: "Free trials" | "subscription deals" | "switch and save" | null;
@@ -275,10 +336,10 @@ export type SUBSCRIPTION_DEAL_QUERYResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
+  category: null;
+  featured: null;
+  link: string | null;
 }>;
-// Variable: SWITCH_DEAL_QUERY
-// Query: *[_type == "dealOffer" && dealType == "switch"]{    _id,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,     }
-export type SWITCH_DEAL_QUERYResult = Array<never>;
 // Variable: FAQ_QUERY
 // Query: *[_type == "FAQs"]| order(_createdAt asc){  _id,  faqQuestion,  faqAnswer,  tag}
 export type FAQ_QUERYResult = Array<never>;
@@ -287,8 +348,9 @@ export type FAQ_QUERYResult = Array<never>;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"dealOffer\" && (dealType == \"subscription deals\" || dealType == \"free trials\")]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n  \n  }": SUBSCRIPTION_DEAL_QUERYResult;
-    "*[_type == \"dealOffer\" && dealType == \"switch\"]{\n    _id,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n   \n  }": SWITCH_DEAL_QUERYResult;
+    "*[_type == \"dealOffer\" && (dealType == \"subscription deals\" || dealType == \"free trials\")]{\n    _id,\n    dealName,\n    slug,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    featured,\n    link\n  \n  }": SUBSCRIPTION_DEAL_QUERYResult;
+    "*[_type == \"dealOffer\" && dealType == \"switch\"]{\n    _id,\n    dealName,\n    slug,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n  }": SWITCH_DEAL_QUERYResult;
+    " *[_type == \"dealOffer\" && slug.current == $slug[0]]{\n     _id,\n     slug,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n\n    }\n    ": DEAL_QUERYResult;
     "*[_type == \"FAQs\"]| order(_createdAt asc){\n  _id,\n  faqQuestion,\n  faqAnswer,\n  tag\n}": FAQ_QUERYResult;
   }
 }

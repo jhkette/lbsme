@@ -2,6 +2,7 @@ import React from "react";
 import { DealOffer } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 
 type DealItemProps = {
   deal: DealOffer;
@@ -16,6 +17,8 @@ export default function DealItem({ deal }: DealItemProps) {
   console.log(deal, "deal item individual");
   return (
     <div className="bg-[url(/images/deals/dealbg.png)] w-[275px] h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
+      {/* @ts-ignore */}
+      <Link href={`/dashboard/marketplace/${deal.slug.current}`}>
       <p className="text-center text-2xl text-lbtext font-bold">
         {deal.dealName}
       </p>
@@ -30,6 +33,7 @@ export default function DealItem({ deal }: DealItemProps) {
         style={{ height: "auto" }} // Maintain proportions
         className="rounded ml-auto mt-6 mr-2" // Optional styling
       />
+      </Link>
     </div>
   );
 }

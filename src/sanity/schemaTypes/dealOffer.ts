@@ -23,6 +23,15 @@ export const dealOffer = defineType({
         Rule.required().error("Deal featured value is correct"),
     }),
     defineField({
+       name: "slug",
+       title: "Slug",
+       type: "slug",
+       options:{
+          source: "dealName",
+          maxLength: 96
+       }
+    }),
+    defineField({
       name: "dealSnippet",
       title: "Deal Snippet",
       type: "string",
