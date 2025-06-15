@@ -66,16 +66,7 @@ export function DropdownMenuComponent() {
             />
             Subscription list
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-lg flex items-center">
-            <Image
-              src={"/images/dropdownmenu/list.svg"}
-              height={25}
-              width={25}
-              alt="user icon"
-              className="inline-block mr-4"
-            />
-            Saving history at glance
-          </DropdownMenuItem>
+      
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer" onClick={handleLogout}>
             <Image
               src={"/images/dropdownmenu/door-open.svg"}
@@ -88,7 +79,7 @@ export function DropdownMenuComponent() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
+        {/* <DropdownMenuGroup>
           <DropdownMenuLabel className="text-sm text-gray-400">
             SECURITY
           </DropdownMenuLabel>
@@ -103,7 +94,7 @@ export function DropdownMenuComponent() {
             Change password
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator /> */}
         <DropdownMenuGroup>
           <DropdownMenuLabel className="text-sm text-gray-400">
             SUPPORT
