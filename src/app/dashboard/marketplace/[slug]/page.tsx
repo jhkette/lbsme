@@ -23,9 +23,13 @@ export default async function page({
   const finalParams = await params;
 
   const dealItem = await client.fetch(DEAL_QUERY, finalParams);
+
+  if(!dealItem){
+    return <h1 className="text-xl text-lbtext">Offer not found</h1>
+  }
   console.log(dealItem, "this is deal item");
 
-  const url = urlFor(dealItem.dealImage?.asset?._ref as string)
+  const url = urlFor(dealItem?.dealImage?.asset?._ref as string)
     .width(400)
     .fit("max") // Maintain aspect ratio
     .auto("format") // Better optimization
@@ -40,7 +44,7 @@ export default async function page({
         <p className="text-lg pl-2 text-lbtext">Go back</p>
       </Link>
       <h1 className="font-bold text-4xl my-8 text-lbtext">
-        Deals Marketplace &gt; {dealItem.dealName}
+        Deals Marketplace &gt; {dealItem?.dealName}
       </h1>
      
       <Image
@@ -58,7 +62,7 @@ export default async function page({
          
         <Image
           src={url}
-          alt={dealItem.dealName || ""}
+          alt={dealItem?.dealName || ""}
           width={150}
           height={110} // This can be an estimate. Real size adjusts automatically
           style={{ height: "auto" }} // Maintain proportions
@@ -66,8 +70,8 @@ export default async function page({
         />
         </div>
         <p className="font-bold">Details:</p>
-        <PortableText value={dealItem.description} />
-        {dealItem.link && (
+        <PortableText value={dealItem?.description ?? []} />
+        {dealItem?.link && (
           <button className="flex flex-row justify-around items-center bg-lbtext hover:bg-lbgreen mt-4 py-3 w-64 rounded-md text-white font-semibold cursor-pointer">
             VIEW THE DEAL <ChevronRight />
           </button>
