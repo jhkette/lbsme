@@ -91,7 +91,7 @@ export default function ContactForm() {
           />
           <button
             disabled={loading}
-            className="px-4 py-2 bg-lbgreen hover:bg-blue-700 transition-colors min-w-48 text-white rounded-lg disabled:cursor-not-allowed self-start"
+            className="px-4 py-2 bg-lbgreen hover:bg-lbtext transition-colors min-w-48 text-white rounded-lg disabled:cursor-not-allowed self-start"
           >
             {loading ? (
                "Sending..."

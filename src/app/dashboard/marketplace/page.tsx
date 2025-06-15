@@ -5,18 +5,18 @@ import { SUBSCRIPTION_DEAL_QUERY, SWITCH_DEAL_QUERY } from "@/sanity/queries";
 import DealItem from "@/components/deals/DealItem";
 import DealSubscriptionMore from "@/components/deals/DealSubscriptionMore";
 import DealSubscriptionSwitchMore from "@/components/deals/DealSubscriptionSwitchMore";
+import { DealOffer } from "@/sanity/types";
 type Deal = {
-  _id: string;
   // Add other properties as needed based on your deal structure
   [key: string]: any;
 };
 
 export default async function Marketplace() {
-  const { data: subscriptionDeals } = await sanityFetch({ query: SUBSCRIPTION_DEAL_QUERY });
+  const { data: subscriptionDeals } = await sanityFetch({
+    query: SUBSCRIPTION_DEAL_QUERY,
+  });
   const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
-  console.log(switchDeals, "SWITCH DEALS")
-
-    
+  console.log(switchDeals, "SWITCH DEALS");
 
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
@@ -34,24 +34,23 @@ export default async function Marketplace() {
           <h2 className="text-xl text-lbtext">Special deals & Free Trials</h2>
         </div>
         <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-start items-end w-full ">
-          {subscriptionDeals.filter((deal: Deal) => deal.featured === true).map((deal: Deal) => (
-            //@ts-ignore
+          {subscriptionDeals.map((deal: Deal) => (
             <DealItem key={deal._id} deal={deal} />
           ))}
           <DealSubscriptionMore />
         </div>
       </section>
-      
+
       <section className="flex flex-col justify-between items-end w-full rounded-lg shadow-lg mb-12">
         <div className="w-full bg-lbgray rounded-t-lg p-2">
           <h2 className="text-xl text-lbtext">Switch & Save</h2>
         </div>
         <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-start items-end w-full ">
-           {switchDeals.filter((deal: Deal) => deal.featured === true).map((deal: Deal) => (
-            //@ts-ignore
-            <DealItem key={deal._id} deal={deal} />
-          ))}
-      
+          {switchDeals
+            .filter((deal: Deal) => deal.featured === true)
+            .map((deal: Deal) => (
+              <DealItem key={deal._id} deal={deal} />
+            ))}
         </div>
       </section>
     </div>

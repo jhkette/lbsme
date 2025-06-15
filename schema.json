@@ -1,6 +1,6 @@
 [
   {
-    "name": "FAQs",
+    "name": "faqs",
     "type": "document",
     "attributes": {
       "_id": {
@@ -13,7 +13,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "FAQs"
+          "value": "faqs"
         }
       },
       "_createdAt": {

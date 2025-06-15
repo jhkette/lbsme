@@ -53,7 +53,9 @@ export default async function page({
     
 
       <div className="deals w-full bg-white p-8 rounded-md mt-4">
+         <p className="text-lbgreen font-semibold">Little Birdie reccomends:</p>
          <div className="w-[400px] p-4 bg-lblightblue rounded-md">
+         
         <Image
           src={url}
           alt={dealItem.dealName || ""}

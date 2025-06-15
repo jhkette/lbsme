@@ -4,11 +4,13 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
 
-type DealItemProps = {
-  deal: DealOffer;
+type Deal = {
+
+  // Add other properties as needed based on your deal structure
+  [key: string]: any;
 };
 
-export default function DealItem({ deal }: DealItemProps) {
+export default function DealItem({ deal }: Deal) {
   const url = urlFor(deal.dealImage?.asset?._ref as string)
     .width(200) // Resize to max 80px width
     .fit("max") // Maintain aspect ratio
@@ -17,7 +19,7 @@ export default function DealItem({ deal }: DealItemProps) {
   console.log(deal, "deal item individual");
   return (
     <div className="bg-[url(/images/deals/dealbg.png)] w-[275px] h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
-      {/* @ts-ignore */}
+    
       <Link href={`/dashboard/marketplace/${deal.slug.current}`}>
       <p className="text-center text-2xl text-lbtext font-bold">
         {deal.dealName}

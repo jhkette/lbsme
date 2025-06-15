@@ -20,7 +20,6 @@ export type DealOffer = {
   _updatedAt: string;
   _rev: string;
   dealName?: string;
-  slug: string
   dealSnippet?: string;
   dealType?: "Free trials" | "subscription deals" | "switch and save";
   dealGenre?: "broadband" | "insurance" | "energy" | "services" | "software" | "finance" | "other";
@@ -284,8 +283,8 @@ export type SUBSCRIPTION_DEAL_QUERYResult = Array<{
 // Query: *[_type == "dealOffer" && dealType == "switch"]{    _id,    dealName,    slug,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    featured,    link  }
 export type SWITCH_DEAL_QUERYResult = Array<never>;
 // Variable: DEAL_QUERY
-// Query: *[_type == "dealOffer" && slug.current == $slug[0]]{     _id,     slug,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    featured,    link    }
-export type DEAL_QUERYResult = Array<{
+// Query: *[_type == "dealOffer" && slug.current == $slug][0]{     _id,     slug,    dealName,    dealSnippet,    dealType,    dealGenre,    description,    dealImage,    category,    featured,    link    }
+export type DEAL_QUERYResult = {
   _id: string;
   slug: null;
   dealName: string | null;
@@ -339,9 +338,9 @@ export type DEAL_QUERYResult = Array<{
   category: null;
   featured: null;
   link: string | null;
-}>;
+} | null;
 // Variable: FAQ_QUERY
-// Query: *[_type == "FAQs"]| order(_createdAt asc){  _id,  faqQuestion,  faqAnswer,  tag}
+// Query: *[_type == "faqs"]| order(_createdAt asc){  _id,  faqQuestion,  faqAnswer,  tag}
 export type FAQ_QUERYResult = Array<never>;
 
 // Query TypeMap
@@ -350,7 +349,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"dealOffer\" && (dealType == \"subscription deals\" || dealType == \"free trials\")]{\n    _id,\n    dealName,\n    slug,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    featured,\n    link\n  \n  }": SUBSCRIPTION_DEAL_QUERYResult;
     "*[_type == \"dealOffer\" && dealType == \"switch\"]{\n    _id,\n    dealName,\n    slug,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n  }": SWITCH_DEAL_QUERYResult;
-    " *[_type == \"dealOffer\" && slug.current == $slug[0]]{\n     _id,\n     slug,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n\n    }\n    ": DEAL_QUERYResult;
-    "*[_type == \"FAQs\"]| order(_createdAt asc){\n  _id,\n  faqQuestion,\n  faqAnswer,\n  tag\n}": FAQ_QUERYResult;
+    " *[_type == \"dealOffer\" && slug.current == $slug][0]{\n     _id,\n     slug,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n\n    }\n    ": DEAL_QUERYResult;
+    "*[_type == \"faqs\"]| order(_createdAt asc){\n  _id,\n  faqQuestion,\n  faqAnswer,\n  tag\n}": FAQ_QUERYResult;
   }
 }
