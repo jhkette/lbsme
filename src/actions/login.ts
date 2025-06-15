@@ -23,6 +23,7 @@ export const handleLogin = async (email: string, password: string) => {
 
     }
     (await cookies()).delete("token"); // Clear any existing token cookie
+   
     // post request to the login URL with encrypted password and email
     const res = await fetch(loginUrl, {
       method: "POST",
@@ -31,8 +32,10 @@ export const handleLogin = async (email: string, password: string) => {
         password: AES.encrypt(password, encryptionKey).toString(),
       }),
     });
+  
 
-    const result = await res.json();
+    const result = await res.json()
+    .catch(() => ({ error: "Could not parse response" }));;
    
     console.log("Login result:", result);
 
