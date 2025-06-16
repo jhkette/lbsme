@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FAQ_QUERYResult } from "@/interfaces/FAQQueryResult";
+import { FAQ_QUERYResult } from "@/interfaces/SanityTypes";
 import { PortableText } from "@portabletext/react"; 
 import "@/styles/faqstyles.css"
 

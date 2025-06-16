@@ -6,3 +6,9 @@ export type FAQ_QUERYResult = Array<{
   faqAnswer: PortableTextBlock[];
   tag: string;
 }>;
+
+
+export type Deal = {
+  // Add other properties as needed based on your deal structure
+  [key: string]: any;
+};

@@ -5,7 +5,7 @@ import { SUBSCRIPTION_DEAL_QUERY, SWITCH_DEAL_QUERY } from "@/sanity/queries";
 import DealItem from "@/components/deals/DealItem";
 import DealSubscriptionMore from "@/components/deals/DealSubscriptionMore";
 // import DealSubscriptionSwitchMore from "@/components/deals/DealSubscriptionSwitchMore";
-import {Deal} from "@/interfaces/Deal"
+import {Deal} from "@/interfaces/SanityTypes"
 
 
 
