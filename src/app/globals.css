@@ -147,3 +147,24 @@
   }
 
 }
+
+  @keyframes peck {
+    0% {
+      transform: rotate(4deg);
+    }
+    2% {
+      transform: rotate(-3deg); /* Peck down */
+    }
+    4% {
+      transform: rotate(4deg); /* Return */
+    }
+    100% {
+      transform: rotate(4deg); /* Idle for rest of cycle */
+    }
+  }
+
+    .pecking-bird {
+      animation: peck 10s ease-in-out infinite;
+    transform-origin: center bottom;
+    display: inline-block;
+  }

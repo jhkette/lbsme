@@ -16,6 +16,7 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-lbtext mb-4 px-12 text-center w-[90%]">
             The UK&apos;s top subscription & bill management app
           </h1>
+          <div className="pecking-bird">
           <Image
             src="./images/home/Bird.svg"
             alt="Bird"
@@ -23,15 +24,10 @@ export default function Home() {
             height={450}
             className="mx-12"
           />
+          </div>
         </div>
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
-          <Image
-            src="./images/home/imagelogo08.svg"
-            alt="Logo"
-            width={75}
-            height={75}
-            className="mb-4"
-          />
+          
           <h2 className="text-2xl font-bold text-lbtext mb-4 px-12 text-center">
             Log into your account
           </h2>

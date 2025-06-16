@@ -50,9 +50,10 @@ export const SUBSCRIPTION_DEAL_QUERY = defineQuery(`*[_type == "dealOffer" && (d
   )
 
 
-export const FAQ_QUERY = defineQuery(`*[_type == "faqs"]| order(_createdAt asc){
+export const FAQ_QUERY = defineQuery(`*[_type == "FAQs"]| order(_createdAt asc){
   _id,
   faqQuestion,
+  _createdAt,
   faqAnswer,
   tag
 }`);
