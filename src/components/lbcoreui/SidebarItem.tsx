@@ -17,14 +17,14 @@ export default function SidebarItem({ iconName, label }: SidebarItemProps) {
 
   return (
     <Link href={label ==="Home" ? "/dashboard":`/dashboard/${label.toLowerCase()}`} className="m-0">
-    <li
+    <div
       className="p-6 flex flex-col items-center justify-center text-white text-lg cursor m-0 w-full border-1 border-r-1 border-lbgreen hover:bg-white hover:text-lbgreen duration-300 ease-in-out"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       <Image src={imageSrc} alt={label} width={30} height={30} />
       {label}
-    </li>
+    </div>
     </Link>
   );
 }

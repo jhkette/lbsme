@@ -3,10 +3,10 @@
 import SidebarItem from "@/components/lbcoreui/SidebarItem";
 export default function Sidebar() {
   return (
-    <div className="bg-lbgreen w-28 min-h-screen flex flex-col justify-start min-h-screen">
+    <div className="bg-lbgreen w-28 min-h-screen">
       <nav>
-        <ul className="max-h-[500px]">
-          <div>
+       
+         
           <SidebarItem
             iconName="homegreen.svg"
             label="Home"/>
@@ -24,14 +24,15 @@ export default function Sidebar() {
             iconName="Tag.svg"
             label="Marketplace"/>
       
-          </div>
-          <div className="mt-16" >
+          
+          <div className="mt-16">
             <SidebarItem
             iconName="help.svg"
             label="Help"/>
+            </div>
           
-          </div>
-        </ul>
+         
+       
       </nav>
     </div>
   );
