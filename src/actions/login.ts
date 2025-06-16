@@ -17,7 +17,7 @@ export const handleLogin = async (email: string, password: string) => {
     if (!loginUrl) {
       throw new Error("environment variable is not defined");
     }
-    const encryptionKey = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
+    const encryptionKey = process.env.ENCRYPTION_KEY;
     if (!encryptionKey) {
       throw new Error("environment variable is not defined");
 
