@@ -5,7 +5,7 @@ export default function Sidebar() {
   return (
     <div className="bg-lbgreen w-28 min-h-screen flex flex-col min-h-screen">
       <nav>
-        <ul className="flex flex-col h-full justify-between">
+        <ul className="flex flex-col max-h-max h-full justify-between">
           <div>
           <SidebarItem
             iconName="homegreen.svg"
