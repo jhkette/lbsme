@@ -2,16 +2,16 @@
 import HeaderDashboard from "@/components/lbcoreui/HeaderDashboard";
 import Sidebar from "@/components/lbcoreui/Sidebar";
 import useApolloClient from "@/apollo/useApolloClient";
-import { ApolloProvider } from "@apollo/client";
+
 import { Toaster } from 'react-hot-toast';
 export default function Layout({ children }: { children: React.ReactNode }) {
   const apolloClient = useApolloClient();
 
-  console.log("Apollo Client initialized:", apolloClient);
+  // console.log("Apollo Client initialized:", apolloClient);
 
   return (
     <div className="flex flex-col items-start  min-h-screen bg-gray-100">
-      <ApolloProvider client={apolloClient}>
+    
         <HeaderDashboard />
         
         <div className="flex flex-row w-full">
@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
        <Toaster/>
-      </ApolloProvider>
+  
     </div>
   );
 }
