@@ -1,32 +1,37 @@
-import {queryAppSync} from "./queryAppSync"
 
-// First, define TypeScript interfaces for the response data
-interface Deal {
+import { queryAppSync, useAppSyncQuery } from "./queryAppSync";
 
-  url: string;
-}
-
-interface GetTopDealsResponse {
-  getTopDeals: Deal[];
-}
-
-// Then create the function using your queryAppSync
-export const fetchTopDeals = async (): Promise<Deal[]> => {
+export const fetchTopDeals = async (from: string, to: string): Promise<any> => {
   const query = `
-  query getProviderlessUserAuthGateway {
-  getProviderlessUserAuthGateway {
-    url
+   query getSubscriptions {
+  getSubscriptions(status: ACTIVE) {
+    subscriptions {
+     merchant {
+        icon
+        id
+        name
+      }
+      displayName
+       cancellationStatus
+      displayName
+      monthlyCost
+      paymentMethod
+      priceChange
+      providerName
+      subscriptionId
+      type
+      saveUp
+    }
   }
-}
-  `;
+}`;
+
+  const variables = { from, to };
 
   try {
-    const data = await queryAppSync(query);
-    return data
+    const data = await queryAppSync(query, variables); // 👈 pass variables here
+    return data;
   } catch (error) {
-    console.error('Failed to fetch top deals:', error);
-    throw error; // Re-throw or handle as needed
+    console.error("Failed to fetch top deals:", error);
+    throw error;
   }
 };
-
-

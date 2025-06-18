@@ -14,13 +14,14 @@ interface UserContextType {
   user: UserInterface | null;
   setUser: (userData: UserInterface) => void;
   clearUser: () => void;
+  setUserToken: (token: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUserState] = useState<UserInterface | null>(null);
-
+ const [token, setToken] = useState<string|null>(null)
   useEffect(() => {
     const fetchUser = async () => {
       const currentUser = await getUser();
@@ -42,12 +43,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setUserState(userData);
   };
 
+  const setUserToken = (token: string) => {
+    setToken(token)
+  }
+
   const clearUser = () => {
     setUserState(null);
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, clearUser }}>
+    <UserContext.Provider value={{ user, setUser, clearUser, setUserToken }}>
       {children}
     </UserContext.Provider>
   );

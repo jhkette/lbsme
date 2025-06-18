@@ -1,10 +1,11 @@
 import {getToken} from "@/actions/getToken"
 
-
+import { useQuery } from "@tanstack/react-query";
+// import { getTokenClient } from "./getTokenClient";
 export const queryAppSync = async (query: string, variables: Record<string, any> = {}) => {
   const url = process.env.REACT_APP_AWS_APPSYNC_URL!;
-  const token = await getToken(); // this should return your JWT
-
+  const token = await getToken() as string; // this should return your JWT
+  console.log(token, "query token")
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -24,4 +25,13 @@ export const queryAppSync = async (query: string, variables: Record<string, any>
   }
 
   return json.data;
+};
+
+
+export const useAppSyncQuery = (query: string, variables?: Record<string, any>) => {
+  return useQuery({
+    queryKey: [query, variables],
+    queryFn: () => queryAppSync(query, variables),
+    staleTime: 1000 * 60 * 5, // 5 minutes cache
+  });
 };
