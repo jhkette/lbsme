@@ -8,12 +8,9 @@ const createApolloClient = () => {
   return new ApolloClient({
     link: link,
     cache: new InMemoryCache({
-      // Optional: Add cache configuration
-      typePolicies: {
-        // Add type policies if needed
-      },
+
     }),
-    // Optional: Add default options
+   
     defaultOptions: {
       watchQuery: {
         errorPolicy: 'all',
@@ -22,7 +19,7 @@ const createApolloClient = () => {
         errorPolicy: 'all',
       },
     },
-    // Enable dev tools in development
+   
     connectToDevTools: process.env.NODE_ENV === 'development',
   });
 };

@@ -3,6 +3,7 @@ import { Mulish } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
+import {useGetSubscriptionsSummaryQuery} from "@/graphql/getSubscriptionSummary.generated"
 
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",

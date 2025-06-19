@@ -9,6 +9,20 @@ export const GET_SUBSCRIPTIONS = gql`
           id
           name
         }
+            category {
+        PK
+        SK
+        category
+        searchCategory
+        searchSubCategory
+        subCategory
+      }
+      dates {
+        endsInDays
+        endsInPercent
+        lastPaymentDate
+        renewalDate
+      }
         displayName
         cancellationStatus
         monthlyCost

@@ -2,22 +2,38 @@
 import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
 //import { format } from 'date-fns'; // add later
 import Image from "next/image";
-// import { formatDate } from "@/lib/time";
+import { formatDate } from "@/lib/time";
+import { useGetSubscriptionSpendingsQuery } from "@/graphql/getSubscriptionSpendings.generated";
 
 
 
 import { useQuery, gql } from '@apollo/client';
+  
 
 // Define the GraphQL query
 const GET_SUBSCRIPTIONS = gql`
   query getSubscriptions {
     getSubscriptions(status: ACTIVE) {
-      subscriptions {
+       subscriptions {
         merchant {
           icon
           id
           name
         }
+            category {
+        PK
+        SK
+        category
+        searchCategory
+        searchSubCategory
+        subCategory
+      }
+      dates {
+        endsInDays
+        endsInPercent
+        lastPaymentDate
+        renewalDate
+      }
         displayName
         cancellationStatus
         monthlyCost
@@ -44,29 +60,25 @@ export default function Home() {
     // pollInterval: 30000,
   });
   console.log(data)
+  const currentDate = new Date();
+  const oneYearAgo = new Date(currentDate);
+oneYearAgo.setFullYear(currentDate.getFullYear() - 1);
 
-  //    const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS);
-
-  // if (loading) return <div>Loading subscriptions...</div>;
-  // if (error){
-  //   console.log(error)
-  // }
-  // console.log(data)
-  // const now2 = new Date();
-  // const sixMonthsAgo2 = subMonths(new Date(), 6);
-  //  const formatDate = (date: Date) => moment(date).format("YYYY-MM-DD"); 
-
-  // const { data, loading } = useGetSubscriptionsSummaryQuery({
+  //  const {
+  //   data: spendingsData,
+  //   loading: spendingsLoading,
+  //   refetch: spendingsRefetch,
+  //   error: spendingError
+  // } = useGetSubscriptionSpendingsQuery({
   //   variables: {
-  //     from: formatDate(sixMonthsAgo2),
-  //     to: formatDate(now2),
+  //     from: formatDate(oneYearAgo),
+  //     to: formatDate(currentDate),
+  //     category: "all"
   //   },
   //   fetchPolicy: "cache-and-network",
   // });
 
-  // console.log(loading, data, "data");
- 
-
+  // console.log(spendingsData, spendingError, "this is spendings data")
  
 
   return (
