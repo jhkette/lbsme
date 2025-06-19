@@ -1,0 +1,34 @@
+query getSubscriptions {
+    getSubscriptions(status: ACTIVE) {
+       subscriptions {
+        merchant {
+          icon
+          id
+          name
+        }
+            category {
+        PK
+        SK
+        category
+        searchCategory
+        searchSubCategory
+        subCategory
+      }
+      dates {
+        endsInDays
+        endsInPercent
+        lastPaymentDate
+        renewalDate
+      }
+        displayName
+        cancellationStatus
+        monthlyCost
+        paymentMethod
+        priceChange
+        providerName
+        subscriptionId
+        type
+        saveUp
+      }
+    }
+  }
