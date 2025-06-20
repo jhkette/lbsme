@@ -1,17 +1,24 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
+import { cookies } from 'next/headers'
 // Middleware to protect dashboard routes
 // and redirect unauthenticated users to the login page
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
+    const cookieStore = await cookies()
+  const token = cookieStore.get('token')
+   
+    const pathname = req.nextUrl.pathname;
+   const isLoginPage = pathname === '/';
+    const isDashboard = pathname.startsWith('/dashboard');
 
-  const token = req.cookies.get('token')?.value;
-  
-  const isDashboard = req.nextUrl.pathname.startsWith('/dashboard');
+   if (isDashboard && !token) {
+    // User is not signed in but trying to access dashboard
+    return NextResponse.redirect(new URL('/', req.url));
+  }
 
-  if (isDashboard && !token) {
-    const loginUrl = new URL('/', req.url);
-    return NextResponse.redirect(loginUrl);
+  if (isLoginPage && token) {
+    // User is signed in but trying to access login
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
   return NextResponse.next();
@@ -19,5 +26,5 @@ export function middleware(req: NextRequest) {
 
 // Apply only to dashboard routes
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ['/dashboard/:path*', '/'],
 };

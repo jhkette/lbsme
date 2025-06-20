@@ -1,13 +1,15 @@
 "use client";
 import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
+import { Suspense } from "react";
 //import { format } from 'date-fns'; // add later
 import Image from "next/image";
 import { formatDate } from "@/lib/time";
 import { useGetSubscriptionsQuery, GetSubscriptionsQueryResult } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
-
-
-
+import {SuspenseIntro, SuspenseTransactions} from "@/components/suspense/SuspenseComponents"
+import TransactionsLanding from "@/components/subscriptionsLanding/TransactionsLanding";
+import DashboardGraph from "@/components/subscriptionsLanding/DashboardGraph";
+import { SuspenseDashboardGraph } from "@/components/suspense/SuspenseComponents";
 import IntroHome from "@/components/lbcoreui/IntroHome";
 export default function Home() {
 
@@ -19,7 +21,7 @@ export default function Home() {
     // Optional: Poll for updates every 30 seconds
     // pollInterval: 30000,
   });
-
+ console.log(data, "main data")
  const subs = data?.getSubscriptions?.subscriptions as Subscription[]
 
  
@@ -34,7 +36,14 @@ export default function Home() {
         alt="graphic"
         className="absolute top-6 z-0 right-40"
       />
-      <DashboardSubs subs={subs} />
+     {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
+     <div className="my-16 flex flex-row">
+      {loading ? <SuspenseDashboardGraph/> : <DashboardGraph/>}
+
+     {loading ? <SuspenseTransactions /> :<TransactionsLanding/>}
+
+     </div>
+
     </div>
   );
 }

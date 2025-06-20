@@ -15,6 +15,7 @@
   }
 
 }
+/* little birdie theme colours */
 @theme {
    --color-lbgreen: #00B1C4;
    --color-lbtext: #29235C;
@@ -26,6 +27,7 @@
     --color-lblightblue:#F2F7FB;
 }
 
+/* default styles */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -168,3 +170,17 @@
     transform-origin: center bottom;
     display: inline-block;
   }
+
+   @keyframes shimmer {
+   to {
+      background-position-x: 0%
+   }
+}
+    .loading {
+   
+
+   background: linear-gradient(-45deg, #f0f0f0 20%, #fff 50%, #f0f0f0 60%);
+   background-size: 300%;
+   background-position-x: 100%;
+   animation: shimmer .75s infinite linear;
+}

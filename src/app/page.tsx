@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Login from "@/components/forms/Login";
-import SignInRedirect from "@/components/signin/signInRedirect";
+
 export default function Home() {
   return (
     <div className="w-full">
@@ -32,8 +32,7 @@ export default function Home() {
             Log into your account
           </h2>
           <Login />
-          {/* this redirects user to "/" if they are not logged in */}
-          <SignInRedirect />
+       
         </div>
       </div>
     </div>

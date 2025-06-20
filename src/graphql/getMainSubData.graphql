@@ -1,5 +1,6 @@
 query getSubscriptions {
     getSubscriptions(status: ACTIVE) {
+     
        subscriptions {
         merchant {
           icon
