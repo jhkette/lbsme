@@ -1,4 +1,5 @@
 export type Subscription = {
+  id: string
   merchant: {
     __typename: "Merchant";
     icon: string;
@@ -21,6 +22,7 @@ export type Subscription = {
     lastPaymentDate: string; // ISO date string
     renewalDate: string;     // ISO date string
   };
+
   displayName: string;
   cancellationStatus: string | null;
   monthlyCost: number;

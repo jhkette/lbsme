@@ -1,0 +1,58 @@
+query getSubscription($id: String!) {
+  getSubscription(id: $id) {
+    category {
+      category
+      PK
+      searchCategory
+      searchSubCategory
+      SK
+      subCategory
+    }
+    costs {
+      amount
+      monthly
+      priceChange
+      totalRemaining
+      average_monthly
+      totalSpent
+      yearly
+      saveUp
+      priceChange
+    }
+    dates {
+      endsInDays
+      endsInPercent
+      lastPaymentDate
+      renewalDate
+      contractEndDate
+    }
+    freeTrial
+    isManual
+    status
+    merchant {
+      icon
+      id
+      name
+    }
+    displayName
+    paymentMethod
+    subscriptionId
+    cancellationStatus
+    type
+    transactions {
+      accountID
+      bookingTime
+      budId
+      title
+      transactionId
+      amount {
+        amount
+        currency
+      }
+      provider {
+        id
+        name
+      }
+    }
+  }
+}

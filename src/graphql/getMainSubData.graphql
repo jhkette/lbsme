@@ -1,12 +1,13 @@
 query getSubscriptions {
     getSubscriptions(status: ACTIVE) {
-     
+        subscriptionId
        subscriptions {
         merchant {
           icon
           id
           name
         }
+        
             category {
         PK
         SK

@@ -18,6 +18,8 @@
     "@portabletext/types": "^2.0.13",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-hover-card": "^1.1.14",
+    "@radix-ui/react-slot": "^1.2.3",
     "@sanity/client": "^7.5.0",
     "@sanity/icons": "^3.7.0",
     "@sanity/image-url": "1",
