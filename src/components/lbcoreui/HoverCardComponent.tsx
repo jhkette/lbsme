@@ -15,11 +15,12 @@ export default function HoverCardComponent({
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Button variant="link">
-          <Info color="#00B1C4" size="28" />
+        <Button variant="link" className="">
+          <Info color="#00B1C4" size={80} className="size-[24px]" />
         </Button>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">{children}</HoverCardContent>
     </HoverCard>
   );
+  
 }

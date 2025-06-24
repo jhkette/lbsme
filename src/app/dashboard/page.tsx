@@ -47,8 +47,11 @@ export default function Home() {
       {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
       <div className="my-16 flex flex-row gap-12">
         {loading ? <SuspenseDashboardGraph /> : <DashboardGraph />}
-
+   {loading ? (
+          <SuspenseTransactions />
+        ) : (
        <SpendingSummary subs={subs}/>
+        )}
       </div>
       <div className="my-16 flex flex-row gap-12">
        {loading ? (
