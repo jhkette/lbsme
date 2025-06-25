@@ -25,6 +25,8 @@
     --color-lbtextgrey:#787787;
     --color-lbtextdark:#323F4B;
     --color-lblightblue:#F2F7FB;
+    --color-lbbgblue: #426DA9;
+    --color-bggrey: #E9E9E9;
 }
 
 /* default styles */
@@ -184,3 +186,6 @@
    background-position-x: 100%;
    animation: shimmer .75s infinite linear;
 }
+
+
+@plugin 'tailwind-scrollbar';

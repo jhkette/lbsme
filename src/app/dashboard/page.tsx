@@ -13,19 +13,18 @@ import {
   SuspenseIntro,
   SuspenseTransactions,
 } from "@/components/suspense/SuspenseComponents";
-import TransactionsLanding from "@/components/subscriptionsLanding/TransactionsLanding";
+import TransactionsLanding from "@/components/subscriptionsLanding/RenewalSummary";
 import DashboardGraph from "@/components/subscriptionsLanding/DashboardGraph";
 import { SuspenseDashboardGraph } from "@/components/suspense/SuspenseComponents";
 import IntroHome from "@/components/lbcoreui/IntroHome";
-import SpendingSummary from "@/components/subscriptionsLanding/SpendingSummary";
+import SpendingSummary from "@/components/subscriptionsLanding/TransactionSummary";
 export default function Home() {
+  // This query gets the key subscription data - and passes it down to child
+  // components
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
-    // Optional: Add error policy
     errorPolicy: "all",
-    // Optional: Cache policy
+
     fetchPolicy: "cache-and-network",
-    // Optional: Poll for updates every 30 seconds
-    // pollInterval: 30000,
   });
   console.log(data, "main data");
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
@@ -47,22 +46,17 @@ export default function Home() {
       {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
       <div className="my-16 flex flex-row gap-12">
         {loading ? <SuspenseDashboardGraph /> : <DashboardGraph />}
-   {loading ? (
-          <SuspenseTransactions />
-        ) : (
-       <SpendingSummary subs={subs}/>
-        )}
+        {loading ? <SuspenseTransactions /> : <SpendingSummary subs={subs} />}
       </div>
       <div className="my-16 flex flex-row gap-12">
-       {loading ? (
+        {loading ? (
           <SuspenseTransactions />
         ) : (
           <TransactionsLanding subs={subs} />
         )}
 
-
         {loading ? <SuspenseDashboardGraph /> : <DashboardGraph />}
-        </div>
+      </div>
     </div>
   );
 }

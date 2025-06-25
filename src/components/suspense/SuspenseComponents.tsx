@@ -15,7 +15,7 @@ export function SuspenseIntro() {
 
 export function SuspenseTransactions(){
   return(
-    <div className="loading w-1/2 p-4 rounded-lg shadow-lg bg-white h-80 ">
+    <div className="loading w-1/2 p-4 rounded-lg shadow-lg bg-white h-110 ">
     
       </div>
   )
@@ -25,7 +25,7 @@ export function SuspenseTransactions(){
 
 export function SuspenseDashboardGraph() {
   return (
-    <div className="loading w-1/2 p-4 rounded-lg shadow-lg bg-white h-80 mr-8">
+    <div className="loading w-1/2 p-4 rounded-lg shadow-lg bg-white h-110 mr-8">
       </div>
   )
 }
