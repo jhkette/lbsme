@@ -3,6 +3,7 @@ import { Subscription } from "@/interfaces/Subscription";
 import { useGetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated";
 import Image from "next/image";
 import { Repeat } from "lucide-react";
+
 interface SpendingDetailProps {
   sub: Subscription;
   yearly: Boolean
@@ -19,7 +20,7 @@ export default function SpendingDetail(props: SpendingDetailProps) {
     // pollInterval: 30000,
   });
 
-  console.log(data?.getSubscription.transactions);
+  console.log(data?.getSubscription.transactions, "TRANSACTIONS");
 const now = new Date();
 const currentYear = now.getFullYear();
 const currentMonth = now.getMonth();
@@ -57,7 +58,7 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
 
   return (
     <div className="flex flex-row justify-between gap-8 py-2 border-b-1 items-center">
-      <div className="flex flex-row items-center justify-start gap-8">
+      <div className="flex flex-row items-center justify-start gap-4">
         {icon !== "unknown" ? (
           <Image
             src={icon}

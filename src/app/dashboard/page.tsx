@@ -1,12 +1,8 @@
 "use client";
 import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
-import { Suspense } from "react";
-//import { format } from 'date-fns'; // add later
 import Image from "next/image";
-import { formatDate } from "@/lib/time";
 import {
   useGetSubscriptionsQuery,
-  GetSubscriptionsQueryResult,
 } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
 import {
@@ -15,9 +11,10 @@ import {
 } from "@/components/suspense/SuspenseComponents";
 import TransactionsLanding from "@/components/subscriptionsLanding/RenewalSummary";
 import DashboardGraph from "@/components/subscriptionsLanding/DashboardGraph";
-import { SuspenseDashboardGraph } from "@/components/suspense/SuspenseComponents";
+
 import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/subscriptionsLanding/TransactionSummary";
+import DealsSummary from "@/components/subscriptionsLanding/DealsSummary";
 export default function Home() {
   // This query gets the key subscription data - and passes it down to child
   // components
@@ -45,7 +42,7 @@ export default function Home() {
       />
       {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
       <div className="my-16 flex flex-row gap-12">
-        {loading ? <SuspenseDashboardGraph /> : <DashboardGraph />}
+        {loading ? <SuspenseTransactions /> : <DashboardGraph subs={subs} />}
         {loading ? <SuspenseTransactions /> : <SpendingSummary subs={subs} />}
       </div>
       <div className="my-16 flex flex-row gap-12">
@@ -55,7 +52,7 @@ export default function Home() {
           <TransactionsLanding subs={subs} />
         )}
 
-        {loading ? <SuspenseDashboardGraph /> : <DashboardGraph />}
+        {loading ? <SuspenseTransactions /> : <DealsSummary />}
       </div>
     </div>
   );
