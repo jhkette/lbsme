@@ -23,7 +23,7 @@ export default defineConfig({
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
-    //@ts-expect-error this is a library issue
+    //@ts-ignore this is a library issue
     visionTool({defaultApiVersion: apiVersion}),
   ],
 })
