@@ -43,7 +43,7 @@ export default function DealsSummary() {
           {
             simplifiedData?.map((deal) => {
               return (
-                  <SmallDealItem deal={deal}/>
+                  <SmallDealItem deal={deal} key={deal.name}/>
               )
             })
           }
