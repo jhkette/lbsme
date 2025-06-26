@@ -5,14 +5,12 @@ import { Repeat } from 'lucide-react';
 import {clsx} from "clsx"
 interface TransactionDetailProps{
     sub: Subscription
-    renewal: Boolean
+    renewal: boolean
 }
 export default function TransactionDetail(props: TransactionDetailProps) {
-  console.log(props, "transaction props")
    if (!props.sub) {
     return null;
   }
-    console.log(props, "renewaldetail")
     const icon = props.sub.merchant.icon
   return (
     

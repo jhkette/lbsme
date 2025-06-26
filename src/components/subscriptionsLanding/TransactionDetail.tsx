@@ -6,7 +6,7 @@ import { Repeat } from "lucide-react";
 
 interface SpendingDetailProps {
   sub: Subscription;
-  yearly: Boolean
+  yearly: boolean
 }
 
 export default function SpendingDetail(props: SpendingDetailProps) {
@@ -20,7 +20,7 @@ export default function SpendingDetail(props: SpendingDetailProps) {
     // pollInterval: 30000,
   });
 
-  console.log(data?.getSubscription.transactions, "TRANSACTIONS");
+
 const now = new Date();
 const currentYear = now.getFullYear();
 const currentMonth = now.getMonth();
@@ -30,8 +30,6 @@ const currentMonth = now.getMonth();
   }
 
   const icon = data?.getSubscription.merchant.icon as string;
-  console.log(data, "spending detail data");
-  console.log(icon, "spending detail data", "icon");
 
   // Sum the amounts of transactions from the current year
   const totalThisYear = (data?.getSubscription?.transactions ?? [])

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/hover-card";
 import { Info } from "lucide-react";
 
-type HoverCardComponentProps = React.PropsWithChildren<{}>;
+type HoverCardComponentProps = React.PropsWithChildren<Record<string, unknown>>;
 
 export default function HoverCardComponent({
   children,

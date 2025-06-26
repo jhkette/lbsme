@@ -25,7 +25,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const currentUser = await getUser();
-      console.log("Fetched user:", currentUser);
       if (currentUser) {
         setUserState(currentUser);
       }

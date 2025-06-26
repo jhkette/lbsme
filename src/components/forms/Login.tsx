@@ -16,6 +16,8 @@ export default function Login() {
     formState: { errors },
     clearErrors,
   } = useForm<SignInData>({
+  
+    //@ts-expect-error this is due to a library mismatch
     resolver: zodResolver(UserSchema),
   });
   const router = useRouter(); 
@@ -45,7 +47,7 @@ export default function Login() {
     clearErrors(); // clear any previous errors
     setLoginError(null); // Clear previous login error
     const logdata = await handleLogin(data.email, data.password);
-    console.log("Login data:", logdata);
+   
     if (logdata.error) {
       console.log("Login failed:", logdata.error);
       setLoginError("Login failed. Please check your credentials.");

@@ -1,0 +1,40 @@
+import React from "react";
+import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
+import Link from "next/link";
+
+type Deal = {
+
+  // Add other properties as needed based on your deal structure
+  [key: string]: any;
+};
+
+export default function SmallDealItem({ deal }: Deal) {
+//   const url = urlFor(deal.dealImage?.asset?._ref as string)
+//     .width(200) // Resize to max 80px width
+//     .fit("max") // Maintain aspect ratio
+//     .auto("format") // Better optimization
+//     .url();
+  console.log(deal, "deal item individual");
+  return (
+    <div className="bg-[url(/images/deals/dealbg.png)] w-[250px] h-[160px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
+    
+      <Link href={`/dashboard/marketplace/`}>
+      <p className="text-center text-2xl text-lbtext font-bold">
+      test
+      </p>
+      <p className="text-lg text-gray-500 font-semibold text-center">
+       test
+      </p>
+      {/* <Image
+        src={url}
+        alt={deal.dealName || ""}
+        width={30}
+        height={30} // This can be an estimate. Real size adjusts automatically
+        style={{ height: "auto" }} // Maintain proportions
+        className="rounded ml-auto mt-2 mr-2" // Optional styling
+      /> */}
+      </Link>
+    </div>
+  );
+}

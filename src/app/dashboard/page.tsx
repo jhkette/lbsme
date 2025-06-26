@@ -23,13 +23,12 @@ export default function Home() {
 
     fetchPolicy: "cache-and-network",
   });
-  console.log(data, "main data");
+  
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
   const transactions = data?.getSubscriptions?.subscriptions?.map(
     (transaction) => transaction.dates.lastPaymentDate
   ) as string[];
-  console.log(transactions);
-
+ 
   return (
     <div className="px-16 w-full mt-12 relative">
       <IntroHome />

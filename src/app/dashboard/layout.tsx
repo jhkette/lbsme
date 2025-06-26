@@ -2,7 +2,6 @@
 import HeaderDashboard from "@/components/lbcoreui/HeaderDashboard";
 import Sidebar from "@/components/lbcoreui/Sidebar";
 import { useState, useEffect } from "react";
-import { fetchTopDeals } from "@/actions/deals";
 import { Toaster } from "react-hot-toast";
 import {
   ApolloProvider,

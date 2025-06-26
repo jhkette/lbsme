@@ -37,7 +37,7 @@ export const handleLogin = async (email: string, password: string) => {
     const result = await res.json()
     .catch(() => ({ error: "Could not parse response" }));;
    
-    console.log("Login result:", result);
+
 
     if (result.error) {
       return { error: result.error };
