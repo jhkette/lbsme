@@ -16,14 +16,8 @@ interface SmallDealItem{
 }
 
 export default function SmallDealItem(props : SmallDealItem) {
-//   const url = urlFor(deal.dealImage?.asset?._ref as string)
-//     .width(200) // Resize to max 80px width
-//     .fit("max") // Maintain aspect ratio
-//     .auto("format") // Better optimization
-//     .url();
-  console.log(props, "deal item individual");
   return (
-    <div className="bg-[url(/images/deals/dealbg.png)] w-[250px] h-[160px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
+    <div className="bg-[url(/images/deals/dealbg.png)] w-[250px] h-[160px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8 hover:opacity-75">
     
       <Link href={`/dashboard/marketplace/`}>
       <p className="text-center text-2xl text-lbtext font-bold">
@@ -33,8 +27,8 @@ export default function SmallDealItem(props : SmallDealItem) {
       <Image
         src={props.deal.icon}
         alt={props.deal.name || ""}
-        width={30}
-        height={30} // This can be an estimate. Real size adjusts automatically
+        width={45}
+        height={45} // This can be an estimate. Real size adjusts automatically
         style={{ height: "auto" }} // Maintain proportions
         className="rounded ml-auto mt-2 mr-2" // Optional styling
       />
