@@ -1,14 +1,14 @@
-query getAllDeals {
-  getAllDeals {
-    deals {
-      currency
-      description
-      logo
+query getFeaturedDeals {
+  getFeaturedDeals {
+    name
+    icon
+    saveUp
+    category {
       name
-      price
-      url
-      summary
+      PK
+      SK
+      searchName
     }
-    category
   }
 }
+
