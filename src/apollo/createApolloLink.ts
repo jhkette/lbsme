@@ -11,7 +11,7 @@ const createApolloLink = (): ApolloLink => {
 
   const config: UrlInfo = {
     url: process.env.NEXT_PUBLIC_APPSYNC_URL!,
-    region: process.env.AWS_PROJECT_REGION!,
+    region: process.env.REACT_APP_AWS_PROJECT_REGION!,
     auth: {
       type: AUTH_TYPE.AWS_LAMBDA,
       token: getAuthorization,

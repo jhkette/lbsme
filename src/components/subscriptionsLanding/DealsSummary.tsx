@@ -34,7 +34,7 @@ export default function DealsSummary() {
    
 
   return (
-       <div className="w-1/2 p-4 rounded-lg shadow-lg bg-white max-h-110">
+       <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-lg shadow-lg bg-white max-h-110 overflow-y-auto">
         <div className="flex flex-row items-center justify-between mx-8 pb-1 border-b-1 border-lbtextgrey">
         <h2 className="text-lg font-semibold">Featured deals</h2>{" "}
         </div>

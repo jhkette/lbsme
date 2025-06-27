@@ -21,13 +21,7 @@ export default function TransactionDetail(props: TransactionDetailProps) {
         ) : (
           <Repeat color="#EDECEC" size={50} />
         )}
-        <p className={clsx(
-          '',
-          props.sub.displayName.length > 45 && 'text-[10px]'
-        )}>
-          {props.sub.displayName && props.sub.displayName}
-        </p>
-         <p className="bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
+          <p className="bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
           {" "}
           {props.sub?.paymentMethod
             ? props.sub?.paymentMethod
@@ -40,6 +34,13 @@ export default function TransactionDetail(props: TransactionDetailProps) {
             ? props.sub?.type
             : "Unknown"}{" "}
         </p>
+        <p className={clsx(
+          'block max-w-[160px] text-wrap ',
+          props.sub.displayName.length > 35 && 'text-[10px]'
+        )}>
+          {props.sub.displayName && props.sub.displayName}
+        </p>
+       
 
       </div>
       <div className='flex flex-col'>

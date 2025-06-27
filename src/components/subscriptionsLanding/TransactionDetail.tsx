@@ -55,7 +55,7 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
   )
 
   return (
-    <div className="flex flex-row justify-between gap-8 py-2 border-b-1 items-center">
+    <div className="flex flex-row justify-between gap-4 py-2 border-b-1 items-center">
       <div className="flex flex-row items-center justify-start gap-4">
         {icon !== "unknown" ? (
           <Image
@@ -76,9 +76,9 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
         </p>
         <div>
           {data?.getSubscription.merchant.name && data.getSubscription.merchant.name.length > 40 ? (
-            <p className="text-xs">{data.getSubscription.merchant.name}</p>
+            <p className="text-xs block w-fit">{data.getSubscription.merchant.name}</p>
           ) : (
-            <p>{data?.getSubscription.merchant.name ? data.getSubscription.merchant.name : ""}</p>
+            <p className="block w-fit">{data?.getSubscription.merchant.name ? data.getSubscription.merchant.name : ""}</p>
           )}
         </div>
       </div>

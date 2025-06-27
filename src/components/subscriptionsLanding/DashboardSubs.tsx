@@ -26,7 +26,7 @@ export default function DashboardSubs(subs: DashboardSubsProps) {
       </div>
       <div className="flex flex-col justify-center items-center w-1/5">
         <p className="text-4xl font-semibold py-2">{yearlSpending}</p>
-        <p className="text-lg font-base">Yearly subcsriptions</p>
+        <p className="text-lg font-base">Yearly subacriptions</p>
       </div>
       <div className="flex flex-col justify-center items-center w-1/5">
         <p className="text-4xl font-semibold text-lbgreen py-2">
