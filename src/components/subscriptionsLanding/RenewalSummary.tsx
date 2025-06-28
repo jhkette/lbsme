@@ -11,7 +11,7 @@ export default function TransactionsLanding(subs: DashboardSubsProps) {
     const [renewal, setRenewal] = useState(true);
 
   return (
-    <div className="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-lg shadow-lg bg-white max-h-110 overflow-y-auto">
+    <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-lg shadow-lg bg-white max-h-110 overflow-y-auto">
       <div className="flex flex-row items-center justify-between px-8">
         <h2 className="text-lg font-semibold ">Upcoming Transactions</h2>{" "}
         <HoverCardComponent>

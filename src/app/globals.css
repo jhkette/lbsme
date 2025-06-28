@@ -11,22 +11,20 @@
     --color-foreground: var(--foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
-    
   }
-
 }
 /* little birdie theme colours */
 @theme {
-   --color-lbgreen: #00B1C4;
-   --color-lbtext: #29235C;
-   --color-lbblue: #DFE9F2;
-    --color-lbgray: #EDECEC;
-    --color-lblgreen:#c4f9ff;
-    --color-lbtextgrey:#787787;
-    --color-lbtextdark:#323F4B;
-    --color-lblightblue:#F2F7FB;
-    --color-lbbgblue: #426DA9;
-    --color-bggrey: #E9E9E9;
+  --color-lbgreen: #00b1c4;
+  --color-lbtext: #29235c;
+  --color-lbblue: #dfe9f2;
+  --color-lbgray: #edecec;
+  --color-lblgreen: #c4f9ff;
+  --color-lbtextgrey: #787787;
+  --color-lbtextdark: #323f4b;
+  --color-lblightblue: #f2f7fb;
+  --color-lbbgblue: #426da9;
+  --color-bggrey: #e9e9e9;
 }
 
 /* default styles */
@@ -66,7 +64,6 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
 }
 
 :root {
@@ -102,7 +99,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
 }
 
 .dark {
@@ -137,55 +133,33 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-
   }
   body {
     @apply bg-background text-foreground;
-
   }
-
 }
 
-  @keyframes peck {
-    0% {
-      transform: rotate(4deg);
-    }
-    2% {
-      transform: rotate(-3deg); /* Peck down */
-    }
-    4% {
-      transform: rotate(4deg); /* Return */
-    }
-    100% {
-      transform: rotate(4deg); /* Idle for rest of cycle */
-    }
+@keyframes shimmer {
+  to {
+    background-position-x: 0%;
   }
-
-    .pecking-bird {
-      animation: peck 10s ease-in-out infinite;
-    transform-origin: center bottom;
-    display: inline-block;
-  }
-
-   @keyframes shimmer {
-   to {
-      background-position-x: 0%
-   }
 }
-    .loading {
-   
-
-   background: linear-gradient(-45deg, #f1f1f1 20%, #fff 50%, #f1f1f1 60%);
-   background-size: 300%;
-   background-position-x: 100%;
-   animation: shimmer .75s infinite linear;
+.loading {
+  background: linear-gradient(-45deg, #f1f1f1 20%, #fff 50%, #f1f1f1 60%);
+  background-size: 300%;
+  background-position-x: 100%;
+  animation: shimmer 0.75s infinite linear;
 }
-
 
 @plugin 'tailwind-scrollbar';
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

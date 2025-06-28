@@ -16,7 +16,7 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-lbtext mb-4 px-12 text-center w-[90%]">
             The UK&apos;s top subscription & bill management app
           </h1>
-          <div className="pecking-bird">
+          <div>
           <Image
             src="./images/home/Bird.svg"
             alt="Bird"
