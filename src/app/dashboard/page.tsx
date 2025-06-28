@@ -1,5 +1,5 @@
 "use client";
-import DashboardSubs from "@/components/subscriptionsLanding/DashboardSubs";
+import DashboardSubs from "@/components/dashboardLanding/DashboardSubs";
 import Image from "next/image";
 import {
   useGetSubscriptionsQuery,
@@ -9,12 +9,12 @@ import {
   SuspenseIntro,
   SuspenseTransactions,
 } from "@/components/suspense/SuspenseComponents";
-import TransactionsLanding from "@/components/subscriptionsLanding/RenewalSummary";
-import DashboardGraph from "@/components/subscriptionsLanding/DashboardGraph";
+import TransactionsLanding from "@/components/dashboardLanding/RenewalSummary";
+import DashboardGraph from "@/components/dashboardLanding/DashboardGraph";
 
 import IntroHome from "@/components/lbcoreui/IntroHome";
-import SpendingSummary from "@/components/subscriptionsLanding/TransactionSummary";
-import DealsSummary from "@/components/subscriptionsLanding/DealsSummary";
+import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
+import DealsSummary from "@/components/dashboardLanding/DealsSummary";
 export default function Home() {
   // This query gets the key subscription data - and passes it down to child
   // components

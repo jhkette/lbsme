@@ -1,0 +1,9 @@
+query getProviders($name: String!) {
+  getProviders(name: $name) {
+    providerId
+    displayName
+    icon
+    regions
+    maintenanceStatus
+  }
+}
