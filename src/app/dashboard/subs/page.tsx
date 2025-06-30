@@ -4,7 +4,7 @@ import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
 import { Repeat } from "lucide-react";
 import Image from "next/image";
-import { set } from "date-fns";
+
 export default function page() {
   const [groupedSubs, setGroupedSubs] = useState<Record<
     string,
@@ -44,45 +44,34 @@ export default function page() {
     return grouped;
   };
 
-    interface Filters {
-      name: string;
-      type: string;
+  const handleChange = (value: string) => {
+    console.log(value);
+    if (typeof value === "string") {
+      setSearch(value);
+
+      let finalSubscriptions = subscriptions.filter((item) => {
+        const q = value.toLowerCase();
+        return (
+          item.displayName.toLowerCase().includes(q) ||
+          item.type.toLowerCase().includes(q)
+        );
+      });
+      setSubscriptions(finalSubscriptions);
+      if (value === "") {
+        setSubscriptions(
+          data?.getSubscriptions?.subscriptions as Subscription[]
+        );
+      }
     }
-
-    interface HandleChangeEvent {
-      target: {
-        name: string;
-        value: string;
-      };
-    }
-
-    const handleChange = (value: string | HandleChangeEvent) => {
-      console.log(value);
-      if (typeof value === "string") {
-        setSearch(value);
-      
-        let finalSubscriptions = subscriptions.filter((item) => {
-          const q = value.toLowerCase();
-          return (
-            item.displayName.toLowerCase().includes(q) ||
-            item.type.toLowerCase().includes(q)
-          );
-        })
-        setSubscriptions(finalSubscriptions);
-        if(value === "") {
-          setSubscriptions(data?.getSubscriptions?.subscriptions as Subscription[]);
-        }
-      } 
-
-    };
+  };
 
   const filteredData = subscriptions.filter((item) => {
-      const q = search.toLowerCase();
-      return (
-        item.displayName.toLowerCase().includes(q) ||
-        item.type.toLowerCase().includes(q)
-      );
-    });
+    const q = search.toLowerCase();
+    return (
+      item.displayName.toLowerCase().includes(q) ||
+      item.type.toLowerCase().includes(q)
+    );
+  });
 
   console.log(data);
 
@@ -97,7 +86,7 @@ export default function page() {
         className="border p-2 rounded w-full md:w-1/2"
       />
 
-      {groupedSubs !== null && subscriptions.length && (
+      {groupedSubs !== null && !!subscriptions.length && (
         <ul>
           {["All", ...Object.keys(groupedSubs)].map((category) => (
             <li key={category}>{category}</li>
