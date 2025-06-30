@@ -1,5 +1,5 @@
 export type Subscription = {
-  id: string
+  id?: string
   merchant: {
     __typename: "Merchant";
     icon: string;

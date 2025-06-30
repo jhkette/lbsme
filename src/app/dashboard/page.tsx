@@ -20,7 +20,7 @@ export default function Home() {
   // components
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
     errorPolicy: "all",
-
+   
     fetchPolicy: "cache-and-network",
   });
   
