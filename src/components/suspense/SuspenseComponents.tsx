@@ -29,3 +29,10 @@ export function SuspenseDashboardGraph() {
       </div>
   )
 }
+
+
+export function SubscriptionsTable(){
+  return (
+  <div className="loading min-w-full bg-white shadow-lg rounded-lg h-130">
+  </div>)
+}

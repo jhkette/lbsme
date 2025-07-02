@@ -3,7 +3,7 @@ import { Mulish } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
-import { useGetSubscriptionsSummaryQuery } from "@/graphql/getSubscriptionSummary.generated";
+import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",
@@ -26,12 +26,16 @@ export default function RootLayout({
         {/* temp hide from search engines */}
         <meta name="robots" content="noindex,nofollow" />
       </Head>
-
+       <body className="antialiased">
+      <ApolloProviderWrapper>
+       
       <UserProvider>
-        <body className="antialiased">
+       
           <main>{children}</main>
-        </body>
+       
       </UserProvider>
+      </ApolloProviderWrapper>
+      </body>
     </html>
   );
 }

@@ -1,14 +1,13 @@
-import { gql } from '@apollo/client';
-
-export const GET_SUBSCRIPTIONS = gql`
-  query getSubscriptions {
-    getSubscriptions(status: ACTIVE) {
-      subscriptions {
+query getInactiveSubscriptions {
+    getSubscriptions(status: DEACTIVE) {
+    
+       subscriptions {
         merchant {
           icon
           id
           name
         }
+        
             category {
         PK
         SK
@@ -35,4 +34,3 @@ export const GET_SUBSCRIPTIONS = gql`
       }
     }
   }
-`;
