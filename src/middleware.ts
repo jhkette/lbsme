@@ -26,5 +26,5 @@ export async function middleware(req: NextRequest) {
 
 // Apply only to dashboard routes
 export const config = {
-  matcher: ['/dashboard/:path*', '/'],
+  matcher: ['/dashboard/:path*', '/', '/openbanking/:path*'],
 };

@@ -22,9 +22,9 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
   const barColors = [
-    "#00B1C4", // --color-lbgreen
+    "#00B1C4", 
     "#426DA9",
-    "#c4f9ff", // --color-lblgreen
+    "#c4f9ff", 
   ];
 
   const simplifiedData = props.subs.map((sub) => ({
@@ -41,7 +41,6 @@ export default function DashboardGraph(props: DashboardSubsProps) {
       lastPayment: sub.dates.lastPaymentDate,
       paymentMethod: sub.paymentMethod,
       merchantName: sub.merchant?.name,
-      // add other primitive fields as needed
     }));
     const csv = generateCsv(csvConfig)(plainSubs);
     download(csvConfig)(csv);

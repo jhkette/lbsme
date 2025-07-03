@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, NormalizedCacheObject, from } from "@apollo/client";
-import createApolloLink from "./createApolloLink"; // Adjust path as needed
+import createApolloLink from "./createApolloLink"; 
 
-// Create the Apollo Client
+// Create Apollo Client
 const createApolloClient = () => {
   const link = createApolloLink();
   

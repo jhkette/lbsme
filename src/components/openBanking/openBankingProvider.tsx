@@ -1,15 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetProvidersQuery } from "@/graphql/getProviders.generated";
 import { Search } from "lucide-react";
 
+
 export default function OpenBankingProvider() {
     const [search, setSearch] = useState("");
+    const [providers, setProviders] = useState([]);
      const { loading, error, data, refetch } = useGetProvidersQuery({
-        variables: { name: "barclays" },
+        variables: { name: "" },
+        errorPolicy: "all",
         fetchPolicy: "cache-and-network",
       });
+    useEffect(() => {
+        if (data?.getProviders) {
+            setProviders(data.getProviders);
+
+        }},[data?.getProviders]);
       console.log(data, "OPEN BANKING DATA");
+
+      console.log(providers, "OPEN BANKING PROVIDERS");
   return (
        <div className="relative w-128 bg-white ">
   {/* Search Icon */}

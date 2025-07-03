@@ -1,11 +1,7 @@
-
 import Image from "next/image";
 import OpenBankingProvider from "@/components/openBanking/openBankingProvider";
 
 export default function Openbanking() {
- 
-
- 
   return (
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
@@ -37,12 +33,9 @@ export default function Openbanking() {
           <p className="text-2xl font-bold text-lbtext mb-4 px-12 text-center w-128">
             Select your bank to connect to view your subscriptions
           </p>
-        <OpenBankingProvider />
-         
+          <OpenBankingProvider />
         </div>
-        <div>
-
-        </div>
+        <div></div>
       </div>
     </div>
   );

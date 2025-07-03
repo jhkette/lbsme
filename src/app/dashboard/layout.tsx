@@ -1,38 +1,31 @@
 "use client";
 import HeaderDashboard from "@/components/lbcoreui/HeaderDashboard";
 import Sidebar from "@/components/lbcoreui/Sidebar";
-import { useState, useEffect } from "react";
+
 import { Toaster } from "react-hot-toast";
-import {
-  ApolloProvider,
-  ApolloClient,
-  NormalizedCacheObject,
-} from "@apollo/client";
-import { getApolloClient } from "@/apollo/createClient";
+import { motion} from 'framer-motion'
+import { usePathname } from 'next/navigation';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  // const [client, setClient] =
-  //   useState<ApolloClient<NormalizedCacheObject> | null>(null);
-
-  // useEffect(() => {
-  //   // Initialize Apollo Client only on client side
-  //   const apolloClient = getApolloClient();
-  //   setClient(apolloClient);
-  // }, []);
-
-  // // Show loading or return null while client is initializing
-  // if (!client) {
-  //   return <div>Loading...</div>; // Or return null for no flash
-  // }
-
+ const pathname = usePathname();
   return (
     // <ApolloProvider client={client}>
       <div className="flex flex-col items-start  min-h-screen bg-gray-100">
         <HeaderDashboard />
-
+      
         <div className="flex flex-row w-full">
           <Sidebar />
-          {children}
+          {/* <AnimatePresence mode="wait"> */}
+             <motion.div
+           key={pathname}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="w-full"
+          >
+          {children}</motion.div>
+          {/* </AnimatePresence> */}
         </div>
         <Toaster />
       </div>

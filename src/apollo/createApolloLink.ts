@@ -3,7 +3,10 @@ import { AUTH_TYPE, createAuthLink } from "aws-appsync-auth-link";
 import { createSubscriptionHandshakeLink } from "aws-appsync-subscription-link";
 import { UrlInfo } from "aws-appsync-subscription-link/lib/types";
 import { getToken } from "@/actions/getToken";
+
+
 const createApolloLink = (): ApolloLink => {
+ 
   const getAuthorization = async (): Promise<string> => {
     const token = await getToken();
     return token || '';
