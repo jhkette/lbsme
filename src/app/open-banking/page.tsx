@@ -26,7 +26,7 @@ export default function Openbanking() {
             />
           </div>
         </div>
-        <div className="flex flex-col items-center justify-start h-screen  w-1/2 pt-56">
+        <div className="flex flex-col items-center justify-start h-screen  w-1/2 pt-24">
           <h2 className="text-4xl font-bold text-lbtext mb-4 px-12 text-center">
             Open Banking
           </h2>

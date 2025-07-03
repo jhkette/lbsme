@@ -7,7 +7,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 import { getApolloClient } from '@/apollo/createClient';
-import {useUser} from "@/contexts/UserContext/UserProvider";
+// import {useUser} from "@/contexts/UserContext/UserProvider";
 
 export default function ApolloProviderWrapper({ 
   children,
@@ -16,8 +16,8 @@ export default function ApolloProviderWrapper({
 }) {
   const [client, setClient] =
     useState<ApolloClient<NormalizedCacheObject> | null>(null);
-  const {getUserToken} = useUser();
-   const finalToken =  getUserToken();
+  // const {getUserToken} = useUser();
+  //  const finalToken =  getUserToken();
   useEffect(() => {
     const apolloClient = getApolloClient();
     setClient(apolloClient);

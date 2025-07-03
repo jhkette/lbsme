@@ -30,11 +30,13 @@ export default async function RootLayout({
         <meta name="robots" content="noindex,nofollow" />
       </Head>
       <body className="antialiased">
-        <UserProvider>
+      
           <ApolloProviderWrapper>
+              <UserProvider>
             <main>{children}</main>
+            </UserProvider>
           </ApolloProviderWrapper>
-        </UserProvider>
+       
       </body>
     </html>
   );
