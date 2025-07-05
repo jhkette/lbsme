@@ -68,13 +68,13 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
           <Repeat color="#EDECEC" size={50} />
         )}
 
-        <p className="bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
+        <p className="bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs hidden lg:block">
           {" "}
           {data?.getSubscription.paymentMethod
             ? data?.getSubscription.paymentMethod
             : "Unknown"}{" "}
         </p>
-        <div>
+        <div className=" hidden lg:block">
           {data?.getSubscription.merchant.name && data.getSubscription.merchant.name.length > 40 ? (
             <p className="text-xs block w-fit">{data.getSubscription.merchant.name}</p>
           ) : (

@@ -11,8 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Subscription } from "@/interfaces/Subscription";
-import HoverCardComponent from "../lbcoreui/HoverCardComponent";
-import { FileSpreadsheet } from "lucide-react";
+import { Download } from "lucide-react";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 
 interface DashboardSubsProps {
@@ -21,11 +20,7 @@ interface DashboardSubsProps {
 export default function DashboardGraph(props: DashboardSubsProps) {
   const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
-  const barColors = [
-    "#00B1C4", 
-    "#426DA9",
-    "#c4f9ff", 
-  ];
+  const barColors = ["#00B1C4", "#426DA9", "#c4f9ff"];
 
   const simplifiedData = props.subs.map((sub) => ({
     displayName: sub.displayName,
@@ -47,39 +42,29 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   };
 
   return (
-    <div className="w-1/2 p-4 rounded-lg shadow-lg bg-white h-110">
+    <div className="w-1/2 p-4 rounded-lg shadow-2xl bg-white h-110">
       <div className="flex flex-row items-center justify-between mx-8 pb-1 border-b-1 border-lbtextgrey">
-        <h2 className="text-lg font-semibold">Upcoming Transactions</h2>{" "}
-        <HoverCardComponent>
-          <div className="flex justify-between gap-4">
-            <div className="space-y-1">
-              <p className="text-sm font-semibold">
-                A visualisation of your monthly spending
-              </p>
-            </div>
-          </div>
-        </HoverCardComponent>
+        <h2 className="text-lg font-semibold">Monthly Spend Visualised</h2>{" "}
       </div>
-      <div
-        className="flex flex-row justify-end items-bottom my-2 mx-8 block w-fit border-b border-transparent hover:border-lbgreen cursor-pointer ease-in-out"
-        onClick={exportDataToCSV}
-      >
-        <FileSpreadsheet color="#00B1C4" />
-        <p className="text-sm font-light text-lbgreen mt-1">
-          Export subscription data to CSV{" "}
-        </p>
+      <div className="flex flex-row w-[90%] items-center justify-end my-2 mx-8 block">
+        <div
+          className="block w-fit justify-start bg-lbgray rounded-lg p-2 mr-2 hover:bg-lbgreen cursor-pointer ease-in-out"
+          onClick={exportDataToCSV}
+        >
+          <Download color="#787787" size={24} className="" />
+        </div>
       </div>
-
+     {/* Start of barchart */}
       <ResponsiveContainer width="90%" height="80%" className="mt-4">
         <BarChart
           width={400}
           height={200}
           data={simplifiedData}
           margin={{
-            top: 5,
+            top: 3,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 10,
           }}
         >
           <XAxis dataKey="displayName" tick={false} />

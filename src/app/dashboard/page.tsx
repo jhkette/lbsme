@@ -30,14 +30,14 @@ export default function Home() {
   ) as string[];
  
   return (
-    <div className="px-16 w-full mt-12 relative">
+    <div className="px-16 w-full mt-14 relative">
       <IntroHome />
       <Image
         src="/lbgraphic.png"
         height={250}
         width={400}
         alt="graphic"
-        className="absolute top-6 z-0 right-40"
+        className="absolute -top-2 z-0 right-40"
       />
       {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
       <div className="my-16 flex flex-row gap-12">

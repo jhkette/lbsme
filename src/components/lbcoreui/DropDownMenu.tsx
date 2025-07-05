@@ -79,22 +79,7 @@ export function DropdownMenuComponent() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-sm text-gray-400">
-            SECURITY
-          </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg flex items-center">
-            <Image
-              src={"/images/dropdownmenu/link.svg"}
-              height={25}
-              width={25}
-              alt="user icon"
-              className="inline-block mr-4"
-            />
-            Change password
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator /> */}
+       
         <DropdownMenuGroup>
           <DropdownMenuLabel className="text-sm text-gray-400">
             SUPPORT

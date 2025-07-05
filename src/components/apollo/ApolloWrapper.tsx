@@ -7,8 +7,9 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 import { getApolloClient } from '@/apollo/createClient';
-// import {useUser} from "@/contexts/UserContext/UserProvider";
 
+// This component wraps the ApolloProvider around the layout componenet - it is 
+// seperate as it needs to run on a client component.
 export default function ApolloProviderWrapper({ 
   children,
 }: {
@@ -16,14 +17,13 @@ export default function ApolloProviderWrapper({
 }) {
   const [client, setClient] =
     useState<ApolloClient<NormalizedCacheObject> | null>(null);
-  // const {getUserToken} = useUser();
-  //  const finalToken =  getUserToken();
+
   useEffect(() => {
     const apolloClient = getApolloClient();
     setClient(apolloClient);
   }, []);
 
-  if (!client) return null; // or a loader/spinner if preferred
+  if (!client) return null; 
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
