@@ -82,7 +82,7 @@ export default function page() {
 
       {groupedSubs !== null && (
         <ul className="flex flex-row gap-12">
-          {["All", ...Object.keys(groupedSubs)].map((category) => (
+          {["All Subscriptions", ...Object.keys(groupedSubs)].map((category) => (
             <li
               key={category}
               onClick={(e) => console.log(e)}

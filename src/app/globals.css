@@ -28,6 +28,14 @@
   --color-lbdarkblue: #29235C;
 }
 
+@theme {
+  --breakpoint-sm: 42rem;
+  --breakpoint-md: 52rem;
+  --breakpoint-lg: 60rem;
+
+}
+
+
 /* default styles */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
