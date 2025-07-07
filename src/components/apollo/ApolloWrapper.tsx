@@ -8,8 +8,8 @@ import {
 } from '@apollo/client';
 import { getApolloClient } from '@/apollo/createClient';
 
-// This component wraps the ApolloProvider around the layout componenet - it is 
-// seperate as it needs to run on a client component.
+// This component wraps the ApolloProvider around the layout componenet - it is in a
+// seperate component as it needs to run on a client component.
 export default function ApolloProviderWrapper({ 
   children,
 }: {

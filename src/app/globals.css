@@ -28,11 +28,12 @@
   --color-lbdarkblue: #29235C;
 }
 
+/* i'm trying to ensure app works well for small desktops to large desktops
+so adjusting accordingly */
 @theme {
-  --breakpoint-sm: 42rem;
-  --breakpoint-md: 52rem;
-  --breakpoint-lg: 60rem;
-
+  --breakpoint-sm: 1024px;  /* Small laptops (13" or so) */
+  --breakpoint-md: 1280px;  /* Standard laptops / small desktops */
+  --breakpoint-lg: 1536px;  /* Large desktops or ultrawide monitors */
 }
 
 
@@ -158,18 +159,23 @@
     background-position-x: 0%;
   }
 }
-.loading {
-  background: linear-gradient(-45deg, #f1f1f1 20%, #fff 50%, #f1f1f1 60%);
-  background-size: 300%;
-  background-position-x: 100%;
-  animation: shimmer 0.75s infinite linear;
-}
+
 
 
 @plugin 'tailwind-scrollbar';
-
+/* hide tailwind scrollbar for safari */
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 }
+
+ /* Custom loading animation */
+
+ .loading {
+  background: linear-gradient(-45deg, #f1f1f1 20%, #fff 50%, #f1f1f1 60%);
+  background-size: 300%;
+  background-position-x: 100%;
+  animation: shimmer 0.75s infinite linear;
+}
+ 

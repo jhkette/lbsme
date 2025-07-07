@@ -1,0 +1,20 @@
+.faq-rich-text ul{
+    margin-right: 1.5rem;
+}
+.faq-rich-text ul {
+  list-style: disc;
+  margin-bottom: 1rem;
+  list-style-position: inside;
+  margin-right: 1.5rem;
+}
+
+.faq-rich-text li {
+  list-style: disc;
+  margin-bottom: 1rem;
+  list-style-position: inside;
+}
+
+.faq-rich-text p{
+    margin: 1rem 0;
+    text-wrap: pretty;
+}

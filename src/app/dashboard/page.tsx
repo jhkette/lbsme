@@ -28,7 +28,9 @@ export default function Home() {
   const transactions = data?.getSubscriptions?.subscriptions?.map(
     (transaction) => transaction.dates.lastPaymentDate
   ) as string[];
- 
+  // dashboard page is the main landing page for the dashboard
+  // it shows the main subscriptions, the spending summary, transactions, and featured deals
+  // these are all components that are imported from the components folder
   return (
     <div className="px-16 w-full mt-14 relative">
       <IntroHome />

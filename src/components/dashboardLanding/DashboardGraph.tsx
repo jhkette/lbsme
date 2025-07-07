@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Subscription } from "@/interfaces/Subscription";
-import { Download } from "lucide-react";
+import { Download, BarChart as BarchartIcon, PieChart } from "lucide-react";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 
 interface DashboardSubsProps {
@@ -46,7 +46,11 @@ export default function DashboardGraph(props: DashboardSubsProps) {
       <div className="flex flex-row items-center justify-between mx-8 pb-1 border-b-1 border-lbtextgrey">
         <h2 className="text-lg font-semibold">Monthly Spend Visualised</h2>{" "}
       </div>
-      <div className="flex flex-row w-[90%] items-center justify-end my-2 mx-8 block">
+      <div className="flex flex-row w-[90%] items-center justify-between my-2 mx-8 block">
+        <div className="flex flex-row items-center">
+          <BarchartIcon color="#787787" size={24} className="mr-2" />
+          <PieChart color="#787787" size={24} className="mr-2" />
+          </div>
         <div
           className="block w-fit justify-start bg-lbgray rounded-lg p-2 mr-2 hover:bg-lbgreen cursor-pointer ease-in-out"
           onClick={exportDataToCSV}

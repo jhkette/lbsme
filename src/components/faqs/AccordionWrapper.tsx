@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { FAQ_QUERYResult } from "@/interfaces/SanityTypes";
 import { PortableText } from "@portabletext/react"; 
-import "@/styles/faqstyles.css"
+
 
 export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {
   return (

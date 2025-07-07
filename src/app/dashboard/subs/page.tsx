@@ -8,7 +8,7 @@ import { formatDate } from "@/lib/time";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { capitalize } from "@/lib/utils";
-import {SubscriptionsTable} from "@/components/suspense/SuspenseComponents";
+import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 
 export default function page() {
   const [groupedSubs, setGroupedSubs] = useState<Record<
@@ -24,7 +24,6 @@ export default function page() {
 
     fetchPolicy: "cache-and-network",
   });
- 
 
   useEffect(() => {
     if (data?.getSubscriptions?.subscriptions) {
@@ -72,8 +71,6 @@ export default function page() {
     }
   };
 
-
-  
   console.log(data);
 
   return (
@@ -81,16 +78,18 @@ export default function page() {
       <h1 className="font-bold text-4xl my-8 text-lbtext">Subscriptions</h1>
 
       {groupedSubs !== null && (
-        <ul className="flex flex-row gap-12">
-          {["All Subscriptions", ...Object.keys(groupedSubs)].map((category) => (
-            <li
-              key={category}
-              onClick={(e) => console.log(e)}
-              className="text-lbgrey text-lg pb-2"
-            >
-              {category}
-            </li>
-          ))}
+        <ul className="flex flex-row gap-12 list-none">
+          {["All Subscriptions", ...Object.keys(groupedSubs)].map(
+            (category) => (
+              <li
+                key={category}
+                onClick={(e) => console.log(e)}
+                className="text-lbgrey text-lg list-none pb-2"
+              >
+                {category}
+              </li>
+            )
+          )}
         </ul>
       )}
       <div className="flex flex-row items-center justify-start gap-8 rounded-lg bg-white shadow p-4 mb-6">
@@ -105,11 +104,21 @@ export default function page() {
           <Search className="relative -left-10 " color="#787787" />
         </div>
         <div className="flex flex-row items-center justify-start">
-          <button className="w-40 border-1 py-2 cursor-pointer rounded-l-md border-lbgray" onClick={()=>setActiveTab(true)}>Active</button>
-          <button className="w-40 border-1 py-2 cursor-pointer rounded-r-md border-lbgray text-white bg-lbdarkblue" onClick={()=>setActiveTab(false)}>Inactive</button>
+          <button
+            className="w-40 border-1 py-2 cursor-pointer rounded-l-md border-lbgray"
+            onClick={() => setActiveTab(true)}
+          >
+            Active
+          </button>
+          <button
+            className="w-40 border-1 py-2 cursor-pointer rounded-r-md border-lbgray text-white bg-lbdarkblue"
+            onClick={() => setActiveTab(false)}
+          >
+            Inactive
+          </button>
         </div>
         <div className="flex flex-row items-center justify-start bg-lbgray rounded-lg p-2">
-        <Download color="#787787" size={24} />
+          <Download color="#787787" size={24} />
         </div>
       </div>
 
@@ -123,12 +132,15 @@ export default function page() {
               <th className="py-2 px-4 text-left">Payment</th>
               <th className="py-2 px-4 text-left">Last Paid</th>
               <th className="py-2 px-4 text-left">Next Payment</th>
-           
             </tr>
           </thead>
           <tbody className="bg-white">
             {subscriptions.map((item, idx) => (
-              <tr key={idx} className="border-t cursor-pointer hover:bg-gray-50" onClick={() => console.log(item)}>
+              <tr
+                key={idx}
+                className="border-t cursor-pointer hover:bg-gray-50"
+                onClick={() => console.log(item)}
+              >
                 <td className="py-4 px-4 flex flex-row items-center">
                   {item.merchant.icon != "unknown" ? (
                     <Image
@@ -157,18 +169,24 @@ export default function page() {
                 <td className="py-2 px-4">{capitalize(item.type)}</td>
                 <td className="py-2 px-4">{item.paymentMethod}</td>
                 <td className="py-2 px-4">
-                  {format(parseISO(item.dates.lastPaymentDate as string), "do MMM yyyy")}
-                  
+                  {format(
+                    parseISO(item.dates.lastPaymentDate as string),
+                    "do MMM yyyy"
+                  )}
                 </td>
                 <td className="py-2 px-4">
-                  {format(parseISO(item.dates.renewalDate as string), "do MMM yyyy")}
+                  {format(
+                    parseISO(item.dates.renewalDate as string),
+                    "do MMM yyyy"
+                  )}
                 </td>
-               
               </tr>
             ))}
           </tbody>
         </table>
-      ): <SubscriptionsTable/>}
+      ) : (
+        <SubscriptionsTable />
+      )}
     </div>
   );
 }

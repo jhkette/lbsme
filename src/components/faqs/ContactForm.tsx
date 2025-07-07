@@ -50,7 +50,7 @@ export default function ContactForm() {
   };
   return (
     <div className="w-full  mx-auto my-8 flex justify-start items-center">
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-5/12">
         <h3 className="text-3xl text-lbgreen font-semibold my-12">
           Contact us
         </h3>
@@ -102,15 +102,7 @@ export default function ContactForm() {
         </form>
       </div>
 
-      <Image
-        unoptimized={true}
-        quality={100}
-        alt="contact"
-        src="/images/home/Bird.svg"
-        className=" w-2/8 h-full ml-32 mt-16 object-cover"
-        width={500}
-        height={500}
-      />
+
     </div>
   );
 }
