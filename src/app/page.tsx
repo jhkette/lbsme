@@ -10,7 +10,7 @@ export default function Home() {
           alt="Logo"
           width={150}
           height={150}
-          className="absolute top-12 left-12 bg-lbblue"
+          className="absolute top-12 left-12 bg-lbblue w-[115px] md:w-[150px] h-auto object-contain"
         />
         <div className="flex flex-col  bg-lbblue items-center justify-center h-screen w-1/2">
           <h1 className="text-3xl font-bold text-lbtext mb-4 px-12 text-center w-[90%]">
@@ -20,9 +20,9 @@ export default function Home() {
           <Image
             src="./images/home/Bird.svg"
             alt="Bird"
-            width={450}
-            height={450}
-            className="mx-12"
+            width={440}
+            height={440}
+            className="mx-12 w-[390px] md:w-[440px] h-auto object-contain"
           />
           </div>
         </div>

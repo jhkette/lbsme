@@ -1,14 +1,16 @@
-query getSubscriptions {
-    getSubscriptions(status: ACTIVE) {
-    
-       subscriptions {
-        merchant {
-          icon
-          id
-          name
-        }
-        
-            category {
+
+
+
+query getSubscriptions($status: SubscriptionStatusEnum!) {
+  getSubscriptions(status: $status) {
+    subscriptions {
+      merchant {
+        icon
+        id
+        name
+      }
+
+      category {
         PK
         SK
         category
@@ -22,15 +24,15 @@ query getSubscriptions {
         lastPaymentDate
         renewalDate
       }
-        displayName
-        cancellationStatus
-        monthlyCost
-        paymentMethod
-        priceChange
-        providerName
-        subscriptionId
-        type
-        saveUp
-      }
+      displayName
+      cancellationStatus
+      monthlyCost
+      paymentMethod
+      priceChange
+      providerName
+      subscriptionId
+      type
+      saveUp
     }
   }
+}

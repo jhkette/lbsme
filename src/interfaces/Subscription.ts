@@ -34,3 +34,5 @@ export type Subscription = {
   saveUp: number;
   __typename: "Subscription";
 };
+
+

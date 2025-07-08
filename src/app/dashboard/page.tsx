@@ -14,22 +14,25 @@ import {
 } from "@/components/suspense/SuspenseComponents";
 import TransactionsLanding from "@/components/dashboardLanding/RenewalSummary";
 import DashboardGraph from "@/components/dashboardLanding/DashboardGraph";
-
+import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
+import { stat } from "fs";
 export default function Home() {
   // This query gets the key subscription data - and passes it down to child
   // components
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
     errorPolicy: "all",
-   
+    variables: {
+      status: SubscriptionStatusEnum.Active , // Use the correct enum or union value as defined in your GraphQL schema
+    },
     fetchPolicy: "cache-and-network",
   });
 
     const { loading: dealLoading, error: dealError, data: dealData } = useGetFeaturedDealsQuery({
     errorPolicy: "all",
-
+    
     fetchPolicy: "cache-and-network",
   });
   console.log("dealData", dealData);
@@ -50,7 +53,7 @@ export default function Home() {
         height={250}
         width={400}
         alt="graphic"
-        className="absolute -top-2 z-0 right-40"
+        className="absolute -top-2 z-0 right-40 "
       />
       {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
       <div className="my-16 flex flex-row gap-12">

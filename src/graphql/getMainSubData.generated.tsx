@@ -3,15 +3,17 @@ import * as Types from '../graphql-types/generated/types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type GetSubscriptionsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetSubscriptionsQueryVariables = Types.Exact<{
+  status: Types.SubscriptionStatusEnum;
+}>;
 
 
 export type GetSubscriptionsQuery = { __typename?: 'Query', getSubscriptions?: { __typename?: 'GetSubscriptionsResult', subscriptions?: Array<{ __typename?: 'Subscription', displayName?: string | null, cancellationStatus?: Types.CancellationStatusEnum | null, monthlyCost: number, paymentMethod?: string | null, priceChange: number, providerName: string, subscriptionId: string, type: Types.SubscriptionPriceTypeEnum, saveUp: number, merchant: { __typename?: 'Merchant', icon?: string | null, id: string, name: string }, category?: { __typename?: 'AssignedCategory', PK: string, SK: string, category: string, searchCategory: string, searchSubCategory: string, subCategory: string } | null, dates: { __typename?: 'SubscriptionDates', endsInDays: number, endsInPercent?: number | null, lastPaymentDate: string, renewalDate: string } }> | null } | null };
 
 
 export const GetSubscriptionsDocument = gql`
-    query getSubscriptions {
-  getSubscriptions(status: ACTIVE) {
+    query getSubscriptions($status: SubscriptionStatusEnum!) {
+  getSubscriptions(status: $status) {
     subscriptions {
       merchant {
         icon
@@ -58,10 +60,11 @@ export const GetSubscriptionsDocument = gql`
  * @example
  * const { data, loading, error } = useGetSubscriptionsQuery({
  *   variables: {
+ *      status: // value for 'status'
  *   },
  * });
  */
-export function useGetSubscriptionsQuery(baseOptions?: Apollo.QueryHookOptions<GetSubscriptionsQuery, GetSubscriptionsQueryVariables>) {
+export function useGetSubscriptionsQuery(baseOptions: Apollo.QueryHookOptions<GetSubscriptionsQuery, GetSubscriptionsQueryVariables> & ({ variables: GetSubscriptionsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetSubscriptionsQuery, GetSubscriptionsQueryVariables>(GetSubscriptionsDocument, options);
       }

@@ -54,3 +54,5 @@ export declare const authLink: ({ url, region, auth: { type }, auth }: {
     auth: any;
 }) => ApolloLink;
 export {};
+
+

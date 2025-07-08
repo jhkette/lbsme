@@ -16,7 +16,7 @@ export default function HoverCardComponent({
     <HoverCard>
       <HoverCardTrigger asChild>
         <Button variant="link" className="cursor-pointer">
-          <Info color="#A9A9A9" size={80} className="size-[24px] mr-4" />
+          <Info color="#29235C" size={82} className="size-[24px] mr-4 " />
         </Button>
       </HoverCardTrigger>
       <HoverCardContent className="w-80 mr-24">{children}</HoverCardContent>
