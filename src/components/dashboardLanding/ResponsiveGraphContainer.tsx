@@ -20,7 +20,7 @@ export default function ResponsiveGraphContainer({
   simplifiedData: { displayName: string; monthlyCost: number; fill: string }[];
   barchart: boolean;
 }) {
-  const barColors = ["#00B1C4", "#426DA9", "#c4f9ff"];
+  const barColors = ["#00B1C4", "#426DA9", "#414a4c" ];
   const simplifiedDataPie = simplifiedData.map((sub, index) => ({
     ...sub,
     value: sub.monthlyCost,

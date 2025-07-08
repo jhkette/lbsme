@@ -19,7 +19,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   const simplifiedData = props.subs.map((sub) => ({
     displayName: sub.displayName,
     monthlyCost: parseFloat(sub.monthlyCost.toFixed(2)),
-    fill: barColors[Math.floor(Math.random() * barColors.length)],
+    fill: "#426da9"
   }));
 
   const exportDataToCSV = () => {
@@ -37,8 +37,8 @@ export default function DashboardGraph(props: DashboardSubsProps) {
 
   return (
     <div className="w-1/2 p-4 rounded-2xl shadow-2xl bg-white h-120">
-      <div className="flex flex-row items-center justify-between mx-8 pb-1 border-b-1 border-lbtextgrey">
-        <h2 className="text-lg font-semibold">Monthly Spend Visualised</h2>{" "}
+      <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
+        <h2 className="text-2xl font-semibold">Monthly Spend Visualised</h2>{" "}
       </div>
       <div className="flex flex-row w-[90%] items-center justify-between my-2 mx-8 block">
         <div className="flex flex-row items-center">
@@ -46,19 +46,21 @@ export default function DashboardGraph(props: DashboardSubsProps) {
           className={clsx('block w-fit rounded-lg p-2 mr-2 hover:bg-lbgray cursor-pointer ease-in-out', !showBarChart && 'bg-lbgray hover:bg-lbgreen', showBarChart&& 'bg-lbgreen hover:bg-lbgrey')}
         onClick={() => setShowBarChart(true)}
         >
-          <BarchartIcon color="#787787" size={24} />
+          <BarchartIcon color={showBarChart?   "#fff": "#787787" } size={24} />
           </div>
           <div  className={clsx('block w-fit rounded-lg p-2 mr-2 hover:bg-lbgray cursor-pointer ease-in-out', showBarChart && 'bg-lbgray hover:bg-lbgreen', !showBarChart&& 'bg-lbgreen hover:bg-lbgrey')}
           onClick={() => setShowBarChart(false)}
         >
-          <PieChart color="#787787" size={24} />
+          <PieChart color={showBarChart?    "#787787" : "#fff"} size={24} />
           </div>
           </div>
         <div
           className="block w-fit justify-start bg-lbgray rounded-lg p-2 mr-2 hover:bg-lbgreen cursor-pointer ease-in-out"
           onClick={exportDataToCSV}
         >
-          <Download color="#787787" size={24} />
+          <div className="text-lbtextgrey hover:text-white">
+      <Download size={24} />
+    </div>
         </div>
       </div>
      {/* Start of barchart */}
