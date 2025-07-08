@@ -10,7 +10,7 @@ function SpendingSummary(subs: DashboardSubsProps) {
   const [yearly, setYearly] = useState(true);
 
   return (
-    <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-lg shadow-2xl bg-white max-h-110 overflow-y-auto">
+    <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 overflow-y-auto">
       <div className=" flex flex-row items-center justify-between px-6">
         <h2 className="text-lg font-semibold ">Transaction Totals</h2>{" "}
         <HoverCardComponent>

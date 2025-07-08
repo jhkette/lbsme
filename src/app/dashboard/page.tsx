@@ -4,6 +4,9 @@ import Image from "next/image";
 import {
   useGetSubscriptionsQuery,
 } from "@/graphql/getMainSubData.generated";
+import {
+  useGetFeaturedDealsQuery,
+} from "@/graphql/getFeaturedDeals.generated";
 import { Subscription } from "@/interfaces/Subscription";
 import {
   SuspenseIntro,
@@ -23,6 +26,14 @@ export default function Home() {
    
     fetchPolicy: "cache-and-network",
   });
+
+    const { loading: dealLoading, error: dealError, data: dealData } = useGetFeaturedDealsQuery({
+    errorPolicy: "all",
+
+    fetchPolicy: "cache-and-network",
+  });
+  console.log("dealData", dealData);
+
   
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
   const transactions = data?.getSubscriptions?.subscriptions?.map(
@@ -53,7 +64,7 @@ export default function Home() {
           <TransactionsLanding subs={subs} />
         )}
 
-        {loading ? <SuspenseTransactions /> : <DealsSummary />}
+        {loading && !dealData?.getFeaturedDeals ? <SuspenseTransactions /> : <DealsSummary deals={dealData?.getFeaturedDeals}/>}
       </div>
     </div>
   );

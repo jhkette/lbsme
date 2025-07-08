@@ -2,27 +2,37 @@ import React from "react";
 import { useGetFeaturedDealsQuery } from "@/graphql/getFeaturedDeals.generated";
 import SmallDealItem from "./DealSmall";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SUBSCRIPTION_DEAL_QUERY, SWITCH_DEAL_QUERY } from "@/sanity/queries";
-import DealItem from "@/components/deals/DealItem";
 
-export default function DealsSummary() {
+interface SubCategoryResult {
+  __typename?: "SubCategoryResult";
+  name?: string;
+  PK?: string;
+  SK?: string;
+  searchName?: string;
+}
+
+interface FeaturedDealsResult {
+  __typename?: "FeaturedDealsResult";
+  name: string;
+  icon: string;
+  saveUp?: number | null | undefined;
+  category?: SubCategoryResult[];
+}
+
+export default function DealsSummary({deals}: {deals?: FeaturedDealsResult[]}) {
   // const { data: subscriptionDeals } = await sanityFetch({
   //   query: SUBSCRIPTION_DEAL_QUERY,
   // });
   // const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
 
-  const { loading, error, data, refetch } = useGetFeaturedDealsQuery({
-    errorPolicy: "all",
 
-    fetchPolicy: "cache-and-network",
-  });
 
   let finalData;
-  if (data && !loading && !error) {
-    finalData = data.getFeaturedDeals.slice(0, 4);
+  if (deals && deals.length > 0) {
+    finalData = deals.slice(0, 4);
   }
 
-  const simplifiedData = finalData?.map((deal) => {
+  const simplifiedData = deals?.map((deal) => {
     return {
       name: deal.name,
       icon: deal.icon,
@@ -31,7 +41,7 @@ export default function DealsSummary() {
 
 
   return (
-    <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-lg shadow-2xl bg-white max-h-110 overflow-y-auto">
+    <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 overflow-y-auto">
       <div className="flex flex-row items-center justify-between mx-8 pb-1 border-b-1 border-lbtextgrey">
         <h2 className="text-lg font-semibold">Featured deals</h2>{" "}
       </div>
