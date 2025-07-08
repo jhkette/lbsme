@@ -81,7 +81,8 @@ export default function SubscriptionMain() {
   };
 
    const handleRowClick = (id: string) => {
-    router.push(`dashboard/subscriptions/${id}`);
+    const finalId = encodeURIComponent(id)
+    router.push(`subs/${finalId}`);
   };
 
   console.log(data);

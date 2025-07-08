@@ -5,6 +5,7 @@ import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
 import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
+import { Analytics } from "@vercel/analytics/next"
 
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",
@@ -36,7 +37,7 @@ export default async function RootLayout({
             <main>{children}</main>
             </UserProvider>
           </ApolloProviderWrapper>
-       
+       <Analytics/>
       </body>
     </html>
   );
