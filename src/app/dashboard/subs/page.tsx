@@ -1,7 +1,10 @@
-
+"use client";
 import SubscriptionMain from "@/components/subscriptions/SubscriptionMain";
 import Image from "next/image";
+
 export default function page() {
+
+
  
 
   return (

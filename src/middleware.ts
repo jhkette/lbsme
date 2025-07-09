@@ -6,17 +6,18 @@ import { cookies } from 'next/headers'
 export async function middleware(req: NextRequest) {
     const cookieStore = await cookies()
   const token = cookieStore.get('token')
+  const user = cookieStore.get('user')
    
     const pathname = req.nextUrl.pathname;
    const isLoginPage = pathname === '/';
     const isDashboard = pathname.startsWith('/dashboard');
 
-   if (isDashboard && !token) {
+   if (isDashboard && !token || !user) {
     // User is not signed in but trying to access dashboard
     return NextResponse.redirect(new URL('/', req.url));
   }
 
-  if (isLoginPage && token) {
+  if (isLoginPage && token && user) {
     // User is signed in but trying to access login
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }

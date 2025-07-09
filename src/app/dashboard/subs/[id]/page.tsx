@@ -1,4 +1,7 @@
+import SubscriptionDetail from "@/components/subscriptionDetailPage/SubscriptionDetail";
 import React from 'react'
+
+
 
 interface Params {
   id: string;
@@ -11,10 +14,14 @@ export default async function page({
 }) {
   const finalParams = await params;
   console.log("Params:", finalParams);
-  const idtoshow =decodeURI(finalParams?.id)
+  const idToFetch =decodeURIComponent(finalParams?.id)
+
+
+    
     return (
         <div className="flex items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold text-lbtext">Subscription Details for ID {idtoshow} </h1>
+        <h1 className="text-2xl font-bold text-lbtext">Subscription Details for ID  </h1>
+        <SubscriptionDetail idToFetch={idToFetch} />
         </div>
     );
 

@@ -21,14 +21,14 @@ export default function TransactionDetail(props: TransactionDetailProps) {
         ) : (
           <Repeat color="#EDECEC" size={50} />
         )}
-          <p className="bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
+          <p className="hidden lg:block bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
           {" "}
           {props.sub?.paymentMethod
             ? props.sub?.paymentMethod
             : "Unknown"}{" "}
         </p>
 
-         <p className="bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
+         <p className=" bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
           {" "}
           {props.sub?.type
             ? props.sub?.type

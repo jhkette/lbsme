@@ -22,7 +22,7 @@ export default function SubscriptionMain() {
     SubscriptionStatusEnum.Active
   );
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All Subscriptions");
   const [search, setSearch] = useState("");
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
@@ -59,6 +59,16 @@ export default function SubscriptionMain() {
 
     return grouped;
   };
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category); 
+    console.log(groupedSubs) 
+    if (category === "All Subscriptions") {
+      setSubscriptions(data?.getSubscriptions?.subscriptions as Subscription[]);
+    } else {
+      const filteredSubs = groupedSubs?.[category] || [];
+      setSubscriptions(filteredSubs);
+    }
+  }
 
   const handleChange = (value: string) => {
     if (typeof value === "string") {
@@ -88,15 +98,15 @@ export default function SubscriptionMain() {
 
   console.log(groupedSubs);
   return (
-    <div className="my-14">
+    <div className="my-12">
       {groupedSubs !== null && (
         <ul className="flex flex-row gap-12 list-none">
           {["All Subscriptions", ...Object.keys(groupedSubs)].map(
             (category) => (
               <li
                 key={category}
-                onClick={(e) => console.log(e)}
-                className="text-lbgrey text-lg list-none pb-2"
+                onClick={(e) => handleCategoryClick((e.target as HTMLElement)?.textContent as string)}
+                className={clsx("text-lbgrey text-lg list-none pb-2 mb-2 ease-in-out", selectedCategory === category ? "border-b-2 border-lbtext text-lbtext font-semibold cursor-pointer" : "cursor-pointer hover:text-lbtext")}
               >
                 {category}
               </li>
@@ -201,7 +211,8 @@ export default function SubscriptionMain() {
                   <p className="mx-auto w-fit bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">{item.paymentMethod}</p>
                   )}</td>
                 <td className="py-2 px-4">
-                      £{item.monthlyCost.toFixed(2)}{" "}</td>
+                
+                      {`£${item.monthlyCost.toFixed(2)}`}</td>
                 <td className="py-2 px-4">
               
                   {format(
