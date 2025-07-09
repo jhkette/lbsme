@@ -25,7 +25,7 @@ export default function SidebarItem({ iconName, label, active }: SidebarItemProp
   return (
     <Link
       href={label === "Home" ? "/dashboard" : `/dashboard/${label.toLowerCase()}`}
-      className="m-0"
+      className="m-0 cursor-pointer"
     >
       <div
         className={`${baseClasses} ${activeOrHoverStyles}`}

@@ -5,8 +5,7 @@ import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
 import { Repeat, Download } from "lucide-react";
 import { Search } from "lucide-react";
-// import { formatDate } from "@/lib/time";
-import { format, parseISO, sub } from "date-fns";
+import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { capitalize } from "@/lib/utils";
 import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
@@ -32,7 +31,7 @@ export default function SubscriptionMain() {
     },
     fetchPolicy: "cache-and-network",
   });
-  console.log("data", data);
+ 
 
   const router = useRouter();
   useEffect(() => {
@@ -155,7 +154,7 @@ export default function SubscriptionMain() {
       </div>
 
       {!!subscriptions.length && !loading ? (
-        <table className="min-w-full bg-white shadow rounded-lg border-1 border-lbgray">
+        <table className="min-w-full bg-white shadow-lg rounded-lg border-1 border-lbgray">
           <thead className="bg-bggrey text-lg font-semibold text-lbtext py-4">
             <tr>
               <th className="py-2 px-4 text-left">Name</th>
