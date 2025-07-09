@@ -1,6 +1,6 @@
 "use client";
-import {useState} from "react";
-import { clsx} from "clsx"
+import { useState } from "react";
+import { clsx } from "clsx";
 import { Subscription } from "@/interfaces/Subscription";
 import { Download, BarChart as BarchartIcon, PieChart } from "lucide-react";
 import { mkConfig, generateCsv, download } from "export-to-csv";
@@ -10,7 +10,6 @@ interface DashboardSubsProps {
   subs: Subscription[];
 }
 export default function DashboardGraph(props: DashboardSubsProps) {
-
   const [showBarChart, setShowBarChart] = useState(true);
   const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
@@ -19,7 +18,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   const simplifiedData = props.subs.map((sub) => ({
     displayName: sub.displayName,
     monthlyCost: parseFloat(sub.monthlyCost.toFixed(2)),
-    fill: "#426da9"
+    fill: "#426da9",
   }));
 
   const exportDataToCSV = () => {
@@ -42,29 +41,41 @@ export default function DashboardGraph(props: DashboardSubsProps) {
       </div>
       <div className="flex flex-row w-[90%] items-center justify-between my-2 mx-8 block">
         <div className="flex flex-row items-center">
-            <div
-          className={clsx('block w-fit rounded-lg p-2 mr-2 hover:bg-lbgray cursor-pointer ease-in-out', !showBarChart && 'bg-lbgray hover:bg-lbgreen', showBarChart&& 'bg-lbgreen hover:bg-lbgrey')}
-        onClick={() => setShowBarChart(true)}
-        >
-          <BarchartIcon color={showBarChart?   "#fff": "#787787" } size={24} />
+          <div
+            className={clsx(
+              "block w-fit rounded-lg p-2 mr-2 hover:bg-lbgray cursor-pointer ease-in-out",
+              !showBarChart && "bg-lbgray hover:bg-lbgreen",
+              showBarChart && "bg-lbgreen hover:bg-lbgrey"
+            )}
+            onClick={() => setShowBarChart(true)}
+          >
+            <BarchartIcon color={showBarChart ? "#fff" : "#787787"} size={24} />
           </div>
-          <div  className={clsx('block w-fit rounded-lg p-2 mr-2 hover:bg-lbgray cursor-pointer ease-in-out', showBarChart && 'bg-lbgray hover:bg-lbgreen', !showBarChart&& 'bg-lbgreen hover:bg-lbgrey')}
-          onClick={() => setShowBarChart(false)}
-        >
-          <PieChart color={showBarChart?    "#787787" : "#fff"} size={24} />
+          <div
+            className={clsx(
+              "block w-fit rounded-lg p-2 mr-2 hover:bg-lbgray cursor-pointer ease-in-out",
+              showBarChart && "bg-lbgray hover:bg-lbgreen",
+              !showBarChart && "bg-lbgreen hover:bg-lbgrey"
+            )}
+            onClick={() => setShowBarChart(false)}
+          >
+            <PieChart color={showBarChart ? "#787787" : "#fff"} size={24} />
           </div>
-          </div>
+        </div>
         <div
           className="block w-fit justify-start bg-lbgray rounded-lg p-2 mr-2 hover:bg-lbgreen cursor-pointer ease-in-out"
           onClick={exportDataToCSV}
         >
           <div className="text-lbtextgrey hover:text-white">
-      <Download size={24} />
-    </div>
+            <Download size={24} />
+          </div>
         </div>
       </div>
-     {/* Start of barchart */}
-     <ResponsiveGraphContainer barchart={showBarChart} simplifiedData={simplifiedData} />
+      {/* Start of barchart */}
+      <ResponsiveGraphContainer
+        barchart={showBarChart}
+        simplifiedData={simplifiedData}
+      />
     </div>
   );
 }

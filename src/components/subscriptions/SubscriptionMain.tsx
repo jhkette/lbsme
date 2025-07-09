@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { clsx } from "clsx";
 import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
 import { Repeat, Download } from "lucide-react";
 import { Search } from "lucide-react";
 // import { formatDate } from "@/lib/time";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, sub } from "date-fns";
 import Image from "next/image";
 import { capitalize } from "@/lib/utils";
 import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
@@ -14,11 +14,13 @@ import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 import { useRouter } from "next/navigation";
 
 export default function SubscriptionMain() {
-     const [groupedSubs, setGroupedSubs] = useState<Record<
+  const [groupedSubs, setGroupedSubs] = useState<Record<
     string,
     Subscription[]
   > | null>(null);
-  const [subStatus, setSubStatus] = useState<SubscriptionStatusEnum>(SubscriptionStatusEnum.Deactive);
+  const [subStatus, setSubStatus] = useState<SubscriptionStatusEnum>(
+    SubscriptionStatusEnum.Active
+  );
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("");
@@ -26,13 +28,13 @@ export default function SubscriptionMain() {
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
     errorPolicy: "all",
     variables: {
-     status:  subStatus , // Pass the reactive value // Use the correct enum or union value as defined in your GraphQL schema
+      status: subStatus, // Pass the reactive value // Use the correct enum or union value as defined in your GraphQL schema
     },
     fetchPolicy: "cache-and-network",
   });
   console.log("data", data);
-  
-   const router = useRouter();
+
+  const router = useRouter();
   useEffect(() => {
     if (data?.getSubscriptions?.subscriptions) {
       const result = groupByCategory(
@@ -59,14 +61,13 @@ export default function SubscriptionMain() {
   };
 
   const handleChange = (value: string) => {
-    console.log(value);
     if (typeof value === "string") {
       setSearch(value);
 
       const finalSubscriptions = subscriptions.filter((item) => {
         const q = value.toLowerCase();
         return (
-               item.merchant.name.toLowerCase().includes(q) ||
+          item.merchant.name.toLowerCase().includes(q) ||
           item.displayName.toLowerCase().includes(q) ||
           item.type.toLowerCase().includes(q)
         );
@@ -80,15 +81,15 @@ export default function SubscriptionMain() {
     }
   };
 
-   const handleRowClick = (id: string) => {
-    const finalId = encodeURIComponent(id)
+  const handleRowClick = (id: string) => {
+    const finalId = encodeURIComponent(id);
     router.push(`subs/${finalId}`);
   };
 
-  console.log(data);
+  console.log(groupedSubs);
   return (
-    <>
-    {groupedSubs !== null && (
+    <div className="my-14">
+      {groupedSubs !== null && (
         <ul className="flex flex-row gap-12 list-none">
           {["All Subscriptions", ...Object.keys(groupedSubs)].map(
             (category) => (
@@ -116,13 +117,23 @@ export default function SubscriptionMain() {
         </div>
         <div className="flex flex-row items-center justify-start">
           <button
-            className="w-40 border-1 py-2 cursor-pointer rounded-l-md border-lbgray"
+            className={clsx(
+              "w-40 border-1 py-2 cursor-pointer rounded-l-md ",
+              subStatus === SubscriptionStatusEnum.Active
+                ? "border-lbgreen text-white bg-lbgreen"
+                : "border-lbgray text-lbtext bg-white"
+            )}
             onClick={() => setSubStatus(SubscriptionStatusEnum.Active)}
           >
             Active
           </button>
           <button
-            className="w-40 border-1 py-2 cursor-pointer rounded-r-md border-lbgray text-white bg-lbdarkblue"
+            className={clsx(
+              "w-40 border-1 py-2 cursor-pointer rounded-r-md ",
+              subStatus === SubscriptionStatusEnum.Deactive
+                ? "border-lbgreen text-white bg-lbgreen"
+                : "border-lbgray text-lbtext bg-white"
+            )}
             onClick={() => setSubStatus(SubscriptionStatusEnum.Deactive)}
           >
             Inactive
@@ -141,21 +152,21 @@ export default function SubscriptionMain() {
               <th className="py-2 px-4 text-left">Type</th>
               <th className="py-2 px-4 text-left">Frequency</th>
               <th className="py-2 px-4 text-left">Payment</th>
+                <th className="py-2 px-4 text-left">Monthly Cost</th>
               <th className="py-2 px-4 text-left">Last Paid</th>
               <th className="py-2 px-4 text-left">Next Payment</th>
             </tr>
           </thead>
           <tbody className="bg-white">
             {subscriptions.map((item, idx) => (
-               
               <tr
-              key={idx}
-                
+                key={idx}
                 className="border-t cursor-pointer hover:bg-gray-50"
                 onClick={() => handleRowClick(item.subscriptionId)}
               >
                 <td className="py-4 px-4 flex flex-row items-center">
-                  {item.merchant.icon !== "unknown" && item.merchant.icon !== null  ? (
+                  {item.merchant.icon !== "unknown" &&
+                  item.merchant.icon !== null ? (
                     <Image
                       src={item.merchant.icon as string}
                       alt={item.merchant.name}
@@ -172,40 +183,50 @@ export default function SubscriptionMain() {
                       />
                     </div>
                   )}
-                  {item.displayName.length > 0 ?
-                  item.displayName.length > 45 ? (
-                    <p className="text-sm ">{item.displayName}</p>
+                  {item.displayName.length > 0 ? (
+                    item.displayName.length > 45 ? (
+                      <p className="text-sm ">{item.displayName}</p>
+                    ) : (
+                      <p className="text-lg">{item.displayName}</p>
+                    )
                   ) : (
-                    <p className="text-lg">{item.displayName}</p>
-                  ) : (
-                    <p className="text-lg">{item.merchant.name}</p>)}
-                
+                    <p className="text-lg">{item.merchant.name}</p>
+                  )}
                 </td>
                 <td className="py-2 px-4">{item.category?.category}</td>
-                <td className="py-2 px-4">{capitalize(item.type)}</td>
-                <td className="py-2 px-4">{item.paymentMethod}</td>
+                <td className="py-2 px-4"><p className="mx-auto w-fit bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">{capitalize(item.type)}</p></td>
+                <td className="py-2 px-4" >
+                  {item.paymentMethod && (
+     
+                  <p className="mx-auto w-fit bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">{item.paymentMethod}</p>
+                  )}</td>
                 <td className="py-2 px-4">
+                      £{item.monthlyCost.toFixed(2)}{" "}</td>
+                <td className="py-2 px-4">
+              
                   {format(
                     parseISO(item.dates.lastPaymentDate as string),
                     "do MMM yyyy"
                   )}
                 </td>
                 <td className="py-2 px-4">
-                  {format(
-                    parseISO(item.dates.renewalDate as string),
-                    "do MMM yyyy"
+                  {subStatus === SubscriptionStatusEnum.Active && (
+                    <>
+                     
+                      {format(
+                        parseISO(item.dates.renewalDate as string),
+                        "do MMM yyyy"
+                      )}
+                    </>
                   )}
                 </td>
               </tr>
-            
             ))}
           </tbody>
         </table>
       ) : (
         <SubscriptionsTable />
       )}
-    
-    
-    </>
-  )
+    </div>
+  );
 }

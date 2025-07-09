@@ -98,7 +98,7 @@ export default function Login() {
       />
       <button
         type="button"
-        className="absolute right-24 lg:right-32 mb-4  cursor-pointer"
+        className="absolute right-28 md:right-30 lg:right-32 mb-4  cursor-pointer"
         onClick={togglePasswordVisibility}
       >
         <Icon className="stroke-muted-foreground size-8" />
