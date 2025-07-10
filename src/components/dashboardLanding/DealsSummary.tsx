@@ -20,10 +20,7 @@ interface FeaturedDealsResult {
 }
 
 export default function DealsSummary({deals}: {deals?: FeaturedDealsResult[]}) {
-  // const { data: subscriptionDeals } = await sanityFetch({
-  //   query: SUBSCRIPTION_DEAL_QUERY,
-  // });
-  // const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
+
 
 
 

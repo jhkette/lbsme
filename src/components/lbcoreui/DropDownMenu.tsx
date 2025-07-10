@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext/UserProvider";
+import Link from "next/link";
 
 import { logOut } from "@/actions/logOut";
 
@@ -44,8 +45,9 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             ACCOUNT
           </DropdownMenuLabel>
-
+         <Link href="/dashboard/personal-details">
           <DropdownMenuItem className="text-lg flex items-center">
+            
             <Image
               src={"/images/dropdownmenu/user.svg"}
               height={25}
@@ -55,6 +57,7 @@ export function DropdownMenuComponent() {
             />
             Personal details
           </DropdownMenuItem>
+          </Link>
 
           <DropdownMenuItem className="text-lg flex items-center">
             <Image

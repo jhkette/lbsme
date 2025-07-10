@@ -1,37 +1,27 @@
 import SubscriptionDetail from "@/components/subscriptionDetailPage/SubscriptionDetail";
-import React from 'react'
+import React from "react";
 import Image from "next/image";
-
 
 interface Params {
   id: string;
 }
 
-export default async function page({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+export default async function page({ params }: { params: Promise<Params> }) {
   const finalParams = await params;
-  console.log("Params:", finalParams);
-  const idToFetch =decodeURIComponent(finalParams?.id)
 
+  const idToFetch = decodeURIComponent(finalParams?.id);
 
-    
-    return (
-        <div className=" px-16 w-full mt-12 relative">
-          
-              <Image
-                    src="/lbgraphic.png"
-                    height={250}
-                    width={400}
-                    alt="graphic"
-                    className="absolute top-2 z-0 right-40 "
-                  />
+  return (
+    <div className=" px-16 w-full mt-12 relative">
+      <Image
+        src="/lbgraphic.png"
+        height={250}
+        width={400}
+        alt="graphic"
+        className="absolute top-2 z-0 right-40 "
+      />
 
-        <SubscriptionDetail idToFetch={idToFetch} />
-        </div>
-    );
-
+      <SubscriptionDetail idToFetch={idToFetch} />
+    </div>
+  );
 }
-

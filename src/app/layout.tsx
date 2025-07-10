@@ -5,7 +5,7 @@ import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
 import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",
@@ -27,17 +27,17 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${mulishSans.variable} antialiased`}>
       <Head>
-        {/* temp hide from search engines */}
+        {/*  hide from search engines as it is a demo REMOVE if you want the site to be visible
+        to search engines.  */}
         <meta name="robots" content="noindex,nofollow" />
       </Head>
       <body className="antialiased">
-      
-          <ApolloProviderWrapper>
-              <UserProvider>
+        <ApolloProviderWrapper>
+          <UserProvider>
             <main>{children}</main>
-            </UserProvider>
-          </ApolloProviderWrapper>
-       <Analytics/>
+          </UserProvider>
+        </ApolloProviderWrapper>
+        <Analytics />
       </body>
     </html>
   );

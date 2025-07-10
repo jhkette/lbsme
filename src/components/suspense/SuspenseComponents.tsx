@@ -1,5 +1,5 @@
 import React from "react";
-
+// Suspense components for loading states
 export function SuspenseIntro() {
   return (
     <div className="loading flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 w-full h-36 z-1">
@@ -33,6 +33,6 @@ export function SuspenseDashboardGraph() {
 
 export function SubscriptionsTable(){
   return (
-  <div className="loading min-w-full bg-white shadow-lg rounded-lg h-130">
+  <div className="loading min-w-full bg-white shadow-lg rounded-lg h-500">
   </div>)
 }

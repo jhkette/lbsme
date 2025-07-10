@@ -11,8 +11,11 @@ import { capitalize } from "@/lib/utils";
 import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 import { useRouter } from "next/navigation";
+import { mkConfig, generateCsv, download } from "export-to-csv";
 
 export default function SubscriptionMain() {
+  // State variables to manage subscriptions, grouped subscriptions, and search
+  // and category selection
   const [groupedSubs, setGroupedSubs] = useState<Record<
     string,
     Subscription[]
@@ -20,10 +23,13 @@ export default function SubscriptionMain() {
   const [subStatus, setSubStatus] = useState<SubscriptionStatusEnum>(
     SubscriptionStatusEnum.Active
   );
-
+  
   const [selectedCategory, setSelectedCategory] = useState("All Subscriptions");
   const [search, setSearch] = useState("");
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  // Configuration for CSV export
+  const csvConfig = mkConfig({ useKeysAsHeaders: true });
+  // fetch subscriptions based on the selected status
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
     errorPolicy: "all",
     variables: {
@@ -77,8 +83,8 @@ export default function SubscriptionMain() {
         const q = value.toLowerCase();
         return (
           item.merchant.name.toLowerCase().includes(q) ||
-          item.displayName.toLowerCase().includes(q) ||
-          item.type.toLowerCase().includes(q)
+          item.displayName.toLowerCase().includes(q)
+          
         );
       });
       setSubscriptions(finalSubscriptions);
@@ -95,6 +101,21 @@ export default function SubscriptionMain() {
     router.push(`subs/${finalId}`);
   };
 
+    const exportDataToCSV = () => {
+      if(data?.getSubscriptions?.subscriptions) {
+      const plainSubs = data?.getSubscriptions?.subscriptions.map((sub) => ({
+        displayName: sub.displayName,
+        monthlyCost: sub.monthlyCost.toFixed(2),
+        renewalDate: sub.dates.renewalDate,
+        lastPayment: sub.dates.lastPaymentDate,
+        paymentMethod: sub.paymentMethod,
+        merchantName: sub.merchant?.name,
+      }));
+      const csv = generateCsv(csvConfig)(plainSubs);
+      download(csvConfig)(csv);
+    }
+    };
+
   console.log(groupedSubs);
   return (
     <div className="my-12">
@@ -105,7 +126,7 @@ export default function SubscriptionMain() {
               <li
                 key={category}
                 onClick={(e) => handleCategoryClick((e.target as HTMLElement)?.textContent as string)}
-                className={clsx("text-lbgrey text-lg list-none pb-2 mb-2 ease-in-out", selectedCategory === category ? "border-b-2 border-lbtext text-lbtext font-semibold cursor-pointer" : "cursor-pointer hover:text-lbtext")}
+                className={clsx("block z-200 text-lbgrey text-lg list-none pb-2 mb-2 ease-in-out", selectedCategory === category ? "border-b-2 border-lbtext text-lbtext font-semibold cursor-pointer" : "cursor-pointer hover:text-lbtext")}
               >
                 {category}
               </li>
@@ -117,7 +138,7 @@ export default function SubscriptionMain() {
         <div className="flex flex-row w-128 md:flex-row items-center justify-between ">
           <input
             type="text"
-            placeholder="Filter by name or type..."
+            placeholder="Filter by subscription type..."
             value={search}
             onChange={(e) => handleChange(e.target.value as string)}
             className="border p-2 rounded w-128 "
@@ -148,15 +169,16 @@ export default function SubscriptionMain() {
             Inactive
           </button>
         </div>
-        <div className="flex flex-row items-center justify-start bg-lbgray rounded-lg p-2">
+        <div className="flex flex-row items-center justify-start bg-lbgray rounded-lg p-2 block w-fit justify-start bg-lbgray rounded-lg mr-2 hover:bg-lbgreen cursor-pointer ease-in-out" onClick={exportDataToCSV}>
           <Download color="#787787" size={24} />
         </div>
       </div>
 
       {!!subscriptions.length && !loading ? (
-        <table className="min-w-full bg-white shadow-lg rounded-lg border-1 border-lbgray">
+        <div className="max-h-[550px] overflow-y-auto scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen">
+        <table className="min-w-full bg-white shadow-lg  border-1 border-lbgray h-fit">
           <thead className="bg-bggrey text-lg font-semibold text-lbtext py-4">
-            <tr>
+            <tr className="rounded-t-lg ">
               <th className="py-2 px-4 text-left">Name</th>
               <th className="py-2 px-4 text-left">Type</th>
               <th className="py-2 px-4 text-left">Frequency</th>
@@ -234,6 +256,7 @@ export default function SubscriptionMain() {
             ))}
           </tbody>
         </table>
+        </div>
       ) : (
         <SubscriptionsTable />
       )}

@@ -20,9 +20,9 @@ export default function Home() {
           <Image
             src="./images/home/Bird.svg"
             alt="Bird"
-            width={440}
-            height={440}
-            className="mx-12 w-[390px] md:w-[440px] h-auto object-contain"
+            width={410}
+            height={410}
+            className="mx-12 w-[370px] md:w-[410px] h-auto object-contain"
           />
           </div>
         </div>

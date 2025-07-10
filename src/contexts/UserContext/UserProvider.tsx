@@ -16,6 +16,7 @@ interface UserContextType {
   clearUser: () => void;
   setUserToken: (token: string) => void;
   getUserToken: () => string | null;
+  getUserState: () => UserInterface | null;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -43,6 +44,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setUserState(userData);
   };
 
+  const getUserState = ():UserInterface| null => {
+    return user || null;
+  };
+
   const setUserToken = (token: string) => {
     setToken(token)
   }
@@ -56,7 +61,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, clearUser, setUserToken, getUserToken }}>
+    <UserContext.Provider value={{ user, setUser, clearUser, setUserToken, getUserToken, getUserState }}>
       {children}
     </UserContext.Provider>
   );

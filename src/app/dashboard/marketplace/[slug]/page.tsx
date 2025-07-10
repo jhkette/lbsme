@@ -24,15 +24,15 @@ export default async function page({
 
   const dealItem = await client.fetch(DEAL_QUERY, finalParams);
 
-  if(!dealItem){
-    return <h1 className="text-xl text-lbtext">Offer not found</h1>
+  if (!dealItem) {
+    return <h1 className="text-xl text-lbtext">Offer not found</h1>;
   }
-  console.log(dealItem, "this is deal item");
+ 
 
   const url = urlFor(dealItem?.dealImage?.asset?._ref as string)
     .width(400)
     .fit("max") // Maintain aspect ratio
-    .auto("format") // Better optimization
+    .auto("format") 
     .url();
   return (
     <section className="px-16 w-full flex flex-col mt-12 relative">
@@ -46,7 +46,7 @@ export default async function page({
       <h1 className="font-bold text-4xl my-8 text-lbtext">
         Deals Marketplace &gt; {dealItem?.dealName}
       </h1>
-     
+
       <Image
         src="/lbgraphic.png"
         height={250}
@@ -54,20 +54,18 @@ export default async function page({
         alt="graphic"
         className="absolute top-6 z-0 right-40"
       />
-    
 
       <div className="deals w-full bg-white p-8 rounded-md mt-4">
-         <p className="text-lbgreen font-semibold">Little Birdie reccomends:</p>
-         <div className="w-[400px] p-4 bg-lblightblue rounded-md">
-         
-        <Image
-          src={url}
-          alt={dealItem?.dealName || ""}
-          width={150}
-          height={110} // This can be an estimate. Real size adjusts automatically
-          style={{ height: "auto" }} // Maintain proportions
-          className="rounded mr-auto my-6 mr-2" // Optional styling
-        />
+        <p className="text-lbgreen font-semibold">Little Birdie reccomends:</p>
+        <div className="w-[400px] p-4 bg-lblightblue rounded-md">
+          <Image
+            src={url}
+            alt={dealItem?.dealName || ""}
+            width={150}
+            height={110} // This can be an estimate. Real size adjusts automatically
+            style={{ height: "auto" }} // Maintain proportions
+            className="rounded mr-auto my-6 mr-2" // Optional styling
+          />
         </div>
         <p className="font-bold">Details:</p>
         <PortableText value={dealItem?.description ?? []} />
