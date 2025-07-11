@@ -1,5 +1,5 @@
 
-import PersonalDetails from "@/components/PersonalDetails/PersonalDetails";
+import PersonalDetails from "@/components/personal/PersonalDetails";
 export default function page() {
 
 
