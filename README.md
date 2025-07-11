@@ -4,9 +4,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This is a Repo for a demo version of the Little Birdie SME app. 
 
 ### How do I get set up? ###
 
@@ -42,6 +40,8 @@ src
  
 --actions  - (function that run server side - such as the handleLogin functions)
 
+--apollo - (set ups apollo client - which is used to run and then cache graphql queries)
+
 --app  - (the next app router - each folder contains a page and this represents a url in the app ie /dashboard/subs)
 
 --components  - (react components - which are used in the main pages - usually to split up code into managable files)
@@ -51,6 +51,8 @@ src
 --interfaces  - (typescript interfaces)
 
 --lib   - (helper functions)
+
+--sanity - (sets up sanity CMS)
 
 --schemas  - (for zod - a validation library - only used for login at the moment)
 
@@ -77,17 +79,12 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
  ### Sanity.io ###
 
- Sanity headless cms is used to store content in relationship to deals.
+ Sanity headless cms is used to store content in relationship to deals. I have used to store FAQs and dummy T&Cs, and privacy policy
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
 
 ### Who do I talk to? ###
 
-The person how made this repo was Joseph Ketterer. To get in contact with him please contact 
+The person how made this repo was Joseph Ketterer. To get in contact with him please contact Martin or Jeremy to get contact details.
 
 ## Deploy on Vercel
 

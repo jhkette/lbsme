@@ -178,8 +178,8 @@ export default function SubscriptionMain() {
       </div>
 
       {!!subscriptions.length && !loading ? (
-        <div className="max-h-[550px] overflow-y-auto scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen">
-        <table className="min-w-full bg-white shadow-lg  border-1 border-lbgray h-fit">
+        <div className="max-h-[550px] overflow-y-auto shadow-2xl  scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen">
+        <table className="min-w-full bg-white  border-1 border-lbgray h-fit">
           <thead className="bg-bggrey text-lg font-semibold text-lbtext py-4">
             <tr className="rounded-t-lg ">
               <th className="py-2 px-4 text-left">Name</th>
