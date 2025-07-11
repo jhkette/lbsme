@@ -1,7 +1,7 @@
 
 "use client";
 import { useUser } from "@/contexts/UserContext/UserProvider";
-export default function personalDetails() {
+export default function PersonalDetails() {
       const { user } = useUser();
   return (
     <div>
