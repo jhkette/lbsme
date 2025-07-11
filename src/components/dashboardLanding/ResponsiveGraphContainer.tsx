@@ -20,7 +20,7 @@ export default function ResponsiveGraphContainer({
   simplifiedData: { displayName: string; monthlyCost: number; fill: string }[];
   barchart: boolean;
 }) {
-  const barColors = ["#00B1C4", "#426DA9", "#414a4c" ];
+  const barColors = ["#00B1C4", "#426DA9", "#414a4c"];
   const simplifiedDataPie = simplifiedData.map((sub, index) => ({
     ...sub,
     value: sub.monthlyCost,
@@ -42,8 +42,13 @@ export default function ResponsiveGraphContainer({
       >
         <XAxis dataKey="displayName" tick={false} />
         <YAxis />
-        <Tooltip />
-      
+        <Tooltip
+          formatter={(value: number) => [
+            `$${value.toFixed(2)}`,
+            "Monthly Cost",
+          ]}
+        />
+
         <Bar
           dataKey="monthlyCost"
           fill="#00B1C4"
@@ -57,11 +62,8 @@ export default function ResponsiveGraphContainer({
       </BarChart>
     </ResponsiveContainer>
   ) : (
-   <ResponsiveContainer width="100%" height={305} className="mt-8">
-      <PieChart
-         margin={{ top: 10, right: 10, bottom: 0, left: 10 }}
-        
-           >
+    <ResponsiveContainer width="100%" height={305} className="mt-8">
+      <PieChart margin={{ top: 10, right: 10, bottom: 0, left: 10 }}>
         <Pie
           data={simplifiedDataPie}
           dataKey="value"
@@ -69,17 +71,21 @@ export default function ResponsiveGraphContainer({
           cx="40%"
           cy="40%"
           outerRadius={90}
-         
         />
-        <Tooltip />
+        <Tooltip
+          formatter={(value: number) => [
+            `£${value.toFixed(2)}`,
+            "Monthly Cost",
+          ]}
+        />
         <Legend
-  align="left"
-  verticalAlign="bottom"
-   wrapperStyle={{
-    paddingLeft: 20, 
-     marginTop: -10, 
-  }}
-/>
+          align="left"
+          verticalAlign="bottom"
+          wrapperStyle={{
+            paddingLeft: 20,
+            marginTop: -10,
+          }}
+        />
       </PieChart>
     </ResponsiveContainer>
   );

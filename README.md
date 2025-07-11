@@ -40,21 +40,21 @@ Alternatively - if you don't want to use docker run:
 ### Folder structure ###
 src  
  
---actions  
+--actions  - (function that run server side - such as the handleLogin functions)
 
---app  
+--app  - (the next app router - each folder contains a page and this represents a url in the app ie /dashboard/subs)
 
---components  
+--components  - (react components - which are used in the main pages - usually to split up code into managable files)
 
---contexts  
+--contexts  - (files that manage react context to ensure global access to react state variables)
 
---interfaces  
+--interfaces  - (typescript interfaces)
 
---lib  
+--lib   - (helper functions)
 
---schemas  
+--schemas  - (for zod - a validation library - only used for login at the moment)
 
-middleware.ts
+middleware.ts - (the middleware file stops a user from accessing authorised content before they have signed in - eg /dashboard)
 
 ### pnpm ###
 
@@ -64,7 +64,7 @@ PNPM is used to install dependencies. The easiest way to install pnpm itself is 
 
 ### Nextjs ###
 
-Nextjs is built on the react library. It features Server Side rendering (the site renders on the server as well as the clien) which improves SEO. It also features built in routing - so folder names can be used to create dynamic routes. It also allows the devloper to create backend API routes or server functions that are run on the server.[https://nextjs.org/](https://nextjs.org/). [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Nextjs is built on the react library. It features Server Side rendering (the site renders on the server as well as the client) which improves SEO. It also features built in routing - so folder names can be used to create dynamic routes. In additions, another useful feature is that it allows the devloper to create backend API routes or server functions that run on the server. For more see: [https://nextjs.org/](https://nextjs.org/). [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 
  ### Tailwind css ###
@@ -87,8 +87,7 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contactThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+The person how made this repo was Joseph Ketterer. To get in contact with him please contact 
 
 ## Deploy on Vercel
 

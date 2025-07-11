@@ -1,3 +1,6 @@
+# Dockerfile.dev for running the Next.js application in development mode in
+# a Docker container with pnpm
+# This Dockerfile is optimized for development with hot reloading and all dependencies
 FROM node:20-alpine
 
 WORKDIR /app

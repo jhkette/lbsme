@@ -13,6 +13,7 @@ import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 import { useRouter } from "next/navigation";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 
+
 export default function SubscriptionMain() {
   // State variables to manage subscriptions, grouped subscriptions, and search
   // and category selection
@@ -169,8 +170,10 @@ export default function SubscriptionMain() {
             Inactive
           </button>
         </div>
-        <div className="flex flex-row items-center justify-start bg-lbgray rounded-lg p-2 block w-fit justify-start bg-lbgray rounded-lg mr-2 hover:bg-lbgreen cursor-pointer ease-in-out" onClick={exportDataToCSV}>
-          <Download color="#787787" size={24} />
+        <div className="bg-lbgray rounded-lg p-2 block w-fit justify-start bg-lbgray rounded-lg mr-2 hover:bg-lbgreen text-lbtextgrey hover:text-white cursor-pointer ease-in-out" onClick={exportDataToCSV}>
+         
+          <Download  size={24} />
+        
         </div>
       </div>
 

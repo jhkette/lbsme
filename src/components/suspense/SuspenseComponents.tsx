@@ -36,3 +36,9 @@ export function SubscriptionsTable(){
   <div className="loading min-w-full bg-white shadow-lg rounded-lg h-500">
   </div>)
 }
+
+export function SuspenseSubscriptionDetail() {
+  return(
+    <div className="loading w-1/2 bg-white shadow-lg rounded-lg mr-12 mt-14 h-400">
+  </div>)
+}

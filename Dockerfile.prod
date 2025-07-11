@@ -1,0 +1,49 @@
+# Dockerfile for building and running a Next.js application with pnpm in production
+# if needed. This is not being used at the moment - as the project is in development.
+# ---------- Build Stage ----------
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Dependencies required for building
+RUN apk add --no-cache libc6-compat
+
+# Enable and install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy only the files needed for installing dependencies
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies with pnpm
+RUN pnpm install --frozen-lockfile
+
+# Copy the full project files
+COPY . .
+
+# Build the Next.js app
+RUN pnpm build
+
+# ---------- Production Stage ----------
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+# Install only runtime dependencies (optional optimization)
+RUN apk add --no-cache libc6-compat
+
+# Enable pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy only the production files from builder
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+# If you have a custom Next.js server, uncomment this:
+# COPY --from=builder /app/server.js ./server.js
+
+EXPOSE 3000
+
+# Use the Next.js built-in server
+CMD ["pnpm", "start"]
