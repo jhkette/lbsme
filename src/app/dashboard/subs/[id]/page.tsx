@@ -18,7 +18,7 @@ export default async function page({ params }: { params: Promise<Params> }) {
         height={250}
         width={400}
         alt="graphic"
-        className="absolute top-2 z-0 right-40 "
+        className="hidden md:block absolute top-2 z-0 right-40 "
       />
 
       <SubscriptionDetail idToFetch={idToFetch} />

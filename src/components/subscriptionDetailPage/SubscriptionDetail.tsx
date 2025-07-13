@@ -10,7 +10,9 @@ type SubscriptionDetailProps = {
   idToFetch: string;
 };
 
-export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProps) {
+export default function SubscriptionDetail({
+  idToFetch,
+}: SubscriptionDetailProps) {
   const { loading, error, data, refetch } = useGetSubscriptionQuery({
     variables: { id: idToFetch },
     errorPolicy: "all",
@@ -23,7 +25,9 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
 
   const totalThisYear = (data?.getSubscription?.transactions ?? [])
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
-    .filter((tx) => new Date(tx.bookingTime as string).getFullYear() === currentYear)
+    .filter(
+      (tx) => new Date(tx.bookingTime as string).getFullYear() === currentYear
+    )
     .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
 
   const allTimeTotal = (data?.getSubscription?.transactions ?? [])
@@ -34,7 +38,9 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
     .filter((tx) => {
       const date = new Date(tx.bookingTime as string);
-      return date.getFullYear() === currentYear && date.getMonth() === currentMonth;
+      return (
+        date.getFullYear() === currentYear && date.getMonth() === currentMonth
+      );
     })
     .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
 
@@ -51,7 +57,9 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
         <h1 className="text-3xl font-bold text-lbtext mb-4">
           Subscription &gt;{" "}
           {loading ? (
-            <span className="blur-sm text-gray-400 select-none">Loading subscription</span>
+            <span className="blur-sm text-gray-400 select-none">
+              Loading subscription
+            </span>
           ) : data?.getSubscription.displayName ? (
             data.getSubscription.displayName
           ) : (
@@ -93,7 +101,12 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
                   <div className="flex flex-col items-center">
                     <p className="text-lbtext px-3 py-1 text-lg block w-fit font-semibold">
                       {data?.getSubscription.dates.lastPaymentDate
-                        ? format(parseISO(data.getSubscription.dates.lastPaymentDate), "do MMM yyyy")
+                        ? format(
+                            parseISO(
+                              data.getSubscription.dates.lastPaymentDate
+                            ),
+                            "do MMM yyyy"
+                          )
                         : "Unknown"}
                     </p>
                     <p className="w-fit block">Last Payment</p>
@@ -112,9 +125,12 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
                   <div>
                     <p className="text-xs text-gray-500">PROVIDER</p>
                     <p className="font-semibold">
-                      {data?.getSubscription.displayName ?? data?.getSubscription.merchant?.name}
+                      {data?.getSubscription.displayName ??
+                        data?.getSubscription.merchant?.name}
                     </p>
-                    <p className="text-xs text-gray-500 mt-4">SPEND THIS YEAR</p>
+                    <p className="text-xs text-gray-500 mt-4">
+                      SPEND THIS YEAR
+                    </p>
                     <p className="font-semibold">£{totalThisYear.toFixed(2)}</p>
                   </div>
 
@@ -129,10 +145,17 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
 
                   <div>
                     <p className="text-xs text-gray-500">RENEWAL DATE</p>
-                    <p className="font-semibold">{data?.getSubscription.dates.renewalDate}</p>
-                    <p className="text-xs text-gray-500 mt-4">EXP TOTAL SPEND THIS YEAR</p>
                     <p className="font-semibold">
-                      £{(data?.getSubscription.costs.monthly ?? 0 * 12).toFixed(2)}
+                      {data?.getSubscription.dates.renewalDate}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-4">
+                      EXP TOTAL SPEND THIS YEAR
+                    </p>
+                    <p className="font-semibold">
+                      £
+                      {(data?.getSubscription.costs.monthly ?? 0 * 12).toFixed(
+                        2
+                      )}
                     </p>
                   </div>
                 </div>
@@ -148,7 +171,9 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
           <div className="w-1/2">
             <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg p-4 ml-12 mt-14">
               <div className="flex flex-col w-full items-start justify-between pb-1 my-2">
-                <h2 className="text-2xl font-semibold pb-4 w-full">Transaction Activity</h2>
+                <h2 className="text-2xl font-semibold pb-4 w-full">
+                  Transaction Activity
+                </h2>
                 <h2 className="text-xl font-semibold border-b border-lbtext w-full pr-4">
                   Transaction Activity
                 </h2>
@@ -156,28 +181,41 @@ export default function SubscriptionDetail({ idToFetch }: SubscriptionDetailProp
 
               {data?.getSubscription.transactions &&
                 data.getSubscription.transactions.length > 0 &&
-                data.getSubscription.transactions.map((transaction) => (
-                  <div
-                    key={transaction?.transactionId}
-                    className="flex flex-row justify-between items-center py-2 border-b border-lbtextgrey w-full"
-                  >
-                    <div className="flex flex-row items-center gap-4">
-                      {data.getSubscription.merchant?.icon !== "unknown" ? (
-                        <Image
-                          src={data.getSubscription.merchant.icon as string}
-                          alt={data.getSubscription.merchant.name as string}
-                          width={50}
-                          height={50}
-                        />
-                      ) : (
-                        <Repeat color="#EDECEC" size={50} />
-                      )}
-                      {/* You can include more transaction details here if needed */}
-                      <p>{transaction?.bookingTime ? format(parseISO(transaction.bookingTime), "do MMM yyyy") : "Unknown Date"}</p>
-                      <p>£{transaction?.amount?.amount?.toFixed(2) ?? "0.00"}</p>
+                // copying the array to ensure data is not mutated
+                [...data.getSubscription.transactions]
+                // reverse to get last date first 
+                  .reverse()
+                  .map((transaction) => (
+                    <div
+                      key={transaction?.transactionId}
+                      className="flex flex-row justify-between items-center py-2 border-b border-lbtextgrey w-full"
+                    >
+                      <div className="flex flex-row items-center gap-4">
+                        {data.getSubscription.merchant?.icon !== "unknown" ? (
+                          <Image
+                            src={data.getSubscription.merchant.icon as string}
+                            alt={data.getSubscription.merchant.name as string}
+                            width={50}
+                            height={50}
+                          />
+                        ) : (
+                          <Repeat color="#EDECEC" size={50} />
+                        )}
+                      
+                        <p>
+                          {transaction?.bookingTime
+                            ? format(
+                                parseISO(transaction.bookingTime),
+                                "do MMM yyyy"
+                              )
+                            : "Unknown Date"}
+                        </p>
+                        <p>
+                          £{transaction?.amount?.amount?.toFixed(2) ?? "0.00"}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
             </div>
           </div>
         </div>
