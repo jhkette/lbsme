@@ -91,43 +91,48 @@ export default function SubscriptionDetail({
             <div className="w-1/2">
               <div className=" flex flex-col gap-2 rounded-lg bg-white shadow-lg p-4 mr-12 mt-14">
                 {/* intro left section */}
-                <div className="flex flex-row items-center gap-4 mx-auto">
-                  <p className="text-lg font-semibold">
-                    {data?.getSubscription.costs.monthly &&
-                      `£${data?.getSubscription.costs.monthly.toFixed(
-                        2
-                      )} per month`}
-                  </p>
+                <div className="flex flex-row items-center gap-4 mx-auto mt-12">
+                   <div className="flex flex-col items-center">
+                    {data?.getSubscription.costs.monthly && (
+                      <>
+                      <p className="block w-fit font-semibold">
+                        £{data?.getSubscription.costs.monthly.toFixed(2)}</p><p className="block w-fit font-normal"> per month
+                      </p>
+                      </>
+                    )}
+                  </div>
 
                   {data?.getSubscription.merchant.icon != "unknown" ? (
                     <Image
                       src={data?.getSubscription.merchant.icon as string}
                       alt={data?.getSubscription.merchant.name as string}
-                      width={180}
-                      height={180}
+                      width={200}
+                      height={200}
                     />
                   ) : (
                     <Repeat color="#EDECEC" size={150} />
                   )}
+                 <div className="flex flex-col items-center">
+                  <p className="text-lbtext px-3 py-1 text-lg block w-fit font-semibold">
 
-                  <p className="text-lbtext px-3 py-1 rounded-lg text-lg">
                     {data?.getSubscription.dates.lastPaymentDate
                       ? format(
                           parseISO(data?.getSubscription.dates.lastPaymentDate),
                           "do MMM yyyy"
                         )
                       : "Unknown"}
-                  </p>
+                  </p><p className="w-fit block">Last Payment</p>
+                  </div>
                 </div>
                 {/*end of intro left section */}
-                <p className="text-lbtext text-lg text-center">
+                <p className="text-lbtext text-lg text-center mr-16">
                   Ends in days:{" "}
                   {typeof data?.getSubscription?.dates?.endsInDays === "number"
                     ? data.getSubscription.dates.endsInDays
                     : "Unknown"}
                 </p>
                 {/* info list */}
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-3 gap-6 mt-24">
                   {/* Column 1: Provider */}
                   <div>
                     <p className="text-xs text-gray-500">PROVIDER</p>
