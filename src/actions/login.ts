@@ -43,8 +43,8 @@ export const handleLogin = async (email: string, password: string) => {
       return { error: result.error };
     }
     const twoHours = 2 * 60 * 60 * 1000;
-    (await cookies()).set("user", JSON.stringify(result.data));
-     (await cookies()).set("token", JSON.stringify(result.data.access_token), { expires: Date.now() + twoHours });
+    (await cookies()).set("user", JSON.stringify(result.data), { expires: Date.now() + twoHours,  httpOnly: true ,secure:true }  );
+     (await cookies()).set("token", JSON.stringify(result.data.access_token), { expires: Date.now() + twoHours, httpOnly: true ,secure:true });
      
     return result;
   } catch (error) {

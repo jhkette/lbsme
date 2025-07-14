@@ -169,7 +169,7 @@ export default function SubscriptionDetail({
 
           {/* Right Container */}
           <div className="w-1/2">
-            <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg p-4 ml-12 mt-14">
+            <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg p-8 ml-12 mt-14">
               <div className="flex flex-col w-full items-start justify-between pb-1 my-2">
                 <h2 className="text-2xl font-semibold pb-4 w-full">
                   Transaction Activity
