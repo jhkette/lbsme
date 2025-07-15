@@ -62,6 +62,7 @@ middleware.ts - (the middleware file stops a user from accessing authorised cont
 
 PNPM is used to install dependencies. The easiest way to install pnpm itself is ``npm install -g pnpm@latest-10``. There is further guidance [here](https://pnpm.io/installation) if needed.  
 
+
 ## Dependencies  ##
 
 ### Nextjs ###

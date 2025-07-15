@@ -23,6 +23,7 @@ export default function Sidebar() {
             key={item.label}
             label={item.label}
             iconName={item.icon}
+            path={item.path}
             active={
               item.exact
                 ? pathname === item.path
@@ -35,6 +36,7 @@ export default function Sidebar() {
           <SidebarItem
             label={helpItem.label}
             iconName={helpItem.icon}
+            path={helpItem.path}
             active={pathname.startsWith(helpItem.path)}
           />
         </div>

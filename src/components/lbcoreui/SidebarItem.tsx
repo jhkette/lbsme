@@ -7,9 +7,10 @@ type SidebarItemProps = {
   iconName: string;
   label: string;
   active: boolean;
+  path: string
 };
 
-export default function SidebarItem({ iconName, label, active }: SidebarItemProps) {
+export default function SidebarItem({ iconName, label, active, path }: SidebarItemProps) {
   const [hover, setHover] = useState(false);
 
   const imageSrc = hover || active
@@ -24,11 +25,11 @@ export default function SidebarItem({ iconName, label, active }: SidebarItemProp
 
   return (
     <Link
-      href={label === "Home" ? "/dashboard" : `/dashboard/${label.toLowerCase()}`}
+      href={path}
       className="m-0 cursor-pointer"
     >
       <div
-        className={`${baseClasses} ${activeOrHoverStyles}`}
+        className={`${baseClasses} ${activeOrHoverStyles} cursor-pointer`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >

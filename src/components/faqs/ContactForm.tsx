@@ -50,8 +50,8 @@ export default function ContactForm() {
   };
   return (
     <div className="w-full  mx-auto my-8 flex justify-start items-center">
-      <div className="w-full md:w-5/12">
-        <h3 className="text-3xl text-lbgreen font-semibold my-12">
+      <div className="w-full md:w-5/12  bg-white p-8 rounded-lg shadow-lg">
+        <h3 className="text-3xl text-lbgreen font-semibold mb-12">
           Contact us
         </h3>
         <p className="text-lbtextdark text-lg mb-4">

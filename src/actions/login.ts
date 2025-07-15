@@ -20,10 +20,9 @@ export const handleLogin = async (email: string, password: string) => {
     const encryptionKey = process.env.ENCRYPTION_KEY;
     if (!encryptionKey) {
       throw new Error("environment variable is not defined");
-
     }
     (await cookies()).delete("token"); // Clear any existing token cookie
-   
+
     // post request to the login URL with encrypted password and email
     const res = await fetch(loginUrl, {
       method: "POST",
@@ -32,20 +31,26 @@ export const handleLogin = async (email: string, password: string) => {
         password: AES.encrypt(password, encryptionKey).toString(),
       }),
     });
-  
 
-    const result = await res.json()
-    .catch(() => ({ error: "Could not parse response" }));;
-   
-
+    const result = await res
+      .json()
+      .catch(() => ({ error: "Could not parse response" }));
 
     if (result.error) {
       return { error: result.error };
     }
     const twoHours = 2 * 60 * 60 * 1000;
-    (await cookies()).set("user", JSON.stringify(result.data), { expires: Date.now() + twoHours,  httpOnly: true ,secure:true }  );
-     (await cookies()).set("token", JSON.stringify(result.data.access_token), { expires: Date.now() + twoHours, httpOnly: true ,secure:true });
-     
+    (await cookies()).set("user", JSON.stringify(result.data), {
+      expires: Date.now() + twoHours,
+      secure: true,
+      sameSite: true,
+    });
+    (await cookies()).set("token", JSON.stringify(result.data.access_token), {
+      expires: Date.now() + twoHours,
+      secure: true,
+      sameSite: true,
+    });
+
     return result;
   } catch (error) {
     console.error("Login failed:", error);

@@ -45,8 +45,8 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             ACCOUNT
           </DropdownMenuLabel>
-         <Link href="/dashboard/personal-details">
-          <DropdownMenuItem className="text-lg flex items-center">
+         <Link href="/dashboard/personal-details" className="cursor-pointer">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             
             <Image
               src={"/images/dropdownmenu/user.svg"}
@@ -58,8 +58,8 @@ export function DropdownMenuComponent() {
             Personal details
           </DropdownMenuItem>
           </Link>
-
-          <DropdownMenuItem className="text-lg flex items-center">
+           <Link href="/dashboard/subs" className="cursor-pointer">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/link.svg"}
               height={25}
@@ -69,7 +69,8 @@ export function DropdownMenuComponent() {
             />
             Subscription list
           </DropdownMenuItem>
-      
+          </Link>
+        
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer" onClick={handleLogout}>
             <Image
               src={"/images/dropdownmenu/door-open.svg"}
@@ -87,7 +88,8 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             SUPPORT
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg flex items-center">
+           <Link href="/dashboard/help" className="cursor-pointer">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/buoy.svg"}
               height={25}
@@ -97,13 +99,14 @@ export function DropdownMenuComponent() {
             />
             Help
           </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuLabel className="text-sm text-gray-400">
             SOCIAL
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg flex items-center">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/user-plus.svg"}
               height={25}
@@ -111,9 +114,9 @@ export function DropdownMenuComponent() {
               alt="user icon"
               className="inline-block mr-4"
             />
-            Reccomend a friend
+            Recomend a friend
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-lg flex items-center">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/fb.svg"}
               height={25}
@@ -129,7 +132,7 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             LEGAL
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg flex items-center">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/file.svg"}
               height={25}
@@ -139,7 +142,7 @@ export function DropdownMenuComponent() {
             />
             Terms & Conditions
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-lg flex items-center">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/file.svg"}
               height={25}

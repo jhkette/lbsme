@@ -21,7 +21,7 @@ export default function SubscriptionDetail({
 
   const now = new Date();
   const currentYear = now.getFullYear();
-  const currentMonth = now.getMonth();
+ 
 
   const totalThisYear = (data?.getSubscription?.transactions ?? [])
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
@@ -34,15 +34,7 @@ export default function SubscriptionDetail({
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
     .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
 
-  const totalThisMonth = (data?.getSubscription?.transactions ?? [])
-    .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
-    .filter((tx) => {
-      const date = new Date(tx.bookingTime as string);
-      return (
-        date.getFullYear() === currentYear && date.getMonth() === currentMonth
-      );
-    })
-    .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
+
 
   return (
     <div>
@@ -73,9 +65,9 @@ export default function SubscriptionDetail({
             <SuspenseSubscriptionDetail />
           ) : (
             <div className="w-1/2">
-              <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg p-4 mr-12 mt-14">
+              <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg py-4 px-10 mr-12 mt-14">
                 {/* Intro */}
-                <div className="flex flex-row items-center gap-4 mx-auto mt-12">
+                <div className="flex flex-row items-center gap-4 mx-auto  mt-12">
                   <div className="flex flex-col items-center">
                     {data?.getSubscription.costs.monthly && (
                       <>
@@ -91,8 +83,9 @@ export default function SubscriptionDetail({
                     <Image
                       src={data?.getSubscription.merchant.icon as string}
                       alt={data?.getSubscription.merchant.name as string}
-                      width={200}
-                      height={200}
+                      width={180}
+                      height={180}
+                      className="rounded-lg"
                     />
                   ) : (
                     <Repeat color="#EDECEC" size={150} />
@@ -169,13 +162,13 @@ export default function SubscriptionDetail({
 
           {/* Right Container */}
           <div className="w-1/2">
-            <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg p-8 ml-12 mt-14">
+            <div className=" scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen max-h-[434px] overflow-y-auto flex flex-col gap-2 rounded-lg bg-white shadow-lg px-10 py-4 ml-12 mt-14">
               <div className="flex flex-col w-full items-start justify-between pb-1 my-2">
                 <h2 className="text-2xl font-semibold pb-4 w-full">
-                  Transaction Activity
+                  Transaction  History
                 </h2>
                 <h2 className="text-xl font-semibold border-b border-lbtext w-full pr-4">
-                  Transaction Activity
+                 Payments
                 </h2>
               </div>
 
@@ -183,7 +176,7 @@ export default function SubscriptionDetail({
                 data.getSubscription.transactions.length > 0 &&
                 // copying the array to ensure data is not mutated
                 [...data.getSubscription.transactions]
-                // reverse to get last date first 
+                  // reverse to get last date first
                   .reverse()
                   .map((transaction) => (
                     <div
@@ -201,7 +194,7 @@ export default function SubscriptionDetail({
                         ) : (
                           <Repeat color="#EDECEC" size={50} />
                         )}
-                      
+
                         <p>
                           {transaction?.bookingTime
                             ? format(

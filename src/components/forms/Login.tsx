@@ -78,7 +78,7 @@ export default function Login() {
         {...register("email")}
         placeholder="Enter your email address"
         className={cn(
-          "w-3/4 p-3 rounded-lg my-4 text-lg border-1 border-gray-400",
+          "w-2/4 p-3 rounded-lg my-4 text-lg border-1 border-gray-400",
           errors.email ? "bg-red-100" : ""
         )}
       />
@@ -90,15 +90,15 @@ export default function Login() {
       <input
         type={type}
         {...register("password")}
-        placeholder="Enter your Littlebirdie password"
+        placeholder="Enter your Little birdie password"
         className={cn(
-          "w-3/4 p-3 rounded-lg my-4 text-lg border-1 border-gray-400",
+          "w-2/4 p-3 rounded-lg my-4 text-lg border-1 border-gray-400",
           errors.password ? "bg-red-100" : ""
         )}
       />
       <button
         type="button"
-        className="absolute right-28 md:right-30 lg:right-32 mb-4  cursor-pointer"
+        className="absolute right-50 md:right54 lg:right-58 mb-4  cursor-pointer"
         onClick={togglePasswordVisibility}
       >
         <Icon className="stroke-muted-foreground size-8" />
@@ -111,7 +111,7 @@ export default function Login() {
       <input
         type="submit"
         value="Login"
-        className="w-3/4 p-3 rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+        className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
       {loading && (
         <Loader className="size-8  absolute top-82 text-lbgreen animate-spin" />
