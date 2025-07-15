@@ -98,10 +98,10 @@ export default function Login() {
       />
       <button
         type="button"
-        className="absolute right-44 md:right54 lg:right-58 mb-4  cursor-pointer"
+        className="absolute right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
         onClick={togglePasswordVisibility}
       >
-        <Icon className="stroke-muted-foreground size-8" />
+        <Icon className="stroke-muted-foreground size-6 lg:size-8" />
       </button>
       <div className=" w-3/4 h-4">
         {errors.password && (
