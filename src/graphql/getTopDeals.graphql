@@ -1,0 +1,10 @@
+query getTopDeals {
+  getTopDeals {
+    currency
+    description
+    logo
+    name
+    price
+    url
+  }
+}

@@ -1,33 +1,21 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.   
- 
 ### What is this repository for? ###
 
 This is a Repo for a demo version of the Little Birdie SME app. 
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
 
 ## Set up ##
+
+You need to add an .env file with the relevant variables in the root of the project. 
 
 To get a development version of the project please run the command below with the Docker daemon running on your computer.
 
 ```docker-compose up --build```
 
-To run an interactive shell:
-
-Run docker ps to find your container name  
- ```docker ps```
-
-Then run the below command to start an interactive shell:  
-```docker exec -it my-lbsme-container sh```
+At the moment I am running the project in a development container. However, there is a file to produce a production container in the project if needed.
 
 Alternatively - if you don't want to use docker run:  
 ```pnpm run dev```
@@ -80,8 +68,7 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
  ### Sanity.io ###
 
- Sanity headless cms is used to store content in relationship to deals. I have used to store FAQs and dummy T&Cs, and privacy policy
-
+ Sanity headless cms is used to store content in relationship to Faqs, Terms and Conditions, and Privacy Policy. It can also be configured to add other content if necessary. 
 
 ### Who do I talk to? ###
 
@@ -89,6 +76,4 @@ The person how made this repo was Joseph Ketterer. To get in contact with him pl
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This app is deployed on vercel.
