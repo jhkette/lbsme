@@ -173,7 +173,7 @@ so adjusting accordingly */
  /* Custom loading animation */
 
  .loading {
-  background: linear-gradient(-45deg, #f1f1f1 20%, #fff 50%, #f1f1f1 60%);
+  background: linear-gradient(-45deg, #f3f3f3 20%, #fff 50%, #f3f3f3 60%);
   background-size: 300%;
   background-position-x: 100%;
   animation: shimmer 0.75s infinite linear;

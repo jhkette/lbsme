@@ -3,7 +3,7 @@
 export function getClientToken(): string | null {
   if (typeof window === "undefined") {
     // Server side — do nothing here directly
-    throw new Error("getToken() should not be called on server directly. Use getServerToken()");
+    throw new Error("getToken() should not be called on server directly. Use getToken()");
   } else {
     // Client side
     const match = document.cookie.match(/(^|;) ?token=([^;]*)(;|$)/);

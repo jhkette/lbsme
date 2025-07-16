@@ -12,8 +12,8 @@ export default async function page() {
 
   return (
     <div className={styles["faq-rich-text"] }>
-    <div className="px-32 w-full mt-12 relative">
-      <h1 className="text-lbgreen text-3xl font-bold my-12">Frequenly asked questions</h1>
+    <div className="px-32 w-full mt-20 relative">
+      <h1 className="text-lbgreen text-3xl font-bold py-12">Frequenly asked questions</h1>
      <AccordionWrapper faqs={faqs}/>
      <ContactForm/>
 

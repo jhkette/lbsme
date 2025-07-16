@@ -21,6 +21,7 @@ export default function SubscriptionDetail({
 
   const now = new Date();
   const currentYear = now.getFullYear();
+  console.log(data)
  
 
   const totalThisYear = (data?.getSubscription?.transactions ?? [])
@@ -34,6 +35,7 @@ export default function SubscriptionDetail({
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
     .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
 
+    console.log(data?.getSubscription.transactions)
 
 
   return (
@@ -79,7 +81,7 @@ export default function SubscriptionDetail({
                     )}
                   </div>
 
-                  {data?.getSubscription.merchant.icon !== "unknown" ? (
+                  {data?.getSubscription.merchant.icon !== "unknown" && data?.getSubscription.merchant.icon !== null ? (
                     <Image
                       src={data?.getSubscription.merchant.icon as string}
                       alt={data?.getSubscription.merchant.name as string}
@@ -114,7 +116,7 @@ export default function SubscriptionDetail({
                 </p>
 
                 {/* Info List */}
-                <div className="grid grid-cols-3 gap-6 mt-24">
+                <div className="grid grid-cols-3 gap-6 mt-12">
                   <div>
                     <p className="text-xs text-gray-500">PROVIDER</p>
                     <p className="font-semibold">
@@ -171,9 +173,10 @@ export default function SubscriptionDetail({
                  Payments
                 </h2>
               </div>
-
+              
               {data?.getSubscription.transactions &&
                 data.getSubscription.transactions.length > 0 &&
+               
                 // copying the array to ensure data is not mutated
                 [...data.getSubscription.transactions]
                   // reverse to get last date first
@@ -195,7 +198,7 @@ export default function SubscriptionDetail({
                           <Repeat color="#EDECEC" size={50} />
                         )}
 
-                        <p>
+                        <p className="block bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
                           {transaction?.bookingTime
                             ? format(
                                 parseISO(transaction.bookingTime),
@@ -203,7 +206,7 @@ export default function SubscriptionDetail({
                               )
                             : "Unknown Date"}
                         </p>
-                        <p>
+                       <p className="block bg-lbgreen text-white px-3 py-1 rounded-lg text-xs">
                           £{transaction?.amount?.amount?.toFixed(2) ?? "0.00"}
                         </p>
                       </div>
