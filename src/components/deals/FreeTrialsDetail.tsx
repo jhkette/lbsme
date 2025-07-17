@@ -3,7 +3,7 @@ import Image from "next/image"
 import { ChevronRight } from 'lucide-react';
 import slugify from "slugify"
 import { useGetTrialsQuery } from '@/graphql/getTrials.generated';
-
+import Link from "next/link";
 
 interface FreeTrialsDetailProps {
   freeItem: string
@@ -46,9 +46,11 @@ export default function FreeTrialsDetail({ freeItem }: FreeTrialsDetailProps) {
         <p className="font-bold">Details:</p>
         <p>{foundItem?.description}</p>
         {foundItem?.url && (
+            <Link href={foundItem.url}>
           <button className="flex flex-row justify-around items-center bg-lbtext hover:bg-lbgreen mt-4 py-3 w-64 rounded-md text-white font-semibold cursor-pointer">
             VIEW THE DEAL <ChevronRight />
           </button>
+          </Link>
         )}
       </div>
     </div>
