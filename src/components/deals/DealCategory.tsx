@@ -1,46 +1,41 @@
-"use client"
-import {useState}from "react";
+
 import slugify from 'slugify';
 import Image from "next/image";
 import Link from "next/link";
 
-type Deal = {
+type DealProps = {
 
-  // Add other properties as needed based on your deal structure
-  [key: string]: any;
+  category: string
+  
 };
 
-export default function DealItem({ deal }: Deal) {
-   const [imgSrc, setImgSrc] = useState(deal.icon);
-  const [error, setError] = useState(false);
-  console.log(deal)
-  let id;
-   if(deal.name){
-   id = slugify(deal.name, { lower: true }); 
-   }else{
-      id = slugify(deal.dealName, { lower: true }); 
-   }
+export default function DealItem({ category }: DealProps) {
+ 
+let categoryId;
+if(category){
+  categoryId = slugify(category, { lower: true }); 
+}
 
   return (
     <>
-      {deal.name ? (
-         <Link href={`/dashboard/marketplace/freetrials/${id}`}>
+      {category ? (
+         <Link href={`/dashboard/marketplace/bestdeals/${categoryId}`}>
         <div className="relative bg-[url(/images/deals/dealbg.png)] min-w-[275px] min-h-[185px] max-w-[275px] max-h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
          
             <p className="text-center p-4 text-lg text-lbtext font-bold max-w-[180]">
-              {deal.name}
+              {category}
             </p>
             {/* <p className="text-lg text-gray-500 font-semibold text-center">
               {deal.dea}
             </p> */}
             <Image
-              src={deal.__typename === "GetFreeTrialsResult" ? "/images/deals/Tag.svg" : imgSrc}
-              alt={deal.name || ""}
+              src={"/images/deals/Tag.svg"}
+              alt={category || ""}
               width={60}
               height={60} 
               style={{ height: "auto" }} // Maintain proportions
               className="rounded absolute right-2 bottom-4" // Optional styling
-              onError={() => setError(true)}
+           
             />
          
         </div>

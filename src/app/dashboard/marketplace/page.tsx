@@ -1,20 +1,40 @@
+"use client";
 import React from "react";
+import { useGetTrialsQuery } from "@/graphql/getTrials.generated";
 import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/live";
-import { SUBSCRIPTION_DEAL_QUERY, SWITCH_DEAL_QUERY } from "@/sanity/queries";
-import DealItem from "@/components/deals/DealItem";
-import DealSubscriptionMore from "@/components/deals/DealSubscriptionMore";
-// import DealSubscriptionSwitchMore from "@/components/deals/DealSubscriptionSwitchMore";
-import {Deal} from "@/interfaces/SanityTypes"
+import { useGetAllDealsQuery } from "@/graphql/getAllDeals.generated";
+import DealCategory from "@/components/deals/DealCategory";
 
+import FreeTrialItem from "@/components/deals/FreeTrialItem";
 
+type Deal = {
+  // Add other properties as needed based on your deal structure
+  [key: string]: any;
+};
+<div className="w-full bg-lbgray rounded-t-lg p-2"></div>;
 
-export default async function Marketplace() {
-  const { data: subscriptionDeals } = await sanityFetch({
-    query: SUBSCRIPTION_DEAL_QUERY,
+export default function page() {
+  const { loading, error, data, refetch } = useGetTrialsQuery({
+    errorPolicy: "all",
+
+    fetchPolicy: "cache-and-network",
   });
-  const { data: switchDeals } = await sanityFetch({ query: SWITCH_DEAL_QUERY });
 
+  const {
+    loading: dealLoading,
+    error: dealError,
+    data: dealData,
+  } = useGetAllDealsQuery({
+    errorPolicy: "all",
+
+    fetchPolicy: "cache-and-network",
+  });
+
+  const finalData = data?.getTrials.items;
+
+  const finalDealsData = dealData?.getAllDeals.map((deal) => {
+    return deal.category;
+  });
 
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
@@ -29,28 +49,29 @@ export default async function Marketplace() {
 
       <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
         <div className="w-full bg-lbgray rounded-t-lg p-2">
-          <h2 className="text-xl text-lbtext">Special deals & Free Trials</h2>
+          <h2 className="text-xl font-semibold text-lbtext">Free Trials</h2>
         </div>
-        <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-start items-end w-full ">
-          {subscriptionDeals
-          .filter((deal: Deal) => deal.featured === true)
-          .map((deal: Deal) => (
-            <DealItem key={deal._id} deal={deal} />
-          ))}
-          <DealSubscriptionMore />
+        <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[245px] ">
+          {/* {subscriptionDeals
+                            .filter((deal: Deal) => deal.featured === true)
+                            .map((deal: Deal) => (
+                              <DealItem key={deal._id} deal={deal} />
+                            ))}
+                            <DealSubscriptionMore /> */}
+          {finalData?.map((deal: Deal) => {
+            return <FreeTrialItem key={deal.name} deal={deal} />;
+          })}
         </div>
       </section>
 
-      <section className="flex flex-col justify-between items-end w-full rounded-lg shadow-lg mb-12">
+      <section className=" flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
         <div className="w-full bg-lbgray rounded-t-lg p-2">
-          <h2 className="text-xl text-lbtext">Switch & Save</h2>
+          <h2 className="text-xl font-semibold text-lbtext">Best Deals</h2>
         </div>
-        <div className="flex flex-row py-4 rounded-b-lg  bg-white justify-start items-end w-full ">
-          {switchDeals
-            .filter((deal: Deal) => deal.featured === true)
-            .map((deal: Deal) => (
-              <DealItem key={deal._id} deal={deal} />
-            ))}
+        <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[450px] ">
+          {finalDealsData?.map((category: string) => {
+            return <DealCategory key={category} category={category} />;
+          })}
         </div>
       </section>
     </div>

@@ -18,7 +18,7 @@ import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
-import { stat } from "fs";
+
 export default function Home() {
   // This query gets the key subscription data - and passes it down to child
   // components
@@ -40,6 +40,7 @@ export default function Home() {
 interface DealIntro {
   name: string;
     description: React.ReactNode;
+    link: string
 }
 
   const dealsIntro: DealIntro[] = [
@@ -50,14 +51,16 @@ interface DealIntro {
         A selection of <span className="text-pink-500">Free trials</span>
       </p>
     ),
+    link: "/dashboard/marketplace/freetrials"
   },
   {
-    name: "Best offers",
+    name: "Best deals",
     description: (
       <p className="text-center text-base text-lbtextgrey font-bold">
-        A selection of <span className="text-pink-500">offers</span>
+        A selection of <span className="text-pink-500">offers and deals</span>
       </p>
     ),
+     link: "/dashboard/marketplace/bestdeals"
   },
   {
     name: "View all",
@@ -66,12 +69,11 @@ interface DealIntro {
         View a selection of <span className="text-pink-500">trials and offers</span>
       </p>
     ),
+    link: "/dashboard/marketplace"
   },
 ];
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
-  const transactions = data?.getSubscriptions?.subscriptions?.map(
-    (transaction) => transaction.dates.lastPaymentDate
-  ) as string[];
+ 
   // dashboard page is the main landing page for the dashboard
   // it shows the main subscriptions, the spending summary, transactions, and featured deals
   // these are all components that are imported from the components folder

@@ -1,19 +1,19 @@
 "use client";
 import React from 'react'
-import { useGetTrialsQuery } from '@/graphql/getTrials.generated';
+import { useGetAllDealsQuery } from '@/graphql/getAllDeals.generated';
 import Image from 'next/image';
 
-import FreeTrialItem from '@/components/deals/FreeTrialItem'
-
-export default function page() {
- 
-
-   const { loading, error, data, refetch } = useGetTrialsQuery({
+import DealCategory  from '@/components/deals/DealCategory'
+   const { loading, error, data, refetch } = useGetAllDealsQuery({
       errorPolicy: "all",
      
       fetchPolicy: "cache-and-network",
     });
    
+export default function page() {
+ 
+
+
 
     type Deal = {
 
@@ -21,10 +21,13 @@ export default function page() {
   [key: string]: any;
 };
 
-    const finalData = data?.getTrials.items
+    const finalData = data?.getAllDeals.map((deal)=> {
+      return deal.category
+    })
+    console.log(finalData)
   return (
      <div className="px-16 w-full flex flex-col mt-12 relative">
-          <h1 className="font-bold text-4xl my-8 text-lbtext">Free Trials</h1>
+          <h1 className="font-bold text-4xl my-8 text-lbtext">Best Deals</h1>
           <Image
             src="/lbgraphic.png"
             height={250}
@@ -34,19 +37,14 @@ export default function page() {
           />
            <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
                   <div className="w-full bg-lbgray rounded-t-lg p-2">
-                    <h2 className="text-xl font-semibold text-lbtext">Free Trials</h2>
+                    <h2 className="text-xl font-semibold text-lbtext">Best Deals</h2>
                   </div>
                   <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[450px] ">
-                    {/* {subscriptionDeals
-                    .filter((deal: Deal) => deal.featured === true)
-                    .map((deal: Deal) => (
-                      <DealItem key={deal._id} deal={deal} />
-                    ))}
-                    <DealSubscriptionMore /> */}
+                 
                     {
-                      finalData?.map((deal: Deal) => {
+                      finalData?.map((category: string) => {
                         return  (
-                        <FreeTrialItem key={deal.name} deal={deal}/>
+                        <DealCategory key={category} category={category}/>
                         )
                       })
                     }

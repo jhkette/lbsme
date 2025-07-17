@@ -7,13 +7,14 @@ interface SmallDealItem {
   deal: {
     name: string;
     description: React.ReactNode;
+    link: string
   };
 }
 
 export default function SmallDealItem(props: SmallDealItem) {
   return (
     <div className="bg-[url(/images/deals/dealbg.png)] w-[200px] h-[128px] lg:w-[250px] lg:h-[160px] bg-center bg-no-repeat bg-cover rounded-lg my-4 mx-4 py-8 hover:opacity-75">
-      <Link href={`/dashboard/marketplace/`}>
+      <Link href={props.deal.link}>
         <p className="text-center text-2xl text-lbtext font-bold">
           {props.deal.name}
         </p>

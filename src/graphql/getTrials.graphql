@@ -1,6 +1,7 @@
 query getTrials {
    getTrials{
   items{
+   
     logo,
     name,
     url,
