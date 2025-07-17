@@ -13,7 +13,7 @@ type Deal = {
 };
 <div className="w-full bg-lbgray rounded-t-lg p-2"></div>;
 
-export default function page() {
+export default function Page() {
   const { loading, error, data, refetch } = useGetTrialsQuery({
     errorPolicy: "all",
 

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import FreeTrialItem from '@/components/deals/FreeTrialItem'
 
-export default function page() {
+export default function Page() {
  
 
    const { loading, error, data, refetch } = useGetTrialsQuery({

@@ -10,7 +10,7 @@ import DealCategory  from '@/components/deals/DealCategory'
       fetchPolicy: "cache-and-network",
     });
    
-export default function page() {
+export default function Page() {
  
 
 

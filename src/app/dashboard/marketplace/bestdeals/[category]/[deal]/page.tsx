@@ -6,7 +6,7 @@ import { ArrowLeft} from "lucide-react";
 
 import "@/styles/dealsslug.css";
 import { Params } from "next/dist/server/request/params";
-import CategrorySpecificDeals from "@/components/deals/CategorySpecificDeals";
+
 import DealOfferDetail from "@/components/deals/DealOfferDetail";
 
 // type Deal = {
