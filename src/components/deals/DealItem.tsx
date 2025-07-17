@@ -31,7 +31,7 @@ export default function DealItem({ deal }: Deal) {
         src={url}
         alt={deal.dealName || ""}
         width={60}
-        height={60} // This can be an estimate. Real size adjusts automatically
+        height={60} 
         style={{ height: "auto" }} // Maintain proportions
         className="rounded ml-auto mt-2 mr-2" // Optional styling
       />

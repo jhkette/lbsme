@@ -340,8 +340,11 @@ export type DEAL_QUERYResult = {
   link: string | null;
 } | null;
 // Variable: FAQ_QUERY
-// Query: *[_type == "faqs"]| order(_createdAt asc){  _id,  faqQuestion,  faqAnswer,  tag}
+// Query: *[_type == "faqs"]| order(_createdAt asc){  _id,  faqQuestion,  _createdAt,  faqAnswer,  tag}
 export type FAQ_QUERYResult = Array<never>;
+// Variable: TEXT_QUERY
+// Query: *[_type == "textpage" && title == $title]{  _id,  title,  textContent}
+export type TEXT_QUERYResult = Array<never>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -350,6 +353,7 @@ declare module "@sanity/client" {
     "*[_type == \"dealOffer\" && (dealType == \"subscription deals\" || dealType == \"free trials\")]{\n    _id,\n    dealName,\n    slug,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    featured,\n    link\n  \n  }": SUBSCRIPTION_DEAL_QUERYResult;
     "*[_type == \"dealOffer\" && dealType == \"switch\"]{\n    _id,\n    dealName,\n    slug,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n  }": SWITCH_DEAL_QUERYResult;
     " *[_type == \"dealOffer\" && slug.current == $slug][0]{\n     _id,\n     slug,\n    dealName,\n    dealSnippet,\n    dealType,\n    dealGenre,\n    description,\n    dealImage,\n    category,\n    featured,\n    link\n\n    }\n    ": DEAL_QUERYResult;
-    "*[_type == \"faqs\"]| order(_createdAt asc){\n  _id,\n  faqQuestion,\n  faqAnswer,\n  tag\n}": FAQ_QUERYResult;
+    "*[_type == \"faqs\"]| order(_createdAt asc){\n  _id,\n  faqQuestion,\n  _createdAt,\n  faqAnswer,\n  tag\n}": FAQ_QUERYResult;
+    "*[_type == \"textpage\" && title == $title]{\n  _id,\n  title,\n  textContent\n}": TEXT_QUERYResult;
   }
 }

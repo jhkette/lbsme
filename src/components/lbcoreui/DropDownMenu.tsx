@@ -132,6 +132,7 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             LEGAL
           </DropdownMenuLabel>
+           <Link href="/dashboard/terms-conditions" className="cursor-pointer">
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/file.svg"}
@@ -142,6 +143,8 @@ export function DropdownMenuComponent() {
             />
             Terms & Conditions
           </DropdownMenuItem>
+          </Link>
+          <Link href="/dashboard/privacy-policy" className="cursor-pointer">
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/file.svg"}
@@ -152,6 +155,7 @@ export function DropdownMenuComponent() {
             />
             Privacy Policy
           </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

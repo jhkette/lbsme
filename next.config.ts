@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "assets.thisisbud.com",
       },
+      { protocol: "https", hostname: "ui.awin.com" },
     ],
   },
 };

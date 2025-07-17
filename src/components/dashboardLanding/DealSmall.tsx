@@ -6,26 +6,29 @@ import Link from "next/link";
 interface SmallDealItem {
   deal: {
     name: string;
-    icon: string;
+    description: React.ReactNode;
   };
 }
 
 export default function SmallDealItem(props: SmallDealItem) {
   return (
-    <div className="bg-[url(/images/deals/dealbg.png)] w-[200px] h-[128px] lg:w-[250px] lg:h-[160px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8 hover:opacity-75">
+    <div className="bg-[url(/images/deals/dealbg.png)] w-[200px] h-[128px] lg:w-[250px] lg:h-[160px] bg-center bg-no-repeat bg-cover rounded-lg my-4 mx-4 py-8 hover:opacity-75">
       <Link href={`/dashboard/marketplace/`}>
         <p className="text-center text-2xl text-lbtext font-bold">
           {props.deal.name}
         </p>
-
-        <Image
+   
+          {props.deal.description}
+        
+        
+        {/* <Image
           src={props.deal.icon}
           alt={props.deal.name || ""}
           width={45}
           height={45}
           style={{ height: "auto" }}
           className="rounded ml-auto mt-2 mr-2"
-        />
+        /> */}
       </Link>
     </div>
   );

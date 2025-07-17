@@ -11,7 +11,7 @@ import { PortableText } from "@portabletext/react";
 
 export default function AccordionWrapper({ faqs }: { faqs: FAQ_QUERYResult }) {
   return (
-    <Accordion type="single" collapsible className="w-full text-lg p-8">
+    <Accordion type="single" collapsible className="w-full text-lg ">
       {faqs.map((faq) => (
         <AccordionItem key={faq._id} value={faq._id}>
           <AccordionTrigger className="text-lg text-lbtextdark">

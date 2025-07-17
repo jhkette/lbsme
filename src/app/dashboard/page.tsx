@@ -5,7 +5,7 @@ import {
   useGetSubscriptionsQuery,
 } from "@/graphql/getMainSubData.generated";
 import {
-  useGetFeaturedDealsQuery,
+  useGetFeaturedDealsQuery
 } from "@/graphql/getFeaturedDeals.generated";
 import { Subscription } from "@/interfaces/Subscription";
 import {
@@ -34,10 +34,40 @@ export default function Home() {
     errorPolicy: "all",
     
     fetchPolicy: "cache-and-network",
-  });
+  })
   console.log("dealData", dealData);
 
-  
+interface DealIntro {
+  name: string;
+    description: React.ReactNode;
+}
+
+  const dealsIntro: DealIntro[] = [
+  {
+    name: "Free trials",
+    description: (
+      <p className="text-center text-base text-lbtextgrey font-bold">
+        A selection of <span className="text-pink-500">Free trials</span>
+      </p>
+    ),
+  },
+  {
+    name: "Best offers",
+    description: (
+      <p className="text-center text-base text-lbtextgrey font-bold">
+        A selection of <span className="text-pink-500">offers</span>
+      </p>
+    ),
+  },
+  {
+    name: "View all",
+    description: (
+      <p className="text-center text-base text-lbtextgrey font-bold">
+        View a selection of <span className="text-pink-500">trials and offers</span>
+      </p>
+    ),
+  },
+];
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
   const transactions = data?.getSubscriptions?.subscriptions?.map(
     (transaction) => transaction.dates.lastPaymentDate
@@ -67,7 +97,7 @@ export default function Home() {
           <TransactionsLanding subs={subs} />
         )}
 
-        {loading && !dealData?.getFeaturedDeals ? <SuspenseTransactions /> : <DealsSummary deals={dealData?.getFeaturedDeals}/>}
+        {loading  ? <SuspenseTransactions /> : <DealsSummary deals={dealsIntro}/>}
       </div>
     </div>
   );

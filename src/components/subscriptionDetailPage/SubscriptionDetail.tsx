@@ -184,9 +184,10 @@ export default function SubscriptionDetail({
                   .map((transaction) => (
                     <div
                       key={transaction?.transactionId}
-                      className="flex flex-row justify-between items-center py-2 border-b border-lbtextgrey w-full"
+                      className="flex flex-row justify-between items-center py-2 border-b border-lbgray w-full"
                     >
-                      <div className="flex flex-row items-center gap-4">
+                      <div className="flex flex-row justify-between items-center w-full gap-4">
+                        <div className="flex flex-row gap-4 items-center">
                         {data.getSubscription.merchant?.icon !== "unknown" ? (
                           <Image
                             src={data.getSubscription.merchant.icon as string}
@@ -197,7 +198,7 @@ export default function SubscriptionDetail({
                         ) : (
                           <Repeat color="#EDECEC" size={50} />
                         )}
-
+                       
                         <p className="block bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
                           {transaction?.bookingTime
                             ? format(
@@ -206,7 +207,13 @@ export default function SubscriptionDetail({
                               )
                             : "Unknown Date"}
                         </p>
-                       <p className="block bg-lbgreen text-white px-3 py-1 rounded-lg text-xs">
+                        {transaction?.provider?.name &&
+                         <p className="block bg-lbgreen text-white px-3 py-1 rounded-lg text-xs">
+                          {transaction?.provider?.name}
+                        </p>
+                        }
+                        </div>
+                       <p className="block text-lbtext font-semibold text-base">
                           £{transaction?.amount?.amount?.toFixed(2) ?? "0.00"}
                         </p>
                       </div>
