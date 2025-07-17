@@ -4,7 +4,7 @@ export default function page() {
 
 
   return (
-    <div className="px-16 w-full flex flex-col mt-12 relative">
+    <div className="px-32 w-full flex flex-col mt-12 relative">
       <PersonalDetails />
     </div>
   );
