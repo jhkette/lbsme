@@ -44,7 +44,7 @@ export default function ResponsiveGraphContainer({
         <YAxis />
         <Tooltip
           formatter={(value: number) => [
-            `$${value.toFixed(2)}`,
+            `£${value.toFixed(2)}`,
             "Monthly Cost",
           ]}
         />

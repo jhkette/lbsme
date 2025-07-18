@@ -11,7 +11,7 @@ This is a Repo for a demo version of the Little Birdie SME app.
 
 ## Set up ##
 
-You need to add an .env file with the relevant variables in the root of the project. 
+You need to add an .env file with the relevant variables in the root of the project. At the moment of writing this Readme I am using the production environment for the backend. The details will be on the .env file. 
 
 To get a development version of the project please run the command below with the Docker daemon running on your computer.
 

@@ -8,6 +8,8 @@ import { getClientToken } from "@/actions/getClientToken";
 const createApolloLink = (): ApolloLink => {
  
    const getAuthorization = async (): Promise<string> => {
+    // if else blocks to get the cookie server side
+    // or client side if called from client. 
     try {
       if (typeof window === "undefined") {
         return (await getToken()) || '';
