@@ -3,6 +3,7 @@ import { Mulish } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
+import OpenBankingProvider from "@/contexts/OpenBanking/OpenBankingProvider"
 import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
 import { Analytics } from "@vercel/analytics/next";
@@ -33,9 +34,11 @@ export default async function RootLayout({
       </Head>
       <body className="antialiased">
         <ApolloProviderWrapper>
+          <OpenBankingProvider>
           <UserProvider>
             <main>{children}</main>
           </UserProvider>
+          </OpenBankingProvider>
         </ApolloProviderWrapper>
         <Analytics />
       </body>

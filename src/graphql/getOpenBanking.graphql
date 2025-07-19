@@ -1,0 +1,18 @@
+query getProviderlessUserAuthGateway {
+  getProviderlessUserAuthGateway {
+    url
+  }
+}
+
+query getStatusConnection {
+  getStatusConnection {
+    connected
+    connectedAt
+  }
+}
+
+query getRefreshUserAuthGateway {
+    getRefreshUserAuthGateway {
+      url
+    }
+  }

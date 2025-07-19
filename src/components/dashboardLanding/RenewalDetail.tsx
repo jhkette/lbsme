@@ -16,7 +16,7 @@ export default function TransactionDetail(props: TransactionDetailProps) {
     
     <div className='flex flex-row justify-between py-2 gap-8 items-center border-b-1'> 
       <div className='flex flex-row items-center gap-4'>
-        {icon != "unknown" ? (
+        {icon !== "unknown" && icon !== null ?(
           <Image src={icon} alt={props.sub.displayName} width={50} height={50} />
         ) : (
           <Repeat color="#EDECEC" size={50} />

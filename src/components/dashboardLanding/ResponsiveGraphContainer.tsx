@@ -24,7 +24,7 @@ export default function ResponsiveGraphContainer({
   const simplifiedDataPie = simplifiedData.map((sub, index) => ({
     ...sub,
     value: sub.monthlyCost,
-    name: sub.displayName,
+    name: sub.displayName ? sub.displayName : "" ,
     fill: barColors[index % barColors.length],
   }));
   return barchart ? (

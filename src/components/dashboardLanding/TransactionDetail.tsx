@@ -57,7 +57,7 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
   return (
     <div className="flex flex-row justify-between gap-4 py-2 border-b-1 items-center">
       <div className="flex flex-row items-center justify-start gap-4">
-        {icon !== "unknown" ? (
+        {icon !== "unknown"  && icon !== null ? (
           <Image
             src={icon}
             alt={data?.getSubscription.displayName as string}

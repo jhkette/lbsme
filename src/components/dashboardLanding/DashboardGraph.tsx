@@ -15,8 +15,10 @@ export default function DashboardGraph(props: DashboardSubsProps) {
 
   const barColors = ["#00B1C4", "#426DA9", "#c4f9ff"];
 
+  console.log(props.subs)
+
   const simplifiedData = props.subs.map((sub) => ({
-    displayName: sub.displayName,
+    displayName: sub.displayName ? sub.displayName : sub.merchant.name,
     monthlyCost: parseFloat(sub.monthlyCost.toFixed(2)),
     fill: "#426da9",
   }));
@@ -33,7 +35,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
     const csv = generateCsv(csvConfig)(plainSubs);
     download(csvConfig)(csv);
   };
-
+  
   return (
     <div className="w-1/2 p-4 rounded-2xl shadow-2xl bg-white h-120">
       <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
