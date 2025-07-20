@@ -73,6 +73,7 @@ interface DealIntro {
   },
 ];
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
+  console.log(subs)
  
   // dashboard page is the main landing page for the dashboard
   // it shows the main subscriptions, the spending summary, transactions, and featured deals

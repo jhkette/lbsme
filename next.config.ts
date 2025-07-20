@@ -14,7 +14,9 @@ const nextConfig: NextConfig = {
         hostname: "assets.thisisbud.com",
       },
       { protocol: "https", hostname: "ui.awin.com" },
-      {protocol: "https", hostname: "freetrials.co.uk"}
+      {protocol: "https", hostname: "freetrials.co.uk"},
+      {protocol: "https", hostname: "prod-images-875610838338.s3.eu-central-1.amazonaws.com"}
+
     ],
   },
 };
