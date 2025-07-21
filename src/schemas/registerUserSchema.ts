@@ -1,13 +1,15 @@
+
 import { z } from 'zod';
+
 export const userInfoSchema = z.object({
-  given_name: z.string().min(1, 'First name is required'),
-  family_name: z.string().min(1, 'Last name is required'),
+  given_name: z.string().min(2, 'First name is required'),
+  family_name: z.string().min(2, 'Last name is required'),
   email: z.string().email('Invalid email address'),
-  terms_and_conditions: z.literal('true').refine(
-    (val) => val === 'true',
-    {
-      message: 'You must accept the terms and conditions',
-    }
+  terms_and_conditions: z.preprocess(
+    (val) => (val === 'true' ? 'true' : undefined),
+    z.literal('true', {
+      errorMap: () => ({ message: 'You must accept the terms and conditions' })
+    })
   ),
   phoneNumber: z
     .string()

@@ -36,10 +36,12 @@ export default function Home() {
             Sign up to start saving
           </p>
           <div className="flex flex-col gap-4">
+                <Link href={"/register"}>
           <button className="w-96 p-3 shadow-lg font-semibold rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer 
           hover:bg-lbtext transition duration-300">
             Get Started
        </button>
+       </Link>
        <Link href={"/sign-up"}>
        <button className="w-96 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
           hover:bg-lbtext hover:text-white transition duration-300">

@@ -1,0 +1,1 @@
+export const COMPANY_SEARCH_URL = "https://api.company-information.service.gov.uk/search?q=";

@@ -27,10 +27,12 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
-          
-          <h2 className="text-2xl font-bold text-lbtext mb-4 px-12 text-center">
-            Log into your account
+          <div className="w-2/4">
+          <h2 className="text-4xl font-bold text-lbtext mb-4 py-1 text-left">
+            Sign Up
           </h2>
+          <p className="text-2xl font-bold text-lbtext mb-4 py-1 text-left">Enter you details</p>
+          </div>
           <RegisterUser />
        
         </div>

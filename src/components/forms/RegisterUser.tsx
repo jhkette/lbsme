@@ -1,40 +1,83 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { userInfoSchema, UserInfoSchema } from "@/schemas/registerUserSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useUserSignup, UserCredentials } from '@/contexts/UserCredentials/UserSignUpContext';
+import axios, {AxiosError} from "axios"
+import { ArrowBigRight} from "lucide-react";
+import {
+  useUserSignup,
+ 
+} from "@/contexts/UserCredentials/UserSignUpContext";
+import {searchCompanyName } from "@/actions/companySearch"
 import { cn } from "@/lib/utils";
+import { COMPANY_SEARCH_URL } from "@/lib/consts";
+
+export interface CompanyDetails{
+  title: string;
+  address_snippet: string;
+  company_number: string;
+}
+
+export interface CompanyResponseData{
+  items: CompanyDetails[]
+}
+
+
 
 export default function RegisterUser() {
+   const [searchTerm, setSearchTerm] = useState<string>("");
+   const [searchResults, setSearchResults] = useState<CompanyDetails[]>([]);
+  const [showLoading, setShowLoading] = useState<boolean>(false);
   const { setUserCredentials } = useUserSignup();
   const {
     register,
     handleSubmit,
     formState: { errors },
     clearErrors,
-  } = useForm<UserInfoSchema>({
+  } = useForm({
     resolver: zodResolver(userInfoSchema),
   });
 
   const router = useRouter();
- 
+
+  //   const searchCompanyName = async () => {
+  //   setShowLoading(true);
+  //   try {
+  //     const { data } = await axios.get<CompanyResponseData>("https://api.company-information.service.gov.uk/search?q=" + searchTerm, {
+  //       headers: {
+  //         "Authorization": process.env.COMPANY_SEARCH_AUTHORIZATION,
+  //       }
+  //     })
+  //     console.log(data)
+  //     setSearchResults(data.items)
+  //     setShowLoading(false);
+  //   } catch (error) {
+  //     const axiosError = error as AxiosError
+  //     console.error(axiosError.message);
+  //     setShowLoading(false);
+  //   }
+
+  // };
+
+  const searchName= async () => {
+     const data = await searchCompanyName(searchTerm)
+     console.log(data)
+  }
+
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<UserInfoSchema> = async (data) => {
-   
-
     if (Object.keys(errors).length > 0) {
       console.log("There are errors in the form");
       return;
     }
-     setUserCredentials({
+    setUserCredentials({
       ...data,
       email: data.email.toLowerCase(),
-      terms_and_conditions: 'true',
+      terms_and_conditions: "true",
     });
 
     clearErrors();
@@ -43,8 +86,7 @@ export default function RegisterUser() {
     // You can store this in context or navigate with data
     console.log("Form Data:", data);
 
-   
-    router.push("/signup-password");
+    // router.push("/signup-password");
   };
 
   return (
@@ -52,6 +94,33 @@ export default function RegisterUser() {
       onSubmit={handleSubmit(onSubmit)}
       className="w-full text-center flex flex-col items-center justify-center relative"
     >
+       {/* company name*/}
+      <input
+        type="text"
+        // {...register("given_name")}
+        placeholder="Search company name"
+        onChange={(e) => setSearchTerm(e.target.value)}
+        value={searchTerm}
+        className={cn(
+          "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+          errors.given_name
+            ? "bg-red-100"
+            : "focus:shadow-md focus:border-blue-400"
+        )}
+        
+      />
+       <button
+        type="button"
+        className="absolute top-5 right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
+       
+      >
+        <ArrowBigRight color="#00b1c4" className=" size-7 lg:size-8"  onClick={searchName}/>
+      </button>
+      <p className="w-2/4 text-xs text-lbgreen text-left align-start pb-2">* Click the arrow to find your company</p>
+       
+      {/* {errors.given_name && (
+        <p className="text-red-500 text-sm">{errors.given_name.message}</p>
+      )} */}
       {/* First Name */}
       <input
         type="text"
@@ -59,7 +128,9 @@ export default function RegisterUser() {
         placeholder="First name"
         className={cn(
           "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-          errors.given_name ? "bg-red-100" : "focus:shadow-md focus:border-blue-400"
+          errors.given_name
+            ? "bg-red-100"
+            : "focus:shadow-md focus:border-blue-400"
         )}
       />
       {errors.given_name && (
@@ -73,7 +144,9 @@ export default function RegisterUser() {
         placeholder="Last name"
         className={cn(
           "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-          errors.family_name ? "bg-red-100" : "focus:shadow-md focus:border-blue-400"
+          errors.family_name
+            ? "bg-red-100"
+            : "focus:shadow-md focus:border-blue-400"
         )}
       />
       {errors.family_name && (
@@ -101,7 +174,9 @@ export default function RegisterUser() {
         placeholder="Phone number"
         className={cn(
           "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-          errors.phoneNumber ? "bg-red-100" : "focus:shadow-md focus:border-blue-400"
+          errors.phoneNumber
+            ? "bg-red-100"
+            : "focus:shadow-md focus:border-blue-400"
         )}
       />
       {errors.phoneNumber && (
@@ -131,7 +206,6 @@ export default function RegisterUser() {
         value="Continue"
         className="w-2/4 p-3 shadow-lg rounded-lg my-6 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
-     
 
       {submitError && (
         <p className="text-red-500 text-sm mt-2">{submitError}</p>
