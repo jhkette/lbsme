@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html, body {
+  @apply min-h-screen bg-lbgray;
+}
+
 @layer base {
   :root {
     --background: #ffffff;

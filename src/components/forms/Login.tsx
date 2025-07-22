@@ -66,7 +66,7 @@ export default function Login() {
 
     setUser(newUser); // Update the context
     setLoading(false);
-    router.push("/dashboard");
+    router.push('/dashboard');
   };
   return (
     <form

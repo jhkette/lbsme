@@ -4,7 +4,7 @@ import RegisterUser from "@/components/forms/RegisterUser";
 export default function Page() {
   return (
     <div className="w-full">
-      <div className="flex flex-row bg-lbgray w-full h-screen relative">
+      <div className="flex flex-row bg-lbgray w-full min-h-screen relative">
         <Image
           src="./lbtext.svg"
           alt="Logo"
