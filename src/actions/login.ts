@@ -1,6 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 import { AES } from "crypto-js";
+import { signIn } from 'aws-amplify/auth'
 
 /**
  * Handles user login by sending a POST request to the login URL with encrypted credentials.
@@ -23,6 +24,7 @@ export const handleLogin = async (email: string, password: string) => {
     }
     (await cookies()).delete("token"); // Clear any existing token cookie
 
+    
     // post request to the login URL with encrypted password and email
     const res = await fetch(loginUrl, {
       method: "POST",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { userInfoSchema, UserInfoSchema } from "@/schemas/registerUserSchema";
@@ -25,16 +25,21 @@ export interface CompanyResponseData {
 export default function RegisterUser() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<CompanyDetails[]>([]);
-  const [showLoading, setShowLoading] = useState<boolean>(false);
+
   const [selectedCompany, setSelectedCompany] = useState<string>("");
-  const { setUserCredentials } = useUserSignup();
+
+  const { setUserCredentials, userCredentials } = useUserSignup();
   const {
     register,
     handleSubmit,
+
     formState: { errors },
     clearErrors,
   } = useForm({
     resolver: zodResolver(userInfoSchema),
+    defaultValues: {
+      phoneNumber: "+44"
+    }
   });
 
   const router = useRouter();
@@ -52,6 +57,12 @@ export default function RegisterUser() {
 
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (selectedCompany !== "") {
+      setSearchTerm(selectedCompany);
+    }
+  }, [selectedCompany]);
+
   const onSubmit: SubmitHandler<UserInfoSchema> = async (data) => {
     if (Object.keys(errors).length > 0) {
       console.log("There are errors in the form");
@@ -62,14 +73,14 @@ export default function RegisterUser() {
       email: data.email.toLowerCase(),
       terms_and_conditions: "true",
     });
+    console.log(userCredentials, "User credentials");
 
     clearErrors();
     setSubmitError(null);
 
-    // You can store this in context or navigate with data
     console.log("Form Data:", data);
 
-    // router.push("/signup-password");
+    router.push("/register-password");
   };
 
   return (
@@ -84,7 +95,7 @@ export default function RegisterUser() {
           // {...register("given_name")}
           placeholder="Search company name"
           onChange={(e) => setSearchTerm(e.target.value)}
-          value={searchTerm}
+          value={selectedCompany !== "" ? selectedCompany : searchTerm}
           className={cn(
             "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
             errors.given_name
@@ -94,21 +105,46 @@ export default function RegisterUser() {
         />
         <button
           type="button"
-          className="absolute top-5 right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
+          className="absolute top-5 right-42 md:right-52 lg:right-58 mb-4 cursor-pointer group"
+          onClick={searchName}
         >
-          <ArrowBigRight
-            color="#00b1c4"
-            className=" size-7 lg:size-8 hover: bg-lbgray"
-            onClick={searchName}
-          />
+          <ArrowBigRight className="size-7 lg:size-8 text-lbgreen group-hover:text-lbtextgrey transition-colors duration-200" />
         </button>
+
         <p className="w-2/4 text-xs text-lbgreen text-left align-start pb-2">
           * Click the arrow to find your company
         </p>
 
-        {/* {errors.given_name && (
-        <p className="text-red-500 text-sm">{errors.given_name.message}</p>
-      )} */}
+        {!!searchResults.length && (
+          <div className="w-2/4  ">
+            <h2 className="text-lbtext text-lg font-semibold pb-2 text-left">
+              Select your company from the list below
+            </h2>
+            <div className="min-h-[120px] max-h-[150px] border-1 border-lbtext p-4 mx-auto scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-y-auto mb-4">
+              {searchResults.map((result) => {
+                return (
+                  <div
+                    className={cn(
+                      "border-b border-lbtextgrey text-lbtextdark cursor-pointer py-2 px-2 hover:bg-lbblue hover:text-lbtextdark",
+                      selectedCompany === result.title &&
+                        "bg-lbgreen text-white"
+                    )}
+                    key={result.title}
+                    onClick={() => setSelectedCompany(result.title)}
+                  >
+                    <div className="flex flex-row justify-start items-center gap-2 font-semibold">
+                      <Building2 size={18} color="#00b1c4" />
+                      <p className="text-base text-left">{result.title}</p>
+                    </div>
+                    <p className="text-sm text-left">
+                      {result.address_snippet}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
         {/* First Name */}
         <input
           type="text"
@@ -142,12 +178,15 @@ export default function RegisterUser() {
         )}
 
         {/* Email */}
+         <div className="w-2/4 flex flex-col">
+         <label htmlFor="phoneNumber" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Email</label>
         <input
           type="email"
+          id="email"
           {...register("email")}
           placeholder="Email address"
           className={cn(
-            "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
             errors.email
               ? "bg-red-100"
               : "focus:shadow-md focus:border-blue-400"
@@ -156,22 +195,26 @@ export default function RegisterUser() {
         {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
+        </div>
 
         {/* Phone Number */}
+        <div className="w-2/4 flex flex-col">
+        <label htmlFor="phoneNumber" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Phone number</label>
         <input
           type="tel"
+          id="phoneNumber"
+          placeholder="Phone number (no spaces)"
           {...register("phoneNumber")}
-          placeholder="Phone number"
-          className={cn(
-            "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+          className={`w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200 ${
             errors.phoneNumber
               ? "bg-red-100"
               : "focus:shadow-md focus:border-blue-400"
-          )}
+          }`}
         />
         {errors.phoneNumber && (
           <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>
         )}
+        </div>
 
         {/* Terms and Conditions */}
         <label className="flex items-center gap-2 mt-4">
@@ -201,27 +244,6 @@ export default function RegisterUser() {
           <p className="text-red-500 text-sm mt-2">{submitError}</p>
         )}
       </form>
-      <div className="min-h-[120px] max-h-[150px] w-2/4  ">
-        {!!searchResults.length && (
-          <div className="min-h-[120px] max-h-[150px]  border-dashed border-2 border-lbdarkblue rounded-md p-4 mx-auto scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-y-auto">
-            {searchResults.map((result) => {
-              return (
-                <div
-                  className="border-b border-lbtextgrey cursor-pointer py-2 px-2 hover:bg-lbblue focus:bg-lbtext focus:text-white"
-                  key={result.address_snippet}
-                  onClick={() => setSelectedCompany(result.title)}
-                >
-                  <div className="flex flex-row justify-start items-center gap-2 font-semibold">
-                    <Building2 size={18} color="#00b1c4" />
-                    <p className="text-base">{result.title}</p>
-                  </div>
-                  <p className="text-sm">{result.address_snippet}</p>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
     </>
   );
 }

@@ -1,21 +1,27 @@
-
-import { z } from 'zod';
+import { z } from "zod";
 
 export const userInfoSchema = z.object({
-  given_name: z.string().min(2, 'First name is required'),
-  family_name: z.string().min(2, 'Last name is required'),
-  email: z.string().email('Invalid email address'),
+  given_name: z.string().min(2, "First name is required"),
+  family_name: z.string().min(2, "Last name is required"),
+  email: z.string().email("Invalid email address"),
   terms_and_conditions: z.preprocess(
-    (val) => (val === 'true' ? 'true' : undefined),
-    z.literal('true', {
-      errorMap: () => ({ message: 'You must accept the terms and conditions' })
+    (val) => (val === "true" ? "true" : undefined),
+    z.literal("true", {
+      errorMap: () => ({ message: "You must accept the terms and conditions" }),
     })
   ),
-  phoneNumber: z
+ phoneNumber: z.preprocess(
+  (val) => {
+    if (typeof val === "string") {
+      return val.replace(/\s+/g, ""); // removes all whitespace
+    }
+    return val;
+  },
+  z
     .string()
-    .min(7, 'Phone number is too short')
-    .max(15, 'Phone number is too long')
-    .regex(/^[\d+\-\s()]+$/, 'Invalid phone number format'),
+    .trim()
+    .regex(/^\+[1-9]\d{1,14}$/, "Phone number must be in valid E.164 format")
+),
 });
 
 // If using with React Hook Form:

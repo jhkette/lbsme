@@ -11,6 +11,9 @@ importers:
       '@apollo/client':
         specifier: ^3.13.8
         version: 3.13.8(@types/react@19.1.8)(graphql-ws@6.0.6(graphql@15.8.0)(ws@8.18.3))(graphql@15.8.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@aws-amplify/auth':
+        specifier: ^6.13.3
+        version: 6.13.3(@aws-amplify/core@6.12.3)
       '@aws-amplify/core':
         specifier: ^6.12.3
         version: 6.12.3
@@ -8327,7 +8330,7 @@ snapshots:
       '@aws-crypto/util': 5.2.0
       '@aws-sdk/types': 3.840.0
       '@aws-sdk/util-locate-window': 3.804.0
-      '@smithy/util-utf8': 2.0.0
+      '@smithy/util-utf8': 2.3.0
       tslib: 2.8.1
 
   '@aws-crypto/sha256-js@1.2.2':
@@ -10343,7 +10346,7 @@ snapshots:
   '@graphql-tools/optimize@2.0.0(graphql@15.8.0)':
     dependencies:
       graphql: 15.8.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@graphql-tools/prisma-loader@8.0.17(@types/node@20.19.9)(graphql@15.8.0)':
     dependencies:
@@ -10389,7 +10392,7 @@ snapshots:
       '@ardatan/relay-compiler': 12.0.3(graphql@15.8.0)
       '@graphql-tools/utils': 10.9.1(graphql@15.8.0)
       graphql: 15.8.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - encoding
 

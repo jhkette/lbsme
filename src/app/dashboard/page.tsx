@@ -19,6 +19,7 @@ import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
 
+
 export default function Home() {
   // This query gets the key subscription data - and passes it down to child
   // components
@@ -72,6 +73,9 @@ interface DealIntro {
     link: "/dashboard/marketplace"
   },
 ];
+
+
+
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
   console.log(subs)
  

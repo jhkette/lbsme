@@ -8,6 +8,7 @@ import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
 import { Analytics } from "@vercel/analytics/next";
 import { UserSignupProvider } from "@/contexts/UserCredentials/UserSignUpContext";
+import AmplifyProvider from "@/components/amplify/AmplifyConnext";
 
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",
@@ -19,12 +20,21 @@ export const metadata: Metadata = {
   description: "The UK's top subscription & bill management app",
 };
 
+
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const token = await getToken();
+
+  console.log('Environment check:', {
+  userPoolId: process.env.NEXT_PUBLIC_AWS_USER_POOLS_ID,
+  userPoolClientId: process.env.NEXT_PUBLIC_AWS_USER_POOLS_WEB_CLIENT_ID,
+  identityPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_IDENTITY_POOL_ID,
+  nodeEnv: process.env.NODE_ENV
+});
 
   return (
     <html lang="en" className={`${mulishSans.variable} antialiased`}>
@@ -34,6 +44,7 @@ export default async function RootLayout({
         <meta name="robots" content="noindex,nofollow" />
       </Head>
       <body className="antialiased">
+        <AmplifyProvider>
         <ApolloProviderWrapper>
           <UserSignupProvider>
             <OpenBankingProvider>
@@ -43,6 +54,7 @@ export default async function RootLayout({
             </OpenBankingProvider>
           </UserSignupProvider>
         </ApolloProviderWrapper>
+        </AmplifyProvider>
 
         <Analytics />
       </body>
