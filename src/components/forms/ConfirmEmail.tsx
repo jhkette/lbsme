@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PasswordSchema, PasswordData } from "@/schemas/passwodSchema";
@@ -9,30 +9,21 @@ import { signUp } from "aws-amplify/auth";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
 
-export default function Password() {
+export default function ConfirmEmail() {
   const {
     register,
     handleSubmit,
     formState: { errors },
     clearErrors,
   } = useForm<PasswordData>({
-    resolver: zodResolver(PasswordSchema),
+    resolver: zodResolver(CodeSchema),
   });
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
-  const [passwordFormError, setPasswordFormError] = useState("");
-  
+  //   const [showPasswordTwo, setShowPasswordTwo] = useState(false); // Toggle for password visibility
 
- 
-  const { userCredentials } = useUserSignup();
- 
-  // return to register if there
-  // is no userCredentials from prior form
-  useEffect(() => {
-    if(!userCredentials?.email){
-            router.push("/register")
-    }
-  })
+  // get user data from UserContext
+  const { setUserCredentials, userCredentials } = useUserSignup();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -41,7 +32,9 @@ export default function Password() {
   const type = showPassword ? "text" : "password";
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
 
- // calls aws amplify signUp function
+  // Function to handle form submission
+  // It uses the handleLogin function to authenticate the user
+  // and updates the user context with the logged-in user's data
   const onSubmit: SubmitHandler<PasswordData> = async (data) => {
     console.log("submit ran");
     try {
@@ -62,18 +55,9 @@ export default function Password() {
       });
 
       console.log(isSignUpComplete, userId, nextStep);
-      // may need refining
-      if (nextStep.signUpStep) {
-        router.push("/confirm-email");
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setPasswordFormError(`There was an error ${err.message}`);
-        console.log(err);
-      } else {
-        setPasswordFormError("An unknown error occurred");
-        console.log(err);
-      }
+      router.push('/confirm-email');
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
@@ -110,9 +94,6 @@ export default function Password() {
         value="Continue"
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
-      {!!passwordFormError.length && (
-        <p className="text-red-500 text-sm">{passwordFormError} </p>
-      )}
     </form>
   );
 }

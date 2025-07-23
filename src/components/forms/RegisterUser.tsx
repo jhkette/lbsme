@@ -90,14 +90,17 @@ export default function RegisterUser() {
         className="w-full text-center flex flex-col items-center justify-center relative"
       >
         {/* company name*/}
+        <div className="w-2/4 flex flex-col">
+         <label htmlFor="companyName" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Company name</label>
         <input
           type="text"
+          id="companyName"
           // {...register("given_name")}
           placeholder="Search company name"
           onChange={(e) => setSearchTerm(e.target.value)}
           value={selectedCompany !== "" ? selectedCompany : searchTerm}
           className={cn(
-            "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
             errors.given_name
               ? "bg-red-100"
               : "focus:shadow-md focus:border-blue-400"
@@ -105,15 +108,16 @@ export default function RegisterUser() {
         />
         <button
           type="button"
-          className="absolute top-5 right-42 md:right-52 lg:right-58 mb-4 cursor-pointer group"
+          className="absolute top-10 right-42 md:right-52 lg:right-58 mb-4 cursor-pointer group"
           onClick={searchName}
         >
           <ArrowBigRight className="size-7 lg:size-8 text-lbgreen group-hover:text-lbtextgrey transition-colors duration-200" />
         </button>
 
-        <p className="w-2/4 text-xs text-lbgreen text-left align-start pb-2">
+        <p className="w-full text-xs text-lbgreen text-left align-start pb-2">
           * Click the arrow to find your company
         </p>
+        </div>
 
         {!!searchResults.length && (
           <div className="w-2/4  ">
@@ -146,12 +150,15 @@ export default function RegisterUser() {
           </div>
         )}
         {/* First Name */}
+        <div className="w-2/4 flex flex-col">
+         <label htmlFor="firstName" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">First name</label>
         <input
           type="text"
+          id="firstName"
           {...register("given_name")}
           placeholder="First name"
           className={cn(
-            "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
             errors.given_name
               ? "bg-red-100"
               : "focus:shadow-md focus:border-blue-400"
@@ -160,14 +167,17 @@ export default function RegisterUser() {
         {errors.given_name && (
           <p className="text-red-500 text-sm">{errors.given_name.message}</p>
         )}
-
+        </div>
         {/* Last Name */}
+         <div className="w-2/4 flex flex-col">
+          <label htmlFor="familyName" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Family name</label>
         <input
           type="text"
           {...register("family_name")}
           placeholder="Last name"
+          id="familyName"
           className={cn(
-            "w-2/4 p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
             errors.family_name
               ? "bg-red-100"
               : "focus:shadow-md focus:border-blue-400"
@@ -176,6 +186,7 @@ export default function RegisterUser() {
         {errors.family_name && (
           <p className="text-red-500 text-sm">{errors.family_name.message}</p>
         )}
+        </div>
 
         {/* Email */}
          <div className="w-2/4 flex flex-col">
