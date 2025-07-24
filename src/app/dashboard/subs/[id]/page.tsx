@@ -14,7 +14,7 @@ export default async function page({ params }: { params: Promise<Params> }) {
   return (
     <div className=" px-16 w-full mt-12 relative">
       <Image
-        src="/lbgraphic.png"
+        src="/images/main/lbgraphic.png"
         height={250}
         width={400}
         alt="graphic"

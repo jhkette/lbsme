@@ -40,7 +40,7 @@ export default function Page() {
     <div className="px-16 w-full flex flex-col mt-12 relative">
       <h1 className="font-bold text-4xl my-8 text-lbtext">Marketplace</h1>
       <Image
-        src="/lbgraphic.png"
+        src="/images/main/lbgraphic.png"
         height={250}
         width={400}
         alt="graphic"

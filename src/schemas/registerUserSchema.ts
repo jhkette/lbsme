@@ -20,7 +20,7 @@ export const userInfoSchema = z.object({
   z
     .string()
     .trim()
-    .regex(/^\+[1-9]\d{1,14}$/, "Phone number must be in valid E.164 format")
+    .regex(/^\+[1-9]\d{5,14}$/, "Phone number must be in valid format - starting with + and your international code")
 ),
 });
 

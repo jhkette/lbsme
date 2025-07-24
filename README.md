@@ -75,6 +75,6 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
 The person how made this repo was Joseph Ketterer. To get in contact with him please contact Martin or Jeremy to get contact details.
 
-## Deploy on Vercel
+### Deploy on Vercel
 
 This app is deployed on vercel.

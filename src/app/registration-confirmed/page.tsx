@@ -1,7 +1,17 @@
+"use client"
 import Image from "next/image";
-import ConfirmEmail from "@/components/forms/ConfirmEmail";
+import Link from "next/link"
+import {useUserSignup} from "@/contexts/UserCredentials/UserSignUpContext";
+import { useEffect } from "react";
+export default function Page() {
 
-export default function Home() {
+     const { clearUserCredentials } = useUserSignup();
+
+
+     useEffect(() => {
+        clearUserCredentials()
+     },[])
+
   return (
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
@@ -19,7 +29,7 @@ export default function Home() {
           <div>
           <Image
         
-         src="/images/main/emailbird.svg"
+         src="/images/main/emailconfirmed.svg"
             alt="Bird"
             width={250}
             height={250}
@@ -30,15 +40,20 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
           
           <h2 className="text-3xl font-bold text-lbtext mb-4 text-left w-2/4">
-            Email confirmation
+            Your registration has been confimed.
           </h2>
          
             <p className="text-lg font-bold text-lbtext mb-4  text-left w-2/4">
-             We have just sent a confirmation email to your email address. Please enter
-             the code to confirm your email.
+             Please now sign in to start using Little Birdie
           </p>
-          
-          <ConfirmEmail />
+          <Link href={"/sign-in"}>
+           <button
+        
+        className="w-78 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbtext text-white cursor-pointer hover:bg-lbgreen transition duration-300"
+      >
+        Sign in
+      </button>
+      </Link>
         
        
         </div>

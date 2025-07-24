@@ -9,7 +9,7 @@ export default function HeaderDashboard({}) {
       <Link href="/dashboard" className="cursor-pointer">
         <div className="flex items-center justify-start gap-2">
           <Image
-            src="/LBLogo.svg"
+            src="/images/main/LBLogo.svg"
             alt="Logo"
             width={60}
             height={35}
@@ -17,7 +17,7 @@ export default function HeaderDashboard({}) {
           />
 
           <Image
-            src="/lbtext.svg"
+             src="/images/main/lbtext.svg"
             alt="Logo Text"
             width={100}
             height={35}
@@ -27,7 +27,7 @@ export default function HeaderDashboard({}) {
       </Link>
       <div className="flex items-center justify-end items-center gap-2 ">
         <Image
-          src="/User.svg"
+          src="/images/main/User.svg"
           alt="profile image"
           width={45}
           height={45}

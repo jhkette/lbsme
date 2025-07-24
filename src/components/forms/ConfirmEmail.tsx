@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { PasswordSchema, PasswordData } from "@/schemas/passwodSchema";
+import { CodeData, CodeSchema } from "@/schemas/codeSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
-import { signUp } from "aws-amplify/auth";
+import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
+import { useState, useEffect } from "react";
+import { Loader } from "lucide-react";
+
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
 
@@ -14,50 +16,74 @@ export default function ConfirmEmail() {
     register,
     handleSubmit,
     formState: { errors },
-    clearErrors,
-  } = useForm<PasswordData>({
+ 
+  } = useForm<CodeData>({
     resolver: zodResolver(CodeSchema),
   });
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
-  //   const [showPasswordTwo, setShowPasswordTwo] = useState(false); // Toggle for password visibility
-
+  const [loading, setLoading] = useState(false); // State to manage loading /not loading
+  const [message, setMessage] = useState("");
+  const [confirmEmailError, setConfirmEmailError] = useState("");
   // get user data from UserContext
-  const { setUserCredentials, userCredentials } = useUserSignup();
+  const { userCredentials, isLoading } = useUserSignup();
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
+  // return to register if there
+  // is no userCredentials from prior form
+  useEffect(() => {
+    if (!isLoading && !userCredentials?.email) {
+      router.push("/register");
+    }
+  });
+
+  const resendCode = async () => {
+    setLoading(true);
+    try {
+      const { destination, deliveryMedium } = await resendSignUpCode({
+        username: userCredentials?.email!,
+      });
+      if (destination && deliveryMedium) {
+        setMessage(
+          `A confirmation code has been sent to ${destination}. Please check your ${deliveryMedium} for the code.`
+        );
+      }
+    } catch (err) {
+      setLoading(false);
+      if (err instanceof Error) {
+        setConfirmEmailError(`There was an error ${err.message}`);
+        console.log(err);
+      } else {
+        setConfirmEmailError("An unknown error occurred");
+        console.log(err);
+      }
+    }
   };
-
-  const type = showPassword ? "text" : "password";
-  const Icon = showPassword ? EyeIcon : EyeOffIcon;
 
   // Function to handle form submission
   // It uses the handleLogin function to authenticate the user
   // and updates the user context with the logged-in user's data
-  const onSubmit: SubmitHandler<PasswordData> = async (data) => {
-    console.log("submit ran");
+  const onSubmit: SubmitHandler<CodeData> = async (data) => {
+  
+    setMessage("");
+     setLoading(true);
     try {
-      const { isSignUpComplete, userId, nextStep } = await signUp({
+     
+      const { isSignUpComplete, nextStep } = await confirmSignUp({
         username: userCredentials?.email!,
-        password: data.password,
-        options: {
-          userAttributes: {
-            email: userCredentials?.email,
-
-            phone_number: userCredentials?.phoneNumber!,
-            given_name: userCredentials?.given_name,
-            family_name: userCredentials?.family_name,
-            "custom:terms_and_conditions":
-              userCredentials?.terms_and_conditions,
-          },
-        },
+        confirmationCode: data.code,
       });
-
-      console.log(isSignUpComplete, userId, nextStep);
-      router.push('/confirm-email');
+      console.log(isSignUpComplete, nextStep);
+      if (nextStep.signUpStep === "DONE") {
+        router.push("/sign-up");
+      }
     } catch (err) {
-      console.log(err);
+      setLoading(false);
+      if (err instanceof Error) {
+        setConfirmEmailError(`There was an error ${err.message}`);
+        console.log(err);
+      } else {
+        setConfirmEmailError("An unknown error occurred");
+        console.log(err);
+      }
     }
   };
   return (
@@ -66,26 +92,27 @@ export default function ConfirmEmail() {
       className="w-full text-center flex flex-col items-center justify-center relative"
     >
       <input
-        type={type}
-        {...register("password")}
-        placeholder="Enter your password"
+        type="text"
+        {...register("code")}
+        placeholder="Enter your code"
         className={cn(
           "w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
-          errors.password
+          errors.code
             ? "bg-red-100 border-red-400 shadow-sm"
             : "focus:shadow-md focus:border-blue-400"
         )}
       />
+
       <button
-        type="button"
-        className="absolute top-8 right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
-        onClick={togglePasswordVisibility}
+        onClick={resendCode}
+        className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbtext text-white cursor-pointer hover:bg-lbgreen transition duration-300"
       >
-        <Icon className="stroke-muted-foreground size-5 lg:size-6" />
+        Resend email code
       </button>
+
       <div className=" w-3/4 h-4">
-        {errors.password && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
+        {errors.code && (
+          <p className="text-red-500 text-sm">{errors.code.message}</p>
         )}
       </div>
 
@@ -94,6 +121,13 @@ export default function ConfirmEmail() {
         value="Continue"
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
+      {loading && (
+        <Loader className="size-8  absolute top-48 text-lbgreen animate-spin" />
+      )}
+      {!!message.length && <p className="text-sm text-lbtext">{message}</p>}
+      {!!confirmEmailError.length && (
+        <p className="text-red-500 text-sm">{confirmEmailError} </p>
+      )}
     </form>
   );
 }

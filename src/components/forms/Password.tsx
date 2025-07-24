@@ -8,6 +8,7 @@ import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
 import { signUp } from "aws-amplify/auth";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
+import {STORAGE_KEY} from "@/lib/consts"
 
 export default function Password() {
   const {
@@ -21,15 +22,17 @@ export default function Password() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const [passwordFormError, setPasswordFormError] = useState("");
+  const [loading, setLoading] = useState(false);
   
 
  
-  const { userCredentials } = useUserSignup();
+  const { userCredentials, isLoading } = useUserSignup();
  
   // return to register if there
   // is no userCredentials from prior form
   useEffect(() => {
-    if(!userCredentials?.email){
+    
+     if (!isLoading && !userCredentials?.email) {
             router.push("/register")
     }
   })
@@ -44,6 +47,7 @@ export default function Password() {
  // calls aws amplify signUp function
   const onSubmit: SubmitHandler<PasswordData> = async (data) => {
     console.log("submit ran");
+    setLoading(true)
     try {
       const { isSignUpComplete, userId, nextStep } = await signUp({
         username: userCredentials?.email!,
@@ -67,6 +71,7 @@ export default function Password() {
         router.push("/confirm-email");
       }
     } catch (err: unknown) {
+      setLoading(false)
       if (err instanceof Error) {
         setPasswordFormError(`There was an error ${err.message}`);
         console.log(err);
@@ -110,6 +115,10 @@ export default function Password() {
         value="Continue"
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
+        {loading && (
+        <Loader className="size-8  absolute top-48 text-lbgreen animate-spin" />
+      )}
+
       {!!passwordFormError.length && (
         <p className="text-red-500 text-sm">{passwordFormError} </p>
       )}

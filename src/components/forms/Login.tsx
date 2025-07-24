@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
@@ -16,15 +16,15 @@ export default function Login() {
     formState: { errors },
     clearErrors,
   } = useForm<SignInData>({
-  
     //@ts-expect-error this is due to a library mismatch
     resolver: zodResolver(UserSchema),
   });
-  const router = useRouter(); 
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
   const [loading, setLoading] = useState(false); // State to manage loading /not loading
 
+  const [isPending, startTransition] = useTransition();
   // get user data from UserContext
   const { setUser } = useUser();
 
@@ -47,7 +47,7 @@ export default function Login() {
     clearErrors(); // clear any previous errors
     setLoginError(null); // Clear previous login error
     const logdata = await handleLogin(data.email, data.password);
-   
+
     if (logdata.error) {
       console.log("Login failed:", logdata.error);
       setLoginError("Login failed. Please check your credentials.");
@@ -63,10 +63,11 @@ export default function Login() {
       phoneNumber: logdata.data.phoneNumber || "",
       postcode: logdata.data.postcode || "",
     };
+    startTransition(() => {
+      setUser(newUser); // Update the context
 
-    setUser(newUser); // Update the context
-    setLoading(false);
-    router.push('/dashboard');
+      router.push("/dashboard");
+    });
   };
   return (
     <form
@@ -87,17 +88,17 @@ export default function Login() {
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
       </div>
-     <input
-  type={type}
-  {...register("password")}
-  placeholder="Enter your Little birdie password"
-  className={cn(
-    "w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
-    errors.password
-      ? "bg-red-100 border-red-400 shadow-sm"
-      : "focus:shadow-md focus:border-blue-400"
-  )}
-/>
+      <input
+        type={type}
+        {...register("password")}
+        placeholder="Enter your Little birdie password"
+        className={cn(
+          "w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
+          errors.password
+            ? "bg-red-100 border-red-400 shadow-sm"
+            : "focus:shadow-md focus:border-blue-400"
+        )}
+      />
       <button
         type="button"
         className="absolute right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"

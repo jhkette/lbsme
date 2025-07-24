@@ -12,13 +12,16 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const isLoginPage = pathname === "/";
   const isDashboard = pathname.startsWith("/dashboard");
+    const isOpenBanking = pathname.startsWith("/open-banking");
 
   const isAuthenticated = token && user;
 
-  if (isDashboard && !isAuthenticated) {
+  if ((isDashboard || isOpenBanking) && !isAuthenticated) {
     // User is not signed in or missing user info
     return NextResponse.redirect(new URL("/", req.url));
   }
+
+  
 
   if (isLoginPage && isAuthenticated) {
     // Authenticated user trying to access login
@@ -30,5 +33,5 @@ export async function middleware(req: NextRequest) {
 
 // Apply only to dashboard routes and root login page
 export const config = {
-  matcher: ["/dashboard/:path*", "/"],
+    matcher: ["/dashboard/:path*", "/open-banking/:path*", "/open-banking", "/"],
 };

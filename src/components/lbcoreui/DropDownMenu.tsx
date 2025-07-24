@@ -32,7 +32,7 @@ export function DropdownMenuComponent() {
           <div className="w-full flex flex-row items-end-safe">
             <h3 className="text-3xl text-lbgreen block pb-4">Profile</h3>
             <Image
-              src="/lbgraphic.png"
+              src="/images/main/lbgraphic.png"
               alt="profile image"
               width={500}
               height={200}

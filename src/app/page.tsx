@@ -7,7 +7,7 @@ export default function Home() {
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
         <Image
-          src="./lbtext.svg"
+          src="/images/main/lbtext.svg"
           alt="Logo"
           width={150}
           height={150}
@@ -19,7 +19,7 @@ export default function Home() {
           </h1>
           <div>
           <Image
-            src="./images/home/Bird.svg"
+            src="/images/home/Bird.svg"
             alt="Bird"
             width={410}
             height={410}
@@ -42,7 +42,7 @@ export default function Home() {
             Get Started
        </button>
        </Link>
-       <Link href={"/sign-up"}>
+       <Link href={"/sign-in"}>
        <button className="w-96 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
           hover:bg-lbtext hover:text-white transition duration-300">
             I already have an account

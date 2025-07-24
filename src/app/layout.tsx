@@ -8,7 +8,7 @@ import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
 import { Analytics } from "@vercel/analytics/next";
 import { UserSignupProvider } from "@/contexts/UserCredentials/UserSignUpContext";
-import AmplifyProvider from "@/components/amplify/AmplifyConnext";
+import AmplifyProvider from "@/components/amplify/AmplifyConnect";
 
 const mulishSans = Mulish({
   variable: "--font-mulish-sans",

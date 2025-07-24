@@ -33,7 +33,7 @@ export default function FreeTrialsDetail({ freeItem }: FreeTrialsDetailProps) {
       </h1>
 
       <Image
-        src="/lbgraphic.png"
+        src="/images/main/lbgraphic.png"
         height={250}
         width={400}
         alt="graphic"

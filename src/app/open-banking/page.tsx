@@ -5,7 +5,7 @@ import { useOBContext } from '@/contexts/OpenBanking/OpenBankingProvider';
  import { OpenBankingPopUp } from '@/components/lbcoreui/OpenBankingPopUp';
  import { redirect, RedirectType } from 'next/navigation'
 
-export default function page() {
+export default function Page() {
       const { openOBPage } = useOBContext();
 
       const connectAccount = () => {
@@ -21,7 +21,7 @@ export default function page() {
         <div className="w-full">
           <div className="flex flex-row bg-lbgray w-full h-screen relative">
             <Image
-              src="./lbtext.svg"
+              src="/images/main/lbtext.svg"
               alt="Logo"
               width={150}
               height={150}
@@ -33,7 +33,7 @@ export default function page() {
               </h1>
               <div>
               <Image
-                src="./images/home/Bird.svg"
+                src="/images/home/Bird.svg"
                 alt="Bird"
                 width={410}
                 height={410}

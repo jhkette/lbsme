@@ -86,7 +86,7 @@ interface DealIntro {
     <div className="px-16 w-full mt-14 relative">
       <IntroHome />
       <Image
-        src="/lbgraphic.png"
+        src="/images/main/lbgraphic.png"
         height={250}
         width={400}
         alt="graphic"

@@ -6,7 +6,7 @@ export default function Home() {
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
         <Image
-          src="./lbtext.svg"
+           src="/images/main/lbtext.svg"
           alt="Logo"
           width={150}
           height={150}
@@ -18,7 +18,7 @@ export default function Home() {
           </h1>
           <div>
           <Image
-            src="./images/home/Bird.svg"
+            src="/images/main/Bird.svg"
             alt="Bird"
             width={410}
             height={410}

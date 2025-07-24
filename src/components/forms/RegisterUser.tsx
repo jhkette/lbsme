@@ -78,7 +78,7 @@ export default function RegisterUser() {
     clearErrors();
     setSubmitError(null);
 
-    console.log("Form Data:", data);
+   
 
     router.push("/register-password");
   };
@@ -235,7 +235,7 @@ export default function RegisterUser() {
             {...register("terms_and_conditions")}
           />
           <span className="text-sm text-gray-700">
-            I agree to the Terms and Conditions
+            I accept the terms and conditions
           </span>
         </label>
         {errors.terms_and_conditions && (

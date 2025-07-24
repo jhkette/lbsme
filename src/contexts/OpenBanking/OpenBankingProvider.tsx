@@ -6,15 +6,11 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  
   useState,
   useContext,
 } from "react";
 import { NetworkStatus } from "@apollo/client";
-import {
-  useGetProviderlessUserAuthGatewayQuery,
-
-} from "@/graphql/getOpenBanking.generated";
+import { useGetProviderlessUserAuthGatewayQuery } from "@/graphql/getOpenBanking.generated";
 
 interface OpenBankingProps {
   openOBPage: () => void;
@@ -28,44 +24,34 @@ interface OpenBankingComponent {
 
 const OBContext = createContext<OpenBankingProps>({
   openOBPage: () => {},
- 
+
   OBLoading: false,
 });
 
 export const useOBContext = () => useContext(OBContext);
 
-
-
 const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
- 
   const [OBLoading, setOBLoading] = useState(false);
 
   // Replace this with actual user/subscription context if needed
   const subscribed = true;
 
-  const {
-    data,
-    refetch,
-    networkStatus,
-  } = useGetProviderlessUserAuthGatewayQuery({
-    fetchPolicy: "cache-and-network",
-    notifyOnNetworkStatusChange: true,
-    pollInterval: 359000,
-    skip: !subscribed,
-  });
-
-
+  const { data, refetch, networkStatus } =
+    useGetProviderlessUserAuthGatewayQuery({
+      fetchPolicy: "cache-and-network",
+      notifyOnNetworkStatusChange: true,
+      pollInterval: 359000,
+      skip: !subscribed,
+    });
 
   useEffect(() => {
     if (data?.getProviderlessUserAuthGateway?.url && OBLoading) {
       const url = data.getProviderlessUserAuthGateway.url;
-        window.open(url, "_blank");
-     
+      window.open(url, "_blank");
     }
   }, [data, OBLoading]);
 
   const openOBPage = useCallback(async () => {
-    console.log("ran", data, data?.getProviderlessUserAuthGateway?.url)
     if (networkStatus === NetworkStatus.error) return;
 
     if (data?.getProviderlessUserAuthGateway?.url) {
@@ -77,13 +63,11 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
     }
   }, [data?.getProviderlessUserAuthGateway?.url, networkStatus, refetch]);
 
-
-
   return (
     <OBContext.Provider
       value={{
         openOBPage,
-       
+
         OBLoading,
       }}
     >
