@@ -5,7 +5,7 @@ import Image from "next/image";
 import { SuspenseSubscriptionDetail } from "@/components/suspense/SuspenseComponents";
 import { format, parseISO } from "date-fns";
 import { useGetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated";
-
+import { ChevronRight } from 'lucide-react';
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -39,7 +39,7 @@ export default function SubscriptionDetail({
 
 
   return (
-    <div>
+  
       <div>
         <Link href="/dashboard/subs">
           <div className="flex flex-row pr-2 items-center gap-1 mb-4 cursor-pointer border-b-2 border-transparent hover:border-lbtext w-fit">
@@ -48,8 +48,8 @@ export default function SubscriptionDetail({
           </div>
         </Link>
 
-        <h1 className="text-3xl font-bold text-lbtext mb-4">
-          Subscription &gt;{" "}
+        <h1 className="text-3xl font-bold text-lbtext mb-4 flex flex-row items-center">
+          Subscription <ChevronRight className="w-9 h-9 mt-1 text-muted-foreground" />
           {loading ? (
             <span className="blur-sm text-gray-400 select-none">
               Loading subscription
@@ -67,7 +67,7 @@ export default function SubscriptionDetail({
             <SuspenseSubscriptionDetail />
           ) : (
             <div className="w-1/2">
-              <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg py-4 px-10 mr-12 mt-14">
+              <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg py-4 px-10 mr-12 mt-13 border-1 border-gray-300">
                 {/* Intro */}
                 <div className="flex flex-row items-center gap-4 mx-auto  mt-12">
                   <div className="flex flex-col items-center">
@@ -164,7 +164,7 @@ export default function SubscriptionDetail({
 
           {/* Right Container */}
           <div className="w-1/2">
-            <div className=" scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen max-h-[434px] overflow-y-auto flex flex-col gap-2 rounded-lg bg-white shadow-lg px-10 py-4 ml-12 mt-14">
+            <div className=" scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen max-h-[434px] overflow-y-auto flex flex-col gap-2 rounded-lg bg-white shadow-lg px-10 py-4 ml-12 mt-13 border-1 border-gray-300">
               <div className="flex flex-col w-full items-start justify-between pb-1 my-2">
                 <h2 className="text-2xl font-semibold pb-4 w-full">
                   Transaction  History
@@ -223,6 +223,6 @@ export default function SubscriptionDetail({
           </div>
         </div>
       </div>
-    </div>
+  
   );
 }

@@ -13,7 +13,7 @@ type Deal = {
 export default function DealItem({ deal }: Deal) {
    const [imgSrc, setImgSrc] = useState(deal.icon);
   const [error, setError] = useState(false);
-  console.log(deal)
+
   let id;
    if(deal.name){
    id = slugify(deal.name, { lower: true }); 

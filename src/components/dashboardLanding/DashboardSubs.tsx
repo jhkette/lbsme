@@ -15,7 +15,7 @@ export default function DashboardSubs(subs: DashboardSubsProps) {
   ); 
   const expectedYearlySavings: number = expectedMonthlySavings * 12; 
   return (
-    <div className="flex flex-row text-lbtext justify-center shadow-2xl bg-white rounded-2xl p-4 w-full h-36 z-1">
+    <div className="flex flex-row text-lbtext justify-center shadow-2xl bg-white rounded-2xl p-4 w-full h-36 z-1 border-1 border-gray-300">
       <div className="flex flex-col justify-center items-center w-1/5">
         <p className="text-4xl font-semibold py-2">{subs.subs.length}</p>
         <p className="text-lg font-base">Subscriptions</p>

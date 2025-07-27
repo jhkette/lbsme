@@ -22,7 +22,7 @@ export const searchCompanyName = async (searchTerm: string) => {
         },
       }
     );
-    console.log(data);
+  
     return data;
     //   setSearchResults(data.items)
     //   setShowLoading(false);

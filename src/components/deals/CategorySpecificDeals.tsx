@@ -24,7 +24,7 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
           const slug = slugify(deal.category,  { lower: true });
         return slug === category
    })
-   console.log(groupedData)
+
 
   return (
 

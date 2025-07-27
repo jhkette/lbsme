@@ -70,6 +70,19 @@ export function DropdownMenuComponent() {
             Subscription list
           </DropdownMenuItem>
           </Link>
+
+          <Link href="/dashboard/subs" className="cursor-pointer">
+          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
+            <Image
+              src={"/images/dropdownmenu/list.svg"}
+              height={25}
+              width={25}
+              alt="user icon"
+              className="inline-block mr-4"
+            />
+            Connected bank accounts
+          </DropdownMenuItem>
+          </Link>
         
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer" onClick={handleLogout}>
             <Image

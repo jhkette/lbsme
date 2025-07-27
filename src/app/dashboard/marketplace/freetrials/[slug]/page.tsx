@@ -20,15 +20,7 @@ export default async function page({
 }) {
   const finalParams = await params;
 
-  console.log(finalParams)
 
-
-  // if (!dealItem) {
-  //   return <h1 className="text-xl text-lbtext">Offer not found</h1>;
-  // }
- 
-
-  
   return (
     <section className="px-16 w-full flex flex-col mt-12 relative">
       <Link

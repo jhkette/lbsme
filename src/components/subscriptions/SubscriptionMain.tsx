@@ -117,9 +117,9 @@ export default function SubscriptionMain() {
     }
     };
 
-  console.log(groupedSubs);
+
   return (
-    <div className="my-12">
+    <div className="my-13">
       {groupedSubs !== null && (
         <ul className="flex flex-row gap-12 list-none">
           {["All Subscriptions", ...Object.keys(groupedSubs)].map(
@@ -127,7 +127,7 @@ export default function SubscriptionMain() {
               <li
                 key={category}
                 onClick={(e) => handleCategoryClick((e.target as HTMLElement)?.textContent as string)}
-                className={clsx("block z-200 text-lbgrey text-lg list-none pb-2 mb-2 ease-in-out", selectedCategory === category ? "border-b-2 border-lbtext text-lbtext font-semibold cursor-pointer" : "cursor-pointer hover:text-lbtext")}
+                className={clsx("block z-200 text-lbgrey text-lg list-none pb-1 mb-2 ease-in-out cursor-pointer", selectedCategory === category ? "border-b-2 border-lbtext text-lbtext font-semibold " : "hover:text-lbtext")}
               >
                 {category}
               </li>
@@ -178,26 +178,28 @@ export default function SubscriptionMain() {
       </div>
 
       {!!subscriptions && !loading ? (
-        <div className="max-h-[550px] overflow-y-auto shadow-2xl  scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen">
+        <div className="max-h-[550px] rounded-lg overflow-y-auto shadow-2xl  scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen border-1 border-gray-300">
         <table className="min-w-full bg-white  border-1 border-lbgray h-fit">
-          <thead className="bg-bggrey text-lg font-semibold text-lbtext py-4">
-            <tr className="rounded-t-lg ">
-              <th className="py-2 px-4 text-left">Name</th>
-              <th className="py-2 px-4 text-left">Type</th>
-              <th className="py-2 px-4 text-left">Frequency</th>
-              <th className="py-2 px-4 text-left">Payment</th>
-                <th className="py-2 px-4 text-left">Monthly Cost</th>
-              <th className="py-2 px-4 text-left">Last Paid</th>
-              <th className="py-2 px-4 text-left">Next Payment</th>
+          <thead className="text-lg font-semibold text-lbtext  ">
+                <tr className="bg-bggrey">
+              <th className="py-4 px-4 text-left">Name</th>
+              <th className="py-4 px-4 text-left">Type</th>
+              <th className="py-4 px-4 text-left">Frequency</th>
+              <th className="py-4 px-4 text-left">Payment</th>
+                <th className="py-4 px-4 text-left">Monthly Cost</th>
+              <th className="py-4 px-4 text-left">Last Paid</th>
+              <th className="py-4 px-4 text-left">Next Payment</th>
             </tr>
           </thead>
           <tbody className="bg-white">
-            {subscriptions.map((item, idx) => (
-              <tr
-                key={idx}
-                className="border-t cursor-pointer hover:bg-gray-50"
-                onClick={() => handleRowClick(item.subscriptionId)}
-              >
+            {subscriptions.map((item, idx) => {
+             
+              return (
+                 <tr
+          key={idx}
+          className="border-t cursor-pointer hover:bg-gray-50" 
+          onClick={() => handleRowClick(item.subscriptionId)}
+        >
                 <td className="py-4 px-4 flex flex-row items-center">
                   {item.merchant.icon !== "unknown" &&
                   item.merchant.icon !== null ? (
@@ -256,7 +258,7 @@ export default function SubscriptionMain() {
                   )}
                 </td>
               </tr>
-            ))}
+            )})}
           </tbody>
         </table>
         </div>

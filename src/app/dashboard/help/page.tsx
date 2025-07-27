@@ -8,7 +8,7 @@ import AccordionWrapper from "@/components/faqs/AccordionWrapper";
 export default async function page() {
   
     const {data: faqs} = await sanityFetch({query: FAQ_QUERY});
-    console.log(faqs)
+   
 
   return (
     

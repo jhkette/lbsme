@@ -37,7 +37,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   };
   
   return (
-    <div className="w-1/2 p-4 rounded-2xl shadow-2xl bg-white h-120">
+    <div className="w-1/2 p-4 rounded-2xl shadow-2xl bg-white h-120 border-1 border-gray-300">
       <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
         <h2 className="text-2xl font-semibold">Monthly Spend Visualised</h2>{" "}
       </div>

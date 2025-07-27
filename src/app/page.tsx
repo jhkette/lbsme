@@ -18,37 +18,40 @@ export default function Home() {
             The UK&apos;s top subscription & bill management app
           </h1>
           <div>
-          <Image
-                    src="/images/home/Bird.svg"
-                    alt="Bird"
-                    width={410}
-                    height={410}
-                    className="mx-12 w-[340px] md:w-[390px] h-auto object-contain"
-                  />
+            <Image
+              src="/images/home/Bird.svg"
+              alt="Bird"
+              width={410}
+              height={410}
+              className="mx-12 w-[340px] md:w-[390px] h-auto object-contain"
+            />
           </div>
         </div>
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
-          
           <h2 className="text-4xl font-bold text-lbtext mb-4 px-12 text-center">
             Welcome to <span className="text-lbgreen">Little Birdie</span>
           </h2>
-           <p className="text-xl font-bold text-lbtext mb-4 px-12 text-center">
+          <p className="text-xl font-bold text-lbtext mb-4 px-12 text-center">
             Sign up to start saving
           </p>
           <div className="flex flex-col gap-4">
-                <Link href={"/register"}>
-          <button className="w-96 p-3 shadow-lg font-semibold rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer 
-          hover:bg-lbtext transition duration-300">
-            Get Started
-       </button>
-       </Link>
-       <Link href={"/sign-in"}>
-       <button className="w-96 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
-          hover:bg-lbtext hover:text-white transition duration-300">
-            I already have an account
-       </button>
-       </Link>
-       </div>
+            <Link href={"/register"}>
+              <button
+                className="w-96 p-3 shadow-lg font-semibold rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer 
+          hover:bg-lbtext transition duration-300"
+              >
+                Get Started
+              </button>
+            </Link>
+            <Link href={"/sign-in"}>
+              <button
+                className="w-96 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
+          hover:bg-lbtext hover:text-white transition duration-300"
+              >
+                I already have an account
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
