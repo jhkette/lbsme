@@ -17,6 +17,7 @@ export default function Login() {
     clearErrors,
   } = useForm<SignInData>({
     //@ts-expect-error this is due to a library mismatch
+    
     resolver: zodResolver(UserSchema),
   });
   const router = useRouter();

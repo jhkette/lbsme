@@ -67,13 +67,13 @@ export default function ConfirmEmail() {
      setLoading(true);
     try {
      
-      const { isSignUpComplete, nextStep } = await confirmSignUp({
+      const { isSignUpComplete, nextStep: submitNextStep } = await confirmSignUp({
         username: userCredentials?.email!,
         confirmationCode: data.code,
       });
-      console.log(isSignUpComplete, nextStep);
-      if (nextStep.signUpStep === "DONE") {
-        router.push("/sign-up");
+      console.log(isSignUpComplete, submitNextStep);
+      if (submitNextStep.signUpStep === "DONE") {
+        router.push("/registration-confirmed");
       }
     } catch (err) {
       setLoading(false);

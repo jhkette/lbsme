@@ -3,9 +3,11 @@ import React from 'react'
 import { useOBContext } from '@/contexts/OpenBanking/OpenBankingProvider';
  import Image from "next/image";
  import { OpenBankingPopUp } from '@/components/lbcoreui/OpenBankingPopUp';
- import { redirect, RedirectType } from 'next/navigation'
+
+ import {useRouter} from "next/navigation"
 
 export default function Page() {
+  const router = useRouter()
       const { openOBPage } = useOBContext();
 
       const connectAccount = () => {
@@ -13,7 +15,7 @@ export default function Page() {
     openOBPage();
   };
   const navigateDashboard = () => {
-    redirect('/dashboard', RedirectType.replace)
+     router.push('/dashboard')
   }
   return (
 

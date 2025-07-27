@@ -52,10 +52,12 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
   }, [data, OBLoading]);
 
   const openOBPage = useCallback(async () => {
+
     if (networkStatus === NetworkStatus.error) return;
 
     if (data?.getProviderlessUserAuthGateway?.url) {
       const url = data.getProviderlessUserAuthGateway.url;
+
       window.open(url, "_blank");
     } else {
       setOBLoading(true);

@@ -2,7 +2,7 @@
 import HeaderDashboard from "@/components/lbcoreui/HeaderDashboard";
 import Sidebar from "@/components/lbcoreui/Sidebar";
 
-import { Toaster } from "react-hot-toast";
+
 import { motion} from 'framer-motion'
 import { usePathname } from 'next/navigation';
 
@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {children}</motion.div>
         
         </div>
-        <Toaster />
+    
       </div>
     // </ApolloProvider>
   );

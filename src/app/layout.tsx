@@ -27,14 +27,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const token = await getToken();
+ 
 
-  console.log('Environment check:', {
-  userPoolId: process.env.NEXT_PUBLIC_AWS_USER_POOLS_ID,
-  userPoolClientId: process.env.NEXT_PUBLIC_AWS_USER_POOLS_WEB_CLIENT_ID,
-  identityPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_IDENTITY_POOL_ID,
-  nodeEnv: process.env.NODE_ENV
-});
+
 
   return (
     <html lang="en" className={`${mulishSans.variable} antialiased`}>

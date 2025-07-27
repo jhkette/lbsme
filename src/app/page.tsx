@@ -19,12 +19,12 @@ export default function Home() {
           </h1>
           <div>
           <Image
-            src="/images/home/Bird.svg"
-            alt="Bird"
-            width={410}
-            height={410}
-            className="mx-12 w-[370px] md:w-[410px] h-auto object-contain"
-          />
+                    src="/images/home/Bird.svg"
+                    alt="Bird"
+                    width={410}
+                    height={410}
+                    className="mx-12 w-[340px] md:w-[390px] h-auto object-contain"
+                  />
           </div>
         </div>
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">

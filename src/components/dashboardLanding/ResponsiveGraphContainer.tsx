@@ -73,8 +73,8 @@ export default function ResponsiveGraphContainer({
           outerRadius={90}
         />
         <Tooltip
-          formatter={(value: number) => [
-            `£${value.toFixed(2)}`,
+          formatter={(value: number, name: string) => [
+            `${name}: £${value.toFixed(2)}`,
             "Monthly Cost",
           ]}
         />

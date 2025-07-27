@@ -38,8 +38,8 @@ export default function RegisterUser() {
   } = useForm({
     resolver: zodResolver(userInfoSchema),
     defaultValues: {
-      phoneNumber: "+44"
-    }
+      phoneNumber: "+44",
+    },
   });
 
   const router = useRouter();
@@ -73,12 +73,9 @@ export default function RegisterUser() {
       email: data.email.toLowerCase(),
       terms_and_conditions: "true",
     });
-    console.log(userCredentials, "User credentials");
 
     clearErrors();
     setSubmitError(null);
-
-   
 
     router.push("/register-password");
   };
@@ -91,32 +88,37 @@ export default function RegisterUser() {
       >
         {/* company name*/}
         <div className="w-2/4 flex flex-col">
-         <label htmlFor="companyName" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Company name</label>
-        <input
-          type="text"
-          id="companyName"
-          // {...register("given_name")}
-          placeholder="Search company name"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          value={selectedCompany !== "" ? selectedCompany : searchTerm}
-          className={cn(
-            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-            errors.given_name
-              ? "bg-red-100"
-              : "focus:shadow-md focus:border-blue-400"
-          )}
-        />
-        <button
-          type="button"
-          className="absolute top-10 right-42 md:right-52 lg:right-58 mb-4 cursor-pointer group"
-          onClick={searchName}
-        >
-          <ArrowBigRight className="size-7 lg:size-8 text-lbgreen group-hover:text-lbtextgrey transition-colors duration-200" />
-        </button>
+          <label
+            htmlFor="companyName"
+            className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+          >
+            Company name
+          </label>
+          <input
+            type="text"
+            id="companyName"
+            // {...register("given_name")}
+            placeholder="Search company name"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={selectedCompany !== "" ? selectedCompany : searchTerm}
+            className={cn(
+              "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+              errors.given_name
+                ? "bg-red-100"
+                : "focus:shadow-md focus:border-blue-400"
+            )}
+          />
+          <button
+            type="button"
+            className="absolute top-10 right-42 md:right-52 lg:right-58 mb-4 cursor-pointer group"
+            onClick={searchName}
+          >
+            <ArrowBigRight className="size-7 lg:size-8 text-lbgreen group-hover:text-lbtextgrey transition-colors duration-200" />
+          </button>
 
-        <p className="w-full text-xs text-lbgreen text-left align-start pb-2">
-          * Click the arrow to find your company
-        </p>
+          <p className="w-full text-xs text-lbgreen text-left align-start pb-2">
+            * Click the arrow to find your company
+          </p>
         </div>
 
         {!!searchResults.length && (
@@ -151,80 +153,100 @@ export default function RegisterUser() {
         )}
         {/* First Name */}
         <div className="w-2/4 flex flex-col">
-         <label htmlFor="firstName" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">First name</label>
-        <input
-          type="text"
-          id="firstName"
-          {...register("given_name")}
-          placeholder="First name"
-          className={cn(
-            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-            errors.given_name
-              ? "bg-red-100"
-              : "focus:shadow-md focus:border-blue-400"
+          <label
+            htmlFor="firstName"
+            className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+          >
+            First name
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            {...register("given_name")}
+            placeholder="First name"
+            className={cn(
+              "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+              errors.given_name
+                ? "bg-red-100"
+                : "focus:shadow-md focus:border-blue-400"
+            )}
+          />
+          {errors.given_name && (
+            <p className="text-red-500 text-sm">{errors.given_name.message}</p>
           )}
-        />
-        {errors.given_name && (
-          <p className="text-red-500 text-sm">{errors.given_name.message}</p>
-        )}
         </div>
         {/* Last Name */}
-         <div className="w-2/4 flex flex-col">
-          <label htmlFor="familyName" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Family name</label>
-        <input
-          type="text"
-          {...register("family_name")}
-          placeholder="Last name"
-          id="familyName"
-          className={cn(
-            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-            errors.family_name
-              ? "bg-red-100"
-              : "focus:shadow-md focus:border-blue-400"
+        <div className="w-2/4 flex flex-col">
+          <label
+            htmlFor="familyName"
+            className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+          >
+            Family name
+          </label>
+          <input
+            type="text"
+            {...register("family_name")}
+            placeholder="Last name"
+            id="familyName"
+            className={cn(
+              "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+              errors.family_name
+                ? "bg-red-100"
+                : "focus:shadow-md focus:border-blue-400"
+            )}
+          />
+          {errors.family_name && (
+            <p className="text-red-500 text-sm">{errors.family_name.message}</p>
           )}
-        />
-        {errors.family_name && (
-          <p className="text-red-500 text-sm">{errors.family_name.message}</p>
-        )}
         </div>
 
         {/* Email */}
-         <div className="w-2/4 flex flex-col">
-         <label htmlFor="phoneNumber" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Email</label>
-        <input
-          type="email"
-          id="email"
-          {...register("email")}
-          placeholder="Email address"
-          className={cn(
-            "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-            errors.email
-              ? "bg-red-100"
-              : "focus:shadow-md focus:border-blue-400"
+        <div className="w-2/4 flex flex-col">
+          <label
+            htmlFor="phoneNumber"
+            className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            {...register("email")}
+            placeholder="Email address"
+            className={cn(
+              "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
+              errors.email
+                ? "bg-red-100"
+                : "focus:shadow-md focus:border-blue-400"
+            )}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
         </div>
 
         {/* Phone Number */}
         <div className="w-2/4 flex flex-col">
-        <label htmlFor="phoneNumber" className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit">Phone number</label>
-        <input
-          type="tel"
-          id="phoneNumber"
-          placeholder="Phone number (no spaces)"
-          {...register("phoneNumber")}
-          className={`w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200 ${
-            errors.phoneNumber
-              ? "bg-red-100"
-              : "focus:shadow-md focus:border-blue-400"
-          }`}
-        />
-        {errors.phoneNumber && (
-          <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>
-        )}
+          <label
+            htmlFor="phoneNumber"
+            className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+          >
+            Phone number
+          </label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            placeholder="Phone number (no spaces)"
+            {...register("phoneNumber")}
+            className={`w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200 ${
+              errors.phoneNumber
+                ? "bg-red-100"
+                : "focus:shadow-md focus:border-blue-400"
+            }`}
+          />
+          {errors.phoneNumber && (
+            <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>
+          )}
         </div>
 
         {/* Terms and Conditions */}
