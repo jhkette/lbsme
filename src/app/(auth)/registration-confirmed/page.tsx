@@ -8,7 +8,7 @@ export default function Page() {
 
   useEffect(() => {
     clearUserCredentials();
-  }, []);
+  }, [clearUserCredentials]);
 
   return (
     <div className="w-full">

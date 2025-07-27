@@ -14,7 +14,7 @@ type SignupContextType = {
   userCredentials: UserCredentials | null;
   setUserCredentials: (data: UserCredentials) => void;
   clearUserCredentials: () => void;
-  isLoading: Boolean
+  isLoading: boolean
 };
 
 

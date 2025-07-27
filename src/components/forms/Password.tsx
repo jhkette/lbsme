@@ -8,7 +8,7 @@ import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
 import { signUp } from "aws-amplify/auth";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
-import {STORAGE_KEY} from "@/lib/consts"
+import { STORAGE_KEY } from "@/lib/consts";
 
 export default function Password() {
   const {
@@ -23,19 +23,16 @@ export default function Password() {
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const [passwordFormError, setPasswordFormError] = useState("");
   const [loading, setLoading] = useState(false);
-  
 
- 
   const { userCredentials, isLoading } = useUserSignup();
- 
+
   // return to register if there
   // is no userCredentials from prior form
   useEffect(() => {
-    
-     if (!isLoading && !userCredentials?.email) {
-            router.push("/register")
+    if (!isLoading && !userCredentials?.email) {
+      router.push("/register");
     }
-  })
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -44,23 +41,38 @@ export default function Password() {
   const type = showPassword ? "text" : "password";
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
 
- // calls aws amplify signUp function
+  // calls aws amplify signUp function
   const onSubmit: SubmitHandler<PasswordData> = async (data) => {
-    console.log("submit ran");
-    setLoading(true)
+    const {
+      email,
+      phoneNumber,
+      given_name,
+      family_name,
+      terms_and_conditions,
+    } = userCredentials ?? {};
+
+    setLoading(true);
     try {
+      if (
+        !email ||
+        !phoneNumber ||
+        !given_name ||
+        !family_name ||
+        !terms_and_conditions
+      ) {
+        throw new Error("Missing required user details.");
+      }
       const { isSignUpComplete, userId, nextStep } = await signUp({
-        username: userCredentials?.email!,
+        username: email,
         password: data.password,
         options: {
           userAttributes: {
-            email: userCredentials?.email,
+            email: email,
 
-            phone_number: userCredentials?.phoneNumber!,
-            given_name: userCredentials?.given_name,
-            family_name: userCredentials?.family_name,
-            "custom:terms_and_conditions":
-              userCredentials?.terms_and_conditions,
+            phone_number: phoneNumber,
+            given_name: given_name,
+            family_name: family_name,
+            "custom:terms_and_conditions": terms_and_conditions,
           },
         },
       });
@@ -71,7 +83,7 @@ export default function Password() {
         router.push("/confirm-email");
       }
     } catch (err: unknown) {
-      setLoading(false)
+      setLoading(false);
       if (err instanceof Error) {
         setPasswordFormError(`There was an error ${err.message}`);
         console.log(err);
@@ -115,7 +127,7 @@ export default function Password() {
         value="Continue"
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
-        {loading && (
+      {loading && (
         <Loader className="size-8  absolute top-48 text-lbgreen animate-spin" />
       )}
 

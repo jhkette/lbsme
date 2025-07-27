@@ -36,10 +36,15 @@ export default function ConfirmEmail() {
   });
 
   const resendCode = async () => {
+
     setLoading(true);
+   
     try {
+       if(!userCredentials?.email){
+      throw new Error("Missing username");
+    }
       const { destination, deliveryMedium } = await resendSignUpCode({
-        username: userCredentials?.email!,
+        username: userCredentials?.email,
       });
       if (destination && deliveryMedium) {
         setMessage(
@@ -66,9 +71,12 @@ export default function ConfirmEmail() {
     setMessage("");
      setLoading(true);
     try {
+         if(!userCredentials?.email){
+      throw new Error("Missing username");
+    }
      
       const { isSignUpComplete, nextStep: submitNextStep } = await confirmSignUp({
-        username: userCredentials?.email!,
+        username: userCredentials?.email,
         confirmationCode: data.code,
       });
       console.log(isSignUpComplete, submitNextStep);
