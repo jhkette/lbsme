@@ -3,6 +3,7 @@ import { Subscription } from "@/interfaces/Subscription";
 import { useGetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated";
 import Image from "next/image";
 import { Repeat } from "lucide-react";
+import Circle from "@/components/lbcoreui/Circle";
 
 interface SpendingDetailProps {
   sub: Subscription;
@@ -65,7 +66,7 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
             height={50}
           />
         ) : (
-          <Repeat color="#EDECEC" size={50} />
+          <Circle/>
         )}
 
         <p className="hidden md:block bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">

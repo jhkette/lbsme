@@ -1,7 +1,7 @@
 import { Subscription } from '@/interfaces/Subscription'
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
-import { Repeat } from 'lucide-react';
+import Circle from '@/components/lbcoreui/Circle';
 import {clsx} from "clsx"
 interface TransactionDetailProps{
     sub: Subscription
@@ -19,14 +19,9 @@ export default function TransactionDetail(props: TransactionDetailProps) {
         {icon !== "unknown" && icon !== null ?(
           <Image src={icon} alt={props.sub.displayName} width={50} height={50} />
         ) : (
-          <Repeat color="#EDECEC" size={50} />
+          <Circle/>
         )}
-          <p className="hidden lg:block bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
-          {" "}
-          {props.sub?.paymentMethod
-            ? props.sub?.paymentMethod
-            : "Unknown"}{" "}
-        </p>
+         
 
          <p className=" bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
           {" "}

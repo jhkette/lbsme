@@ -21,7 +21,7 @@ export default function Page() {
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
         <Image
-          src="/images/main/lbtext.svg"
+         src="/images/main/lbsmelogo.svg"
           alt="Logo"
           width={150}
           height={150}

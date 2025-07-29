@@ -6,14 +6,14 @@ export default function Page() {
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full min-h-screen relative">
         <Image
-          src="/images/main/lbtext.svg"
+         src="/images/main/lbsmelogo.svg"
           alt="Logo"
           width={150}
           height={150}
           className="absolute top-12 left-12 bg-lbblue w-[100px] md:w-[110px] lg:w-[140px] h-auto object-contain"
         />
         <div className="flex flex-col  bg-lbblue items-center justify-center h-screen w-1/2">
-           <h1 className="text-3xl font-bold text-lbtext mb-4 px-12 py-4 text-center w-[80%]">
+            <h1 className="text-3xl/10 font-bold text-lbtext mb-4 px-12 py-4 text-center w-[70%] ">
             Subscriptions managed, Money Saved, Life Simplified
           </h1>
           <div>

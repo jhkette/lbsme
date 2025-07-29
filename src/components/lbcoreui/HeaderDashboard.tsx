@@ -8,16 +8,10 @@ export default function HeaderDashboard({}) {
     <div className="h-24 w-full  border-b-1 border-cyan-500 flex items-center justify-between px-12 bg-white">
       <Link href="/dashboard" className="cursor-pointer">
         <div className="flex items-center justify-start gap-2">
-          <Image
-            src="/images/main/LBLogo.svg"
-            alt="Logo"
-            width={60}
-            height={35}
-            className="object-contain"
-          />
+        
 
           <Image
-             src="/images/main/lbtext.svg"
+            src="/images/main/lbsmelogo.svg"
             alt="Logo Text"
             width={100}
             height={35}

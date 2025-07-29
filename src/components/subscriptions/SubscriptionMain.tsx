@@ -12,7 +12,7 @@ import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 import { useRouter } from "next/navigation";
 import { mkConfig, generateCsv, download } from "export-to-csv";
-
+import Circle from "@/components/lbcoreui/Circle";
 
 export default function SubscriptionMain() {
   // State variables to manage subscriptions, grouped subscriptions, and search
@@ -206,18 +206,15 @@ export default function SubscriptionMain() {
                     <Image
                       src={item.merchant.icon as string}
                       alt={item.merchant.name}
-                      width={45}
-                      height={45}
+                      width={50}
+                      height={50}
                       className="inline-block mr-4"
                     />
                   ) : (
-                    <div className="w-[45px] mx-2">
-                      <Repeat
-                        size={35}
-                        color="#EDECEC"
-                        className="inline-block mx-auto"
-                      />
-                    </div>
+                     <div className="mr-4">
+                      <Circle />
+                      </div>
+                   
                   )}
                   {item.displayName.length > 0 ? (
                     item.displayName.length > 45 ? (
