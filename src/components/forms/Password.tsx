@@ -52,6 +52,7 @@ export default function Password() {
     } = userCredentials ?? {};
 
     setLoading(true);
+     clearErrors(); // clear any previous errors
     try {
       if (
         !email ||

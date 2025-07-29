@@ -24,9 +24,11 @@ query getSubscriptions($status: SubscriptionStatusEnum!) {
         lastPaymentDate
         renewalDate
       }
+      
       displayName
       cancellationStatus
       monthlyCost
+   
       paymentMethod
       priceChange
       providerName

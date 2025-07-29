@@ -127,7 +127,7 @@ export function DropdownMenuComponent() {
               alt="user icon"
               className="inline-block mr-4"
             />
-            Recomend a friend
+            Recommend a friend
           </DropdownMenuItem>
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image

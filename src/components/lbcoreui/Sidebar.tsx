@@ -7,9 +7,7 @@ export default function Sidebar() {
 
   const navItems = [
     { label: "Home", icon: "homegreen.svg", path: "/dashboard", exact: true },
-    { label: "subs", icon: "List.svg", path: "/dashboard/subs" },
-    { label: "Analytics", icon: "Activity.svg", path: "/dashboard/analytics" },
-    { label: "Payments", icon: "Dollar.svg", path: "/dashboard/payments" },
+    { label: "Subs", icon: "List.svg", path: "/dashboard/subs" },
     { label: "Marketplace", icon: "Tag.svg", path: "/dashboard/marketplace" },
   ];
 
@@ -32,7 +30,7 @@ export default function Sidebar() {
           />
         ))}
 
-        <div className="mt-16">
+        <div className="mt-40">
           <SidebarItem
             label={helpItem.label}
             iconName={helpItem.icon}

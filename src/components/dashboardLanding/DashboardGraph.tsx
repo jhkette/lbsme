@@ -17,7 +17,9 @@ export default function DashboardGraph(props: DashboardSubsProps) {
 
   console.log(props.subs)
 
-  const simplifiedData = props.subs.map((sub) => ({
+  const simplifiedData = props.subs.map((sub) => 
+    (
+{
     displayName: sub.displayName ? sub.displayName : sub.merchant.name,
     monthlyCost: parseFloat(sub.monthlyCost.toFixed(2)),
     fill: "#426da9",
@@ -39,7 +41,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   return (
     <div className="w-1/2 p-4 rounded-2xl shadow-2xl bg-white h-120 border-1 border-gray-300">
       <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
-        <h2 className="text-2xl font-semibold">Monthly Spend Visualised</h2>{" "}
+        <h2 className="text-2xl font-semibold">Monthly Spend</h2>{" "}
       </div>
       <div className="flex flex-row w-[90%] items-center justify-between my-2 mx-8 block">
         <div className="flex flex-row items-center">

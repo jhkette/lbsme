@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import DashboardSubs from "@/components/dashboardLanding/DashboardSubs";
 import Image from "next/image";
 import {
@@ -19,8 +20,11 @@ import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
 import { DealsIntro } from "@/lib/dealsIntro";
-
+import { useApolloClient } from "@apollo/client";
+import {GetSubscriptionDocument, GetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated"
 export default function Home() {
+
+  const [detailedDescriptions, setDetailedSubscriptions ] = useState<GetSubscriptionQuery['getSubscription'][]>([])
   // This query gets the key subscription data - and passes it down to child
   // components
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
@@ -36,7 +40,31 @@ export default function Home() {
     
     fetchPolicy: "cache-and-network",
   })
+  const client = useApolloClient();
 
+  useEffect(() => {
+    const fetchDetails = async () => {
+      if (!data?.getSubscriptions?.subscriptions) return;
+
+      try {
+        const detailedData = await Promise.all(
+         data?.getSubscriptions?.subscriptions.map((sub) =>
+            client.query({
+              query: GetSubscriptionDocument, // Your detailed query
+              variables: { id: sub.subscriptionId },
+              fetchPolicy: "network-only", // skip cache if needed
+            }).then(res => res.data.subscription)
+          )
+        );
+
+        setDetailedSubscriptions(detailedData);
+      } catch (err) {
+        console.error("Failed to fetch detailed subscriptions", err);
+      }
+    };
+
+    fetchDetails();
+  }, [ data?.getSubscriptions?.subscriptions]);
 
 
 

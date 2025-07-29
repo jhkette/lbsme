@@ -13,8 +13,10 @@ export default function Home() {
           className="absolute top-12 left-12 bg-lbblue w-[100px] md:w-[110px] lg:w-[140px] h-auto object-contain"
         />
         <div className="flex flex-col  bg-lbblue items-center justify-center h-screen w-1/2">
-          <h1 className="text-3xl font-bold text-lbtext mb-4 px-12 text-center w-[90%]">
-            The UK&apos;s top subscription & bill management app
+           <h1 className="text-3xl/10 font-bold text-lbtext mb-4 px-12 py-4 text-center w-[80%]">
+            Subscriptions managed, Money Saved, Life Simplified
+          
+           
           </h1>
           <div>
           <Image

@@ -34,12 +34,11 @@ export default function TransactionDetail(props: TransactionDetailProps) {
             ? props.sub?.type
             : "Unknown"}{" "}
         </p>
-        <p className={clsx(
-          'block max-w-[160px] text-wrap ',
-          props.sub.displayName.length > 35 && 'text-[10px]'
-        )}>
-          {props.sub.displayName && props.sub.displayName}
-        </p>
+        {props.sub.merchant.name && props.sub.merchant.name.length > 40 ? (
+            <p className="text-xs block w-fit">{props.sub.merchant.name}</p>
+          ) : (
+            <p className="text-sm md:text-base block w-fit">{props.sub.merchant.name ? props.sub.merchant.name : ""}</p>
+          )}
        
 
       </div>

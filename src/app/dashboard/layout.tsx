@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 export default function Layout({ children }: { children: React.ReactNode }) {
  const pathname = usePathname();
   return (
-    // <ApolloProvider client={client}>
+ 
       <div className="flex flex-col items-start  min-h-screen bg-gray-100">
         <HeaderDashboard />
       
@@ -29,6 +29,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
     
       </div>
-    // </ApolloProvider>
+  
   );
 }

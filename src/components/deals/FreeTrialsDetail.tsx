@@ -33,7 +33,7 @@ export default function FreeTrialsDetail({ freeItem }: FreeTrialsDetailProps) {
       </h1>
 
       <Image
-        src="/images/main/lbgraphic.png"
+        src="/images/main/lbgraphic.svg"
         height={250}
         width={400}
         alt="graphic"
@@ -41,7 +41,7 @@ export default function FreeTrialsDetail({ freeItem }: FreeTrialsDetailProps) {
       />
 
       <div className="deals w-full bg-white p-8 rounded-md mt-12">
-        <p className="text-lbgreen font-semibold">Little Birdie reccomends:</p>
+        <p className="text-lbgreen font-semibold">Little Birdie recommends:</p>
        
         <p className="font-bold">Details:</p>
         <p>{foundItem?.description}</p>
