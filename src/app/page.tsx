@@ -17,7 +17,7 @@ export default function Home() {
           <h1 className="text-3xl/10 font-bold text-lbtext mb-4 px-12 py-4 text-center w-[70%] ">
             Subscriptions managed, Money Saved, Life Simplified
           </h1>
-           
+         
           
           <div className="text-center">
             <Image

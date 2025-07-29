@@ -15,7 +15,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
 
   const barColors = ["#00B1C4", "#426DA9", "#c4f9ff"];
 
-  console.log(props.subs)
+  console.log(props.subs, "graph data")
 
   const simplifiedData = props.subs.map((sub) => 
     (

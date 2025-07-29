@@ -31,6 +31,7 @@ export default function Page() {
   });
 
   const finalData = data?.getTrials.items;
+  console.log(finalData, "final trials data")
 
   const finalDealsData = dealData?.getAllDeals.map((deal) => {
     return deal.category;
@@ -52,12 +53,7 @@ export default function Page() {
           <h2 className="text-xl font-semibold text-lbtext">Free Trials</h2>
         </div>
         <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[245px] ">
-          {/* {subscriptionDeals
-                            .filter((deal: Deal) => deal.featured === true)
-                            .map((deal: Deal) => (
-                              <DealItem key={deal._id} deal={deal} />
-                            ))}
-                            <DealSubscriptionMore /> */}
+        
           {finalData?.map((deal: Deal) => {
             return <FreeTrialItem key={deal.name} deal={deal} />;
           })}

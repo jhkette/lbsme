@@ -43,7 +43,7 @@ export default function TransactionDetail(props: TransactionDetailProps) {
           ? format(parseISO(props.sub.dates.renewalDate), "do MMM yyyy")
           : format(parseISO(props.sub.dates.lastPaymentDate), "do MMM yyyy")}
       </p>
-      <p className='text-xs text-orange-400'>{props.renewal && `Subscriptions renews in ${props.sub.dates.endsInDays} days`}</p>
+      <p className='text-xs text-orange-400'>{props.renewal && `Subscription renews in ${props.sub.dates.endsInDays} days`}</p>
       </div>
     </div>
   )

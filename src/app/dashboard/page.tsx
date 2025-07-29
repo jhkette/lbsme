@@ -70,6 +70,10 @@ export default function Home() {
 
 
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
+
+  console.log("a list of basic sub data", data?.getSubscriptions?.subscriptions)
+
+  console.log("detailed list of subscriptions", detailedDescriptions)
  
  
   // dashboard page is the main landing page for the dashboard
