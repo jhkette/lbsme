@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
+import { LoaderCircle } from 'lucide-react';
 import { handleLogin } from "@/actions/login";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import { cn } from "@/lib/utils";
@@ -118,7 +119,7 @@ export default function Login() {
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
       {loading && (
-        <Loader className="size-8  absolute top-82 text-lbgreen animate-spin" />
+        <LoaderCircle className="size-12  absolute top-82 text-lbgreen animate-spin" />
       )}
 
       <div className=" w-3/4 h-4">
