@@ -180,15 +180,15 @@ export default function SubscriptionMain() {
       {!!subscriptions && !loading ? (
         <div className="max-h-[550px] rounded-lg overflow-y-auto shadow-2xl  scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen border-1 border-gray-300">
         <table className="min-w-full bg-white  border-1 border-lbgray h-fit">
-          <thead className="text-lg font-semibold text-lbtext  ">
+          <thead className="text-base lg:text-lg font-semibold text-lbtext  ">
                 <tr className="bg-bggrey">
-              <th className="py-4 px-4 text-left">Name</th>
-              <th className="py-4 px-4 text-left">Type</th>
-              <th className="py-4 px-4 text-left">Frequency</th>
-              <th className="py-4 px-4 text-left">Payment</th>
-                <th className="py-4 px-4 text-left">Monthly Cost</th>
-              <th className="py-4 px-4 text-left">Last Paid</th>
-              <th className="py-4 px-4 text-left">Next Payment</th>
+              <th className="py-2 lg:py-4 px-4 text-left">Name</th>
+              <th className="py-2 lg:py-4 px-4 text-left">Type</th>
+              <th className="py-2 lg:py-4 px-4 text-left">Frequency</th>
+              <th className="py-2 lg:py-4 px-4 text-left">Payment</th>
+                <th className="py-2 lg:py-4 px-4 text-left">Monthly Cost</th>
+              <th className="py-2 lg:py-4 px-4 text-left">Last Paid</th>
+              <th className="py-2 lg:py-4 px-4 text-left">Next Payment</th>
             </tr>
           </thead>
           <tbody className="bg-white">
