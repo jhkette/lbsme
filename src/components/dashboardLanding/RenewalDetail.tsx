@@ -30,9 +30,9 @@ export default function TransactionDetail(props: TransactionDetailProps) {
             : "Unknown"}{" "}
         </p>
         {props.sub.merchant.name && props.sub.merchant.name.length > 40 ? (
-            <p className="text-xs block w-fit">{props.sub.merchant.name}</p>
+            <p className="text-xs block max-w-[190px] lg:max-w-[240px] text-wrap">{props.sub.merchant.name}</p>
           ) : (
-            <p className="text-sm md:text-base block w-fit">{props.sub.merchant.name ? props.sub.merchant.name : ""}</p>
+            <p className="text-sm md:text-base block max-w-[190px] lg:max-w-[240px] text-wrap">{props.sub.merchant.name ? props.sub.merchant.name : ""}</p>
           )}
        
 
