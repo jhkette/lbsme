@@ -21,7 +21,7 @@ export default function Page() {
   const finalData = data?.getAllDeals.map((deal) => {
     return deal.category;
   });
-  console.log(finalData);
+
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
       <h1 className="font-bold text-4xl my-8 text-lbtext">Best Deals</h1>
@@ -36,7 +36,7 @@ export default function Page() {
         <div className="w-full bg-lbgray rounded-t-lg p-2">
           <h2 className="text-xl font-semibold text-lbtext">Best Deals</h2>
         </div>
-        <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[450px] ">
+        <div className="overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[450px] ">
           {finalData?.map((category: string) => {
             return <DealCategory key={category} category={category} />;
           })}
