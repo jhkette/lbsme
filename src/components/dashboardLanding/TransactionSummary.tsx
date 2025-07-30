@@ -10,7 +10,7 @@ function SpendingSummary(subs: DashboardSubsProps) {
   const [yearly, setYearly] = useState(true);
 
   return (
-    <div className=" w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 border-1 border-gray-300 overflow-y-auto">
+    <div className=" w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 border-1 border-gray-300 overflow-y-auto scrollbar-nice">
       <div className=" flex flex-row items-center justify-between">
         <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
         <h2 className="text-2xl font-semibold">Transaction Totals</h2>{" "}

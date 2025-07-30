@@ -178,7 +178,7 @@ export default function SubscriptionMain() {
       </div>
 
       {!!subscriptions && !loading ? (
-        <div className="max-h-[550px] rounded-lg overflow-y-auto shadow-2xl border-1 border-gray-300">
+        <div className="max-h-[550px] rounded-lg overflow-y-auto shadow-2xl border-1 border-gray-300 scrollbar-nice">
         <table className="min-w-full bg-white  border-1 border-lbgray h-fit">
           <thead className="text-base lg:text-lg font-semibold text-lbtext  ">
                 <tr className="bg-bggrey">

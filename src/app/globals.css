@@ -183,3 +183,43 @@ so adjusting accordingly */
   animation: shimmer 0.75s infinite linear;
 }
  
+
+
+/* Custom Scrollbar */
+.scrollbar-nice {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #00b1c4 transparent;
+  overflow: auto;
+}
+
+/* Hide by default in Firefox (visible on hover via parent styling) */
+.scrollbar-nice:not(:hover) {
+  scrollbar-width: none;
+}
+
+/* WebKit Browsers */
+.scrollbar-nice::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-nice::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.scrollbar-nice::-webkit-scrollbar-thumb {
+  background-color: #00b1c4;
+  border-radius: 8px;
+  border: 2px solid transparent; /* optional: space between thumb and track */
+  background-clip: content-box;
+}
+
+/* Hide scrollbar in WebKit until hover */
+.scrollbar-nice::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-nice:hover::-webkit-scrollbar {
+  display: block;
+}
