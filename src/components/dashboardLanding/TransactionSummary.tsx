@@ -9,6 +9,8 @@ interface DashboardSubsProps {
 function SpendingSummary(subs: DashboardSubsProps) {
   const [yearly, setYearly] = useState(true);
 
+  console.log(subs.subs, "subs in spending summary");
+
   return (
     <div className=" w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 border-1 border-gray-300 overflow-y-auto scrollbar-nice">
       <div className=" flex flex-row items-center justify-between">

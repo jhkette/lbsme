@@ -166,7 +166,7 @@ so adjusting accordingly */
 
 
 
-@plugin 'tailwind-scrollbar';
+
 /* hide tailwind scrollbar for safari */
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {

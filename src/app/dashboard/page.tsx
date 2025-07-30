@@ -35,39 +35,7 @@ export default function Home() {
     fetchPolicy: "cache-and-network",
   });
 
-    const { loading: dealLoading, error: dealError, data: dealData } = useGetFeaturedDealsQuery({
-    errorPolicy: "all",
-    
-    fetchPolicy: "cache-and-network",
-  })
-  const client = useApolloClient();
-
-  useEffect(() => {
-    const fetchDetails = async () => {
-      if (!data?.getSubscriptions?.subscriptions) return;
-
-      try {
-        const detailedData = await Promise.all(
-         data?.getSubscriptions?.subscriptions.map((sub) =>
-            client.query({
-              query: GetSubscriptionDocument, // Your detailed query
-              variables: { id: sub.subscriptionId },
-              fetchPolicy: "network-only", // skip cache if needed
-            }).then(res => res.data.subscription)
-          )
-        );
-
-        setDetailedSubscriptions(detailedData);
-      } catch (err) {
-        console.error("Failed to fetch detailed subscriptions", err);
-      }
-    };
-
-    fetchDetails();
-  }, [ data?.getSubscriptions?.subscriptions]);
-
-
-
+  
 
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
 
