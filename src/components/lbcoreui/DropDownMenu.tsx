@@ -27,7 +27,7 @@ export function DropdownMenuComponent() {
           {user?.givenName} {user?.familyName}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-100 mx-4" align="start" side="bottom">
+      <DropdownMenuContent className="w-100 mx-4 z-300" align="start" side="bottom">
         <DropdownMenuLabel>
           <div className="w-full flex flex-row items-end-safe">
             <h3 className="text-3xl text-lbgreen block pb-4">Profile</h3>

@@ -139,7 +139,7 @@ export default function SubscriptionMain() {
         <div className="flex flex-row w-128 md:flex-row items-center justify-between ">
           <input
             type="text"
-            placeholder="Filter by subscription type..."
+            placeholder="Filter by subscription name..."
             value={search}
             onChange={(e) => handleChange(e.target.value as string)}
             className="border p-2 rounded w-128 "
