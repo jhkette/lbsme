@@ -1,19 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  LineChart,
-  Pie,
-  Bar,
-  Cell,
-  Rectangle,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
-import { format } from "date-fns";
+import { LoaderCircle } from "lucide-react";
 import { useApolloClient } from "@apollo/client";
 import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import {
@@ -24,7 +15,7 @@ import { de } from "date-fns/locale";
 
 export default function LineChartPayment() {
       const client = useApolloClient();
-  const [detailedDescriptions, setDetailedSubscriptions] = useState<string[]>([]);
+  const [detailedDescriptions, setDetailedSubscriptions] = useState<any[]>([]);
 
 
   const { loading, error, data, refetch } = useGetSubscriptionsQuery({
@@ -64,25 +55,77 @@ export default function LineChartPayment() {
 
     fetchDetails();
   }, [data?.getSubscriptions?.subscriptions]);
-  const getMonthInitials = () => {
-    const now = new Date();
-    const currentMonthIndex = now.getMonth(); // 0-based: January = 0, December = 11
-    const monthInitials = [];
+  
+ 
 
-    for (let i = 0; i <= currentMonthIndex; i++) {
-      const monthDate = new Date(now.getFullYear(), i, 1);
-      const monthInitial = format(monthDate, "MMM")[0];
-      monthInitials.push(monthInitial);
+type MonthKey = "jan" | "feb" | "mar" | "apr" | "may" | "jun" | "jul" | "aug" | "sep" | "oct" | "nov" | "dec";
+
+const monthTotals: Record<MonthKey, number> = {
+  jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0,
+  jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0
+};
+
+const monthMap: MonthKey[] = [
+  "jan", "feb", "mar", "apr", "may", "jun",
+  "jul", "aug", "sep", "oct", "nov", "dec"
+];
+
+const currentYear = new Date().getUTCFullYear();
+
+for (const subArray of detailedDescriptions) {
+  for (const tx of subArray) {
+    const date = new Date(tx.bookingTime);
+    const year = date.getUTCFullYear();
+    if (year !== currentYear) continue;
+
+    const monthName = monthMap[date.getUTCMonth()];
+    if (monthName && tx.amount && typeof tx.amount.amount === "number") {
+      monthTotals[monthName] += tx.amount.amount;
+    }
+  }
+}
+
+const cumulativeData = (() => {
+  const currentMonthIndex = new Date().getMonth(); 
+  let runningTotal = 0;
+
+  return monthMap.map((month, index) => {
+    if (index > currentMonthIndex) {
+      return null; // Skip months beyond the current month
     }
 
-    return monthInitials;
-  };
+    runningTotal += monthTotals[month];
+    return {
+      month: month.charAt(0).toUpperCase() + month.slice(1), // Capitalize first letter
+      spend: parseFloat(runningTotal.toFixed(2))
+    };
+  }).filter(Boolean); // remove nulls
+})();
 
-  const monthXdata = getMonthInitials();
-  console.log("monthXdata", monthXdata, detailedDescriptions, "detailedDescriptions");
+
 
   return(
-    <p>graph</p>
-  )
+    <div className="relative w-full h-full">
+    {detailedDescriptions.length > 0 ? (
+      <ResponsiveContainer width="100%" height={350}>
+    <LineChart data={cumulativeData} margin={{ top: 40, right: 40, left: 20, bottom: 20 }}>
+     
+      <XAxis dataKey="month" />
+      <YAxis />
+      <Tooltip 
+       formatter={(value: number) => [
+            `£${value.toFixed(2)}`,
+            "Cumulative Spend",
+          ]}/>
+      <Line type="monotone" dataKey="spend" stroke="#426da9" strokeWidth={2} />
+    </LineChart>
+  </ResponsiveContainer>
+    ) : (
+      <LoaderCircle className="size-12 mx-auto mt-30 text-lbgreen animate-spin" />
+    )}
+  </div>
+    
+);
+  
 
 }

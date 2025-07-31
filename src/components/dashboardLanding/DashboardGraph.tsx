@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { clsx } from "clsx";
 import { Subscription } from "@/interfaces/Subscription";
-import { Download, BarChart as BarchartIcon, PieChart } from "lucide-react";
+import { Download, BarChart as BarchartIcon, PieChart, LineChartIcon } from "lucide-react";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import ResponsiveGraphContainer from "./ResponsiveGraphContainer";
 
@@ -41,7 +41,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   return (
     <div className="w-1/2 p-4 rounded-2xl shadow-2xl bg-white h-120 border-1 border-gray-300">
       <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
-        <h2 className="text-2xl font-semibold">Monthly Spend</h2>{" "}
+        <h2 className="text-2xl font-semibold">{showBarChart ? "Monthly Spend" : "Yearly Spend"}</h2>{" "}
       </div>
       <div className="flex flex-row w-[90%] items-center justify-between my-2 mx-8 block">
         <div className="flex flex-row items-center">
@@ -63,7 +63,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
             )}
             onClick={() => setShowBarChart(false)}
           >
-            <PieChart color={showBarChart ? "#787787" : "#fff"} size={24} />
+            <LineChartIcon  color={showBarChart ? "#787787" : "#fff"} size={24} />
           </div>
         </div>
         <div
