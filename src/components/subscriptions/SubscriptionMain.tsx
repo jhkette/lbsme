@@ -121,7 +121,7 @@ export default function SubscriptionMain() {
   return (
     <div className="my-13">
       {groupedSubs !== null && (
-        <ul className="flex flex-row gap-12 list-none">
+       <ul className="flex flex-row gap-12 list-none overflow-x-auto whitespace-nowrap scrollbar-nice">
           {["All Subscriptions", ...Object.keys(groupedSubs)].map(
             (category) => (
               <li
@@ -135,7 +135,7 @@ export default function SubscriptionMain() {
           )}
         </ul>
       )}
-      <div className="flex flex-row items-center justify-start gap-8 rounded-lg bg-white shadow p-4 mb-6">
+      <div className="flex flex-row items-center justify-start gap-8 rounded-lg bg-white shadow p-4 mb-6 ">
         <div className="flex flex-row w-128 md:flex-row items-center justify-between ">
           <input
             type="text"

@@ -85,7 +85,7 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
           )}
         </div>
       </div>
-      <p className="text-lg font-semibold">{ props.yearly ?`£${totalThisYear.toFixed(2)}` :  `£${totalThisMonth.toFixed(2)}`} </p>
+      <p className="text-lg font-semibold">{ props.yearly ?`£${totalThisYear.toFixed(2)}` : data?.getSubscription?.isManual ? `£${data.getSubscription.costs.monthly}` :  `£${totalThisMonth.toFixed(2)}`} </p>
     </div>
   );
 }

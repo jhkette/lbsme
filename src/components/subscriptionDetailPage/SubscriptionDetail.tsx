@@ -6,6 +6,7 @@ import { SuspenseSubscriptionDetail } from "@/components/suspense/SuspenseCompon
 import { format, parseISO } from "date-fns";
 import { useGetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated";
 import { ChevronRight } from 'lucide-react';
+import BigCircle from "@/components/lbcoreui/BigCircle";
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -90,7 +91,7 @@ export default function SubscriptionDetail({
                       className="rounded-lg"
                     />
                   ) : (
-                    <Repeat color="#EDECEC" size={150} />
+                    <BigCircle />
                   )}
 
                   <div className="flex flex-col items-center">

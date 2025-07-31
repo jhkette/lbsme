@@ -36,8 +36,12 @@ export default function BarchartGraph({
         width={400}
         height={200}
         data={sortedData}
-        margin={{ top: 3, right: 30, left: 20, bottom: 10 }}
+        margin={{ top: 3, right: 30, left: 0, bottom: 10 }}
       >
+        <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#20b2c3ff" stopOpacity={0.9} />
+          <stop offset="95%" stopColor="#baf8ffff" stopOpacity={0.2} />
+        </linearGradient>
         <XAxis dataKey="displayName" tick={false} />
         <YAxis />
         <Tooltip
@@ -49,10 +53,10 @@ export default function BarchartGraph({
         <Bar
           dataKey="monthlyCost"
           name="Monthly Subscription cost"
-          activeBar={<Rectangle fill="#00B1C4" stroke="#1a1a1a" />}
+          activeBar={<Rectangle fill="#426da9" stroke="#1a1a1a" />}
         >
           {sortedData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.fill} />
+            <Cell key={`cell-${index}`} fill={"url(#colorSpend)"} stroke="#1a1a1a"/>
           ))}
         </Bar>
       </BarChart>

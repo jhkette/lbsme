@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+ AreaChart,Area,  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { LoaderCircle } from "lucide-react";
@@ -27,7 +27,8 @@ export default function LineChartPayment() {
   });
 
   
-
+ // useffect to fetch detailed subscription data for each subscription
+ // the transaction data for each sub is then saved
   useEffect(() => {
     const fetchDetails = async () => {
       if (!data?.getSubscriptions?.subscriptions) return;
@@ -84,7 +85,8 @@ for (const subArray of detailedDescriptions) {
     }
   }
 }
-
+// get cumulative data for the graph
+// this will be used to show the cumulative spend for each month
 const cumulativeData = (() => {
   const currentMonthIndex = new Date().getMonth(); 
   let runningTotal = 0;
@@ -94,7 +96,8 @@ const cumulativeData = (() => {
       return null; // Skip months beyond the current month
     }
 
-    runningTotal += monthTotals[month];
+    runningTotal += monthTotals[month]; // add the month's total to the running total in monthTotals index for each month
+    // Return the month and its cumulative spend
     return {
       month: month.charAt(0).toUpperCase() + month.slice(1), // Capitalize first letter
       spend: parseFloat(runningTotal.toFixed(2))
@@ -107,8 +110,16 @@ const cumulativeData = (() => {
   return(
     <div className="relative w-full h-full">
     {detailedDescriptions.length > 0 ? (
-      <ResponsiveContainer width="100%" height={350}>
-    <LineChart data={cumulativeData} margin={{ top: 40, right: 40, left: 20, bottom: 20 }}>
+      <ResponsiveContainer width="95%" height={350}>
+        <AreaChart data={cumulativeData} margin={{ top: 40, right: 40, left: 20, bottom:10 }}>
+   
+          <defs>
+        <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#6089c2ff" stopOpacity={0.9} />
+          <stop offset="95%" stopColor="#cce5ff" stopOpacity={0.2} />
+        </linearGradient>
+      </defs>
+      
      
       <XAxis dataKey="month" />
       <YAxis />
@@ -117,8 +128,14 @@ const cumulativeData = (() => {
             `£${value.toFixed(2)}`,
             "Cumulative Spend",
           ]}/>
-      <Line type="monotone" dataKey="spend" stroke="#426da9" strokeWidth={2} />
-    </LineChart>
+       <Area
+        type="monotone"
+        dataKey="spend"
+        stroke="#426da9"
+        fill="url(#colorSpend)"
+        strokeWidth={2}
+      />
+    </AreaChart>
   </ResponsiveContainer>
     ) : (
       <LoaderCircle className="size-12 mx-auto mt-30 text-lbgreen animate-spin" />
