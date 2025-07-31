@@ -77,7 +77,7 @@ const totalThisMonth = (data?.getSubscription?.transactions ?? [])
             ? data?.getSubscription.paymentMethod
             : "Unknown"}{" "}
         </p>
-        <div>
+        <div >
           {data?.getSubscription.merchant.name && data.getSubscription.merchant.name.length > 40 ? (
             <p className="text-xs block w-fit">{data.getSubscription.merchant.name}</p>
           ) : (

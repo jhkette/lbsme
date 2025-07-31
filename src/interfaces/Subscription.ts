@@ -30,7 +30,7 @@ export type Subscription = {
   priceChange: number;
   providerName: string;
   subscriptionId: string;
-  type: "weekly" | "monthly" | "yearly" | string; // can extend as needed
+  type: "weekly" | "monthly" | "yearly" | string; 
   saveUp: number;
   __typename: "Subscription";
 };

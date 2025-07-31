@@ -1,17 +1,17 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running. 
+
  
 ### What is this repository for? ###
 
-This is a Repo for a demo version of the Little Birdie SME app. 
+This is a Repo for a demo version of the Little Birdie SME website. 
 
 ### How do I get set up? ###
 
 
 ## Set up ##
 
-You need to add an .env file with the relevant variables in the root of the project. At the moment of writing this Readme I am using the production environment for the backend. The details will be on the .env file. 
+You need to add an .env file with the relevant variables in the root of the project. 
 
 To get a development version of the project please run the command below with the Docker daemon running on your computer.
 
@@ -44,7 +44,7 @@ src
 
 --sanity - (sets up sanity CMS)
 
---schemas  - (for zod - a validation library - only used for login at the moment)
+--schemas  - (for zod - a validation library)
 
 middleware.ts - (the middleware file stops a user from accessing authorised content before they have signed in - eg /dashboard)
 
@@ -65,11 +65,11 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
 #### Shadcn components 
 
- I have used [shadcn](https://ui.shadcn.com/) for extra ui components. These are incredibly easy to add and match the style of the UI. Simply go the website and click the component you wish to add and follow the installation commands. THe shadcn components are located in the @/components/ui folder. Other core ui components are located in @/components/core-ui
+ I have used [shadcn](https://ui.shadcn.com/) for extra ui components. These are incredibly easy to add and match the style of the UI. Simply go the website and click the component you wish to add and follow the installation commands. THe shadcn components are located in the @/components/ui folder. Other non shadcn core ui components are located in @/components/core-ui
 
 #### Sanity.io 
 
- Sanity headless cms is used to store content in relationship to Faqs, Terms and Conditions, and Privacy Policy. It can also be configured to add other content if necessary. 
+ Sanity headless cms is used to store content in relationship to Faqs, Terms and Conditions, and Privacy Policy. It can also be configured to add other content if necessary. There is configiration in the [..studio] folder and the sanity folder.
 
 ### Who do I talk to? 
 
