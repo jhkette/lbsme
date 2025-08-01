@@ -182,7 +182,7 @@ export default function SubscriptionMain() {
         <table className="min-w-full bg-white  border-1 border-lbgray h-fit">
           <thead className="text-base lg:text-lg font-semibold text-lbtext  ">
                 <tr className="bg-bggrey">
-              <th className="py-2 lg:py-4 px-4 text-left">Name</th>
+           <th className="py-2 lg:py-4 px-4 max-w-[320px] text-wrap text-left">Name</th>
               <th className="py-2 lg:py-4 px-4 text-left">Type</th>
               <th className="py-2 lg:py-4 px-4 text-left">Frequency</th>
               <th className="py-2 lg:py-4 px-4 text-left">Payment</th>
@@ -197,35 +197,37 @@ export default function SubscriptionMain() {
               return (
                  <tr
           key={idx}
-          className="border-t cursor-pointer hover:bg-gray-50" 
+          className="border-t cursor-pointer hover:bg-gray-200" 
           onClick={() => handleRowClick(item.subscriptionId)}
         >
-                <td className="py-4 px-4 flex flex-row items-center">
-                  {item.merchant.icon !== "unknown" &&
-                  item.merchant.icon !== null ? (
-                    <Image
-                      src={item.merchant.icon as string}
-                      alt={item.merchant.name}
-                      width={50}
-                      height={50}
-                      className="inline-block mr-4"
-                    />
-                  ) : (
-                     <div className="mr-4">
-                      <Circle />
-                      </div>
-                   
-                  )}
-                  {item.displayName.length > 0 ? (
-                    item.displayName.length > 45 ? (
-                      <p className="text-sm ">{item.displayName}</p>
-                    ) : (
-                      <p className="text-lg">{item.displayName}</p>
-                    )
-                  ) : (
-                    <p className="text-lg">{item.merchant.name}</p>
-                  )}
-                </td>
+            <td className="py-4 px-4 flex flex-row items-center gap-4 max-w-[320px] break-words">
+
+  {item.merchant.icon !== "unknown" && item.merchant.icon !== null ? (
+    <Image
+      src={item.merchant.icon as string}
+      alt={item.merchant.name}
+      width={50}
+      height={50}
+      className="inline-block"
+    />
+  ) : (
+    <div>
+      <Circle />
+    </div>
+  )}
+
+  <div className="text-left">
+    {item.displayName.length > 0 ? (
+      item.displayName.length > 45 ? (
+        <p className="text-sm">{item.displayName}</p>
+      ) : (
+        <p className="text-lg">{item.displayName}</p>
+      )
+    ) : (
+      <p className="text-lg">{item.merchant.name}</p>
+    )}
+  </div>
+</td>
                 <td className="py-2 px-4">{item.category?.category}</td>
                 <td className="py-2 px-4"><p className="mx-auto w-fit bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">{capitalize(item.type)}</p></td>
                 <td className="py-2 px-4" >

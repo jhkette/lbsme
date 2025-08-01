@@ -40,7 +40,7 @@ export default function LineChartPayment() {
               .query({
                 query: GetSubscriptionDocument, // Your detailed query
                 variables: { id: sub.subscriptionId },
-                fetchPolicy: "network-only", // skip cache if needed
+                fetchPolicy: "cache-first", 
               })
               .then((res) => res.data.getSubscription.transactions)
           )
@@ -110,6 +110,7 @@ const cumulativeData = (() => {
   return(
     <div className="relative w-full h-full">
     {detailedDescriptions.length > 0 ? (
+         <div className="chart-wrapper w-full h-full" tabIndex={-1}>
       <ResponsiveContainer width="95%" height={350}>
         <AreaChart data={cumulativeData} margin={{ top: 40, right: 40, left: 20, bottom:10 }}>
    
@@ -122,7 +123,7 @@ const cumulativeData = (() => {
       
      
       <XAxis dataKey="month" />
-      <YAxis />
+      <YAxis tickFormatter={(value) => `£${value}`} />
       <Tooltip 
        formatter={(value: number) => [
             `£${value.toFixed(2)}`,
@@ -137,6 +138,7 @@ const cumulativeData = (() => {
       />
     </AreaChart>
   </ResponsiveContainer>
+  </div>
     ) : (
       <LoaderCircle className="size-12 mx-auto mt-30 text-lbgreen animate-spin" />
     )}

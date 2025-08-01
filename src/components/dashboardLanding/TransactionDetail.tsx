@@ -2,7 +2,6 @@ import React from "react";
 import { Subscription } from "@/interfaces/Subscription";
 import { useGetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated";
 import Image from "next/image";
-import { Repeat } from "lucide-react";
 import Circle from "@/components/lbcoreui/Circle";
 
 interface SpendingDetailProps {

@@ -29,6 +29,7 @@ Alternatively - if you don't want to use docker run:
 src  
  
 --actions  - (function that run server side - such as the handleLogin functions)
+note. server actions are sequential (if multiple are called togethor) and next api routes can run in parallel. So next api routes are better for more complex, chained calls but for what I am doing I feel server actions are fine.
 
 --apollo - (set ups apollo client - which is used to run and then cache graphql queries)
 
@@ -75,6 +76,6 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
 The person how made this repo was Joseph Ketterer. To get in contact with him please contact Martin or Jeremy to get contact details.
 
-### Deploy on Vercel
+### Deployed on Vercel
 
-This app is deployed on vercel.
+This app is deployed as a demo on vercel.

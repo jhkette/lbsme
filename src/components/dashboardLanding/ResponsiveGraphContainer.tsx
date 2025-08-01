@@ -1,7 +1,7 @@
 import React from "react";
 
-import LineChartPayment from "./LineGraph";
-import BarchartGraph from "./BarchartGraph";
+import LineChartPayment from "./graphs/LineGraph";
+import BarchartGraph from "./graphs/BarchartGraph";
 export default function ResponsiveGraphContainer({
   barchart,
   simplifiedData,

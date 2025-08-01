@@ -223,3 +223,8 @@ so adjusting accordingly */
 .scrollbar-nice:hover::-webkit-scrollbar {
   display: block;
 }
+
+
+.chart-wrapper:focus {
+  outline: none;
+}
