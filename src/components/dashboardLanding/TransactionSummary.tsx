@@ -22,7 +22,7 @@ function SpendingSummary(subs: DashboardSubsProps) {
             <div className="space-y-1">
             
               <p className="text-sm font-semibold">
-                Yearly and monthly total spends for each
+                Yearly and monthly total transaction costs for each
                 subscription.
               </p>
              

@@ -47,13 +47,13 @@ export default function BarchartGraph({
           <Bar
             dataKey="monthlyCost"
             name="Monthly Subscription cost"
-            activeBar={<Rectangle fill="#426da9" stroke="#1a1a1a" />}
+            activeBar={<Rectangle fill="#426da9" stroke="#258f9bff" />}
           >
             {sortedData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={"url(#colorSpend)"}
-                stroke="#1a1a1a"
+                stroke="#258f9bff"
               />
             ))}
           </Bar>
