@@ -23,7 +23,7 @@ export function DropdownMenuComponent() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 ease-in-out rounded-lg py-2 px-4">
+        <div className="flex font-semibold items-center text-lbtextdark gap-2 cursor-pointer hover:bg-gray-100 ease-in-out rounded-lg py-2 px-4">
           {user?.givenName} {user?.familyName}
         </div>
       </DropdownMenuTrigger>

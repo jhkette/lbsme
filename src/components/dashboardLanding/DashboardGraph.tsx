@@ -67,7 +67,7 @@ export default function DashboardGraph(props: DashboardSubsProps) {
           </div>
         </div>
         <div
-          className="block w-fit justify-start bg-lbgray rounded-lg p-2 mr-2 hover:bg-lbgreen cursor-pointer ease-in-out"
+          className="block w-fit justify-start bg-lbgray rounded-lg p-2 mr-2 mb-1 hover:bg-lbgreen cursor-pointer ease-in-out"
           onClick={exportDataToCSV}
         >
           <div className="text-lbtextgrey hover:text-white">

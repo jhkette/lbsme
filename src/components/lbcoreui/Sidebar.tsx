@@ -14,7 +14,7 @@ export default function Sidebar() {
   const helpItem = { label: "Help", icon: "help.svg", path: "/dashboard/help" };
 
   return (
-    <div className="bg-lbgreen w-28 min-h-screen">
+    <div className="bg-lbgreen w-26 min-h-screen">
       <nav>
         {navItems.map((item) => (
           <SidebarItem

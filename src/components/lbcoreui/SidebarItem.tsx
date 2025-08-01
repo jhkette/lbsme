@@ -18,7 +18,7 @@ export default function SidebarItem({ iconName, label, active, path }: SidebarIt
     : `/images/sidebar/${iconName}`;
 
   const baseClasses =
-    "p-6 flex flex-col items-center justify-center text-lg cursor w-full border-1 border-r-1 border-lbgreen duration-300 ease-in-out";
+    "p-6 flex flex-col items-center justify-center text-base font-semibold cursor w-full border-1 border-r-1 border-lbgreen duration-300 ease-in-out";
   const activeOrHoverStyles = active
     ? "bg-white text-lbgreen"
     : "text-white hover:bg-white hover:text-lbgreen";

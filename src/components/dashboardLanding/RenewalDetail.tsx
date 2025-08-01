@@ -11,9 +11,12 @@ export default function TransactionDetail(props: TransactionDetailProps) {
   if (!props.sub) {
     return;
   }
+
+  
+
   const icon = props.sub.merchant.icon;
-   // return early if the last payment date is in the future and renewal is false -i.e. we are showing the last payment date
- if (new Date(props.sub.dates.lastPaymentDate).getTime() > Date.now() && !props.renewal) {
+   // return early if the renewal date is in the past
+ if ( new Date() > new Date(props.sub.dates.renewalDate)) {
   return;
 }
   return (

@@ -20,7 +20,6 @@ export default function SpendingDetail(props: SpendingDetailProps) {
     // pollInterval: 30000,
   });
 
-  console.log("transaction detail data on transaction", data?.getSubscription);
 
   const now = new Date();
 

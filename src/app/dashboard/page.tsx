@@ -20,8 +20,8 @@ import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
 import { DealsIntro } from "@/lib/dealsIntro";
-import { useApolloClient } from "@apollo/client";
-import {GetSubscriptionDocument, GetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated"
+
+import {GetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated"
 export default function Home() {
 
   const [detailedDescriptions, setDetailedSubscriptions ] = useState<GetSubscriptionQuery['getSubscription'][]>([])
