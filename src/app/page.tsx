@@ -22,7 +22,7 @@ export default function Home() {
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
         <Image
-          src="/images/main/lbsmelogo.svg"
+         src="/images/main/lbfinal.svg"
           alt="Logo"
           width={150}
           height={150}

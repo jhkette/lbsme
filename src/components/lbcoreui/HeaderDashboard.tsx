@@ -11,7 +11,7 @@ export default function HeaderDashboard({}) {
         
 
           <Image
-            src="/images/main/lbsmelogo.svg"
+            src="/images/main/lbfinal.svg"
             alt="Logo Text"
             width={100}
             height={35}
