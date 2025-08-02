@@ -47,7 +47,7 @@ function SpendingSummary(subs: DashboardSubsProps) {
           )}
           onClick={() => setYearly(false)}
         >
-          Monthly
+          This Month
         </p>
       </div>
       <div className="px-6 py-2 max-h-85 overflow-y-auto scrollbar-nice">

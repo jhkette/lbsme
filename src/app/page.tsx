@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Image from "next/image";
-
+import BirdLead from "@/components/auth/BirdLead";
 import Link from "next/link";
 
 export default function Home() {
@@ -28,21 +28,7 @@ export default function Home() {
           height={150}
           className="absolute top-12 left-12 bg-lbblue w-[100px] md:w-[110px] lg:w-[140px] h-auto object-contain"
         />
-        <div className="flex flex-col  bg-lbblue items-center justify-center h-screen w-1/2">
-          <h1 className="text-3xl/10 font-bold text-lbtext mb-4 px-12 py-4 text-center w-[70%] ">
-            Subscriptions managed, Money Saved, Life Simplified
-          </h1>
-
-          <div className="text-center">
-            <Image
-              src="/images/home/Bird.svg"
-              alt="Bird"
-              width={410}
-              height={410}
-              className="mx-12 w-[310px] md:w-[340px] h-auto object-contain"
-            />
-          </div>
-        </div>
+        <BirdLead />
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
           <h2 className="text-4xl font-bold text-lbtext mb-4 px-12 text-center">
             Welcome to <span className="text-lbgreen">Little Birdie</span>
@@ -53,7 +39,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <Link href={"/register"}>
               <button
-                className="w-96 p-3 shadow-lg font-semibold rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer 
+                className="w-92 p-3 shadow-lg font-semibold rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer 
           hover:bg-lbtext transition duration-300"
               >
                 Get Started
@@ -61,7 +47,7 @@ export default function Home() {
             </Link>
             <Link href={"/sign-in"}>
               <button
-                className="w-96 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
+                className="w-92 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
           hover:bg-lbtext hover:text-white transition duration-300"
               >
                 I already have an account
