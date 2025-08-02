@@ -33,7 +33,7 @@ export default function TransactionsLanding(subs: DashboardSubsProps) {
   const lastRenewalSorted = sortByRenewalDate([...subs.subs]);
 
   return (
-    <div className="w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 border-1 border-gray-300 overflow-y-auto scrollbar-nice">
+    <div className="w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 border-1 border-gray-300">
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center justify-between mx-8 pb-1 my-2">
         <h2 className="text-2xl font-semibold">Upcoming Transactions</h2>{" "}
@@ -69,7 +69,7 @@ export default function TransactionsLanding(subs: DashboardSubsProps) {
           Last Payments
         </p>
       </div>
-      <div className="px-8">
+      <div className="px-8 py-2 max-h-85 overflow-y-auto scrollbar-nice">
          {renewal ? 
           lastRenewalSorted.map((sub) => {
             return (

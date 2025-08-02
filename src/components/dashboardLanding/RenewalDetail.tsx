@@ -12,13 +12,11 @@ export default function TransactionDetail(props: TransactionDetailProps) {
     return;
   }
 
-  
-
   const icon = props.sub.merchant.icon;
-   // return early if the renewal date is in the past
- if ( new Date() > new Date(props.sub.dates.renewalDate)) {
-  return;
-}
+  // return early if the renewal date is in the past
+  if (new Date() > new Date(props.sub.dates.renewalDate)) {
+    return;
+  }
   return (
     <div className="flex flex-row justify-between py-2 gap-8 items-center border-b-1">
       <div className="flex flex-row items-center gap-4">
@@ -47,20 +45,21 @@ export default function TransactionDetail(props: TransactionDetailProps) {
           </p>
         )}
       </div>
-      <div className="flex flex-col items-end w-[160px] md:w-[180px]">
+      <div className="flex flex-col items-end w-[175px] md:w-[190px]">
         <p className="font-semibold w-full text-right">
           {props.renewal
             ? format(parseISO(props.sub.dates.renewalDate), "do MMM yyyy")
             : format(parseISO(props.sub.dates.lastPaymentDate), "do MMM yyyy")}
         </p>
         <p className="text-xs text-orange-400 w-full text-right">
-  {props.renewal && (() => {
-    const days = props.sub.dates.endsInDays;
-    if (days > 1) return `Subscription renews in ${days} days`;
-    if (days === 1) return 'Subscription renews tomorrow';
-    return 'Subscription renews today';
-  })()}
-</p>
+          {props.renewal &&
+            (() => {
+              const days = props.sub.dates.endsInDays;
+              if (days > 1) return `Subscription renews in ${days} days`;
+              if (days === 1) return "Subscription renews tomorrow";
+              return "Subscription renews within 24 hours";
+            })()}
+        </p>
       </div>
     </div>
   );

@@ -22,15 +22,7 @@ export default function SmallDealItem(props: SmallDealItem) {
           {props.deal.description}
          
         
-        
-        {/* <Image
-          src={props.deal.icon}
-          alt={props.deal.name || ""}
-          width={45}
-          height={45}
-          style={{ height: "auto" }}
-          className="rounded ml-auto mt-2 mr-2"
-        /> */}
+       
       </Link>
     </div>
   );

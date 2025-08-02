@@ -30,7 +30,7 @@ export default function Sidebar() {
           />
         ))}
 
-        <div className="mt-40">
+        <div className="mt-60">
           <SidebarItem
             label={helpItem.label}
             iconName={helpItem.icon}
