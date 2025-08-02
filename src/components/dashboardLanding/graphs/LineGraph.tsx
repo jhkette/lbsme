@@ -9,7 +9,6 @@ import { useApolloClient } from "@apollo/client";
 import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import {
   GetSubscriptionDocument,
-  GetSubscriptionQuery,
 } from "@/graphql/getSubscriptionDetail.generated";
 import { de } from "date-fns/locale";
 
@@ -55,7 +54,7 @@ export default function LineChartPayment() {
     };
 
     fetchDetails();
-  }, [data?.getSubscriptions?.subscriptions]);
+  }, [data?.getSubscriptions?.subscriptions, client]);
   
  
 
