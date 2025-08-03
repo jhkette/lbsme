@@ -29,8 +29,8 @@ export default function Password() {
   // return to register if there
   // is no userCredentials from prior form
   useEffect(() => {
-    if (!isLoading && !userCredentials?.email) {
-      router.push("/register");
+    if (!isLoading && (!userCredentials?.email|| !userCredentials?.companyDetails.title)) {
+      router.push("/register-user");
     }
   });
 

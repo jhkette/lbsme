@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { userInfoSchema, UserInfoSchema } from "@/schemas/registerUserSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ArrowBigRight } from "lucide-react";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
-import { searchCompanyName } from "@/actions/companySearch";
+
 import { cn } from "@/lib/utils";
 import { Building2 } from "lucide-react";
 
@@ -44,24 +43,10 @@ export default function RegisterUser() {
 
   const router = useRouter();
 
-  const searchName = async () => {
-    try {
-      const data = await searchCompanyName(searchTerm);
-      if (data?.items) {
-        setSearchResults([...data.items]);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (selectedCompany !== "") {
-      setSearchTerm(selectedCompany);
-    }
-  }, [selectedCompany]);
 
   const onSubmit: SubmitHandler<UserInfoSchema> = async (data) => {
     if (Object.keys(errors).length > 0) {
@@ -72,12 +57,18 @@ export default function RegisterUser() {
       ...data,
       email: data.email.toLowerCase(),
       terms_and_conditions: "true",
+      companyDetails:{
+        title: "",
+        address_snippet: "",
+        company_number:""
+
+      }
     });
 
     clearErrors();
     setSubmitError(null);
 
-    router.push("/register-password");
+    router.push("/register-company");
   };
 
   return (
@@ -86,71 +77,9 @@ export default function RegisterUser() {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full text-center flex flex-col items-center justify-center relative"
       >
-        {/* company name*/}
-        <div className="w-2/4 flex flex-col">
-          <label
-            htmlFor="companyName"
-            className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
-          >
-            Company name
-          </label>
-          <input
-            type="text"
-            id="companyName"
-            // {...register("given_name")}
-            placeholder="Search company name"
-            onChange={(e) => setSearchTerm(e.target.value)}
-            value={selectedCompany !== "" ? selectedCompany : searchTerm}
-            className={cn(
-              "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
-              errors.given_name
-                ? "bg-red-100"
-                : "focus:shadow-md focus:border-blue-400"
-            )}
-          />
-          <button
-            type="button"
-            className="absolute top-10 right-42 md:right-52 lg:right-58 mb-4 cursor-pointer group"
-            onClick={searchName}
-          >
-            <ArrowBigRight className="size-7 lg:size-8 text-lbgreen group-hover:text-lbtextgrey transition-colors duration-200" />
-          </button>
+       
 
-          <p className="w-full text-xs text-lbgreen text-left align-start pb-2">
-            * Click the arrow to find your company
-          </p>
-        </div>
-
-        {!!searchResults.length && (
-          <div className="w-2/4  ">
-            <h2 className="text-lbtext text-lg font-semibold pb-2 text-left">
-              Select your company from the list below
-            </h2>
-            <div className="min-h-[120px] max-h-[150px] border-1 border-lbtext p-4 mx-auto scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-y-auto mb-4">
-              {searchResults.map((result) => {
-                return (
-                  <div
-                    className={cn(
-                      "border-b border-lbtextgrey text-lbtextdark cursor-pointer py-2 px-2 hover:bg-lbblue hover:text-lbtextdark",
-                      selectedCompany === result.title &&
-                        "bg-lbgreen text-white"
-                    )}
-                    key={result.title}
-                    onClick={() => setSelectedCompany(result.title)}
-                  >
-                    <div className="flex flex-row justify-start items-center gap-2 font-semibold">
-                      <Building2 size={18} color="#00b1c4" />
-                      <p className="text-base text-left">{result.title}</p>
-                    </div>
-                    <p className="text-sm text-left">
-                      {result.address_snippet}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+       
         {/* First Name */}
         <div className="w-2/4 flex flex-col">
           <label

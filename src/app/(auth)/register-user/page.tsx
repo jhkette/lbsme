@@ -15,11 +15,11 @@ export default function Page() {
         />
         <BirdLead/>
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
-          <div className="w-2/4">
+          <div className="w-2/4 mt-4">
           <h2 className="text-4xl font-bold text-lbtext mb-4 py-1 text-left">
             Sign Up
           </h2>
-          <p className="text-2xl font-bold text-lbtext mb-4 py-1 text-left">Enter you details</p>
+          <p className="text-2xl font-bold text-lbtext mb-4 py-1 text-left">Enter your personal details</p>
           </div>
           <RegisterUser />
        

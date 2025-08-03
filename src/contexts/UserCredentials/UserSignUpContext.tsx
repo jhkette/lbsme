@@ -8,6 +8,11 @@ export type UserCredentials = {
   email: string;
   terms_and_conditions: string;
   phoneNumber: string;
+  companyDetails:{
+    title: string;
+    address_snippet: string;
+    company_number: string;
+  }
 };
 
 type SignupContextType = {
