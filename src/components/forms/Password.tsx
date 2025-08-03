@@ -86,7 +86,8 @@ export default function Password() {
     } catch (err: unknown) {
       setLoading(false);
       if (err instanceof Error) {
-        setPasswordFormError(`There was an error ${err.message}`);
+        
+        setPasswordFormError(`There was an error: ${err.message.toLowerCase()}`);
         console.log(err);
       } else {
         setPasswordFormError("An unknown error occurred");
