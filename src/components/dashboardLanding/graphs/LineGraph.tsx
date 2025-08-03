@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
- AreaChart,Area,  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+ AreaChart,Area,  XAxis, YAxis, Tooltip, ResponsiveContainer
 } from "recharts";
 import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { LoaderCircle } from "lucide-react";
@@ -10,7 +10,7 @@ import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import {
   GetSubscriptionDocument,
 } from "@/graphql/getSubscriptionDetail.generated";
-import { de } from "date-fns/locale";
+
 
 export default function LineChartPayment() {
       const client = useApolloClient();

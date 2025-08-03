@@ -23,7 +23,7 @@ const DealsSummary: React.FC<Props> = ({ deals }) => {
         <h2 className="text-2xl font-semibold">Featured Deals & Free Trials</h2>{" "}
       </div>
 
-      <div className="grid grid-cols-2 gap-[4px] mx-auto px-4">
+      <div className="grid grid-cols-2 gap-4 mx-auto px-8">
   {deals?.map((deal) => {
     return <SmallDealItem deal={deal} key={deal.name} />;
   })}

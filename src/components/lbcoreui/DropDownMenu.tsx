@@ -119,16 +119,8 @@ export function DropdownMenuComponent() {
           <DropdownMenuLabel className="text-sm text-gray-400">
             SOCIAL
           </DropdownMenuLabel>
-          <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
-            <Image
-              src={"/images/dropdownmenu/user-plus.svg"}
-              height={25}
-              width={25}
-              alt="user icon"
-              className="inline-block mr-4"
-            />
-            Recommend a friend
-          </DropdownMenuItem>
+         
+          <Link href="https://www.facebook.com/LittleBirdieHQ/" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/fb.svg"}
@@ -139,6 +131,7 @@ export function DropdownMenuComponent() {
             />
             Follow us on facebook
           </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

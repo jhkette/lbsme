@@ -33,8 +33,8 @@ export default function Page() {
             className="absolute top-6 z-0 right-40"
           />
            <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
-                  <div className="w-full bg-lbgray rounded-t-lg p-2">
-                    <h2 className="text-xl font-semibold text-lbtext">Free Trials</h2>
+                  <div className="w-full bg-lbgray rounded-t-lg p-4">
+                    <h2 className="text-2xl font-semibold text-lbtext">Free Trials</h2>
                   </div>
                   <div className="overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[450px] ">
                     {/* {subscriptionDeals
