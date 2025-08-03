@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PasswordSchema, PasswordData } from "@/schemas/passwodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
+import { EyeIcon, EyeOffIcon, LoaderCircle } from "lucide-react";
 import { signUp } from "aws-amplify/auth";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
 
-import { LoaderCircle } from 'lucide-react';
+
 
 export default function Password() {
   const {

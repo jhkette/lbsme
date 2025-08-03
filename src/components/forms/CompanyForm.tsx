@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { userInfoSchema, UserInfoSchema } from "@/schemas/registerUserSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+
 
 import { ArrowBigRight } from "lucide-react";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
@@ -52,7 +51,7 @@ export default function RegisterCompany() {
 
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  interface OnSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+ 
 
   interface UserCredentials {
     given_name: string;
@@ -63,7 +62,7 @@ export default function RegisterCompany() {
     companyDetails: CompanyDetails;
   }
 
-  const onSubmit = async (event: OnSubmitEvent): Promise<void> => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (
       !selectedCompany?.title ||
