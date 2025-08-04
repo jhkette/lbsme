@@ -36,7 +36,7 @@ export default function Page() {
         <div className="w-full bg-lbgray rounded-t-lg p-4">
           <h2 className="text-2xl font-semibold text-lbtext">Best Deals</h2>
         </div>
-        <div className="overflow-x-auto flex flex-row py-4 rounded-b-lg  bg-white justify-around items-end w-full flex-wrap max-h-[450px] ">
+        <div className="overflow-x-auto flex flex-row py-4 px-12 rounded-b-lg  bg-white justify-start items-center w-full flex-wrap max-h-[450px] ">
           {finalData?.map((category: string) => {
             return <DealCategory key={category} category={category} />;
           })}
