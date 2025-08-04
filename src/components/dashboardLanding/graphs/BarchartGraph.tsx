@@ -22,7 +22,7 @@ export default function BarchartGraph({
   const sortedData = [...simplifiedData].sort(
     (a, b) => b.monthlyCost - a.monthlyCost
   );
-
+  const isSmallDataset = sortedData.length <= 4;
   return sortedData.length > 0 ? (
     <div className="chart-wrapper w-full h-full">
       <ResponsiveContainer width="90%" height="80%" className="mt-4">
@@ -48,6 +48,7 @@ export default function BarchartGraph({
             dataKey="monthlyCost"
             name="Monthly Subscription cost"
             activeBar={<Rectangle fill="#426da9" stroke="#258f9bff" />}
+             barSize={isSmallDataset ? 60 : undefined} 
           >
             {sortedData.map((entry, index) => (
               <Cell
