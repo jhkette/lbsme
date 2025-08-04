@@ -8,6 +8,7 @@ import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { searchCompanyName } from "@/actions/companySearch";
 import { cn } from "@/lib/utils";
 import { Building2 } from "lucide-react";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface CompanyDetails {
   title: string;
@@ -85,8 +86,7 @@ export default function RegisterCompany() {
       },
     });
 
-    console.log("user credentials", userCredentials);
-
+   
     setFormError("");
 
     router.push("/register-password");
@@ -121,7 +121,7 @@ export default function RegisterCompany() {
               <button
                 type="button"
                 onClick={searchName}
-                className="w-full flex flex-col justify-center items-center p-3 shadow-lg rounded-lg mt-2 mb-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+                className="w-full flex flex-col justify-center items-center px-3 py-4 shadow-lg rounded-lg mt-2 mb-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
               >
                 <Search size={18} className="inline" />
               </button>
@@ -143,7 +143,7 @@ export default function RegisterCompany() {
                         selectedCompany?.title === result.title &&
                           "bg-lbgreen text-white"
                       )}
-                      key={result.company_number}
+                      key={uuidv4()}
                       onClick={() => setSelectedCompany(result)}
                     >
                       <div className="flex flex-row justify-start items-center gap-2 font-semibold">

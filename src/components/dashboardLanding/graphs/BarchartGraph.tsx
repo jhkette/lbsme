@@ -33,8 +33,8 @@ export default function BarchartGraph({
           margin={{ top: 3, right: 30, left: 0, bottom: 10 }}
         >
           <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#20b2c3ff" stopOpacity={0.9} />
-            <stop offset="95%" stopColor="#7ac6ceff" stopOpacity={0.2} />
+            <stop offset="5%" stopColor="#20b6c7ff"  />
+            <stop offset="95%" stopColor="#8bc9cfff"  />
           </linearGradient>
           <XAxis dataKey="displayName" tick={false} />
           <YAxis tickFormatter={(value) => `£${value}`} />
