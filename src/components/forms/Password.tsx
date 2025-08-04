@@ -131,7 +131,7 @@ export default function Password() {
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
       {loading && (
-        <LoaderCircle className="size-12  absolute top-82 text-lbgreen animate-spin" />
+        <LoaderCircle className="size-12  absolute top-62 text-lbgreen animate-spin" />
       )}
       {!!passwordFormError.length && (
         <p className="text-red-500 text-sm">{passwordFormError} </p>

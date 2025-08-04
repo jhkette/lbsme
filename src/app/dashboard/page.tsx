@@ -20,6 +20,7 @@ import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
 import { DealsIntro } from "@/lib/dealsIntro";
+import DashboardNoSubs from "@/components/dashboardLanding/DashboardNoSubs";
 
 import {GetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated"
 export default function Home() {
@@ -39,9 +40,23 @@ export default function Home() {
 
   const subs = data?.getSubscriptions?.subscriptions as Subscription[];
 
-  console.log("a list of basic sub data", data?.getSubscriptions?.subscriptions)
 
-  console.log("detailed list of subscriptions", detailedDescriptions)
+  // handle logging in with no subscriptions to show
+  if(!loading && data?.getSubscriptions?.subscriptions?.length === 0){
+    return(
+       <div className="px-16 w-full mt-14 relative">
+         <IntroHome />
+      <Image
+        src="/images/main/lbgraphic.png"
+        height={250}
+        width={400}
+        alt="graphic"
+        className="absolute -top-2 z-0 right-40 "
+      />
+      <DashboardNoSubs />
+      </div>
+    )
+  }
  
  
   // dashboard page is the main landing page for the dashboard
@@ -57,6 +72,7 @@ export default function Home() {
         alt="graphic"
         className="absolute -top-2 z-0 right-40 "
       />
+     
       {loading ? <SuspenseIntro /> : <DashboardSubs subs={subs} />}
       <div className="my-16 flex flex-row gap-12">
         {loading ? <SuspenseTransactions /> : <DashboardGraph subs={subs} />}

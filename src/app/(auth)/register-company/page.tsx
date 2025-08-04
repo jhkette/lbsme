@@ -19,7 +19,7 @@ export default function Page() {
           <h2 className="text-4xl font-bold text-lbtext mb-4 py-1 text-left">
             Sign Up
           </h2>
-          <p className="text-2xl font-bold text-lbtext mb-4 py-1 text-left">Enter your company details</p>
+          <p className="text-2xl font-bold text-lbtext mb-4 py-1 text-left">Add your company details</p>
           </div>
           <RegisterCompany />
        

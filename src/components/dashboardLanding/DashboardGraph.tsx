@@ -13,9 +13,8 @@ export default function DashboardGraph(props: DashboardSubsProps) {
   const [showBarChart, setShowBarChart] = useState(true);
   const csvConfig = mkConfig({ useKeysAsHeaders: true });
 
-  const barColors = ["#00B1C4", "#426DA9", "#c4f9ff"];
+ 
 
-  console.log(props.subs, "graph data")
 
   const simplifiedData = props.subs.map((sub) => 
     (

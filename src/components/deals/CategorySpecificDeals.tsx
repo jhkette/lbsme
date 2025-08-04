@@ -30,8 +30,8 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
 
 
    <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
-                  <div className="w-full bg-lbgray rounded-t-lg p-2">
-                    <h2 className="text-xl font-semibold text-lbtext">Best Deals</h2>
+                  <div className="w-full bg-lbgray rounded-t-lg p-3">
+                    <h2 className="text-2xl font-semibold text-lbtext">Best Deals</h2>
                   </div>
                   <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 pl-12 rounded-b-lg  bg-white justify-start items-end w-full flex-wrap max-h-[550px] ">
       {category && groupedData

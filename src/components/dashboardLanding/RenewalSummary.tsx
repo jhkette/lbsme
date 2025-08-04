@@ -49,10 +49,10 @@ export default function TransactionsLanding(subs: DashboardSubsProps) {
         </HoverCardComponent>
       </div>
 
-      <div className="flex flex-row items-center gap-4 pb-2 pt-3 bg-bggrey w-full px-6">
+      <div className="flex flex-row items-end gap-4 pb-1 pt-3 bg-bggrey w-full px-6">
         <p
           className={clsx(
-            "py-1 px-2 w-fit cursor-pointer block",
+            "mt-1 py-1 px-2 w-fit cursor-pointer block",
             renewal && "font-bold border-b-2 border-lbtextgrey"
           )}
           onClick={() => setRenewal(true)}
@@ -61,7 +61,7 @@ export default function TransactionsLanding(subs: DashboardSubsProps) {
         </p>
         <p
           className={clsx(
-            "py-1 px-2 w-fit cursor-pointer block",
+            "mt-1 py-1 px-2 w-fit cursor-pointer block",
             !renewal && "font-bold border-b-2 border-lbtextgrey"
           )}
           onClick={() => setRenewal(false)}

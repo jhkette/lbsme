@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { useEffect } from "react";
+import EmailConfirmedBird from "@/components/auth/EmailConfirmedBird";
 export default function Page() {
   const { clearUserCredentials } = useUserSignup();
 
@@ -20,20 +21,7 @@ export default function Page() {
           height={150}
           className="absolute top-12 left-12 bg-lbblue w-[100px] md:w-[110px] lg:w-[140px] h-auto object-contain"
         />
-        <div className="flex flex-col  bg-lbblue items-center justify-center h-screen w-1/2">
-           <h1 className="text-3xl/10 font-bold text-lbtext mb-4 px-12 py-4 text-center w-[70%] ">
-            Subscriptions managed, Money Saved, Life Simplified
-          </h1>
-          <div>
-            <Image
-              src="/images/main/emailconfirmed.svg"
-              alt="Bird"
-              width={250}
-              height={250}
-              className="mx-12 w-[200px] md:w-[250px] mt-2 h-auto object-contain"
-            />
-          </div>
-        </div>
+       <EmailConfirmedBird/>
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
           <h2 className="text-3xl font-bold text-lbtext mb-4 text-left w-2/4">
             Your registration has been confimed.

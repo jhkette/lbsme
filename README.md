@@ -58,6 +58,12 @@ PNPM is used to install dependencies. The easiest way to install pnpm itself is 
 
 Nextjs is built on the react library. It features Server Side rendering (the site renders on the server as well as the client) which improves SEO. It also features built in routing - so folder names can be used to create dynamic routes. In additions, another useful feature is that it allows the devloper to create backend API routes or server functions that run on the server. For more see: [https://nextjs.org/](https://nextjs.org/). [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
+
+#### Graphql / Apollo CLient
+
+This project uses graphql with Apollo Client to query data from the backend. Apollo client is the intermediary library used to run the queries and cache them. There are different caching options available but in the project I feel it is advantageous to cache as much as possible. Therefore I reccomend using the "cache and network" option. To add a graphql query check against the backend or AWS appsync playground that it will run then add it to the graphql folder. Then run  ``pnpm run codegen`` to generate functions you can call in the project. 
+
+
 #### Tailwind css 
 
  This project uses tailwind 4 for CSS. Tailwind works by added the css syntax to the className of the element. There is extenstive documentation on the [tailwind site](https://tailwindcss.com/) . One issue where tailwind differs from prior versions is you do not need to make a tailwind config file - all custom colours, spacing and so on can be stored in globals.css - which is in the app folder. The current css can act as a template on how to do this.

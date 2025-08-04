@@ -10,7 +10,7 @@
     name: "Free trials",
     description: (
       <p className="text-center text-sm md:text-base text-lbtextgrey font-bold">
-        A selection of <span className="text-pink-500">Free trials</span>
+        View a selection of <span className="text-pink-500">Free trials</span>
       </p>
     ),
     link: "/dashboard/marketplace/freetrials"

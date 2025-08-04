@@ -6,7 +6,7 @@ import { CodeData, CodeSchema } from "@/schemas/codeSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
 import { useState, useEffect } from "react";
-import { Loader } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
@@ -31,7 +31,7 @@ export default function ConfirmEmail() {
   // is no userCredentials from prior form
   useEffect(() => {
     if (!isLoading && !userCredentials?.email) {
-      router.push("/register");
+      router.push("/register-user");
     }
   });
 
@@ -47,6 +47,7 @@ export default function ConfirmEmail() {
         username: userCredentials?.email,
       });
       if (destination && deliveryMedium) {
+        setLoading(false);
         setMessage(
           `A confirmation code has been sent to ${destination}. Please check your ${deliveryMedium} for the code.`
         );
@@ -130,11 +131,11 @@ export default function ConfirmEmail() {
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
       />
       {loading && (
-        <Loader className="size-8  absolute top-48 text-lbgreen animate-spin" />
+        <LoaderCircle  className="size-12  absolute top-78 text-lbgreen animate-spin" />
       )}
-      {!!message.length && <p className="text-sm text-lbtext">{message}</p>}
+      {!!message.length && <p className="mt-12 text-sm text-lbtext">{message}</p>}
       {!!confirmEmailError.length && (
-        <p className="text-red-500 text-sm">{confirmEmailError} </p>
+        <p className="mt-8 text-red-500 text-sm">{confirmEmailError} </p>
       )}
     </form>
   );

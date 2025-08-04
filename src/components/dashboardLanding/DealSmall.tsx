@@ -13,8 +13,8 @@ interface SmallDealItem {
 
 export default function SmallDealItem(props: SmallDealItem) {
   return (
-    <div className="bg-[url(/images/deals/dealbg.png)] w-[190px] h-[140px] md:w-[225px] md:h-[145px] lg:w-[250px] lg:h-[160px] bg-center bg-no-repeat bg-cover rounded-lg my-4  py-6  md:py-8 hover:opacity-75">
-      <Link href={props.deal.link}>
+         <Link href={props.deal.link}>
+   <div className="bg-[url(/images/deals/dealbg.png)] w-full max-w-[250px] h-[140px] md:h-[145px] lg:h-[160px] bg-center bg-no-repeat bg-cover rounded-lg my-4 py-6 md:py-8 hover:opacity-75">
         <p className="text-center text-2xl text-lbtext font-bold">
           {props.deal.name}
         </p>
@@ -23,7 +23,8 @@ export default function SmallDealItem(props: SmallDealItem) {
          
         
        
-      </Link>
+     
     </div>
+     </Link>
   );
 }
