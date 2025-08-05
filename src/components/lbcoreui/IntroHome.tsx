@@ -7,7 +7,7 @@ function IntroHome() {
   const { user } = useUser();
   return (
     <div>
-      <h1 className="font-bold text-4xl mt-8 pb-4 text-lbtext">
+      <h1 className="font-bold text-3xl lg:text-4xl mt-8 pb-4 text-lbtext">
         Hello {user?.givenName} {user?.familyName},
       </h1>
       <p className="text-lg pb-12 font-semibold text-lbtextdark">Today is {formattedDate}</p>
