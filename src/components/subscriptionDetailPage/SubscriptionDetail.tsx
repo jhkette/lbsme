@@ -12,7 +12,7 @@ import BigCircle from "@/components/lbcoreui/BigCircle";
 import Circle from "@/components/lbcoreui/Circle";
 import { cancelSubscriptionLink } from "@/lib/consts";
 import {useSubscriptionStatus} from "@/contexts/SubscribedContext/SubscriptionStatusContext";
-import { SuspenseTextSubs } from "@/components/suspense/SuspenseComponents";
+
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -97,12 +97,14 @@ if (subscribed && !subLoading) {
         Subscription{" "}
         <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
         {loading ? (
-          <SuspenseTextSubs />
-        ) : data?.getSubscription.displayName ? (
-          data.getSubscription.displayName
-        ) : (
-          data?.getSubscription.merchant?.name
-        )}
+            <span className="blur-sm text-gray-400 select-none">
+              Loading subscription
+            </span>
+          ) : data?.getSubscription.displayName ? (
+            data.getSubscription.displayName
+          ) : (
+            data?.getSubscription.merchant?.name
+          )}
       </h1>
 
       <div className="flex flex-row items-start gap-4 mb-4">
