@@ -2,7 +2,7 @@
 
 ### What is this repository for? ###
 
-This is a Repo for a demo version of the Little Birdie SME website.  
+This is a Repo for a demo version of the Little Birdie SME website.   
 
 ### How do I get set up? ###
 
