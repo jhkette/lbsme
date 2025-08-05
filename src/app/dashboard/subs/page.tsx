@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function page() {
   return (
     <div className="px-16 w-full mt-12 relative">
-      <h1 className="font-bold text-4xl mt-14 mb-8 text-lbtext">
+      <h1 className="font-bold text-3-xl md:text-4xl mt-14 mb-8 text-lbtext">
         Subscriptions
       </h1>
       <Image

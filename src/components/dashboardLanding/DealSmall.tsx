@@ -14,7 +14,7 @@ interface SmallDealItem {
 export default function SmallDealItem(props: SmallDealItem) {
   return (
     <Link href={props.deal.link}>
-      <div className="bg-[url(/images/deals/dealbgsmall.png)] md:bg-[url(/images/deals/dealbg.png)] shadow-lg border-1 border-lbgray w-full max-w-[240px] h-[145px]  md:h-[165px] md:h-[155px] bg-center bg-no-repeat bg-cover rounded-lg my-4 py-6 md:py-8 hover:opacity-75">
+      <div className="bg-[url(/images/deals/dealbgsmall.png)] md:bg-[url(/images/deals/dealbg.png)] shadow-lg border-1 border-lbgray w-full mx-auto max-w-[230px] h-[145px]  md:h-[147px] md:max-w-[240px]  lg:h-[167px] lg:max-w-[260px] bg-center bg-no-repeat bg-cover rounded-lg my-2 py-6 md:py-8 hover:opacity-75">
         <p className="text-center text-2xl text-lbtext font-bold">
           {props.deal.name}
         </p>

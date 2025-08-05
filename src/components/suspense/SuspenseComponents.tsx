@@ -12,6 +12,19 @@ export function SuspenseIntro() {
   );
 }
 
+export function SuspenseTextIntro() {
+  return (
+    <div className="loading w-[250px] flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 h-[65px] z-1"></div>
+  );
+}
+
+export function SuspenseTextSubs() {
+  return (
+    <div className="loading w-[280px] flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 h-[65px] z-1"></div>
+  );
+}
+
+
 export function SuspenseDeals() {
   return (
     <div className="loading flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 w-full h-[450px] z-1"></div>

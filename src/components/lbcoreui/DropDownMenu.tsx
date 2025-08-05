@@ -77,7 +77,7 @@ export function DropdownMenuComponent() {
           </DropdownMenuItem>
           </Link>
 
-          <Link href="/dashboard/subs" className="cursor-pointer">
+          <Link href="/dashboard/connected-accounts" className="cursor-pointer">
           <DropdownMenuItem className="text-lg flex items-center cursor-pointer">
             <Image
               src={"/images/dropdownmenu/list.svg"}

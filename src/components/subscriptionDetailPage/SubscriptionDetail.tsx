@@ -12,6 +12,7 @@ import BigCircle from "@/components/lbcoreui/BigCircle";
 import Circle from "@/components/lbcoreui/Circle";
 import { cancelSubscriptionLink } from "@/lib/consts";
 import {useSubscriptionStatus} from "@/contexts/SubscribedContext/SubscriptionStatusContext";
+import { SuspenseTextSubs } from "@/components/suspense/SuspenseComponents";
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -86,13 +87,11 @@ export default function SubscriptionDetail({
         </div>
       </Link>
 
-      <h1 className="relative text-3xl font-bold text-lbtext mb-4 flex flex-row items-center z-500">
+      <h1 className="relative text-3xl md:text-4xl font-bold text-lbtext mb-4 flex flex-row justify-start items-center z-500">
         Subscription{" "}
-        <ChevronRight className="w-9 h-9 mt-1 text-muted-foreground" />
+        <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
         {loading ? (
-          <span className="blur-sm text-gray-400 italic select-none">
-            Loading subscription...
-          </span>
+          <SuspenseTextSubs />
         ) : data?.getSubscription.displayName ? (
           data.getSubscription.displayName
         ) : (
@@ -272,7 +271,7 @@ export default function SubscriptionDetail({
                               <Circle />
                             )}
 
-                            <p className="block bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
+                            <p className="block min-w-[110px] flex flex-col justify-center items-center bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
                               {transaction?.bookingTime
                                 ? format(
                                     parseISO(transaction.bookingTime),

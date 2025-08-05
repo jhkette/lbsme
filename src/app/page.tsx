@@ -47,7 +47,7 @@ export default function Home() {
             </Link>
             <Link href={"/sign-in"}>
               <button
-                className="w-92 p-3 shadow-lg border-2 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
+                className="w-92 p-3 shadow-lg border-1 border-lbdarkblue rounded-lg my-4 text-lg bg-white text-lbtext  cursor-pointer 
           hover:bg-lbtext hover:text-white transition duration-300"
               >
                 I already have an account
