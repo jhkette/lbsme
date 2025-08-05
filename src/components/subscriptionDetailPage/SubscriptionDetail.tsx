@@ -50,9 +50,15 @@ export default function SubscriptionDetail({
   }, [idToFetch, fetchMinnaWebUI]);
  // user has to be subscribed to use the minna cancel link
   // if not subscribed, use the default cancel subscription link
-  const destinationURL = subscribed && !subLoading ? minnaData?.url
-    ? encodeURI(`${minnaData?.url}&authToken=${minnaData?.authToken}`)
-    : cancelSubscriptionLink : cancelSubscriptionLink;
+ let destinationURL = "";
+
+if (subscribed && !subLoading) {
+  if (minnaData?.url && minnaData?.authToken) {
+    destinationURL = encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`);
+  }else{
+    destinationURL = cancelSubscriptionLink;
+  }
+}
 
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -220,9 +226,16 @@ export default function SubscriptionDetail({
                 rel="noopener noreferrer"
                 className="mx-auto text-center"
               >
-                <button className="mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg hover:bg-lbgreen cursor-pointer transition-colors">
-                  Cancel Subscription
-                </button>
+                <button
+    disabled={!destinationURL || subLoading}
+    className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
+      !destinationURL || subLoading
+        ? 'opacity-50 cursor-not-allowed'
+        : 'hover:bg-lbgreen cursor-pointer'
+    }`}
+  >
+    Cancel Subscription
+  </button>
               </a>
             </div>
           </div>

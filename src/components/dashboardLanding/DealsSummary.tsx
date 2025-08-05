@@ -24,8 +24,8 @@ const DealsSummary: React.FC<Props> = ({ deals }) => {
       </div>
 
   <div className="grid justify-center px-8 gap-4 
-  [grid-template-columns:repeat(auto-fit,_minmax(240px,_1fr))] 
-  md:[grid-template-columns:repeat(auto-fit,_minmax(245px,_1fr))] 
+  [grid-template-columns:repeat(auto-fit,_minmax(205px,_1fr))] 
+  md:[grid-template-columns:repeat(auto-fit,_minmax(220px,_1fr))] 
   lg:[grid-template-columns:repeat(auto-fit,_minmax(260px,_1fr))]">
   {deals?.map((deal) => {
     return <SmallDealItem deal={deal} key={deal.name} />;
