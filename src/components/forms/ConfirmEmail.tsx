@@ -113,6 +113,7 @@ export default function ConfirmEmail() {
       />
 
       <button
+      type="button" 
         onClick={resendCode}
         className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbtext text-white cursor-pointer hover:bg-lbgreen transition duration-300"
       >

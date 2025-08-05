@@ -161,7 +161,7 @@ export default function RegisterCompany() {
                 <input
                   type="submit"
                   value="Select your company"
-                  className="w-2/4 p-3 shadow-lg rounded-lg my-2 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+                  className="w-fit p-3 shadow-lg rounded-lg my-2 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
                 />
               </div>
             </div>
