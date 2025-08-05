@@ -21,7 +21,7 @@ export function DropdownMenuComponent() {
   };
   const { user } = useUser();
 
-    const fullname = `${user?.givenName!} ${user?.familyName}`
+   const fullname = `${user?.givenName ?? ''} ${user?.familyName ?? ''}`.trim();
 
   return (
     <DropdownMenu>
