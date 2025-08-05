@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { redirect, RedirectType } from 'next/navigation'
 
 interface OpenBankingPopUpProps {
   connectAccount: () => void;

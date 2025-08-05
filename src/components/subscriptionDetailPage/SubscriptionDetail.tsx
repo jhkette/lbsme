@@ -11,7 +11,7 @@ import { ChevronRight } from "lucide-react";
 import BigCircle from "@/components/lbcoreui/BigCircle";
 import Circle from "@/components/lbcoreui/Circle";
 import { cancelSubscriptionLink } from "@/lib/consts";
-
+import {useSubscriptionStatus} from "@/contexts/SubscribedContext/SubscriptionStatusContext";
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -36,6 +36,7 @@ export default function SubscriptionDetail({
     fetchPolicy: "cache-and-network",
   });
   const [fetchMinnaWebUI] = useFetchMinnaWebUiMutation();
+  const { subscribed, loading: subLoading } = useSubscriptionStatus();
 
   useEffect(() => {
     (async () => {
@@ -43,13 +44,14 @@ export default function SubscriptionDetail({
         variables: { subscriptionId: idToFetch },
       });
       setMinnaData(minnaData?.fetchMinnaWebUI);
-      // You can use minnaData here if needed
+     
     })();
   }, [idToFetch, fetchMinnaWebUI]);
-
-  const destinationURL = minnaData?.url
+ // user has to be subscribed to use the minna cancel link
+  // if not subscribed, use the default cancel subscription link
+  const destinationURL = subscribed && !subLoading ? minnaData?.url
     ? encodeURI(`${minnaData?.url}&authToken=${minnaData?.authToken}`)
-    : cancelSubscriptionLink;
+    : cancelSubscriptionLink : cancelSubscriptionLink;
 
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -214,7 +216,7 @@ export default function SubscriptionDetail({
                 </div>
               )}
               <a
-                href={destinationURL}
+                href={!subLoading ? destinationURL:""}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mx-auto text-center"

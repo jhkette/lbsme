@@ -21,7 +21,7 @@ export default function Home() {
             Email confirmation
           </h2>
          
-            <p className="text-lg font-bold text-lbtext mb-4  text-left w-2/4">
+            <p className="text-lg font-bold text-lbtext mb-2  text-left w-2/4">
              We have just sent a confirmation email to your email address. Please enter
              the code to confirm your email.
           </p>

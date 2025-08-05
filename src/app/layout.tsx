@@ -8,6 +8,7 @@ import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
 import { Analytics } from "@vercel/analytics/next";
 import { UserSignupProvider } from "@/contexts/UserCredentials/UserSignUpContext";
+import {SubscriptionStatusProvider}  from "@/contexts/SubscribedContext/SubscriptionStatusContext";
 import AmplifyProvider from "@/components/amplify/AmplifyConnect";
 
 const mulishSans = Mulish({
@@ -41,12 +42,15 @@ export default async function RootLayout({
       <body className="antialiased">
         <AmplifyProvider>
         <ApolloProviderWrapper>
+          
           <UserSignupProvider>
+            <SubscriptionStatusProvider>
             <OpenBankingProvider>
               <UserProvider>
                 <main>{children}</main>
               </UserProvider>
             </OpenBankingProvider>
+            </SubscriptionStatusProvider>
           </UserSignupProvider>
         </ApolloProviderWrapper>
         </AmplifyProvider>

@@ -132,7 +132,7 @@ export default function RegisterUser() {
         {/* Email */}
         <div className="w-2/4 flex flex-col">
           <label
-            htmlFor="phoneNumber"
+            htmlFor="email"
             className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
           >
             Email
@@ -141,7 +141,7 @@ export default function RegisterUser() {
             type="email"
             id="email"
             {...register("email")}
-            placeholder="Email address"
+            placeholder="Company email address"
             className={cn(
               "w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200",
               errors.email

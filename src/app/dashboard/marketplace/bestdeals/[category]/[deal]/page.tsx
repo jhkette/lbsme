@@ -3,7 +3,7 @@ import React from "react";
 
 import Link from "next/link";
 import { ArrowLeft} from "lucide-react";
-
+import Image from "next/image";
 import "@/styles/dealsslug.css";
 import { Params } from "next/dist/server/request/params";
 
@@ -40,6 +40,13 @@ export default async function page({
         <ArrowLeft size={18} color="#29235C" />{" "}
         <p className="text-lg pl-2 text-lbtext">Go back</p>
       </Link>
+        <Image
+             src="/images/main/lbgraphic.png"
+              height={250}
+              width={400}
+              alt="graphic"
+              className="absolute top-6 z-0 right-40"
+            />
      <DealOfferDetail categoryParam={category as string} slugParam={deal as string} />
      
     </section>

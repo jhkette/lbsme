@@ -20,7 +20,6 @@ export default function SpendingDetail(props: SpendingDetailProps) {
     // pollInterval: 30000,
   });
 
-
   const now = new Date();
 
   const currentYear = now.getFullYear();
@@ -55,19 +54,19 @@ export default function SpendingDetail(props: SpendingDetailProps) {
       (sum, tx) => sum + (tx.amount && tx.amount.amount ? tx.amount.amount : 0),
       0
     );
-    const isManual = data?.getSubscription?.isManual || false;
- const renewalDate = new Date(data?.getSubscription?.dates.renewalDate || "");
-const isAfterRenewal = now > renewalDate;
+  const isManual = data?.getSubscription?.isManual || false;
+  const renewalDate = new Date(data?.getSubscription?.dates.renewalDate || "");
+  const isAfterRenewal = now > renewalDate;
 
-let displayAmount: string|null;
+  let displayAmount: string | null;
 
-if (props.yearly) {
-  displayAmount = isManual ? null : `£${totalThisYear.toFixed(2)}`;
-} else if (data?.getSubscription?.isManual && isAfterRenewal) {
-  displayAmount = `£${data?.getSubscription?.costs?.monthly ?? "0.00"}`;
-} else {
-  displayAmount = `£${totalThisMonth.toFixed(2)}`;
-}
+  if (props.yearly) {
+    displayAmount = isManual ? null : `£${totalThisYear.toFixed(2)}`;
+  } else if (data?.getSubscription?.isManual && isAfterRenewal) {
+    displayAmount = `£${data?.getSubscription?.costs?.monthly ?? "0.00"}`;
+  } else {
+    displayAmount = `£${totalThisMonth.toFixed(2)}`;
+  }
 
   return (
     <>

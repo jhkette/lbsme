@@ -24,8 +24,8 @@ export default function DealItem({ deal }: Deal) {
   return (
     <>
       {deal.name ? (
-         <Link href={`/dashboard/marketplace/freetrials/${id}`}>
-        <div className="relative bg-[url(/images/deals/dealbg.png)] min-w-[275px] min-h-[185px] max-w-[275px] max-h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
+         <Link href={`/dashboard/marketplace/freetrials/${id}`} className="shadow-lg border-1 border-lbgray">
+        <div className=" relative bg-[url(/images/deals/dealbg.png)] min-w-[275px] min-h-[185px] max-w-[275px] max-h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
          
             <p className="text-center p-4 text-lg text-lbtext font-bold max-w-[180]">
               {deal.name}

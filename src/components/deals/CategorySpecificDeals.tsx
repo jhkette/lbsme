@@ -19,7 +19,7 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
   });
 
   return (
-    <section className="flex flex-col justify-start gap-5 items-end w-full mt-15 rounded-lg shadow-lg mb-12">
+    <section className="flex flex-col justify-start gap-5 items-end w-full mt-30 rounded-lg shadow-lg mb-12">
       <div className="w-full bg-lbgray rounded-t-lg p-3">
         <h2 className="text-2xl font-semibold text-lbtext">Best Deals</h2>
       </div>

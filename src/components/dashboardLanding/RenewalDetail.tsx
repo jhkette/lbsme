@@ -17,6 +17,9 @@ export default function TransactionDetail(props: TransactionDetailProps) {
   if (new Date() > new Date(props.sub.dates.renewalDate)) {
     return;
   }
+  if (new Date() < new Date(props.sub.dates.lastPaymentDate) && !props.renewal) {
+  return;
+}
   return (
     <div className="flex flex-row justify-between py-2 gap-8 items-center border-b-1">
       <div className="flex flex-row items-center gap-4">

@@ -117,7 +117,7 @@ export default function RegisterCompany() {
                 selectedCompany !== null ? selectedCompany.title : searchTerm
               }
             />
-            <div className="w-20 ml-6 mt-3">
+            <div className="w-18 ml-6 mt-3">
               <button
                 type="button"
                 onClick={searchName}

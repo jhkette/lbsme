@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import Link from "next/link";
-
+import { cn } from "@/lib/utils";
 import { logOut } from "@/actions/logOut";
 
 export function DropdownMenuComponent() {
@@ -20,11 +20,17 @@ export function DropdownMenuComponent() {
     window.location.href = "/"; // client-side redirect
   };
   const { user } = useUser();
+
+    const fullname = `${user?.givenName!} ${user?.familyName}`
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex font-semibold items-center text-lbtextdark gap-2 cursor-pointer hover:bg-gray-100 ease-in-out rounded-lg py-2 px-4">
-          {user?.givenName} {user?.familyName}
+        <div className="flex items-center text-lbtextdark gap-2 cursor-pointer hover:bg-gray-100 ease-in-out rounded-lg py-2 px-4">
+         <p className={cn(fullname.length > 40 ? 'text-sm' : 'text-base')}>
+  {fullname}
+</p>
+
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-100 mx-4 z-300" align="start" side="bottom">

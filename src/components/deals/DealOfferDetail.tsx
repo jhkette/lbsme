@@ -64,13 +64,7 @@ const foundItem = getFinalDeal(deals as DealItem[], categoryParam, slugParam)
         Deals Marketplace &gt; {foundItem?.name}
       </h1>
 
-      <Image
-        src="/lbgraphic.png"
-        height={250}
-        width={400}
-        alt="graphic"
-        className="absolute top-6 z-0 right-40"
-      />
+     
 
       <div className="deals w-full bg-white p-8 rounded-md mt-12">
         <p className="text-lbgreen font-semibold">Little Birdie reccomends:</p>
