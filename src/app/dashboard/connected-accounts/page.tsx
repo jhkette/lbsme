@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import { useOBContext } from "@/contexts/OpenBanking/OpenBankingProvider";
 import { useGetBankAccountQuery } from "@/graphql/getBankAccount.generated";
-import Image from "next/image";
+
 import { OpenBankingPopUp } from "@/components/lbcoreui/OpenBankingPopUp";
 import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
-export default function page() {
+export default function Page() {
   const { user } = useUser();
   const router = useRouter();
   const { openOBPage } = useOBContext();
