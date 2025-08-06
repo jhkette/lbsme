@@ -134,7 +134,7 @@ export default function RegisterCompany() {
               <h2 className="text-lbtext text-lg font-semibold pb-2 text-left">
                 Select your company details from the list below:
               </h2>
-              <div className="max-h-[180px] border-1 border-gray-300 p-4 mx-auto scrollbar-nice overflow-y-auto mb-4">
+              <div className="max-h-[180px] border-1 border-gray-300 rounded-lg px-4 py-6 mx-auto scrollbar-nice overflow-y-auto mb-4">
                 {searchResults.map((result) => {
                   return (
                     <div

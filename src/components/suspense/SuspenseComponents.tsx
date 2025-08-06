@@ -27,7 +27,7 @@ export function SuspenseTextSubs() {
 
 export function SuspenseDeals() {
   return (
-    <div className="loading flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 w-full h-[450px] z-1"></div>
+    <div className="loading flex flex-row text-lbtext justify-center shadow-lg bg-white rounded-lg p-4 w-full h-[450px] mt-18 z-1"></div>
   );
 }
 

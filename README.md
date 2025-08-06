@@ -61,7 +61,7 @@ Nextjs is built on the react library. It features Server Side rendering (the sit
 
 #### Graphql / Apollo CLient
 
-This project uses graphql with Apollo Client to query data from the backend. Apollo client is the intermediary library used to run the queries and cache them. There are different caching options available but in the project I feel it is advantageous to cache as much as possible. Therefore I reccomend using the "cache and network" option. To add a graphql query check against the backend or AWS appsync playground that it will run then add it to the graphql folder. Then run  ``pnpm run codegen`` to generate functions you can call in the project. 
+This project uses graphql with Apollo Client to query data from the backend. Apollo client is the intermediary library used to run the queries and cache them. There are different caching options available but in the project I feel it is advantageous to cache as much as possible. Therefore I recommend using the "cache and network" option. To add a graphql query check against the backend or AWS appsync playground that it will run then add it to the graphql folder. Then run  ``pnpm run codegen`` to generate functions you can call in the project. 
 
 
 #### Tailwind css 

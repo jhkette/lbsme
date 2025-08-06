@@ -67,7 +67,7 @@ const foundItem = getFinalDeal(deals as DealItem[], categoryParam, slugParam)
      
 
       <div className="deals w-full bg-white p-8 rounded-md mt-12">
-        <p className="text-lbgreen font-semibold">Little Birdie reccomends:</p>
+        <p className="text-lbgreen font-semibold">Little Birdie recommends:</p>
         {foundItem?.logo &&
         <Image src={foundItem.logo as string} alt={foundItem.name + " logo"} width={150} height={150} />
 }

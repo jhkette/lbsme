@@ -16,10 +16,12 @@ if(category){
   categoryId = slugify(category, { lower: true }); 
 }
 
+
+
   return (
     <>
       {category ? (
-         <Link href={`/dashboard/marketplace/bestdeals/${categoryId}`}>
+         <Link href={`/dashboard/marketplace/bestdeals/${categoryId}`}  className="hover:scale-105 transition-transform duration-300 hover: opacity-90 ease-in-out">
         <div className="shadow-lg border-1 border-lbgray relative bg-[url(/images/deals/dealbg.png)] min-w-[275px] min-h-[185px] max-w-[275px] max-h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
          
             <p className="text-center p-4 text-lg text-lbtext font-bold max-w-[180]">

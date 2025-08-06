@@ -2,6 +2,7 @@
 import slugify from "slugify";
 import Image from "next/image";
 import Link from "next/link";
+import { SuspenseDeals } from "@/components/suspense/SuspenseComponents";
 import { useGetAllDealsQuery } from "@/graphql/getAllDeals.generated";
 type DealProps = {
   category: string;
@@ -19,11 +20,15 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
   });
 
   return (
-    <section className="flex flex-col justify-start gap-5 items-end w-full mt-30 rounded-lg shadow-lg mb-12">
+    <section className="flex flex-col justify-start items-end w-full mt-30 rounded-lg shadow-lg mb-12">
       <div className="w-full bg-lbgray rounded-t-lg p-3">
         <h2 className="text-2xl font-semibold text-lbtext">Best Deals</h2>
       </div>
-      <div className="scrollbar-hide scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-lbgreen scrollbar-track-lbgreen overflow-x-auto flex flex-row py-4 pl-12 rounded-b-lg  bg-white justify-start items-end w-full flex-wrap max-h-[550px] ">
+       { loading ? (
+              <SuspenseDeals/>
+            ) : (
+            
+      <div className="overflow-x-auto scrollbar-nice flex flex-row py-4 pl-12 rounded-b-lg  bg-white justify-start items-end w-full flex-wrap max-h-[550px] ">
         {category && groupedData
           ? groupedData.deals.map((deal) => {
               const dealSlug = slugify(deal.name, { lower: true });
@@ -32,6 +37,7 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
                 <Link
                   key={dealSlug}
                   href={`/dashboard/marketplace/bestdeals/${category}/${dealSlug}`}
+                  className="hover:scale-105 transition-transform duration-300 hover: opacity-90 ease-in-out"
                 >
                   <div className="relative bg-[url(/images/deals/dealbg.png)] min-w-[275px] min-h-[185px] max-w-[275px] max-h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
                     <p className="text-center p-4 text-lg text-lbtext font-bold max-w-[180]">
@@ -51,6 +57,7 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
             })
           : null}
       </div>
+      )}
     </section>
   );
 }

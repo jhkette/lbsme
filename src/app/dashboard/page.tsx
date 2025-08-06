@@ -5,9 +5,7 @@ import Image from "next/image";
 import {
   useGetSubscriptionsQuery,
 } from "@/graphql/getMainSubData.generated";
-import {
-  useGetFeaturedDealsQuery
-} from "@/graphql/getFeaturedDeals.generated";
+
 import { Subscription } from "@/interfaces/Subscription";
 import {
   SuspenseIntro,
@@ -19,7 +17,7 @@ import { SubscriptionStatusEnum } from "@/graphql-types/generated/types";
 import IntroHome from "@/components/lbcoreui/IntroHome";
 import SpendingSummary from "@/components/dashboardLanding/TransactionSummary";
 import DealsSummary from "@/components/dashboardLanding/DealsSummary";
-import { DealsIntro } from "@/lib/dealsIntro";
+import { DealsIntro } from "@/components/dashboardLanding/dealsIntro";
 import DashboardNoSubs from "@/components/dashboardLanding/DashboardNoSubs";
 
 import {GetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated"

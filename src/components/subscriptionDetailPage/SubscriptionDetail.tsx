@@ -4,14 +4,14 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { SuspenseSubscriptionDetail } from "@/components/suspense/SuspenseComponents";
-import { format, parseISO, isBefore, set } from "date-fns";
+import { format, parseISO, isBefore, set, sub } from "date-fns";
 import { useGetSubscriptionQuery } from "@/graphql/getSubscriptionDetail.generated";
 import { useFetchMinnaWebUiMutation } from "@/graphql/minnaMutation.generated";
 import { ChevronRight } from "lucide-react";
 import BigCircle from "@/components/lbcoreui/BigCircle";
 import Circle from "@/components/lbcoreui/Circle";
 import { cancelSubscriptionLink } from "@/lib/consts";
-import {useSubscriptionStatus} from "@/contexts/SubscribedContext/SubscriptionStatusContext";
+import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
 
 type SubscriptionDetailProps = {
   idToFetch: string;
@@ -45,26 +45,27 @@ export default function SubscriptionDetail({
         variables: { subscriptionId: idToFetch },
       });
       setMinnaData(minnaData?.fetchMinnaWebUI);
-     
     })();
   }, [idToFetch, fetchMinnaWebUI]);
- // user has to be subscribed to use the minna cancel link
+  // user has to be subscribed to use the minna cancel link
   // if not subscribed, use the default cancel subscription link
 
-let destinationURL = "";
-const isLoading = subLoading  || loading 
+  let destinationURL = "";
+  
 
-if (subscribed && !isLoading) {
-  if (minnaData?.url && minnaData?.authToken) {
-    destinationURL = encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`);
-  } else {
-    destinationURL = cancelSubscriptionLink;
+  if (subscribed && !subLoading) {
+    if (minnaData?.url && minnaData?.authToken) {
+      destinationURL = encodeURI(
+        `${minnaData.url}&authToken=${minnaData.authToken}`
+      );
+    } else {
+      destinationURL = cancelSubscriptionLink;
+    }
   }
-}
 
   const now = new Date();
   const currentYear = now.getFullYear();
-  console.log(data, "data from subscription detail");
+
 
   const totalThisYear = (data?.getSubscription?.transactions ?? [])
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
@@ -96,17 +97,16 @@ if (subscribed && !isLoading) {
       </Link>
 
       <h1 className="relative text-3xl md:text-4xl font-bold text-lbtext mb-4 flex flex-row justify-start items-center z-500">
-        Subscription{" "}
-        <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
+        Subscription <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
         {loading ? (
-            <span className="blur-sm text-gray-400 select-none">
-              Loading subscription
-            </span>
-          ) : data?.getSubscription.displayName ? (
-            data.getSubscription.displayName
-          ) : (
-            data?.getSubscription.merchant?.name
-          )}
+          <span className="blur-sm text-gray-400 select-none">
+            Loading subscription
+          </span>
+        ) : data?.getSubscription.displayName ? (
+          data.getSubscription.displayName
+        ) : (
+          data?.getSubscription.merchant?.name
+        )}
       </h1>
 
       <div className="flex flex-row items-start gap-4 mb-4">
@@ -225,23 +225,23 @@ if (subscribed && !isLoading) {
                 </div>
               )}
               <a
-                 href={destinationURL || "#"}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="mx-auto text-center"
-  onClick={(e) => !destinationURL && e.preventDefault()} // Prevent navigation if no URL
->
-  <button
-    disabled={!destinationURL || isLoading} // Disable when NO destination URL or loading
-    className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
-      !destinationURL || isLoading
-        ? 'opacity-50 cursor-not-allowed'
-        : 'hover:bg-lbgreen cursor-pointer'
-    }`}
-  >
-    {isLoading ? 'Loading...' : 'Cancel Subscription'}
-  </button>
-</a>
+                href={destinationURL || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-auto text-center"
+                onClick={(e) => !destinationURL && e.preventDefault()} 
+              >
+                <button
+                  disabled={!destinationURL || subLoading} 
+                  className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
+                    !destinationURL || subLoading
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-lbgreen cursor-pointer"
+                  }`}
+                >
+                  {subLoading ? "Loading..." : "Cancel Subscription"}
+                </button>
+              </a>
             </div>
           </div>
         )}

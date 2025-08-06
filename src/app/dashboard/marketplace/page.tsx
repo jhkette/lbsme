@@ -1,11 +1,13 @@
 "use client";
-import React, {useEffect} from "react";
-import { useGetTrialsQuery } from "@/graphql/getTrials.generated";
+import React, {useEffect, useState} from "react";
+
 import Image from "next/image";
 import { useGetAllDealsQuery } from "@/graphql/getAllDeals.generated";
 import DealCategory from "@/components/deals/DealCategory";
 import FreeTrialItem from "@/components/deals/FreeTrialItem";
 import {SuspenseDeals} from "@/components/suspense/SuspenseComponents";
+import { useApolloClient } from "@apollo/client";
+import { fetchAllTrials } from "@/lib/freeTrialsQuery"; // adjust path
 
 type Deal = {
   // Add other properties as needed based on your deal structure
@@ -14,18 +16,48 @@ type Deal = {
 <div className="w-full bg-lbgray rounded-t-lg p-2"></div>;
 
 export default function Page() {
+  
   // stops odd scroll behavior on page change
   // this is a workaround for the issue where the page scrolls to the bottom on initial load
   // it locks the scroll position to the top of the page
   useEffect(() => {
   window.scrollTo(0, 0); // Lock to top
 }, []);
-  const { loading, error, data, refetch } = useGetTrialsQuery({
-    errorPolicy: "all",
+  const client = useApolloClient();
+    const [freeTrials, setFreeTrials] = useState<Deal[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+  
+    useEffect(() => {
+      let isMounted = true;
+  
+      async function loadTrials() {
+        try {
+          const trials = await fetchAllTrials(client);
+          if (isMounted) {
+            setFreeTrials(trials);
+          }
+        } catch (err) {
+          if (isMounted) {
+            setError(err as Error);
+          }
+        } finally {
+          if (isMounted) {
+            setLoading(false);
+          }
+        }
+      }
+  
+      loadTrials();
+  
+      return () => {
+        isMounted = false;
+      };
+    }, [client]);
 
-    fetchPolicy: "cache-and-network",
-  });
 
+
+ 
   const {
     loading: dealLoading,
     error: dealError,
@@ -36,8 +68,6 @@ export default function Page() {
     fetchPolicy: "cache-and-network",
   });
 
-  const finalData = data?.getTrials.items;
-  console.log(finalData, "final trials data")
 
   const finalDealsData = dealData?.getAllDeals.map((deal) => {
     return deal.category;
@@ -60,7 +90,7 @@ export default function Page() {
         </div>
         <div className="overflow-x-auto flex flex-row py-4 px-12 rounded-b-lg  bg-white justify-start items-center w-full flex-wrap h-[455px] scrollbar-nice "> 
         
-          {finalData?.map((deal: Deal) => {
+          {freeTrials?.map((deal: Deal) => {
             return <FreeTrialItem key={deal.name} deal={deal} />;
           })}
         </div>

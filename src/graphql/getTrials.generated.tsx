@@ -3,21 +3,25 @@ import * as Types from '../graphql-types/generated/types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type GetTrialsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetTrialsQueryVariables = Types.Exact<{
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  nextToken?: Types.InputMaybe<Types.Scalars['String']['input']>;
+}>;
 
 
-export type GetTrialsQuery = { __typename?: 'Query', getTrials: { __typename?: 'FreeTrialsResult', items: Array<{ __typename?: 'GetFreeTrialsResult', logo: string, name: string, url: string, description: string }> } };
+export type GetTrialsQuery = { __typename?: 'Query', getTrials: { __typename?: 'FreeTrialsResult', nextToken?: string | null, items: Array<{ __typename?: 'GetFreeTrialsResult', logo: string, name: string, url: string, description: string }> } };
 
 
 export const GetTrialsDocument = gql`
-    query getTrials {
-  getTrials {
+    query getTrials($limit: Int, $nextToken: String) {
+  getTrials(limit: $limit, nextToken: $nextToken) {
     items {
       logo
       name
       url
       description
     }
+    nextToken
   }
 }
     `;
@@ -34,6 +38,8 @@ export const GetTrialsDocument = gql`
  * @example
  * const { data, loading, error } = useGetTrialsQuery({
  *   variables: {
+ *      limit: // value for 'limit'
+ *      nextToken: // value for 'nextToken'
  *   },
  * });
  */

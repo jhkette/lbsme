@@ -10,7 +10,7 @@ export default function BirdConfirmAccount() {
                alt="Bird"
                width={250}
                height={250}
-               className="mx-12 w-[155px] md:w-[175px] mt-2 h-auto object-contain py-8"
+               className="mx-12 w-[135px] md:w-[155px] mt-2 h-auto object-contain py-8"
              />
            <h1 className="text-2xl/10 text-4xl/12 font-bold text-lbtext mb-4 px-12  text-center w-[85%] ">
                Subscriptions managed, Money Saved, Life Simplified
