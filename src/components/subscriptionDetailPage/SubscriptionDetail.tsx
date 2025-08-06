@@ -52,7 +52,7 @@ export default function SubscriptionDetail({
   // if not subscribed, use the default cancel subscription link
 
 let destinationURL = "";
-const isLoading = subLoading  || loading || !minnaData;
+const isLoading = subLoading  || loading 
 
 if (subscribed && !isLoading) {
   if (minnaData?.url && minnaData?.authToken) {

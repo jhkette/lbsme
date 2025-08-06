@@ -18,7 +18,7 @@ export const searchCompanyName = async (searchTerm: string) => {
       "https://api.company-information.service.gov.uk/search?q=" + searchTerm,
       {
         headers: {
-          Authorization: process.env.NEXT_PUBLIC_COMPANY_SEARCH_AUTHORIZATION,
+          Authorization: process.env.COMPANY_SEARCH_AUTHORIZATION,
         },
       }
     );
