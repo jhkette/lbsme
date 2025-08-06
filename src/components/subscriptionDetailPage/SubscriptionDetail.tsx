@@ -30,7 +30,7 @@ export default function SubscriptionDetail({
   const [minnaData, setMinnaData] = useState<
     fetchMinnaWebUI | null | undefined
   >(null);
-
+ const [destinationURL, setDestinationURL] = useState<string | null>(null);
   const { loading, error, data, refetch } = useGetSubscriptionQuery({
     variables: { id: idToFetch },
     errorPolicy: "all",
@@ -47,21 +47,25 @@ export default function SubscriptionDetail({
       setMinnaData(minnaData?.fetchMinnaWebUI);
     })();
   }, [idToFetch, fetchMinnaWebUI]);
-  // user has to be subscribed to use the minna cancel link
-  // if not subscribed, use the default cancel subscription link
-
-  let destinationURL = "";
-  
-
-  if (subscribed && !subLoading) {
+ 
+// Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
+  useEffect(() => {
+   
     if (minnaData?.url && minnaData?.authToken) {
-      destinationURL = encodeURI(
-        `${minnaData.url}&authToken=${minnaData.authToken}`
+      setDestinationURL(encodeURI(
+        `${minnaData.url}&authToken=${minnaData.authToken}`)
       );
     } else {
-      destinationURL = cancelSubscriptionLink;
-    }
+      setDestinationURL(cancelSubscriptionLink);
+    
   }
+  }, [minnaData]);
+   
+
+
+  
+
+
 
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -232,7 +236,7 @@ export default function SubscriptionDetail({
                 onClick={(e) => !destinationURL && e.preventDefault()} 
               >
                 <button
-                  disabled={!destinationURL} 
+                 
                   className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
                     !destinationURL 
                       ? "opacity-50 cursor-not-allowed"

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function MobileCheck({ children }: { children: ReactNode }) {
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const isMobile = () => {
@@ -15,7 +16,7 @@ export default function MobileCheck({ children }: { children: ReactNode }) {
 
     if (isMobile()) {
       // optionally check if user already dismissed the modal
-     
+      router.push("/mobile-redirect");
     }
   }, []);
 
