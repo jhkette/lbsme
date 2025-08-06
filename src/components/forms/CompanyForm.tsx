@@ -8,7 +8,7 @@ import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { searchCompanyName } from "@/actions/companySearch";
 import { cn } from "@/lib/utils";
 import { Building2 } from "lucide-react";
-import { v4 as uuidv4 } from 'uuid';
+
 
 export interface CompanyDetails {
   title: string;
@@ -135,7 +135,7 @@ export default function RegisterCompany() {
                 Select your company details from the list below:
               </h2>
               <div className="max-h-[180px] border-1 border-gray-300 rounded-lg px-4 py-6 mx-auto scrollbar-nice overflow-y-auto mb-4">
-                {searchResults.map((result) => {
+                {searchResults.map((result, index) => {
                   return (
                     <div
                       className={cn(
@@ -143,7 +143,7 @@ export default function RegisterCompany() {
                         selectedCompany?.title === result.title &&
                           "bg-lbgreen text-white"
                       )}
-                      key={uuidv4()}
+                      key={index}
                       onClick={() => setSelectedCompany(result)}
                     >
                       <div className="flex flex-row justify-start items-center gap-2 font-semibold">

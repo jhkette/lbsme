@@ -121,7 +121,7 @@ export default function SubscriptionMain() {
   return (
     <div className="my-13">
       {groupedSubs !== null && (
-       <ul className="flex flex-row gap-12 list-none overflow-x-auto whitespace-nowrap scrollbar-nice">
+       <ul className="flex flex-row gap-10 list-none overflow-x-auto whitespace-nowrap scrollbar-nice">
           {["All Subscriptions", ...Object.keys(groupedSubs)].map(
             (category) => (
               <li

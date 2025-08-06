@@ -232,14 +232,14 @@ export default function SubscriptionDetail({
                 onClick={(e) => !destinationURL && e.preventDefault()} 
               >
                 <button
-                  disabled={!destinationURL || subLoading} 
+                  disabled={!destinationURL} 
                   className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
-                    !destinationURL || subLoading
+                    !destinationURL 
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-lbgreen cursor-pointer"
                   }`}
                 >
-                  {subLoading ? "Loading..." : "Cancel Subscription"}
+                  {!destinationURL ? "Loading..." : "Cancel Subscription"}
                 </button>
               </a>
             </div>

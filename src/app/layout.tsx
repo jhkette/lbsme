@@ -8,7 +8,8 @@ import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 import { getToken } from "@/actions/getToken";
 import { Analytics } from "@vercel/analytics/next";
 import { UserSignupProvider } from "@/contexts/UserCredentials/UserSignUpContext";
-import {SubscriptionStatusProvider}  from "@/contexts/SubscribedContext/SubscriptionStatusContext";
+import { SubscriptionStatusProvider } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
+import MobileCheck from "@/components/mobileCheck/MobileCheck";
 import AmplifyProvider from "@/components/amplify/AmplifyConnect";
 
 const mulishSans = Mulish({
@@ -21,17 +22,11 @@ export const metadata: Metadata = {
   description: "The UK's top subscription & bill management app",
 };
 
-
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
- 
-
-
-
   return (
     <html lang="en" className={`${mulishSans.variable} antialiased`}>
       <Head>
@@ -40,20 +35,21 @@ export default async function RootLayout({
         <meta name="robots" content="noindex,nofollow" />
       </Head>
       <body className="antialiased">
-        <AmplifyProvider>
-        <ApolloProviderWrapper>
-          
-          <UserSignupProvider>
-            <SubscriptionStatusProvider>
-            <OpenBankingProvider>
-              <UserProvider>
-                <main>{children}</main>
-              </UserProvider>
-            </OpenBankingProvider>
-            </SubscriptionStatusProvider>
-          </UserSignupProvider>
-        </ApolloProviderWrapper>
-        </AmplifyProvider>
+        <MobileCheck>
+          <AmplifyProvider>
+            <ApolloProviderWrapper>
+              <UserSignupProvider>
+                <SubscriptionStatusProvider>
+                  <OpenBankingProvider>
+                    <UserProvider>
+                      <main>{children}</main>
+                    </UserProvider>
+                  </OpenBankingProvider>
+                </SubscriptionStatusProvider>
+              </UserSignupProvider>
+            </ApolloProviderWrapper>
+          </AmplifyProvider>
+        </MobileCheck>
 
         <Analytics />
       </body>

@@ -4,8 +4,6 @@
  
 This is a Repo for a demo version of the Little Birdie SME website.   
 
-### How do I get set up? ###
-
 
 ## Set up ##
 
@@ -82,6 +80,11 @@ The person how made this repo was Joseph Ketterer. To get in contact with him pl
 
 ## CMS
 A cms is available at /studio and you can login with an allowed email
+
+## Additional info
+At the moment the site is hidden from search engines using -  
+```<meta name="robots" content="noindex,nofollow" />```
+If the site is visiting on a mobile it redirects to a download the app page - but the link has not been added. 
 
 ### Deployed on Vercel
 
