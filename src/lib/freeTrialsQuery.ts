@@ -20,7 +20,7 @@ interface FetchAllTrialsOptions {
 export async function fetchAllTrials(
   client: FetchAllTrialsOptions["client"]
 ): Promise<Deal[]> {
-  let allItems: Deal[] = [];
+  const allItems: Deal[] = [];
   let nextToken: string | null | undefined = null;
   do {
     const { data }: { data: GetTrialsResponse } = await client.query({
