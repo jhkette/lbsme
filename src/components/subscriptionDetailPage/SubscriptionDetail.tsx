@@ -50,12 +50,14 @@ export default function SubscriptionDetail({
   }, [idToFetch, fetchMinnaWebUI]);
  // user has to be subscribed to use the minna cancel link
   // if not subscribed, use the default cancel subscription link
- let destinationURL = "";
 
-if (subscribed && !subLoading) {
+let destinationURL = "";
+const isLoading = subLoading  || loading || !minnaData;
+
+if (subscribed && !isLoading) {
   if (minnaData?.url && minnaData?.authToken) {
     destinationURL = encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`);
-  }else{
+  } else {
     destinationURL = cancelSubscriptionLink;
   }
 }
@@ -223,22 +225,23 @@ if (subscribed && !subLoading) {
                 </div>
               )}
               <a
-                href={!subLoading ? destinationURL:""}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mx-auto text-center"
-              >
-                <button
-    disabled={!destinationURL || subLoading}
+                 href={destinationURL || "#"}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mx-auto text-center"
+  onClick={(e) => !destinationURL && e.preventDefault()} // Prevent navigation if no URL
+>
+  <button
+    disabled={!destinationURL || isLoading} // Disable when NO destination URL or loading
     className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
-      !destinationURL || subLoading
+      !destinationURL || isLoading
         ? 'opacity-50 cursor-not-allowed'
         : 'hover:bg-lbgreen cursor-pointer'
     }`}
   >
-    Cancel Subscription
+    {isLoading ? 'Loading...' : 'Cancel Subscription'}
   </button>
-              </a>
+</a>
             </div>
           </div>
         )}
