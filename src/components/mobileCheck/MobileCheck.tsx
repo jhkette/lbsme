@@ -15,7 +15,7 @@ export default function MobileCheck({ children }: { children: ReactNode }) {
     };
 
     if (isMobile()) {
-      // optionally check if user already dismissed the modal
+    
       router.push("/mobile-redirect");
     }
   }, []);
