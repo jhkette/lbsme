@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-
+import {format, parseISO} from "date-fns";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import { useOBContext } from "@/contexts/OpenBanking/OpenBankingProvider";
@@ -13,7 +13,7 @@ import { useSubscriptionStatus } from "@/contexts/SubscribedContext/Subscription
 export default function Page() {
   const { user } = useUser();
   const router = useRouter();
-  const { openOBPage } = useOBContext();
+  const { openOBPage, OBLoading } = useOBContext();
 
   const connectAccount = () => {
     // setModalVisible(false);
@@ -42,6 +42,7 @@ export default function Page() {
     },
   }));
  
+
 
 
   return (
@@ -84,9 +85,9 @@ export default function Page() {
                     />
                   ) : <Landmark size={30}/>} <span className="text-lbtextdark font-normal">{account.provider.displayName}</span>
                 </p>
-                
+                 props.sub.dates.renewalDate), "do MMM yyyy")
                  <p className="text-lg font-semibold text-lbtext">
-                  Last Synced: <span className="text-lbtextdark font-normal">{account.lastSynced}</span>
+                  Last Synced: <span className="text-lbtextdark font-normal">{format(parseISO(account.lastSynced),  "do MMM yyyy")}</span>
                 </p>
               </div>
             ))}
@@ -94,10 +95,11 @@ export default function Page() {
         </div>
         <div className=" w-1/2  py-4 ">
        <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbgray rounded-2xl  mx-18 my-6 p-14"> 
-        {accountInfoList[0]?.status === "Active" ? "Please click add another account to connect another bank account to Little Birdie." : "Please click connect to Open Banking to connect your bank account to Little Birdie."}
+       <p className="text-center"> {accountInfoList[0]?.status === "Active" ? "Please click add another account to connect another bank account to Little Birdie." : "Please click connect to Open Banking to connect your bank account to Little Birdie."}</p>
           <div>
             <OpenBankingPopUp
               connectAccount={connectAccount}
+              obLoading={OBLoading}
               navigateDashboard={navigateDashboard}
               status={accountInfoList[0]?.status}
             />
