@@ -4,7 +4,7 @@ import { useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MobileCheck({ children }: { children: ReactNode }) {
-  const [showModal, setShowModal] = useState(false);
+ 
   const router = useRouter();
 
   useEffect(() => {

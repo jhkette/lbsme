@@ -12,7 +12,8 @@ import BigCircle from "@/components/lbcoreui/BigCircle";
 import Circle from "@/components/lbcoreui/Circle";
 import { cancelSubscriptionLink } from "@/lib/consts";
 import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
-
+import { SubscriptionDetails } from "@/interfaces/DetailedSubscription";
+import { get } from "http";
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -24,13 +25,19 @@ interface fetchMinnaWebUI {
   validTo?: string | null;
 }
 
+/*
+ *!TO DO THIS FILE IS TOO LARGE AND NEEDS TO BE SPLIT INTO SMALLER COMPONENTS FOR BETTER READABILITY
+ *!This file is responsible for displaying the subscription details, including costs, dates, and transactions
+ * These could be split into individual compoenents
+ */
+
 export default function SubscriptionDetail({
   idToFetch,
 }: SubscriptionDetailProps) {
   const [minnaData, setMinnaData] = useState<
     fetchMinnaWebUI | null | undefined
   >(null);
- const [destinationURL, setDestinationURL] = useState<string | null>(null);
+  const [destinationURL, setDestinationURL] = useState<string | null>(null);
   const { loading, error, data, refetch } = useGetSubscriptionQuery({
     variables: { id: idToFetch },
     errorPolicy: "all",
@@ -47,40 +54,50 @@ export default function SubscriptionDetail({
       setMinnaData(minnaData?.fetchMinnaWebUI);
     })();
   }, [idToFetch, fetchMinnaWebUI]);
- 
-// Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
+
+  // Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
   useEffect(() => {
-   
     if (minnaData?.url && minnaData?.authToken) {
-      setDestinationURL(encodeURI(
-        `${minnaData.url}&authToken=${minnaData.authToken}`)
+      setDestinationURL(
+        encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`)
       );
     } else {
       setDestinationURL(cancelSubscriptionLink);
-    
-  }
+    }
   }, [minnaData]);
-   
-
-
-  
-
-
 
   const now = new Date();
   const currentYear = now.getFullYear();
 
+  function projectedAmountByYearEnd(bookingTime: string, amount: number) {
+    const bookingDate = new Date(bookingTime);
+    const month = bookingDate.getUTCMonth() + 1;
 
-  const totalThisYear = (data?.getSubscription?.transactions ?? [])
-    .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
-    .filter(
-      (tx) => new Date(tx.bookingTime as string).getFullYear() === currentYear
-    )
-    .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
+    const monthsLeft = 12 - month;
+    return amount * monthsLeft;
+  }
+
+  
 
   const allTimeTotal = (data?.getSubscription?.transactions ?? [])
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
     .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
+
+  function getExpectedSpendThisYear(
+    subscription: SubscriptionDetails
+  ): string | undefined {
+    if (subscription.type === "yearly") {
+      return `${subscription.costs.monthly * 12}`;
+    }
+    if (subscription.type === "monthly" || subscription.type === "weekly") {
+      const projection = projectedAmountByYearEnd(
+        subscription.transactions?.[subscription.transactions?.length - 1]
+          .bookingTime,
+        subscription.costs.monthly
+      );
+      return `${(subscription.costs.yearly + projection).toFixed(2)}`;
+    }
+  }
 
   return (
     <>
@@ -208,7 +225,9 @@ export default function SubscriptionDetail({
                   {/* Cell 4: Spend This Year */}
                   <div className="flex flex-col mt-4">
                     <p className="text-xs text-gray-500">SPEND THIS YEAR</p>
-                    <p className="font-semibold">£{totalThisYear.toFixed(2)}</p>
+                    <p className="font-semibold">
+                      £{data.getSubscription.costs.yearly.toFixed(2)}
+                    </p>
                   </div>
 
                   {/* Cell 5: Total Spend */}
@@ -222,9 +241,14 @@ export default function SubscriptionDetail({
                     <p className="text-xs text-gray-500">
                       EXP TOTAL SPEND THIS YEAR
                     </p>
-                    <p className="font-semibold">
-                      £{(data?.getSubscription.costs.monthly * 12).toFixed(2)}
-                    </p>
+                    {!loading  && (
+                      <p className="font-semibold">
+                        £
+                        {getExpectedSpendThisYear(
+                          data?.getSubscription as SubscriptionDetails
+                        ) ?? "0.00"}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
@@ -233,12 +257,11 @@ export default function SubscriptionDetail({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mx-auto text-center"
-                onClick={(e) => !destinationURL && e.preventDefault()} 
+                onClick={(e) => !destinationURL && e.preventDefault()}
               >
                 <button
-                 
                   className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
-                    !destinationURL 
+                    !destinationURL
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-lbgreen cursor-pointer"
                   }`}
