@@ -36,7 +36,7 @@ export function OpenBankingPopUp({ connectAccount, navigateDashboard, status, ob
           <DialogTitle className="text-xl">You are now connected to Open Banking</DialogTitle>
           <DialogDescription className="text-lg pt-4">
             Please follow the instuctions on the new tab to add your account to Little Birdie. 
-            Once you have recieved a success message return to the Little Birdie website.
+            Once you have received a success message return to the Little Birdie website.
           </DialogDescription>
         </DialogHeader>
        
