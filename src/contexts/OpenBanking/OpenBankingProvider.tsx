@@ -11,6 +11,7 @@ import {
 } from "react";
 import { NetworkStatus } from "@apollo/client";
 import { useGetProviderlessUserAuthGatewayQuery } from "@/graphql/getOpenBanking.generated";
+import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
 
 interface OpenBankingProps {
   openOBPage: () => void;
@@ -32,15 +33,16 @@ export const useOBContext = () => useContext(OBContext);
 
 const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
   const [OBLoading, setOBLoading] = useState(false);
+    const { subscribed, loading: subLoading } = useSubscriptionStatus();
 
-  // Replace this with actual user/subscription context if needed
-  const subscribed = true;
+  // Replace this with actual user/subscription context  
 
   const { data, refetch, networkStatus } =
     useGetProviderlessUserAuthGatewayQuery({
       fetchPolicy: "cache-and-network",
       notifyOnNetworkStatusChange: true,
       pollInterval: 10000,
+      // skip if not subscribed
       skip: !subscribed,
     });
 
