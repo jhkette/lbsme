@@ -57,8 +57,9 @@ export default function Page() {
         alt="graphic"
         className="absolute -top-2 z-0 right-40 "
       />
-      <div className="my-16 flex flex-row gap-12 mt-21 ">
-        <div className="w-1/2 p-4 rounded-2xl   shadow-2xl bg-white h-120 border-1 border-gray-300 overflow">
+      <div className="my-16  mt-21 ">
+        <div className="flex flex-row gap-12 rounded-2xl   shadow-2xl bg-white h-120 border-1 border-gray-300">
+        <div className="w-1/2 p-4  overflow-x-auto scrollbar-nice">
           <div className="flex flex-col items-start justify-start mx-8 pb-1 my-2">
             <h2 className="text-2xl font-semibold text-lbtext my-4">
               Your account details
@@ -77,25 +78,26 @@ export default function Page() {
                   ) : <Landmark size={50}/>}
                 </p>
                 <p className="text-lg font-semibold text-lbtext">
-                  {account.provider.displayName}
+                 Account: <span className="">{account.provider.displayName}</span>
                 </p>
-                <p className="text-">
-                  Status: {account.status}
+                 <p className="text-lg font-semibold text-lbtext">
+                  Status: <span className="">{account.status}</span>
                 </p>
-                <p className="text-sm text-gray-500">
-                  Last Synced: {account.lastSynced}
+                 <p className="text-lg font-semibold text-lbtext">
+                  Last Synced: <span className="">{account.lastSynced}</span>
                 </p>
               </div>
             ))}
           </div>
         </div>
-        <div className=" w-1/2  py-4 rounded-2xl shadow-2xl bg-white max-h-120 border-1 border-gray-300 ">
+        <div className=" w-1/2  py-4 ">
           <div>
             <OpenBankingPopUp
               connectAccount={connectAccount}
               navigateDashboard={navigateDashboard}
             />
           </div>
+        </div>
         </div>
       </div>
     </div>

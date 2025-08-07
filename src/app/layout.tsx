@@ -5,7 +5,7 @@ import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
 import OpenBankingProvider from "@/contexts/OpenBanking/OpenBankingProvider";
 import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
-import { getToken } from "@/actions/getToken";
+
 import { Analytics } from "@vercel/analytics/next";
 import { UserSignupProvider } from "@/contexts/UserCredentials/UserSignUpContext";
 import { SubscriptionStatusProvider } from "@/contexts/SubscribedContext/SubscriptionStatusContext";

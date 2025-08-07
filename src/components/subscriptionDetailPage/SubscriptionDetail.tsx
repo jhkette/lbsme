@@ -97,6 +97,7 @@ export default function SubscriptionDetail({
       );
       return `${(subscription.costs.yearly + projection).toFixed(2)}`;
     }
+    return "uknown";
   }
 
   return (
