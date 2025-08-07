@@ -64,7 +64,7 @@ export default function SubscriptionDetail({
     } else {
       setDestinationURL(cancelSubscriptionLink);
     }
-  }, [minnaData]);
+  }, [minnaData, subscribed]);
 
   const now = new Date();
   const currentYear = now.getFullYear();

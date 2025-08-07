@@ -18,7 +18,7 @@ export default function MobileCheck({ children }: { children: ReactNode }) {
     
       router.push("/mobile-redirect");
     }
-  }, []);
+  }, [router]);
 
   
 
