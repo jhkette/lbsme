@@ -40,7 +40,7 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
     useGetProviderlessUserAuthGatewayQuery({
       fetchPolicy: "cache-and-network",
       notifyOnNetworkStatusChange: true,
-      pollInterval: 359000,
+      pollInterval: 10000,
       skip: !subscribed,
     });
 

@@ -31,16 +31,7 @@ export default function SpendingDetail(props: SpendingDetailProps) {
 
   const icon = data?.getSubscription.merchant.icon as string;
 
-  // Sum the amounts of transactions from the current year
-  const totalThisYear = (data?.getSubscription?.transactions ?? [])
-    .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
-    .filter(
-      (tx) => new Date(tx.bookingTime as string).getFullYear() === currentYear
-    )
-    .reduce(
-      (sum, tx) => sum + (tx.amount && tx.amount.amount ? tx.amount.amount : 0),
-      0
-    );
+
 
   const totalThisMonth = (data?.getSubscription?.transactions ?? [])
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
@@ -61,7 +52,7 @@ export default function SpendingDetail(props: SpendingDetailProps) {
   let displayAmount: string | null;
 
   if (props.yearly) {
-    displayAmount = isManual ? null : `£${totalThisYear.toFixed(2)}`;
+    displayAmount = isManual ? null : `£${data?.getSubscription?.costs?.yearly.toFixed(2)}`;
   } else if (data?.getSubscription?.isManual && isAfterRenewal) {
     displayAmount = `£${data?.getSubscription?.costs?.monthly ?? "0.00"}`;
   } else {
