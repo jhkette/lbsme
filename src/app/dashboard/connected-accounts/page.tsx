@@ -85,7 +85,7 @@ export default function Page() {
                     />
                   ) : <Landmark size={30}/>} <span className="text-lbtextdark font-normal">{account.provider.displayName}</span>
                 </p>
-                 props.sub.dates.renewalDate), "do MMM yyyy")
+               
                  <p className="text-lg font-semibold text-lbtext">
                   Last Synced: <span className="text-lbtextdark font-normal">{format(parseISO(account.lastSynced),  "do MMM yyyy")}</span>
                 </p>
