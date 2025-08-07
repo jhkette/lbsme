@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { clsx } from "clsx";
 import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
-import { Repeat, Download } from "lucide-react";
+import {  Download } from "lucide-react";
 import { Search } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
