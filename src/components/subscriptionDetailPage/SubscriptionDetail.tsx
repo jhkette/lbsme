@@ -13,7 +13,7 @@ import Circle from "@/components/lbcoreui/Circle";
 import { cancelSubscriptionLink } from "@/lib/consts";
 import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
 import { SubscriptionDetails } from "@/interfaces/DetailedSubscription";
-import { get } from "http";
+
 type SubscriptionDetailProps = {
   idToFetch: string;
 };
@@ -26,9 +26,9 @@ interface fetchMinnaWebUI {
 }
 
 /*
- *!TO DO THIS FILE IS TOO LARGE AND NEEDS TO BE SPLIT INTO SMALLER COMPONENTS FOR BETTER READABILITY
+ *TO DO! THIS FILE IS TOO LARGE AND NEEDS TO BE SPLIT INTO SMALLER COMPONENTS FOR BETTER READABILITY
  *!This file is responsible for displaying the subscription details, including costs, dates, and transactions
- * These could be split into individual compoenents
+ * These file should be split into individual compoenents
  */
 
 export default function SubscriptionDetail({
@@ -57,7 +57,7 @@ export default function SubscriptionDetail({
 
   // Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
   useEffect(() => {
-    if (minnaData?.url && minnaData?.authToken) {
+    if (minnaData?.url && minnaData?.authToken && subscribed) {
       setDestinationURL(
         encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`)
       );

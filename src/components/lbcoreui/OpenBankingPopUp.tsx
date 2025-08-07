@@ -13,9 +13,11 @@ import {
 interface OpenBankingPopUpProps {
   connectAccount: () => void;
   navigateDashboard: () => void;
+  status: string;
 }
 
-export function OpenBankingPopUp({ connectAccount, navigateDashboard }: OpenBankingPopUpProps) {
+export function OpenBankingPopUp({ connectAccount, navigateDashboard, status }: OpenBankingPopUpProps) {
+  console.log(status, "status in OpenBankingPopUp");
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -23,7 +25,7 @@ export function OpenBankingPopUp({ connectAccount, navigateDashboard }: OpenBank
           className="w-fit px-8 py-6 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
          
        onClick={connectAccount} >
-          Connect to Open Banking
+          {status == "Active" ? "Add another account":"Connect to Open Banking" }
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
