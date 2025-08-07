@@ -18,7 +18,7 @@ export default async function page() {
     },
   });
   const textContent = data.data[0]?.textContent;
-  console.log(data)
+ 
   return (
      <div className={styles["faq-rich-text"] }>
       <div className="px-32 w-full mt-20 relative">

@@ -44,7 +44,7 @@ export default function LineChartPayment() {
               .then((res) => res.data.getSubscription.transactions)
           )
         );
-        console.log("Detailed subscription data fetched", detailedData);
+       
 
         // setTransaction((prev) => [...prev, ...detailedData]);
         setDetailedSubscriptions(detailedData);

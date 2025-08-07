@@ -17,7 +17,7 @@ interface OpenBankingPopUpProps {
 }
 
 export function OpenBankingPopUp({ connectAccount, navigateDashboard, status }: OpenBankingPopUpProps) {
-  console.log(status, "status in OpenBankingPopUp");
+
   return (
     <Dialog>
       <DialogTrigger asChild>

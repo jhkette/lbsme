@@ -21,7 +21,7 @@ export default function FreeTrialsDetail({ freeItem }: FreeTrialsDetailProps) {
       return slug === freeItem
   })
 
-  console.log(foundItem)
+
 
        
   return (

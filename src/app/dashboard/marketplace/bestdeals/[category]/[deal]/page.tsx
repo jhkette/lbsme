@@ -8,20 +8,13 @@ import { Params } from "next/dist/server/request/params";
 
 import DealOfferDetail from "@/components/deals/DealOfferDetail";
 
-// type Deal = {
-//   _id: string;
-//   // Add other properties as needed based on your deal structure
-//   [key: string]: any;
-// };
 
 export default async function page({ params }: { params: Promise<Params> }) {
   const { category, deal } = await params;
 
-  console.log(category, deal);
+ 
 
-  // if (!dealItem) {
-  //   return <h1 className="text-xl text-lbtext">Offer not found</h1>;
-  // }
+
 
   return (
     <section className="px-16 w-full flex flex-col mt-12 relative">

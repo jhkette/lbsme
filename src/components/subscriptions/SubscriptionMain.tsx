@@ -48,7 +48,7 @@ export default function SubscriptionMain() {
       );
       setGroupedSubs(result);
       setSubscriptions(data.getSubscriptions.subscriptions as Subscription[]);
-      console.log("ran", data.getSubscriptions.subscriptions);
+   
     }
   }, [data?.getSubscriptions?.subscriptions]);
 
@@ -67,7 +67,7 @@ export default function SubscriptionMain() {
   };
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category); 
-    console.log(groupedSubs) 
+
     if (category === "All Subscriptions") {
       setSubscriptions(data?.getSubscriptions?.subscriptions as Subscription[]);
     } else {
