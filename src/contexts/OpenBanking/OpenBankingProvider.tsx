@@ -41,9 +41,9 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
     useGetProviderlessUserAuthGatewayQuery({
       fetchPolicy: "cache-and-network",
       notifyOnNetworkStatusChange: true,
-      pollInterval: 10000,
-      // skip if not subscribed
-      skip: !subscribed,
+      pollInterval: 3000,
+     
+     
     });
 
   useEffect(() => {
@@ -54,7 +54,6 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
   }, [data, OBLoading]);
 
   const openOBPage = useCallback(async () => {
-
     if (networkStatus === NetworkStatus.error) return;
 
     if (data?.getProviderlessUserAuthGateway?.url) {
