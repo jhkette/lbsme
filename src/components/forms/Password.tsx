@@ -21,7 +21,7 @@ export default function Password() {
     resolver: zodResolver(PasswordSchema),
   });
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+  const [showPassword, setShowPassword] = useState(false); 
   const [passwordFormError, setPasswordFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
