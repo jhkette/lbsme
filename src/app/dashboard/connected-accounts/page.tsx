@@ -11,6 +11,7 @@ import { Landmark } from "lucide-react";
 import { SubscriptionsBankConnection } from "@/components/suspense/SuspenseComponents";
 import { OpenBankingPopUp } from "@/components/lbcoreui/OpenBankingPopUp";
 import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
+// this page could be broken down into smaller components for better readability and maintainability
 export default function Page() {
   const { user } = useUser();
   const router = useRouter();
@@ -113,9 +114,7 @@ export default function Page() {
               </div>
             </div>
             <div className=" w-1/2  py-4 ">
-              {OBLoading ? (
-                <LoaderCircle className="size-12  absolute top-82 right-62 text-lbgreen animate-spin" />
-              ) : (
+             
                 <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbgray rounded-2xl  mx-18 my-6 p-14">
                   <p className="text-center">
                     {" "}
@@ -132,7 +131,7 @@ export default function Page() {
                     />
                   </div>
                 </div>
-              )}
+           
             </div>
           </div>
         )}

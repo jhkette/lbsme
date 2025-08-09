@@ -1,5 +1,4 @@
-"use client"; // if using in a Next.js app directory
-
+"use client"; 
 import {
   createContext,
   FC,

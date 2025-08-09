@@ -29,11 +29,11 @@ export default function ConfirmEmail() {
 
   // return to register if there
   // is no userCredentials from prior form
-  // useEffect(() => {
-  //   if (!isLoading && !userCredentials?.email) {
-  //     router.push("/register-user");
-  //   }
-  // });
+  useEffect(() => {
+    if (!isLoading && !userCredentials?.email) {
+      router.push("/register-user");
+    }
+  });
 
   const resendCode = async () => {
 
