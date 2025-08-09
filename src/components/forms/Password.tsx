@@ -75,25 +75,13 @@ export default function Password() {
             given_name: given_name,
             family_name: family_name,
             "custom:terms_and_conditions": terms_and_conditions,
+                 "custom:businessId": userCredentials?.companyDetails.company_number,
+          "custom:business_name": userCredentials?.companyDetails.title
           },
         },
       });
 
-      // !!!from lbsme app
-      //  await Auth.signUp({
-      //   username: email,
-      //   password: watchPassword,
-      //   attributes: {
-      //     email,
-      //     "phone_number": phoneNumber,
-      //     given_name,
-      //     family_name,
-      //     "custom:terms_and_conditions": terms_and_conditions,
-      //     "custom:businessId": company_reg_number,
-      //     "custom:business_name": search_company_name
-      //   },
-      // });
-
+    
 
       console.log(isSignUpComplete, userId, nextStep);
       // may need refining
