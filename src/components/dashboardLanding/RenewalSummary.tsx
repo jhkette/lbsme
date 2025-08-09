@@ -28,7 +28,7 @@ export default function TransactionsLanding(subs: DashboardSubsProps) {
 
 
 }
-
+  console.log(subs.subs, "renewal summary")
   const lastPaymentSorted = sortByPaymentDate([...subs.subs]);
   const lastRenewalSorted = sortByRenewalDate([...subs.subs]);
 

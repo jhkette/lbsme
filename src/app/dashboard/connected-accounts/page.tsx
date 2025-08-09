@@ -6,7 +6,7 @@ import { useUser } from "@/contexts/UserContext/UserProvider";
 import { useOBContext } from "@/contexts/OpenBanking/OpenBankingProvider";
 import { useGetBankAccountQuery } from "@/graphql/getBankAccount.generated";
 import Image from "next/image";
-import { LoaderCircle } from "lucide-react";
+
 import { Landmark } from "lucide-react";
 import { SubscriptionsBankConnection } from "@/components/suspense/SuspenseComponents";
 import { OpenBankingPopUp } from "@/components/lbcoreui/OpenBankingPopUp";
