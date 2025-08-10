@@ -1,7 +1,7 @@
-import React from "react";
 
-import LineChartPayment from "./graphs/LineGraph";
-import BarchartGraph from "./graphs/BarchartGraph";
+
+import LineChartPayment from "@/components/dashboardLanding/graphs/LineGraph";
+import BarchartGraph from "@/components/dashboardLanding/graphs/BarchartGraph";
 export default function ResponsiveGraphContainer({
   barchart,
   simplifiedData,
@@ -11,10 +11,7 @@ export default function ResponsiveGraphContainer({
 }) {
 
 
-  // Sort data by monthlyCost descending
-  const sortedData = [...simplifiedData].sort(
-    (a, b) => b.monthlyCost - a.monthlyCost
-  );
+
 
 
 
