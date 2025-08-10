@@ -55,6 +55,8 @@ export default function LineChartPayment() {
     fetchDetails();
   }, [data?.getSubscriptions?.subscriptions, client]);
 
+
+
   type MonthKey =
     | "jan"
     | "feb"
@@ -113,8 +115,6 @@ export default function LineChartPayment() {
       }
     }
   }
-
-
   // get cumulative data for the graph
   // this will be used to show the cumulative spend for each month
   const cumulativeData = (() => {
@@ -123,7 +123,7 @@ export default function LineChartPayment() {
 
     return monthMap
       .map((month, index) => {
-        if (index >= currentMonthIndex) {
+        if (index > currentMonthIndex) {
           return null; // Skip months beyond the current month
         }
 
@@ -137,13 +137,16 @@ export default function LineChartPayment() {
       .filter(Boolean); // remove nulls
   })();
 
-  if(detailedDescriptions.length > 0){
-    console.log(cumulativeData)
-  }
+  useEffect(() => {
+      console.log(cumulativeData, "cumalitive data", detailedDescriptions);
+
+  },[cumulativeData])
 
   return (
     <div className="relative w-full h-full">
+  
       {detailedDescriptions.length > 0 ? (
+        
         <div className="chart-wrapper w-full h-full" tabIndex={-1}>
           <ResponsiveContainer width="95%" height={350}>
             <AreaChart
