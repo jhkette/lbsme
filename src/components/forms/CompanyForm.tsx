@@ -23,7 +23,6 @@ export default function RegisterCompany() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<CompanyDetails[]>([]);
   const [formError, setFormError] = useState<string>("");
-  const [loading, setLoading] = useState<Boolean>(false)
   const [selectedCompany, setSelectedCompany] = useState<CompanyDetails | null>(
     null
   );
