@@ -82,8 +82,6 @@ export default function Password() {
       });
 
     
-
-      console.log(isSignUpComplete, userId, nextStep);
       // may need refining
       if (nextStep.signUpStep) {
         router.push("/confirm-email");
