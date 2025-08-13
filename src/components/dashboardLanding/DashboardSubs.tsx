@@ -1,5 +1,4 @@
 import React from "react";
-import { GetSubscriptionsQueryResult } from "@/graphql/getMainSubData.generated";
 import { Subscription } from "@/interfaces/Subscription";
 interface DashboardSubsProps {
   subs: Subscription[];
