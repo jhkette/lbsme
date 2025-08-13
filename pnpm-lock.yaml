@@ -11,9 +11,6 @@ importers:
       '@apollo/client':
         specifier: ^3.13.9
         version: 3.13.9(@types/react@19.1.9)(graphql-ws@6.0.6(graphql@15.8.0)(ws@8.18.3))(graphql@15.8.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@aws-amplify/adapter-nextjs':
-        specifier: ^1.6.8
-        version: 1.6.8(aws-amplify@6.15.5)(next@15.3.3(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@aws-amplify/auth':
         specifier: ^6.15.0
         version: 6.15.0(@aws-amplify/core@6.13.1)
@@ -280,12 +277,6 @@ packages:
 
   '@asamuzakjp/dom-selector@2.0.2':
     resolution: {integrity: sha512-x1KXOatwofR6ZAYzXRBL5wrdV0vwNxlTCK9NCuLqAzQYARqGcvFwiJA6A1ERuh+dgeA4Dxm3JBYictIes+SqUQ==}
-
-  '@aws-amplify/adapter-nextjs@1.6.8':
-    resolution: {integrity: sha512-GY93BkdguUCw8Bc7mDxxWs6Pw1A/eTccX3aFErs4nu80HrBalAJxmToKhfFnhqw3OSJ4sqIQFihCU/djoLENHA==}
-    peerDependencies:
-      aws-amplify: ^6.13.1
-      next: '>=13.5.0 <16.0.0'
 
   '@aws-amplify/analytics@7.0.86':
     resolution: {integrity: sha512-1CEaP6hA1kdBcDbXOg0MFw7Kpwu6Lt93S7r0/Oy/vu9bR3AzKPe/muT8euljmCFl/bY16zqZvY6vUW+WeA0jIw==}
@@ -3890,10 +3881,6 @@ packages:
     resolution: {integrity: sha512-Q1ASwgRbg7XXYel6pxPBKtJin+rd/Yb60Swm5edzZN6lsE0ve8jlb7X9lNE3dKoEzZg/BHi6pO5A3AMRfmXevw==}
     peerDependencies:
       '@apollo/client': 3.x
-
-  aws-jwt-verify@4.0.1:
-    resolution: {integrity: sha512-kzvi71eD3w/mCpYRUY7cz6DX4bfYihGdI2yV3FYQ2JuZZenqAqDPz0gWj0ew6vlAtdEVBNb7p+Dm2TAIxpVYMA==}
-    engines: {node: '>=14.0.0'}
 
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
@@ -8167,12 +8154,6 @@ snapshots:
       bidi-js: 1.0.3
       css-tree: 2.3.1
       is-potential-custom-element-name: 1.0.1
-
-  '@aws-amplify/adapter-nextjs@1.6.8(aws-amplify@6.15.5)(next@15.3.3(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
-    dependencies:
-      aws-amplify: 6.15.5
-      aws-jwt-verify: 4.0.1
-      next: 15.3.3(@babel/core@7.28.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
   '@aws-amplify/analytics@7.0.86(@aws-amplify/core@6.13.1)':
     dependencies:
@@ -12936,8 +12917,6 @@ snapshots:
       zen-observable-ts: 1.2.5
     transitivePeerDependencies:
       - supports-color
-
-  aws-jwt-verify@4.0.1: {}
 
   aws4@1.13.2: {}
 
