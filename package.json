@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.9",
-    "@aws-amplify/adapter-nextjs": "^1.6.8",
     "@aws-amplify/auth": "^6.15.0",
     "@aws-amplify/core": "^6.13.1",
     "@aws-sdk/types": "^3.862.0",
