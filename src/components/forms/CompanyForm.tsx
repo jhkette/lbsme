@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import { LoaderCircle } from "lucide-react";
 import { Search } from "lucide-react";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { searchCompanyName } from "@/actions/companySearch";
@@ -23,7 +23,7 @@ export default function RegisterCompany() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<CompanyDetails[]>([]);
   const [formError, setFormError] = useState<string>("");
-
+  const [loading, setLoading] = useState<Boolean>(false)
   const [selectedCompany, setSelectedCompany] = useState<CompanyDetails | null>(
     null
   );
@@ -42,13 +42,18 @@ export default function RegisterCompany() {
 
   const searchName = async () => {
     try {
+    
       const data = await searchCompanyName(searchTerm);
       if (data?.items) {
         setSearchResults([...data.items]);
       }
     } catch (err) {
+       setFormError(
+        `There was an error ${(err instanceof Error && err.message) ? err.message : ''}`
+      );
       console.log(err);
     }
+  
   };
 
   const setCompanyTerm = (value: string) => {
@@ -128,6 +133,7 @@ export default function RegisterCompany() {
           {!!formError.length && (
             <p className="text-red-500 text-sm">{formError} </p>
           )}
+           
         </div>
         <div className="min-h-[290px] w-full flex flex-col items-center justify-center">
           {!!searchResults.length && (
@@ -135,6 +141,7 @@ export default function RegisterCompany() {
               <h2 className="text-lbtext text-lg font-semibold pb-2 text-left">
                 Select your company details from the list below:
               </h2>
+            
               <div className="max-h-[180px] border border-gray-300 rounded-lg px-4 py-6 mx-auto scrollbar-nice overflow-y-auto mb-4">
                 {searchResults.map((result, index) => {
                   const isSelected =

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { clsx } from "clsx";
 import { Subscription } from "@/interfaces/Subscription";
-import { Download, BarChart as BarchartIcon, PieChart, LineChartIcon } from "lucide-react";
+import { Download, BarChart as BarchartIcon, LineChartIcon } from "lucide-react";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import ResponsiveGraphContainer from "./ResponsiveGraphContainer";
 
