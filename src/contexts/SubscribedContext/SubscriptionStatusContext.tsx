@@ -12,7 +12,10 @@ type SubscriptionStatusContextType = {
 const SubscriptionStatusContext = createContext<SubscriptionStatusContextType | undefined>(undefined);
 
 export const SubscriptionStatusProvider = ({ children }: { children: ReactNode }) => {
-  const { data, loading } = useStatusQuery();
+  const { data, loading } = useStatusQuery({
+    fetchPolicy: "no-cache",
+     notifyOnNetworkStatusChange: true,
+  });
   const [subscribed, setSubscribed] = useState<boolean | null>(null);
 
   useEffect(() => {

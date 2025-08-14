@@ -41,6 +41,7 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
       fetchPolicy: "cache-and-network",
       notifyOnNetworkStatusChange: true,
       pollInterval: 3000,
+          skip: !subscribed,
      
      
     });
@@ -53,6 +54,7 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
   }, [data, OBLoading]);
 
   const openOBPage = useCallback(async () => {
+      if (!subscribed || subLoading) return; 
     if (networkStatus === NetworkStatus.error) return;
 
     if (data?.getProviderlessUserAuthGateway?.url) {
@@ -63,7 +65,7 @@ const OpenBankingProvider: FC<OpenBankingComponent> = ({ children }) => {
       setOBLoading(true);
       await refetch();
     }
-  }, [data?.getProviderlessUserAuthGateway?.url, networkStatus, refetch]);
+  }, [subscribed, subLoading, data?.getProviderlessUserAuthGateway?.url, networkStatus, refetch]);
 
   return (
     <OBContext.Provider

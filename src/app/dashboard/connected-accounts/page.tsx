@@ -114,7 +114,7 @@ export default function Page() {
               </div>
             </div>
             <div className=" w-1/2  py-4 ">
-            {!subLoading && subscribed && (
+        
              
                 <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbgray rounded-2xl  mx-18 my-6 p-14">
                   <p className="text-center">
@@ -135,7 +135,7 @@ export default function Page() {
                 </div>
 
            
-            )}
+          
             </div>
           </div>
         )}
