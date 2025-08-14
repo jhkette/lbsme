@@ -57,14 +57,14 @@ export default function SubscriptionDetail({
 
   // Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
   useEffect(() => {
-    if (minnaData?.url && minnaData?.authToken && subscribed) {
+    if (minnaData?.url && minnaData?.authToken) {
       setDestinationURL(
         encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`)
       );
     } else {
       setDestinationURL(cancelSubscriptionLink);
     }
-  }, [minnaData, subscribed]);
+  }, [minnaData]);
 
   const now = new Date();
   const currentYear = now.getFullYear();
