@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex flex-row w-full">
           <Sidebar />
       
-             <motion.div
+             <motion.main
            key={pathname}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             transition={{ duration: 0.65, ease: "easeInOut" }}
             className="w-full"
           >
-          {children}</motion.div>
+          {children}</motion.main>
         
         </div>
     
