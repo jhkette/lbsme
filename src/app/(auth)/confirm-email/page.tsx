@@ -1,18 +1,20 @@
 import Image from "next/image";
 import ConfirmEmail from "@/components/forms/ConfirmEmail";
 import BirdConfirmAccount from "@/components/auth/BirdConfirmAccount";
-
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
-         <Image
-                src="/images/main/lbsmelogo.svg"
-                 alt="Logo"
-                 width={150}
-                 height={150}
-                 className="absolute top-12 left-12 bg-lbblue w-[100px] md:w-[110px] lg:w-[140px] h-auto object-contain"
-               />
+        <Link href={"/"}>
+        <Image
+         src="/images/main/lbsmelogo.svg"
+          alt="Logo"
+          width={150}
+          height={150}
+          className="absolute top-12 left-12 bg-lbblue w-[100px] md:w-[110px] lg:w-[140px] h-auto object-contain"
+        />
+        </Link>
                <BirdConfirmAccount/>
     
         <div className="flex flex-col items-center justify-center h-screen  w-1/2">
