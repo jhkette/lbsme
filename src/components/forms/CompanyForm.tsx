@@ -41,7 +41,7 @@ export default function RegisterCompany() {
 
   const searchName = async () => {
     try {
-    
+      setSelectedCompany(null);
       const data = await searchCompanyName(searchTerm);
       if (data?.items) {
         setSearchResults([...data.items]);
@@ -56,6 +56,7 @@ export default function RegisterCompany() {
   };
 
   const setCompanyTerm = (value: string) => {
+    console.log(value)
     setSelectedCompany(null);
     setSearchTerm(value);
   };
@@ -142,9 +143,10 @@ export default function RegisterCompany() {
               </h2>
             
               <div className="max-h-[180px] border border-gray-300 rounded-lg px-4 py-6 mx-auto scrollbar-nice overflow-y-auto mb-4">
-                {searchResults.map((result, index) => {
-                  const isSelected =
-                    selectedCompany?.company_number === result.company_number;
+                {searchResults.map((result) => {
+                  const isSelected = 
+  selectedCompany?.company_number === result.company_number &&
+  selectedCompany?.title === result.title;
                   return (
                     <div
                       className={cn(
@@ -153,7 +155,7 @@ export default function RegisterCompany() {
                           ? "bg-lbgreen text-white"
                           : "hover:bg-lbblue hover:text-lbtextdark"
                       )}
-                      key={index}
+                     key={`${result.company_number}-${result.title}`}
                       onClick={() => setSelectedCompany(result)}
                     >
                       <div className="flex flex-row justify-start items-center gap-2 font-semibold">
