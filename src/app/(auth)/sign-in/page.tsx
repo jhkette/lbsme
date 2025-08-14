@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Login from "@/components/forms/Login";
 import BirdLead from "@/components/auth/BirdLead";
-import Link from "next/link";
+import Link from "next/link"
 export default function Home() {
   return (
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
-        <Link href={"/"} className="cursor-pointer">
+         <Link href={"/"} className="cursor-pointer">
         <Image
          src="/images/main/lbsmelogo.svg"
           alt="Logo"
