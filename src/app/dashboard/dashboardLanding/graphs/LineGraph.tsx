@@ -55,8 +55,6 @@ export default function LineChartPayment() {
     fetchDetails();
   }, [data?.getSubscriptions?.subscriptions, client]);
 
-
-
   type MonthKey =
     | "jan"
     | "feb"
@@ -102,14 +100,22 @@ export default function LineChartPayment() {
   ];
 
   const currentYear = new Date().getUTCFullYear();
+  const currentMonth = new Date().getUTCMonth(); // 0 = January
 
   for (const subArray of detailedDescriptions) {
     for (const tx of subArray) {
       const date = new Date(tx.bookingTime);
       const year = date.getUTCFullYear();
-      if (year !== currentYear) continue;
+      const monthIdx = date.getUTCMonth();
 
-      const monthName = monthMap[date.getUTCMonth()];
+      // If the current month is January, only include last year's transactions
+      if (currentMonth === 0) {
+        if (year !== currentYear - 1) continue;
+      } else {
+        if (year !== currentYear) continue;
+      }
+
+      const monthName = monthMap[monthIdx];
       if (monthName && tx.amount && typeof tx.amount.amount === "number") {
         monthTotals[monthName] += tx.amount.amount;
       }
@@ -118,12 +124,11 @@ export default function LineChartPayment() {
   // get cumulative data for the graph
   // this will be used to show the cumulative spend for each month
   const cumulativeData = (() => {
-    const currentMonthIndex = new Date().getMonth();
     let runningTotal = 0;
 
     return monthMap
       .map((month, index) => {
-        if (index > currentMonthIndex) {
+        if (index > currentMonth) {
           return null; // Skip months beyond the current month
         }
 
@@ -138,15 +143,12 @@ export default function LineChartPayment() {
   })();
 
   useEffect(() => {
-      console.log(cumulativeData, "cumalitive data", detailedDescriptions);
-
-  },[cumulativeData])
+    console.log(cumulativeData, "cumalitive data", detailedDescriptions);
+  }, [cumulativeData]);
 
   return (
     <div className="relative w-full h-full">
-  
       {detailedDescriptions.length > 0 ? (
-        
         <div className="chart-wrapper w-full h-full" tabIndex={-1}>
           <ResponsiveContainer width="95%" height={350}>
             <AreaChart
