@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <div className="flex flex-row bg-lbgray w-full h-screen relative">
-          <Link href={"/"}>
+         <Link href={"/"} className="cursor-pointer">
                 <Image
                  src="/images/main/lbsmelogo.svg"
                   alt="Logo"
