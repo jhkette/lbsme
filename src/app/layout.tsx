@@ -3,7 +3,7 @@ import { Mulish } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
-import OpenBankingProvider from "@/contexts/OpenBanking/OpenBankingProvider";
+
 import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 
 import { Analytics } from "@vercel/analytics/next";
@@ -40,11 +40,11 @@ export default async function RootLayout({
             <ApolloProviderWrapper>
               <UserSignupProvider>
                 <SubscriptionStatusProvider>
-                  <OpenBankingProvider>
+                 
                     <UserProvider>
                       <main>{children}</main>
                     </UserProvider>
-                  </OpenBankingProvider>
+                  
                 </SubscriptionStatusProvider>
               </UserSignupProvider>
             </ApolloProviderWrapper>
