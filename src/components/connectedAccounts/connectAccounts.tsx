@@ -2,20 +2,20 @@
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { useUser } from "@/contexts/UserContext/UserProvider";
-import { OpenBankingPopUp } from "@/components/lbcoreui/OpenBankingPopUp";
+
 import { useGetBankAccountQuery } from "@/graphql/getBankAccount.generated";
-import { useSubscriptionStatus } from "@/contexts/SubscribedContext/SubscriptionStatusContext";
+
 import { Landmark } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useStatusQuery } from '@/graphql/getSubscribedStatus.generated'; 
+
+import { useStatusQuery } from "@/graphql/getSubscribedStatus.generated";
 interface ConnectAccountsProps {
   url: string;
 }
 
 export default function ConnectAccounts({ url }: ConnectAccountsProps) {
-   const { data: subData, loading: subLoading } = useStatusQuery({
+  const { data: subData, loading: subLoading } = useStatusQuery({
     fetchPolicy: "no-cache",
-     notifyOnNetworkStatusChange: true,
+    notifyOnNetworkStatusChange: true,
   });
 
   const { loading, error, data, refetch } = useGetBankAccountQuery({
@@ -37,8 +37,6 @@ export default function ConnectAccounts({ url }: ConnectAccountsProps) {
 
   const { user } = useUser();
 
-
-
   return (
     <>
       <div className="flex flex-row gap-12 rounded-2xl py-8  shadow-2xl bg-white h-fit border-1 border-gray-300">
@@ -56,11 +54,11 @@ export default function ConnectAccounts({ url }: ConnectAccountsProps) {
             <p className="text-lg font-semibold text-lbtext">
               Subscribed status:{" "}
               <span className="text-lbtextdark font-normal">
-            {subLoading
-  ? "Loading..."
-  : subData?.getSubscribedStatus.subscribed
-    ? "Active"
-    : "Inactive"}
+                {subLoading
+                  ? "Loading..."
+                  : subData?.getSubscribedStatus.subscribed
+                  ? "Active"
+                  : "Inactive"}
               </span>
             </p>
             {accountInfoList.map((account, index) => (
@@ -99,28 +97,25 @@ export default function ConnectAccounts({ url }: ConnectAccountsProps) {
           </div>
         </div>
         <div className=" w-1/2  py-4 ">
-{!subLoading && subData?.getSubscribedStatus.subscribed &&
-    <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbgray rounded-2xl  mx-18 my-6 p-14">
-      <p className="text-center">
-        {accountInfoList[0]?.status === "Active"
-          ? "Please click add another account to connect another bank account to Little Birdie."
-          : "Please click connect to Open Banking to connect your bank account to Little Birdie."}
-      </p>
-      <div>
-    
-        <button
-          onClick={() => window.open(url, "_blank")}
-          className="w-fit px-8 py-6 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
-        >
-          {accountInfoList[0]?.status === "Active"
-            ? "Add another account"
-            : "Connect to Open Banking"}
-        </button>
-
-      </div>
-    </div>
-}
- 
+          {!subLoading && subData?.getSubscribedStatus.subscribed && (
+            <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbgray rounded-2xl  mx-18 my-6 p-14">
+              <p className="text-center">
+                {accountInfoList[0]?.status === "Active"
+                  ? "Please click add another account to connect another bank account to Little Birdie."
+                  : "Please click connect to Open Banking to connect your bank account to Little Birdie."}
+              </p>
+              <div>
+                <button
+                  onClick={() => window.open(url, "_blank")}
+                  className="w-fit px-8 py-6 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+                >
+                  {accountInfoList[0]?.status === "Active"
+                    ? "Add another account"
+                    : "Connect to Open Banking"}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
