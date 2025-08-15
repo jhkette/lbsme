@@ -51,7 +51,7 @@ export function SubscriptionsTable() {
 
 export function SubscriptionsBankConnection() {
   return (
-    <div className="loading min-w-full bg-white shadow-lg rounded-lg h-250"></div>
+    <div className="loading min-w-full bg-white shadow-lg rounded-lg h-150"></div>
   );
 }
 
