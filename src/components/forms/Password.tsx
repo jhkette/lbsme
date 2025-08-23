@@ -9,8 +9,6 @@ import { signUp } from "aws-amplify/auth";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { cn } from "@/lib/utils";
 
-
-
 export default function Password() {
   const {
     register,
@@ -21,7 +19,7 @@ export default function Password() {
     resolver: zodResolver(PasswordSchema),
   });
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const [passwordFormError, setPasswordFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +28,10 @@ export default function Password() {
   // return to register if there
   // is no userCredentials from prior form
   useEffect(() => {
-    if (!isLoading && (!userCredentials?.email|| !userCredentials?.companyDetails.title)) {
+    if (
+      !isLoading &&
+      (!userCredentials?.email || !userCredentials?.companyDetails.title)
+    ) {
       router.push("/register-user");
     }
   });
@@ -38,6 +39,8 @@ export default function Password() {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
+  console.log(userCredentials);
 
   const type = showPassword ? "text" : "password";
   const Icon = showPassword ? EyeIcon : EyeOffIcon;
@@ -53,14 +56,16 @@ export default function Password() {
     } = userCredentials ?? {};
 
     setLoading(true);
-     clearErrors(); // clear any previous errors
+
+    clearErrors(); // clear any previous errors
     try {
       if (
         !email ||
         !phoneNumber ||
         !given_name ||
         !family_name ||
-        !terms_and_conditions
+        !terms_and_conditions ||
+        !userCredentials?.companyDetails.company_number
       ) {
         throw new Error("Missing required user details.");
       }
@@ -75,13 +80,12 @@ export default function Password() {
             given_name: given_name,
             family_name: family_name,
             "custom:terms_and_conditions": terms_and_conditions,
-                 "custom:businessId": userCredentials?.companyDetails.company_number,
-          "custom:business_name": userCredentials?.companyDetails.title
+            "custom:businessId": userCredentials?.companyDetails.company_number,
+            "custom:business_name": userCredentials?.companyDetails.title,
           },
         },
       });
 
-    
       // may need refining
       if (nextStep.signUpStep) {
         router.push("/confirm-email");
@@ -89,8 +93,9 @@ export default function Password() {
     } catch (err: unknown) {
       setLoading(false);
       if (err instanceof Error) {
-        
-        setPasswordFormError(`There was an error: ${err.message.toLowerCase()}`);
+        setPasswordFormError(
+          `There was an error: ${err.message.toLowerCase()}`
+        );
         console.log(err);
       } else {
         setPasswordFormError("An unknown error occurred");
