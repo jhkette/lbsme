@@ -9,14 +9,14 @@ import {SuspenseDeals} from "@/components/suspense/SuspenseComponents";
 import { useApolloClient } from "@apollo/client";
 import { fetchAllTrials } from "@/lib/freeTrialsQuery"; 
 
-import Broadband from "@/images/deal-icons/broadband.svg";
-import CarInsurance from "@/images/deal-icons/car-insurance.svg";
-import Energy from "@images/deal-icons/energy.svg";
-import HomeInsurance from "@/images/deal-icons/home-insurance.svg";
-import Mobile from "@/images/deal-icons/mobile.svg";
-import PetInsurance from "@/images/deal-icons/pet-insurance.svg";
-import TravelInsurance from "@/images/deal-icons/travel-insurance.svg";
-import { FixedDeals } from "@/interfaces/FixedDeals";
+// import Broadband from "/images/deal-icons/broadband.svg";
+// import CarInsurance from "@/images/deal-icons/car-insurance.svg";
+// import Energy from "@images/deal-icons/energy.svg";
+// import HomeInsurance from "@/images/deal-icons/home-insurance.svg";
+// import Mobile from "@/images/deal-icons/mobile.svg";
+// import PetInsurance from "@/images/deal-icons/pet-insurance.svg";
+// import TravelInsurance from "@/images/deal-icons/travel-insurance.svg";
+// import { FixedDeals } from "@/interfaces/FixedDeals";
 import {
   FD_LINK_BROADBAND,
   FD_LINK_MOBILE,
@@ -89,15 +89,15 @@ export default function Page() {
 
 
 
- const FIXED_DEALS = [
-  { name: FixedDeals.Broadband, uri: FD_LINK_BROADBAND, icon: Broadband },
-  { name: FixedDeals.CarInsurance, uri: FD_LINK_CAR_INS, icon: CarInsurance },
-  { name: FixedDeals.Energy, uri: FD_LINK_ENERGY, icon: Energy },
-  { name: FixedDeals.HomeInsurance, uri: FD_LINK_HOME_INS, icon: HomeInsurance },
-  { name: FixedDeals.Mobile, uri: FD_LINK_MOBILE, icon: Mobile },
-  { name: FixedDeals.PetInsurance, uri: FD_LINK_PET_INS, icon: PetInsurance },
-  { name: FixedDeals.TravelInsurance, uri: FD_LINK_TRAVEL_INS, icon: TravelInsurance },
-];
+//  const FIXED_DEALS = [
+//   { name: FixedDeals.Broadband, uri: FD_LINK_BROADBAND, icon: Broadband },
+//   { name: FixedDeals.CarInsurance, uri: FD_LINK_CAR_INS, icon: CarInsurance },
+//   { name: FixedDeals.Energy, uri: FD_LINK_ENERGY, icon: Energy },
+//   { name: FixedDeals.HomeInsurance, uri: FD_LINK_HOME_INS, icon: HomeInsurance },
+//   { name: FixedDeals.Mobile, uri: FD_LINK_MOBILE, icon: Mobile },
+//   { name: FixedDeals.PetInsurance, uri: FD_LINK_PET_INS, icon: PetInsurance },
+//   { name: FixedDeals.TravelInsurance, uri: FD_LINK_TRAVEL_INS, icon: TravelInsurance },
+// ];
 
 
 
