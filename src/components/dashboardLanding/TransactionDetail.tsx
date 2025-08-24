@@ -41,10 +41,18 @@ export default function SpendingDetail(props: SpendingDetailProps) {
         date.getFullYear() === currentYear && date.getMonth() === currentMonth
       );
     })
-    .reduce(
-      (sum, tx) => sum + (tx.amount && tx.amount.amount ? tx.amount.amount : 0),
-      0
-    );
+  .reduce((acc, tx) => {
+    const date = new Date(tx.bookingTime as string);
+    const dateKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
+    // filter to check date isn't on same day (ie not in set) - as this can be an error
+    if (!acc.seenDates.has(dateKey)) {
+      acc.sum += tx.amount?.amount ?? 0;
+      acc.seenDates.add(dateKey);
+    }
+
+    return acc;
+    // return the sum, seenDates is the set being checked
+  }, { sum: 0, seenDates: new Set<string>() }).sum;
   const isManual = data?.getSubscription?.isManual || false;
   const renewalDate = new Date(data?.getSubscription?.dates.renewalDate || "");
   const isAfterRenewal = now > renewalDate;

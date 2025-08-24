@@ -25,6 +25,31 @@ interface fetchMinnaWebUI {
   validTo?: string | null;
 }
 
+interface Transaction {
+  __typename?: "TransactionData" | undefined;
+  accountID?: string | null | undefined;
+  bookingTime?: string | null | undefined;
+  budId?: string | null | undefined;
+  title?: string | null | undefined;
+  transactionId?: string | null | undefined;
+  amount?:
+    | {
+        __typename?: "TransactionAmount" | undefined;
+        amount?: number | null | undefined;
+        currency?: string | null | undefined;
+      }
+    | null
+    | undefined;
+  provider?:
+    | {
+        __typename?: "ProviderData" | undefined;
+        id?: string | null | undefined;
+        name?: string | null | undefined;
+      }
+    | null
+    | undefined;
+}
+
 /*
  *TO DO! THIS FILE IS TOO LARGE AND NEEDS TO BE SPLIT INTO SMALLER COMPONENTS FOR BETTER READABILITY
  *!This file is responsible for displaying the subscription details, including costs, dates, and transactions
@@ -38,6 +63,9 @@ export default function SubscriptionDetail({
     fetchMinnaWebUI | null | undefined
   >(null);
   const [destinationURL, setDestinationURL] = useState<string | null>(null);
+  const [finalTransactions, setFinalTransaction] = useState<
+    Transaction[] | null
+  >(null);
   const { loading, error, data, refetch } = useGetSubscriptionQuery({
     variables: { id: idToFetch },
     errorPolicy: "all",
@@ -66,6 +94,32 @@ export default function SubscriptionDetail({
     }
   }, [minnaData]);
 
+  useEffect(() => {
+    if (data?.getSubscription.transactions) {
+      const reducedTransactions = data?.getSubscription.transactions.reduce(
+        (acc, tx) => {
+          if (!tx?.bookingTime) return acc;
+
+          const date = new Date(tx.bookingTime);
+          const dateKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
+
+          if (!acc.seenDates.has(dateKey)) {
+            acc.seenDates.add(dateKey);
+            acc.unique.push(tx); // keep the first transaction for that date
+          }
+
+          return acc;
+        },
+        {
+          seenDates: new Set<string>(),
+          unique: [] as  Transaction[],
+        }
+      ).unique;
+
+      setFinalTransaction(Array.from(reducedTransactions as Transaction[]));
+    }
+  }, [data?.getSubscription.transactions]);
+
   const now = new Date();
   const currentYear = now.getFullYear();
 
@@ -74,10 +128,8 @@ export default function SubscriptionDetail({
     const month = bookingDate.getUTCMonth() + 1;
 
     const monthsLeft = 12 - month;
-    return amount * monthsLeft;
+    return (amount * monthsLeft);
   }
-
-  
 
   const allTimeTotal = (data?.getSubscription?.transactions ?? [])
     .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
@@ -87,7 +139,7 @@ export default function SubscriptionDetail({
     subscription: SubscriptionDetails
   ): string | undefined {
     if (subscription.type === "yearly") {
-      return `${subscription.costs.monthly * 12}`;
+      return `${(subscription.costs.monthly * 12).toFixed(2)}`;
     }
     if (subscription.type === "monthly" || subscription.type === "weekly") {
       const projection = projectedAmountByYearEnd(
@@ -242,7 +294,7 @@ export default function SubscriptionDetail({
                     <p className="text-xs text-gray-500">
                       EXP TOTAL SPEND THIS YEAR
                     </p>
-                    {!loading  && (
+                    {!loading && (
                       <p className="font-semibold">
                         £
                         {getExpectedSpendThisYear(
@@ -287,11 +339,11 @@ export default function SubscriptionDetail({
                 </h2>
               </div>
               <div className="overflow-y-auto max-h-[300px] scrollbar-nice w-full">
-                {data?.getSubscription.transactions &&
-                  data.getSubscription.transactions.length > 0 &&
+                {finalTransactions &&
+                 
                   // copying the array to ensure data is not mutated
 
-                  [...data.getSubscription.transactions]
+                  finalTransactions
                     // reverse to get last date first
                     .reverse()
                     .map((transaction) => (
