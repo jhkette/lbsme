@@ -57,7 +57,7 @@ const FIXED_DEALS = [
   },
 ];
 
-export default function CategrorySpecificDeals({ category }: DealProps) {
+export default function Page() {
   const pathname = usePathname();
 
 
@@ -115,7 +115,7 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
                   </p>
                   <Image
                     src={deal.icon}
-                    alt={category || ""}
+                    alt={deal.name || ""}
                     width={60}
                     height={60}
                     style={{ height: "auto" }}
