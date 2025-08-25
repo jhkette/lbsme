@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { SuspenseDeals } from "@/components/suspense/SuspenseComponents";
 import FreeTrialItem from "@/components/deals/FreeTrialItem";
 import { useApolloClient } from "@apollo/client";
 import { fetchAllTrials } from "@/lib/freeTrialsQuery"; // adjust path
-
+import { usePathname } from "next/navigation";
 type Deal = {
   [key: string]: any;
 };
@@ -43,15 +44,41 @@ export default function Page() {
     };
   }, [client]);
 
+  const pathname = usePathname();
+  
+  
+    const topNav = [
+      { name: "SME Deals", link: "sme-deals" },
+      { name: "Free Trials", link: "free-trials" },
+      { name: "Best Deals", link: "best-deals" },
+    ];
+
   return (
-    <div className="px-16 w-full flex flex-col mt-12 relative">
-      <h1 className="font-bold text-4xl my-8 text-lbtext">Free Trials</h1>
+      <div className="px-16 w-full flex flex-col mt-12 relative">
+      <h1 className="font-bold text-4xl my-8 text-lbtext">Best Deals</h1>
+     <nav className="flex flex-row justify-start gap-8 items-center relative top-8">
+  {topNav.map((item, index) => {
+    const isActive = pathname.includes(item.link); // check if current path matches
+
+    return (
+      <Link
+        key={index}
+        href={`/dashboard/marketplace/${item.link}`} // add link if needed
+        className={`rounded-md px-2 py-1 w-fit transition-colors duration-300 
+          ${isActive ? "bg-lbgreen text-white" : "bg-lbblue2 text-lbtext"}`}
+      >
+        {item.name}
+      </Link>
+    );
+  })}
+</nav>
+          
       <Image
         src="/images/main/lbgraphic.png"
         height={250}
         width={400}
         alt="graphic"
-        className="absolute top-6 z-0 right-40"
+        className="absolute top-14 z-0 right-40"
       />
       {loading ? (
         <SuspenseDeals />

@@ -13,7 +13,7 @@
         View a selection of <span className="text-lbgreen font-bold text-lg">Free trials</span>
       </p>
     ),
-    link: "/dashboard/marketplace/freetrials"
+    link: "/dashboard/marketplace/free-trials"
   },
   {
     name: "Best deals",
@@ -22,15 +22,15 @@
         A selection of <span className="text-lbgreen font-bold text-lg">offers and deals</span>
       </p>
     ),
-     link: "/dashboard/marketplace/bestdeals"
+     link: "/dashboard/marketplace/best-deals"
   },
   {
-    name: "View all",
+    name: "SME deals",
     description: (
       <p className="text-center text-sm md:text-base  text-lbtextgrey font-bold">
-        View a selection of <span className="text-lbgreen font-bold text-lg">trials and offers</span>
+        View a selection of deals <span className="text-lbgreen font-bold text-lg">catered for businesses</span>
       </p>
     ),
-    link: "/dashboard/marketplace"
+    link: "/dashboard/marketplace/sme-deals"
   },
 ];
