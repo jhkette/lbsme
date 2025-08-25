@@ -6,9 +6,9 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const navItems = [
-    { label: "Home", icon: "homegreen.svg", path: "/dashboard", exact: true },
-    { label: "Subs", icon: "List.svg", path: "/dashboard/subs" },
-    { label: "Marketplace", icon: "Tag.svg", path: "/dashboard/marketplace" },
+    { label: "Home", icon: "homegreen.svg", path: "/dashboard", uri: "/dashboard", exact: true },
+    { label: "Subs", icon: "List.svg", path: "/dashboard/subs", uri:  "/dashboard/subs" },
+    { label: "Marketplace", icon: "Tag.svg", path: "/dashboard/marketplace/sme-deals", uri:"/dashboard/marketplace" },
   ];
 
   const helpItem = { label: "Help", icon: "help.svg", path: "/dashboard/help" };
@@ -25,7 +25,7 @@ export default function Sidebar() {
             active={
               item.exact
                 ? pathname === item.path
-                : pathname.startsWith(item.path)
+                : pathname.startsWith(item.uri)
             }
           />
         ))}

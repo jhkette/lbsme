@@ -31,7 +31,6 @@ export default function Page() {
       <nav className="flex flex-row justify-start gap-8 items-center relative top-8">
         {topNav.map((item, index) => {
           const isActive = pathname.includes(item.link); 
-
           return (
             <Link
               key={index}

@@ -48,10 +48,10 @@ export default function Page() {
   
   
     const topNav = [
-      { name: "SME Deals", link: "sme-deals" },
-      { name: "Free Trials", link: "free-trials" },
-      { name: "Best Deals", link: "best-deals" },
-    ];
+    { name: "SME Deals", link: "sme-deals" },
+    { name: "Free Trials", link: "free-trials" },
+    { name: "Best Deals", link: "best-deals" },
+  ];
 
   return (
       <div className="px-16 w-full flex flex-col mt-12 relative">

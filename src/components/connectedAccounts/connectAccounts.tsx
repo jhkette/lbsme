@@ -98,7 +98,7 @@ export default function ConnectAccounts({ url }: ConnectAccountsProps) {
         </div>
         <div className=" w-1/2  py-4 ">
           {!subLoading && subData?.getSubscribedStatus.subscribed && (
-            <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbgray rounded-2xl  mx-18 my-6 p-14">
+            <div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbpaleblue rounded-2xl  mx-18 my-6 p-14">
               <p className="text-center">
                 {accountInfoList[0]?.status === "Active"
                   ? "Please click add another account to connect another bank account to Little Birdie."
@@ -107,7 +107,7 @@ export default function ConnectAccounts({ url }: ConnectAccountsProps) {
               <div>
                 <button
                   onClick={() => window.open(url, "_blank")}
-                  className="w-fit px-8 py-6 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+                  className="w-fit px-8 py-2 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
                 >
                   {accountInfoList[0]?.status === "Active"
                     ? "Add another account"
