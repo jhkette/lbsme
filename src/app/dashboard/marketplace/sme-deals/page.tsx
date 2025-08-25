@@ -16,7 +16,7 @@ export default function Page() {
 
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
-      <h1 className="font-bold text-4xl my-8 text-lbtext">Best Deals</h1>
+      <h1 className="font-bold text-4xl my-8 text-lbtext">SME Deals</h1>
       <nav className="flex flex-row justify-start gap-8 items-center relative top-8">
         {topNav.map((item, index) => {
           const isActive = pathname.includes(item.link); 

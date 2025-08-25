@@ -20,11 +20,11 @@ export default async function page({
   return (
     <section className="px-16 w-full flex flex-col mt-12 relative">
       <Link
-        href="/dashboard/marketplace"
+        href="/dashboard/marketplace/best-deals"
         className="flex flex-row items-center hover-bg-blue-200 rounded-md w-fit px-4 py-2 hover:bg-blue-100"
       >
         <ArrowLeft size={18} color="#29235C" />{" "}
-        <p className="text-lg pl-2 text-lbtext">Go back to best offers</p>
+        <p className="text-lg pl-2 text-lbtext">Go back to best deals</p>
       </Link>
        <Image
                    src="/images/main/lbgraphic.png"
