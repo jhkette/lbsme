@@ -65,7 +65,7 @@ export default function Page() {
         key={index}
         href={`/dashboard/marketplace/${item.link}`} // add link if needed
         className={`rounded-md px-2 py-1 w-fit transition-colors duration-300 
-          ${isActive ? "bg-lbgreen text-white" : "bg-lbblue2 text-lbtext hover:bg-lbgreen text-white"}`}
+          ${isActive ? "bg-lbgreen text-white" : "bg-lbblue2 text-lbtext hover:bg-lbgreen hover:text-white"}`}
       >
         {item.name}
       </Link>
