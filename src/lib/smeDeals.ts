@@ -3,10 +3,10 @@ import {
   FD_LINK_BROADBAND,
   FD_LINK_MOBILE,
   FD_LINK_CAR_INS,
-  FD_LINK_HOME_INS,
+  FD_LINK_BUSINESS_INS,
   FD_LINK_ENERGY,
-  FD_LINK_PET_INS,
-  FD_LINK_TRAVEL_INS,
+  FD_LINK_FINANCE,
+
 } from "@/lib/consts";
 
 
@@ -28,23 +28,19 @@ export const FIXED_DEALS = [
     icon: "/images/deal-icons/energy.svg",
   },
   {
-    name: FixedDeals.HomeInsurance,
-    uri: FD_LINK_HOME_INS,
-    icon: "/images/deal-icons/home-insurance.svg",
+    name: FixedDeals.Finance,
+    uri: FD_LINK_FINANCE,
+    icon: "/images/deal-icons/money.svg",
   },
   {
     name: FixedDeals.Mobile,
     uri: FD_LINK_MOBILE,
     icon: "/images/deal-icons/mobile.svg",
   },
+ 
   {
-    name: FixedDeals.PetInsurance,
-    uri: FD_LINK_PET_INS,
-    icon: "/images/deal-icons/pet-insurance.svg",
-  },
-  {
-    name: FixedDeals.TravelInsurance,
-    uri: FD_LINK_TRAVEL_INS,
+    name: FixedDeals.BusinessInsurance,
+    uri: FD_LINK_BUSINESS_INS,
     icon: "/images/deal-icons/travel-insurance.svg",
   },
 ];

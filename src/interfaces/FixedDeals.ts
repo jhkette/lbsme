@@ -4,6 +4,6 @@
   CarInsurance = "Car Insurance",
   HomeInsurance = "Home Insurance",
   Energy = "Energy",
-  PetInsurance = "Pet Insurance",
-  TravelInsurance = "Travel Insurance",
+  BusinessInsurance = "Business Insurance",
+  Finance = "Finance",
 }
