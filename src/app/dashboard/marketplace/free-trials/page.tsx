@@ -48,7 +48,7 @@ export default function Page() {
   
   
     const topNav = [
-    { name: "SME Deals", link: "sme-deals" },
+    { name: "Business Deals", link: "sme-deals" },
     { name: "Free Trials", link: "free-trials" },
     { name: "Best Deals", link: "best-deals" },
   ];
