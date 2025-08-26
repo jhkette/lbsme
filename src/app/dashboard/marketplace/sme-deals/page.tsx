@@ -16,7 +16,7 @@ export default function Page() {
 
   return (
     <div className="px-16 w-full flex flex-col mt-12 relative">
-      <h1 className="font-bold text-4xl my-8 text-lbtext">SME Deals</h1>
+      <h1 className="font-bold text-4xl my-8 text-lbtext">Business Deals</h1>
       <nav className="flex flex-row justify-start gap-8 items-center relative top-8">
         {topNav.map((item, index) => {
           const isActive = pathname.includes(item.link); 
@@ -43,7 +43,7 @@ export default function Page() {
 
       <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
         <div className="w-full bg-lbgray rounded-t-lg p-4">
-          <h2 className="text-2xl font-semibold text-lbtext">SME Deals</h2>
+          <h2 className="text-2xl font-semibold text-lbtext">Business Deals</h2>
         </div>
         <div className="overflow-x-auto flex flex-row py-4 px-12 rounded-b-lg  bg-white justify-start items-center w-full flex-wrap h-[455px] scrollbar-nice ">
           {FIXED_DEALS.map((deal, index) => {

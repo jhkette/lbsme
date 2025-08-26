@@ -56,7 +56,7 @@ export default function Page() {
       ) : (
         <section className="flex flex-col justify-between items-end w-full mt-15 rounded-lg shadow-lg mb-12">
           <div className="w-full bg-lbgray rounded-t-lg p-4">
-            <h2 className="text-2xl font-semibold text-lbtext">SME Deals</h2>
+            <h2 className="text-2xl font-semibold text-lbtext">Best Deals</h2>
           </div>
           <div className="overflow-x-auto flex flex-row py-4 px-12 rounded-b-lg  bg-white justify-start items-center w-full flex-wrap h-[455px] scrollbar-nice ">
             {finalData?.map((category: string) => {

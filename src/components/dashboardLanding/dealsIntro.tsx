@@ -25,7 +25,7 @@
      link: "/dashboard/marketplace/best-deals"
   },
   {
-    name: "SME deals",
+    name: "Business deals",
     description: (
       <p className="text-center text-sm md:text-base  text-lbtextgrey font-bold">
         View a selection of deals <span className="text-lbgreen font-bold text-lg">catered for businesses</span>
