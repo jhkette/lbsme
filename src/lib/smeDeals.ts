@@ -2,7 +2,7 @@ import { FixedDeals } from "@/interfaces/FixedDeals";
 import {
   FD_LINK_BROADBAND,
   FD_LINK_MOBILE,
-  FD_LINK_CAR_INS,
+
   FD_LINK_BUSINESS_INS,
   FD_LINK_ENERGY,
   FD_LINK_FINANCE,
@@ -17,11 +17,7 @@ export const FIXED_DEALS = [
     uri: FD_LINK_BROADBAND,
     icon: "/images/deal-icons/broadband.svg",
   },
-  {
-    name: FixedDeals.CarInsurance,
-    uri: FD_LINK_CAR_INS,
-    icon: "/images/deal-icons/car-insurance.svg",
-  },
+
   {
     name: FixedDeals.Energy,
     uri: FD_LINK_ENERGY,
