@@ -96,6 +96,7 @@ export default function Page() {
                     <DealSubscriptionMore /> */}
 
             {freeTrials?.map((deal: Deal) => {
+              console.log(deal)
               return <FreeTrialItem key={deal.name} deal={deal} />;
             })}
           </div>

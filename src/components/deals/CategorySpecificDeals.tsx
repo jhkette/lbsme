@@ -31,12 +31,13 @@ export default function CategrorySpecificDeals({ category }: DealProps) {
       <div className="overflow-x-auto scrollbar-nice flex flex-row py-4 pl-12 rounded-b-lg  bg-white justify-start items-end w-full flex-wrap max-h-[550px] ">
         {category && groupedData
           ? groupedData.deals.map((deal) => {
+            console.log(deal, "this is catehory specific deal")
               const dealSlug = slugify(deal.name, { lower: true });
 
               return (
                 <Link
                   key={dealSlug}
-                  href={`/dashboard/marketplace/bestdeals/${category}/${dealSlug}`}
+                  href={`/dashboard/marketplace/best-deals/${category}/${dealSlug}`}
                   className="hover:scale-105 transition-transform duration-300 hover: opacity-90 ease-in-out"
                 >
                   <div className="relative bg-[url(/images/deals/dealbg.png)] min-w-[275px] min-h-[185px] max-w-[275px] max-h-[185px] bg-center bg-no-repeat bg-cover my-4 mx-4 py-8">
