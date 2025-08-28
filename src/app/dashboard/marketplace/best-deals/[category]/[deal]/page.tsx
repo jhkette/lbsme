@@ -19,7 +19,7 @@ export default async function page({ params }: { params: Promise<Params> }) {
   return (
     <section className="px-16 w-full flex flex-col mt-12 relative">
       <Link
-        href={`/dashboard/marketplace/bestdeals/${category}`}
+        href={`/dashboard/marketplace/best-deals/${category}`}
         className="flex flex-row items-center hover-bg-blue-200 rounded-md w-fit px-4 py-2 hover:bg-blue-100"
       >
         <ArrowLeft size={18} color="#29235C" />{" "}
