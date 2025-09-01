@@ -13,7 +13,7 @@ import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 import { useRouter } from "next/navigation";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import Circle from "@/components/lbcoreui/Circle";
-
+import { PopoverComponent } from "./PopOverComponent";
 export default function SubscriptionMain() {
   // State variables to manage subscriptions, grouped subscriptions, and search
   // and category selection
@@ -121,7 +121,7 @@ export default function SubscriptionMain() {
   return (
     <div className="my-13">
       {groupedSubs !== null && (
-       <ul className="flex flex-row gap-10 list-none overflow-x-auto whitespace-nowrap scrollbar-nice">
+       <ul className="flex flex-row gap-8 list-none overflow-x-auto whitespace-nowrap scrollbar-nice">
           {["All Subscriptions", ...Object.keys(groupedSubs)].map(
             (category) => (
               <li
@@ -170,11 +170,13 @@ export default function SubscriptionMain() {
             Inactive
           </button>
         </div>
-        <div className="bg-lbgray rounded-lg p-2 block w-fit justify-start bg-lbgray rounded-lg mr-2 hover:bg-lbgreen text-lbtextgrey hover:text-white cursor-pointer ease-in-out" onClick={exportDataToCSV}>
+        <div className="bg-lbgray rounded-lg p-2 block w-fit justify-start bg-lbgray rounded-lg  hover:bg-lbgreen text-lbtextgrey hover:text-white cursor-pointer ease-in-out" onClick={exportDataToCSV}>
          
           <Download  size={24} />
         
         </div>
+        <PopoverComponent/>
+       
       </div>
 
       {!!subscriptions && !loading ? (
