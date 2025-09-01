@@ -507,6 +507,7 @@ export type Query = {
   getSubCategory: Array<SubCategoryResult>;
   getSubscribedStatus: GetSubscribedStatusResult;
   getSubscription: SubscriptionDetails;
+  getSubscriptionPeriod: GetSubscriptionPeriodResult;
   getSubscriptionSpendings: SubscriptionsSpendingsResult;
   getSubscriptions?: Maybe<GetSubscriptionsResult>;
   getSubscriptionsSummary: SubscriptionsSummaryResult;
@@ -519,6 +520,7 @@ export type Query = {
   getUserLogs: UserLogsResult;
   listUsers: ListUsersResult;
   refreshTransaction?: Maybe<UserAuthGatewayResult>;
+  sendWelcomeEmail?: Maybe<Scalars['Boolean']['output']>;
   setUserStatus?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -570,6 +572,11 @@ export type QueryGetNotificationsSettingsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   nextToken?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<NotificationTypeEnum>;
+};
+
+
+export type QueryGetProviderlessUserAuthGatewayArgs = {
+  web?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -633,6 +640,11 @@ export type QueryListUsersArgs = {
   filter?: InputMaybe<UserFilter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   nextToken?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySendWelcomeEmailArgs = {
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -937,4 +949,9 @@ export type FetchMinnaWebUiResult = {
 export type GetSubscribedStatusResult = {
   __typename?: 'getSubscribedStatusResult';
   subscribed?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type GetSubscriptionPeriodResult = {
+  __typename?: 'getSubscriptionPeriodResult';
+  period?: Maybe<Scalars['String']['output']>;
 };

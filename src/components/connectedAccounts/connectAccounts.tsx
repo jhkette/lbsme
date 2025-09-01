@@ -20,7 +20,7 @@ export default function ConnectAccounts({ url }: ConnectAccountsProps) {
 
   const { loading, error, data, refetch } = useGetBankAccountQuery({
     errorPolicy: "all",
-
+    
     fetchPolicy: "cache-and-network",
   });
 

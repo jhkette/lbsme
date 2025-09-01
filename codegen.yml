@@ -1,6 +1,6 @@
 
 overwrite: true
-schema: "../lb-backend/lib/common/appSync/schema.graphql"
+schema: "../lb-backend-app/lib/common/appSync/schema.graphql"
 documents: "./src/**/!(*.generated).graphql"
 generates:
   src/graphql-types/generated/types.ts:
