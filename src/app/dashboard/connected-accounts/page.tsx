@@ -18,7 +18,7 @@ export default function Page() {
   const [fetchUrl, { data, loading: queryLoading, error }] =
     useGetProviderlessUserAuthGatewayLazyQuery({
       fetchPolicy: "network-only", // always get fresh data
-      variables: { web: true },
+      // variables: { web: true },
     });
 
   const url = data?.getProviderlessUserAuthGateway?.url;
