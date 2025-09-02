@@ -9,7 +9,7 @@ import Image from "next/image";
 import { SubscriptionsBankConnection } from "@/components/suspense/SuspenseComponents";
 
 
-import { NetworkStatus } from "@apollo/client";
+
 // this page could be broken down into smaller components for better readability and maintainability
 export default function Page() {
 
@@ -18,11 +18,12 @@ export default function Page() {
   const [fetchUrl, { data, loading: queryLoading, error }] =
     useGetProviderlessUserAuthGatewayLazyQuery({
       fetchPolicy: "network-only", // always get fresh data
-      // variables: { web: true },
+      variables: { web: true },
     });
+   
 
   const url = data?.getProviderlessUserAuthGateway?.url;
-
+  
   // Fetch as soon as the page mounts — don’t wait for subscribed to finish
   useEffect(() => {
     fetchUrl();
