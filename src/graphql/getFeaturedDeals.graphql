@@ -1,14 +1,13 @@
 query getFeaturedDeals {
-  getFeaturedDeals {
-    name
-    icon
-    saveUp
-    category {
-      name
-      PK
-      SK
-      searchName
-    }
-  }
+	getFeaturedDeals {
+		name
+		icon
+		saveUp
+		category {
+			name
+			PK
+			SK
+			searchName
+		}
+	}
 }
-

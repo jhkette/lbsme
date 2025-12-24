@@ -5,126 +5,126 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from "lucide-react";
 import { handleLogin } from "@/actions/login";
 import { useUser } from "@/contexts/UserContext/UserProvider";
 import { cn } from "@/lib/utils";
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    clearErrors,
-  } = useForm<SignInData>({
-    //@ts-expect-error this is due to a library mismatch
-    
-    resolver: zodResolver(UserSchema),
-  });
-  const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
-  const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
-  const [loading, setLoading] = useState(false); // State to manage loading /not loading
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		clearErrors,
+	} = useForm<SignInData>({
+		//@ts-expect-error this is due to a library mismatch
 
-  const [isPending, startTransition] = useTransition();
-  // get user data from UserContext
-  const { setUser } = useUser();
+		resolver: zodResolver(UserSchema),
+	});
+	const router = useRouter();
+	const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+	const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
+	const [loading, setLoading] = useState(false); // State to manage loading /not loading
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+	const [isPending, startTransition] = useTransition();
+	// get user data from UserContext
+	const { setUser } = useUser();
 
-  const type = showPassword ? "text" : "password";
-  const Icon = showPassword ? EyeIcon : EyeOffIcon;
+	const togglePasswordVisibility = () => {
+		setShowPassword((prev) => !prev);
+	};
 
-  // Function to handle form submission
-  // It uses the handleLogin function to authenticate the user
-  // and updates the user context with the logged-in user's data
-  const onSubmit: SubmitHandler<SignInData> = async (data) => {
-    setLoading(true); // Set loading state to true
-    if (errors.email || errors.password) {
-      console.log("There are errors in the form");
-      return;
-    }
-    clearErrors(); // clear any previous errors
-    setLoginError(null); // Clear previous login error
-    const logdata = await handleLogin(data.email, data.password);
+	const type = showPassword ? "text" : "password";
+	const Icon = showPassword ? EyeIcon : EyeOffIcon;
 
-    if (logdata.error) {
-      console.log("Login failed:", logdata.error);
-      setLoginError("Login failed. Please check your credentials.");
-      setLoading(false); // Set loading state to false
-      return;
-    }
-    const newUser = {
-      username: logdata.data.username || "",
-      email: logdata.data.email || "",
-      emailVerified: logdata.data.emailVerified || false,
-      familyName: logdata.data.familyName || "",
-      givenName: logdata.data.givenName || "",
-      phoneNumber: logdata.data.phoneNumber || "",
-      postcode: logdata.data.postcode || "",
-    };
-    startTransition(() => {
-      setUser(newUser); // Update the context
+	// Function to handle form submission
+	// It uses the handleLogin function to authenticate the user
+	// and updates the user context with the logged-in user's data
+	const onSubmit: SubmitHandler<SignInData> = async (data) => {
+		setLoading(true); // Set loading state to true
+		if (errors.email || errors.password) {
+			console.log("There are errors in the form");
+			return;
+		}
+		clearErrors(); // clear any previous errors
+		setLoginError(null); // Clear previous login error
+		const logdata = await handleLogin(data.email, data.password);
 
-      router.push("/dashboard");
-    });
-  };
-  return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full text-center flex flex-col items-center justify-center relative"
-    >
-      <input
-        type="text"
-        {...register("email")}
-        placeholder="Enter your email address"
-        className={cn(
-          "w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
-          errors.email ? "bg-red-100" : "focus:shadow-md focus:border-blue-400"
-        )}
-      />
-      <div className=" w-3/4 h-4">
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
-      </div>
-      <input
-        type={type}
-        {...register("password")}
-        placeholder="Enter your Little birdie password"
-        className={cn(
-          "w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
-          errors.password
-            ? "bg-red-100 border-red-400 shadow-sm"
-            : "focus:shadow-md focus:border-blue-400"
-        )}
-      />
-      <button
-        type="button"
-        className="absolute right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
-        onClick={togglePasswordVisibility}
-      >
-        <Icon className="stroke-muted-foreground size-5 lg:size-6" />
-      </button>
-      <div className=" w-3/4 h-4">
-        {errors.password && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
-        )}
-      </div>
-      <input
-        type="submit"
-        value="Login"
-        className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
-      />
-      {loading && (
-        <LoaderCircle className="size-12  absolute top-82 text-lbgreen animate-spin" />
-      )}
+		if (logdata.error) {
+			console.log("Login failed:", logdata.error);
+			setLoginError("Login failed. Please check your credentials.");
+			setLoading(false); // Set loading state to false
+			return;
+		}
+		const newUser = {
+			username: logdata.data.username || "",
+			email: logdata.data.email || "",
+			emailVerified: logdata.data.emailVerified || false,
+			familyName: logdata.data.familyName || "",
+			givenName: logdata.data.givenName || "",
+			phoneNumber: logdata.data.phoneNumber || "",
+			postcode: logdata.data.postcode || "",
+		};
+		startTransition(() => {
+			setUser(newUser); // Update the context
 
-      <div className=" w-3/4 h-4">
-        {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
-      </div>
-    </form>
-  );
+			router.push("/dashboard");
+		});
+	};
+	return (
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="w-full text-center flex flex-col items-center justify-center relative"
+		>
+			<input
+				type="text"
+				{...register("email")}
+				placeholder="Enter your email address"
+				className={cn(
+					"w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
+					errors.email ? "bg-red-100" : "focus:shadow-md focus:border-blue-400",
+				)}
+			/>
+			<div className=" w-3/4 h-4">
+				{errors.email && (
+					<p className="text-red-500 text-sm">{errors.email.message}</p>
+				)}
+			</div>
+			<input
+				type={type}
+				{...register("password")}
+				placeholder="Enter your Little birdie password"
+				className={cn(
+					"w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
+					errors.password
+						? "bg-red-100 border-red-400 shadow-sm"
+						: "focus:shadow-md focus:border-blue-400",
+				)}
+			/>
+			<button
+				type="button"
+				className="absolute right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
+				onClick={togglePasswordVisibility}
+			>
+				<Icon className="stroke-muted-foreground size-5 lg:size-6" />
+			</button>
+			<div className=" w-3/4 h-4">
+				{errors.password && (
+					<p className="text-red-500 text-sm">{errors.password.message}</p>
+				)}
+			</div>
+			<input
+				type="submit"
+				value="Login"
+				className="w-2/4 p-3 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
+			/>
+			{loading && (
+				<LoaderCircle className="size-12  absolute top-82 text-lbgreen animate-spin" />
+			)}
+
+			<div className=" w-3/4 h-4">
+				{loginError && <p className="text-red-500 text-sm">{loginError}</p>}
+			</div>
+		</form>
+	);
 }

@@ -1,12 +1,11 @@
 query getBankAccount {
-  getBankAccount {
-    accountId
-    lastSynced
-    provider {
-      displayName
-      icon
-    }
-    status
-  }
+	getBankAccount {
+		accountId
+		lastSynced
+		provider {
+			displayName
+			icon
+		}
+		status
+	}
 }
-

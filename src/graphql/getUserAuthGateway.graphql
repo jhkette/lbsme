@@ -1,7 +1,5 @@
 query getUserAuthGateway($provider: String!) {
-  getUserAuthGateway(provider: $provider) {
-    url
-  }
+	getUserAuthGateway(provider: $provider) {
+		url
+	}
 }
-
-

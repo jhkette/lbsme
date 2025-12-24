@@ -1,9 +1,6 @@
-import {z} from "zod"
+import { z } from "zod";
 export const CodeSchema = z.object({
-  code: z
-    .string()
-    .min(3, "This code is too short")
-    
+	code: z.string().min(3, "This code is too short"),
 });
 
-export type CodeData = z.infer<typeof CodeSchema  >;
+export type CodeData = z.infer<typeof CodeSchema>;

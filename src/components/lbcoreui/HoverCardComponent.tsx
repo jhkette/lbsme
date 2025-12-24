@@ -1,26 +1,25 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
+	HoverCard,
+	HoverCardContent,
+	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Info } from "lucide-react";
 
 type HoverCardComponentProps = React.PropsWithChildren<Record<string, unknown>>;
 
 export default function HoverCardComponent({
-  children,
+	children,
 }: HoverCardComponentProps) {
-  return (
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <Button variant="link" className="cursor-pointer">
-          <Info color="#29235C" size={82} className="size-[24px] mr-4 " />
-        </Button>
-      </HoverCardTrigger>
-      <HoverCardContent className="w-80 mr-24">{children}</HoverCardContent>
-    </HoverCard>
-  );
-
+	return (
+		<HoverCard>
+			<HoverCardTrigger asChild>
+				<Button variant="link" className="cursor-pointer">
+					<Info color="#29235C" size={82} className="size-[24px] mr-4 " />
+				</Button>
+			</HoverCardTrigger>
+			<HoverCardContent className="w-80 mr-24">{children}</HoverCardContent>
+		</HoverCard>
+	);
 }

@@ -15,39 +15,39 @@ import { useSubscriptionStatus } from "@/contexts/SubscribedContext/Subscription
 import { SubscriptionDetails } from "@/interfaces/DetailedSubscription";
 
 type SubscriptionDetailProps = {
-  idToFetch: string;
+	idToFetch: string;
 };
 
 interface fetchMinnaWebUI {
-  __typename?: "fetchMinnaWebUIResult";
-  url?: string | null;
-  authToken?: string | null;
-  validTo?: string | null;
+	__typename?: "fetchMinnaWebUIResult";
+	url?: string | null;
+	authToken?: string | null;
+	validTo?: string | null;
 }
 
 interface Transaction {
-  __typename?: "TransactionData" | undefined;
-  accountID?: string | null | undefined;
-  bookingTime?: string | null | undefined;
-  budId?: string | null | undefined;
-  title?: string | null | undefined;
-  transactionId?: string | null | undefined;
-  amount?:
-    | {
-        __typename?: "TransactionAmount" | undefined;
-        amount?: number | null | undefined;
-        currency?: string | null | undefined;
-      }
-    | null
-    | undefined;
-  provider?:
-    | {
-        __typename?: "ProviderData" | undefined;
-        id?: string | null | undefined;
-        name?: string | null | undefined;
-      }
-    | null
-    | undefined;
+	__typename?: "TransactionData" | undefined;
+	accountID?: string | null | undefined;
+	bookingTime?: string | null | undefined;
+	budId?: string | null | undefined;
+	title?: string | null | undefined;
+	transactionId?: string | null | undefined;
+	amount?:
+		| {
+				__typename?: "TransactionAmount" | undefined;
+				amount?: number | null | undefined;
+				currency?: string | null | undefined;
+		  }
+		| null
+		| undefined;
+	provider?:
+		| {
+				__typename?: "ProviderData" | undefined;
+				id?: string | null | undefined;
+				name?: string | null | undefined;
+		  }
+		| null
+		| undefined;
 }
 
 /*
@@ -57,343 +57,342 @@ interface Transaction {
  */
 
 export default function SubscriptionDetail({
-  idToFetch,
+	idToFetch,
 }: SubscriptionDetailProps) {
-  const [minnaData, setMinnaData] = useState<
-    fetchMinnaWebUI | null | undefined
-  >(null);
-  const [destinationURL, setDestinationURL] = useState<string | null>(null);
-  const [finalTransactions, setFinalTransaction] = useState<
-    Transaction[] | null
-  >(null);
-  const { loading, error, data, refetch } = useGetSubscriptionQuery({
-    variables: { id: idToFetch },
-    errorPolicy: "all",
-    fetchPolicy: "cache-and-network",
-  });
-  const [fetchMinnaWebUI] = useFetchMinnaWebUiMutation();
-  const { subscribed, loading: subLoading } = useSubscriptionStatus();
+	const [minnaData, setMinnaData] = useState<
+		fetchMinnaWebUI | null | undefined
+	>(null);
+	const [destinationURL, setDestinationURL] = useState<string | null>(null);
+	const [finalTransactions, setFinalTransaction] = useState<
+		Transaction[] | null
+	>(null);
+	const { loading, error, data, refetch } = useGetSubscriptionQuery({
+		variables: { id: idToFetch },
+		errorPolicy: "all",
+		fetchPolicy: "cache-and-network",
+	});
+	const [fetchMinnaWebUI] = useFetchMinnaWebUiMutation();
+	const { subscribed, loading: subLoading } = useSubscriptionStatus();
 
-  useEffect(() => {
-    (async () => {
-      const { data: minnaData } = await fetchMinnaWebUI({
-        variables: { subscriptionId: idToFetch },
-      });
-      setMinnaData(minnaData?.fetchMinnaWebUI);
-    })();
-  }, [idToFetch, fetchMinnaWebUI]);
+	useEffect(() => {
+		(async () => {
+			const { data: minnaData } = await fetchMinnaWebUI({
+				variables: { subscriptionId: idToFetch },
+			});
+			setMinnaData(minnaData?.fetchMinnaWebUI);
+		})();
+	}, [idToFetch, fetchMinnaWebUI]);
 
-  // Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
-  useEffect(() => {
-    if (minnaData?.url && minnaData?.authToken) {
-      setDestinationURL(
-        encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`)
-      );
-    } else {
-      setDestinationURL(cancelSubscriptionLink);
-    }
-  }, [minnaData]);
+	// Set the destination URL based on the fetched Minna data or fallback to the cancel subscription link
+	useEffect(() => {
+		if (minnaData?.url && minnaData?.authToken) {
+			setDestinationURL(
+				encodeURI(`${minnaData.url}&authToken=${minnaData.authToken}`),
+			);
+		} else {
+			setDestinationURL(cancelSubscriptionLink);
+		}
+	}, [minnaData]);
 
-  useEffect(() => {
-    if (data?.getSubscription.transactions) {
-      const reducedTransactions = data?.getSubscription.transactions.reduce(
-        (acc, tx) => {
-          if (!tx?.bookingTime) return acc;
+	useEffect(() => {
+		if (data?.getSubscription.transactions) {
+			const reducedTransactions = data?.getSubscription.transactions.reduce(
+				(acc, tx) => {
+					if (!tx?.bookingTime) return acc;
 
-          const date = new Date(tx.bookingTime);
-          const dateKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
+					const date = new Date(tx.bookingTime);
+					const dateKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
 
-          if (!acc.seenDates.has(dateKey)) {
-            acc.seenDates.add(dateKey);
-            acc.unique.push(tx); // keep the first transaction for that date
-          }
+					if (!acc.seenDates.has(dateKey)) {
+						acc.seenDates.add(dateKey);
+						acc.unique.push(tx); // keep the first transaction for that date
+					}
 
-          return acc;
-        },
-        {
-          seenDates: new Set<string>(),
-          unique: [] as  Transaction[],
-        }
-      ).unique;
+					return acc;
+				},
+				{
+					seenDates: new Set<string>(),
+					unique: [] as Transaction[],
+				},
+			).unique;
 
-      setFinalTransaction(Array.from(reducedTransactions as Transaction[]));
-    }
-  }, [data?.getSubscription.transactions]);
+			setFinalTransaction(Array.from(reducedTransactions as Transaction[]));
+		}
+	}, [data?.getSubscription.transactions]);
 
-  const now = new Date();
-  const currentYear = now.getFullYear();
+	const now = new Date();
+	const currentYear = now.getFullYear();
 
-  function projectedAmountByYearEnd(bookingTime: string, amount: number) {
-    const bookingDate = new Date(bookingTime);
-    const month = bookingDate.getUTCMonth() + 1;
+	function projectedAmountByYearEnd(bookingTime: string, amount: number) {
+		const bookingDate = new Date(bookingTime);
+		const month = bookingDate.getUTCMonth() + 1;
 
-    const monthsLeft = 12 - month;
-    return (amount * monthsLeft);
-  }
+		const monthsLeft = 12 - month;
+		return amount * monthsLeft;
+	}
 
-  const allTimeTotal = (data?.getSubscription?.transactions ?? [])
-    .filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
-    .reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
+	const allTimeTotal = (data?.getSubscription?.transactions ?? [])
+		.filter((tx): tx is NonNullable<typeof tx> => !!tx && !!tx.bookingTime)
+		.reduce((sum, tx) => sum + (tx.amount?.amount ?? 0), 0);
 
-  function getExpectedSpendThisYear(
-    subscription: SubscriptionDetails
-  ): string | undefined {
-    if (subscription.type === "yearly") {
-      return `${(subscription.costs.monthly * 12).toFixed(2)}`;
-    }
-    if (subscription.type === "monthly" || subscription.type === "weekly") {
-      const projection = projectedAmountByYearEnd(
-        subscription.transactions?.[subscription.transactions?.length - 1]
-          .bookingTime,
-        subscription.costs.monthly
-      );
-      return `${(subscription.costs.yearly + projection).toFixed(2)}`;
-    }
-    return "uknown";
-  }
+	function getExpectedSpendThisYear(
+		subscription: SubscriptionDetails,
+	): string | undefined {
+		if (subscription.type === "yearly") {
+			return `${(subscription.costs.monthly * 12).toFixed(2)}`;
+		}
+		if (subscription.type === "monthly" || subscription.type === "weekly") {
+			const projection = projectedAmountByYearEnd(
+				subscription.transactions?.[subscription.transactions?.length - 1]
+					.bookingTime,
+				subscription.costs.monthly,
+			);
+			return `${(subscription.costs.yearly + projection).toFixed(2)}`;
+		}
+		return "uknown";
+	}
 
-  return (
-    <>
-      {data?.getSubscription.isManual === false && (
-        <Image
-          src="/images/main/lbgraphic.png"
-          height={250}
-          width={400}
-          alt="graphic"
-          className="hidden md:block absolute top-2 z-0 right-40 "
-        />
-      )}
-      <Link href="/dashboard/subs">
-        <div className="flex flex-row pr-2 items-center gap-1 mb-4 cursor-pointer border-b-2 border-transparent hover:border-lbtext w-fit">
-          <ArrowLeft size={20} />
-          <p className="text-lbgrey">Go back to subs</p>
-        </div>
-      </Link>
+	return (
+		<>
+			{data?.getSubscription.isManual === false && (
+				<Image
+					src="/images/main/lbgraphic.png"
+					height={250}
+					width={400}
+					alt="graphic"
+					className="hidden md:block absolute top-2 z-0 right-40 "
+				/>
+			)}
+			<Link href="/dashboard/subs">
+				<div className="flex flex-row pr-2 items-center gap-1 mb-4 cursor-pointer border-b-2 border-transparent hover:border-lbtext w-fit">
+					<ArrowLeft size={20} />
+					<p className="text-lbgrey">Go back to subs</p>
+				</div>
+			</Link>
 
-      <h1 className="relative text-3xl md:text-4xl font-bold text-lbtext mb-4 flex flex-row justify-start items-center z-500">
-        Subscription <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
-        {loading ? (
-          <span className="blur-sm text-gray-400 select-none">
-            Loading subscription
-          </span>
-        ) : data?.getSubscription.displayName ? (
-          data.getSubscription.displayName
-        ) : (
-          data?.getSubscription.merchant?.name
-        )}
-      </h1>
+			<h1 className="relative text-3xl md:text-4xl font-bold text-lbtext mb-4 flex flex-row justify-start items-center z-500">
+				Subscription <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
+				{loading ? (
+					<span className="blur-sm text-gray-400 select-none">
+						Loading subscription
+					</span>
+				) : data?.getSubscription.displayName ? (
+					data.getSubscription.displayName
+				) : (
+					data?.getSubscription.merchant?.name
+				)}
+			</h1>
 
-      <div className="flex flex-row items-start gap-4 mb-4">
-        {/* Left Container */}
-        {loading ? (
-          <SuspenseSubscriptionDetail />
-        ) : (
-          <div className="w-1/2">
-            <div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg py-4 px-10 mr-12 mt-13 border-1 border-gray-300">
-              {/* Intro */}
-              <div className="flex flex-row items-center gap-4 mx-auto  mt-12">
-                <div className="flex flex-col items-center">
-                  {data?.getSubscription.costs.monthly && (
-                    <>
-                      <p className="block w-fit font-semibold">
-                        £{data.getSubscription.costs.monthly.toFixed(2)}
-                      </p>
-                      <p className="block w-fit font-normal">per month</p>
-                    </>
-                  )}
-                </div>
+			<div className="flex flex-row items-start gap-4 mb-4">
+				{/* Left Container */}
+				{loading ? (
+					<SuspenseSubscriptionDetail />
+				) : (
+					<div className="w-1/2">
+						<div className="flex flex-col gap-2 rounded-lg bg-white shadow-lg py-4 px-10 mr-12 mt-13 border-1 border-gray-300">
+							{/* Intro */}
+							<div className="flex flex-row items-center gap-4 mx-auto  mt-12">
+								<div className="flex flex-col items-center">
+									{data?.getSubscription.costs.monthly && (
+										<>
+											<p className="block w-fit font-semibold">
+												£{data.getSubscription.costs.monthly.toFixed(2)}
+											</p>
+											<p className="block w-fit font-normal">per month</p>
+										</>
+									)}
+								</div>
 
-                {data?.getSubscription.merchant.icon !== "unknown" &&
-                data?.getSubscription.merchant.icon !== null ? (
-                  <Image
-                    src={data?.getSubscription.merchant.icon as string}
-                    alt={data?.getSubscription.merchant.name as string}
-                    width={120}
-                    height={120}
-                    className="rounded-lg"
-                  />
-                ) : (
-                  <BigCircle />
-                )}
+								{data?.getSubscription.merchant.icon !== "unknown" &&
+								data?.getSubscription.merchant.icon !== null ? (
+									<Image
+										src={data?.getSubscription.merchant.icon as string}
+										alt={data?.getSubscription.merchant.name as string}
+										width={120}
+										height={120}
+										className="rounded-lg"
+									/>
+								) : (
+									<BigCircle />
+								)}
 
-                <div className="flex flex-col items-center">
-                  <p className="text-lbtext px-3 py-1 text-lg block w-fit font-semibold">
-                    {data?.getSubscription.dates.lastPaymentDate &&
-                    isBefore(
-                      parseISO(data.getSubscription.dates.lastPaymentDate),
-                      new Date()
-                    )
-                      ? format(
-                          parseISO(data.getSubscription.dates.lastPaymentDate),
-                          "do MMM yyyy"
-                        )
-                      : "Unknown"}
-                  </p>
-                  <p className="w-fit block">Last Payment</p>
-                </div>
-              </div>
+								<div className="flex flex-col items-center">
+									<p className="text-lbtext px-3 py-1 text-lg block w-fit font-semibold">
+										{data?.getSubscription.dates.lastPaymentDate &&
+										isBefore(
+											parseISO(data.getSubscription.dates.lastPaymentDate),
+											new Date(),
+										)
+											? format(
+													parseISO(data.getSubscription.dates.lastPaymentDate),
+													"do MMM yyyy",
+												)
+											: "Unknown"}
+									</p>
+									<p className="w-fit block">Last Payment</p>
+								</div>
+							</div>
 
-              <p className="text-lbtext text-lg text-center mr-16">
-                Renews in days:{" "}
-                {typeof data?.getSubscription?.dates?.endsInDays === "number"
-                  ? data.getSubscription.dates.endsInDays
-                  : "Unknown"}
-              </p>
+							<p className="text-lbtext text-lg text-center mr-16">
+								Renews in days:{" "}
+								{typeof data?.getSubscription?.dates?.endsInDays === "number"
+									? data.getSubscription.dates.endsInDays
+									: "Unknown"}
+							</p>
 
-              {/* Info List */}
-              {data?.getSubscription.isManual === false && (
-                <div className="grid grid-cols-3 gap-6 mt-12 px-12 items-start">
-                  {/* Cell 1: Provider */}
-                  <div className="flex flex-col">
-                    <p className="text-xs text-gray-500">PROVIDER</p>
-                    <p className="font-semibold">
-                      {data?.getSubscription.displayName ??
-                        data?.getSubscription.merchant?.name}
-                    </p>
-                  </div>
+							{/* Info List */}
+							{data?.getSubscription.isManual === false && (
+								<div className="grid grid-cols-3 gap-6 mt-12 px-12 items-start">
+									{/* Cell 1: Provider */}
+									<div className="flex flex-col">
+										<p className="text-xs text-gray-500">PROVIDER</p>
+										<p className="font-semibold">
+											{data?.getSubscription.displayName ??
+												data?.getSubscription.merchant?.name}
+										</p>
+									</div>
 
-                  {/* Cell 2: Category */}
-                  <div className="flex flex-col">
-                    <p className="text-xs text-gray-500">CATEGORY</p>
-                    <p className="font-semibold">
-                      {data?.getSubscription?.category?.category}
-                    </p>
-                  </div>
+									{/* Cell 2: Category */}
+									<div className="flex flex-col">
+										<p className="text-xs text-gray-500">CATEGORY</p>
+										<p className="font-semibold">
+											{data?.getSubscription?.category?.category}
+										</p>
+									</div>
 
-                  {/* Cell 3: Renewal Date */}
-                  <div className="flex flex-col">
-                    <p className="text-xs text-gray-500">RENEWAL DATE</p>
-                    <p className="font-semibold">
-                      {data?.getSubscription.dates.renewalDate
-                        ? format(
-                            parseISO(
-                              data?.getSubscription.dates.renewalDate as string
-                            ),
-                            "do MMM yyyy"
-                          )
-                        : "Unknown Date"}
-                    </p>
-                  </div>
+									{/* Cell 3: Renewal Date */}
+									<div className="flex flex-col">
+										<p className="text-xs text-gray-500">RENEWAL DATE</p>
+										<p className="font-semibold">
+											{data?.getSubscription.dates.renewalDate
+												? format(
+														parseISO(
+															data?.getSubscription.dates.renewalDate as string,
+														),
+														"do MMM yyyy",
+													)
+												: "Unknown Date"}
+										</p>
+									</div>
 
-                  {/* Cell 4: Spend This Year */}
-                  <div className="flex flex-col mt-4">
-                    <p className="text-xs text-gray-500">SPEND THIS YEAR</p>
-                    <p className="font-semibold">
-                      £{data.getSubscription.costs.yearly.toFixed(2)}
-                    </p>
-                  </div>
+									{/* Cell 4: Spend This Year */}
+									<div className="flex flex-col mt-4">
+										<p className="text-xs text-gray-500">SPEND THIS YEAR</p>
+										<p className="font-semibold">
+											£{data.getSubscription.costs.yearly.toFixed(2)}
+										</p>
+									</div>
 
-                  {/* Cell 5: Total Spend */}
-                  <div className="flex flex-col mt-4">
-                    <p className="text-xs text-gray-500">TOTAL SPEND</p>
-                    <p className="font-semibold">£{allTimeTotal.toFixed(2)}</p>
-                  </div>
+									{/* Cell 5: Total Spend */}
+									<div className="flex flex-col mt-4">
+										<p className="text-xs text-gray-500">TOTAL SPEND</p>
+										<p className="font-semibold">£{allTimeTotal.toFixed(2)}</p>
+									</div>
 
-                  {/* Cell 6: Expected Spend */}
-                  <div className="flex flex-col mt-4">
-                    <p className="text-xs text-gray-500">
-                      EXP TOTAL SPEND THIS YEAR
-                    </p>
-                    {!loading && (
-                      <p className="font-semibold">
-                        £
-                        {getExpectedSpendThisYear(
-                          data?.getSubscription as SubscriptionDetails
-                        ) ?? "0.00"}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
-              <a
-                href={destinationURL || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mx-auto text-center"
-                onClick={(e) => !destinationURL && e.preventDefault()}
-              >
-                <button
-                  className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
-                    !destinationURL
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-lbgreen cursor-pointer"
-                  }`}
-                >
-                  {!destinationURL ? "Loading..." : "Cancel Subscription"}
-                </button>
-              </a>
-            </div>
-          </div>
-        )}
+									{/* Cell 6: Expected Spend */}
+									<div className="flex flex-col mt-4">
+										<p className="text-xs text-gray-500">
+											EXP TOTAL SPEND THIS YEAR
+										</p>
+										{!loading && (
+											<p className="font-semibold">
+												£
+												{getExpectedSpendThisYear(
+													data?.getSubscription as SubscriptionDetails,
+												) ?? "0.00"}
+											</p>
+										)}
+									</div>
+								</div>
+							)}
+							<a
+								href={destinationURL || "#"}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="mx-auto text-center"
+								onClick={(e) => !destinationURL && e.preventDefault()}
+							>
+								<button
+									className={`mt-4 mx-auto w-96 bg-lbtext text-white font-semibold py-2 mb-12 px-4 rounded-lg transition-colors ${
+										!destinationURL
+											? "opacity-50 cursor-not-allowed"
+											: "hover:bg-lbgreen cursor-pointer"
+									}`}
+								>
+									{!destinationURL ? "Loading..." : "Cancel Subscription"}
+								</button>
+							</a>
+						</div>
+					</div>
+				)}
 
-        {/* Right Container */}
-        {data?.getSubscription.isManual === false && (
-          <div className="w-1/2">
-            <div className="  max-h-[434px] flex flex-col gap-2 rounded-lg bg-white shadow-lg px-10 py-4 ml-12 mt-13 border-1 border-gray-300">
-              <div className="flex flex-col w-full items-start justify-between pb-1 my-2">
-                <h2 className="text-2xl font-semibold pb-4 w-full">
-                  Transaction History
-                </h2>
-                <h2 className="text-xl font-semibold border-b border-lbgray w-full pr-4">
-                  Payments
-                </h2>
-              </div>
-              <div className="overflow-y-auto max-h-[300px] scrollbar-nice w-full">
-                {finalTransactions &&
-                 
-                  // copying the array to ensure data is not mutated
+				{/* Right Container */}
+				{data?.getSubscription.isManual === false && (
+					<div className="w-1/2">
+						<div className="  max-h-[434px] flex flex-col gap-2 rounded-lg bg-white shadow-lg px-10 py-4 ml-12 mt-13 border-1 border-gray-300">
+							<div className="flex flex-col w-full items-start justify-between pb-1 my-2">
+								<h2 className="text-2xl font-semibold pb-4 w-full">
+									Transaction History
+								</h2>
+								<h2 className="text-xl font-semibold border-b border-lbgray w-full pr-4">
+									Payments
+								</h2>
+							</div>
+							<div className="overflow-y-auto max-h-[300px] scrollbar-nice w-full">
+								{finalTransactions &&
+									// copying the array to ensure data is not mutated
 
-                  finalTransactions
-                    // reverse to get last date first
-                    .reverse()
-                    .map((transaction) => (
-                      <div
-                        key={transaction?.transactionId}
-                        className="flex flex-row justify-between items-center py-2 border-b border-lbgray w-[95%]"
-                      >
-                        <div className="flex flex-row justify-between items-center w-full gap-4">
-                          <div className="flex flex-row gap-4 items-center">
-                            {data.getSubscription.merchant?.icon !==
-                            "unknown" ? (
-                              <Image
-                                src={
-                                  data.getSubscription.merchant.icon as string
-                                }
-                                alt={
-                                  data.getSubscription.merchant.name as string
-                                }
-                                width={50}
-                                height={50}
-                              />
-                            ) : (
-                              <Circle />
-                            )}
+									finalTransactions
+										// reverse to get last date first
+										.reverse()
+										.map((transaction) => (
+											<div
+												key={transaction?.transactionId}
+												className="flex flex-row justify-between items-center py-2 border-b border-lbgray w-[95%]"
+											>
+												<div className="flex flex-row justify-between items-center w-full gap-4">
+													<div className="flex flex-row gap-4 items-center">
+														{data.getSubscription.merchant?.icon !==
+														"unknown" ? (
+															<Image
+																src={
+																	data.getSubscription.merchant.icon as string
+																}
+																alt={
+																	data.getSubscription.merchant.name as string
+																}
+																width={50}
+																height={50}
+															/>
+														) : (
+															<Circle />
+														)}
 
-                            <p className="block min-w-[110px] flex flex-col justify-center items-center bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
-                              {transaction?.bookingTime
-                                ? format(
-                                    parseISO(transaction.bookingTime),
-                                    "do MMM yyyy"
-                                  )
-                                : "Unknown Date"}
-                            </p>
-                            {transaction?.provider?.name && (
-                              <p className="block bg-lbgreen text-white px-3 py-1 rounded-lg text-xs">
-                                {transaction?.provider?.name}
-                              </p>
-                            )}
-                          </div>
-                          <p className="block text-lbtext font-semibold text-base">
-                            £{transaction?.amount?.amount?.toFixed(2) ?? "0.00"}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </>
-  );
+														<p className="block min-w-[110px] flex flex-col justify-center items-center bg-lbbgblue text-white px-3 py-1 rounded-lg text-xs">
+															{transaction?.bookingTime
+																? format(
+																		parseISO(transaction.bookingTime),
+																		"do MMM yyyy",
+																	)
+																: "Unknown Date"}
+														</p>
+														{transaction?.provider?.name && (
+															<p className="block bg-lbgreen text-white px-3 py-1 rounded-lg text-xs">
+																{transaction?.provider?.name}
+															</p>
+														)}
+													</div>
+													<p className="block text-lbtext font-semibold text-base">
+														£{transaction?.amount?.amount?.toFixed(2) ?? "0.00"}
+													</p>
+												</div>
+											</div>
+										))}
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		</>
+	);
 }

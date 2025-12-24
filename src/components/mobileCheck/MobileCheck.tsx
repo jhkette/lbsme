@@ -1,31 +1,22 @@
-'use client';
+"use client";
 
 import { useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
 export default function MobileCheck({ children }: { children: ReactNode }) {
- 
-  const router = useRouter();
+	const router = useRouter();
 
-  useEffect(() => {
-    const isMobile = () => {
-      if (typeof navigator === "undefined") return false;
-      const ua = navigator.userAgent || "";
-      return /android|iphone|ipad|ipod/i.test(ua);
-    };
+	useEffect(() => {
+		const isMobile = () => {
+			if (typeof navigator === "undefined") return false;
+			const ua = navigator.userAgent || "";
+			return /android|iphone|ipad|ipod/i.test(ua);
+		};
 
-    if (isMobile()) {
-    
-      router.push("/mobile-redirect");
-    }
-  }, [router]);
+		if (isMobile()) {
+			router.push("/mobile-redirect");
+		}
+	}, [router]);
 
-  
-
-  return (
-    <>
-      {children}
-   
-    </>
-  );
+	return <>{children}</>;
 }

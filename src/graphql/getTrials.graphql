@@ -1,11 +1,11 @@
 query getTrials($limit: Int, $nextToken: String) {
-  getTrials(limit: $limit, nextToken: $nextToken) {
-    items {
-      logo
-      name
-      url
-      description
-    }
-    nextToken
-  }
+	getTrials(limit: $limit, nextToken: $nextToken) {
+		items {
+			logo
+			name
+			url
+			description
+		}
+		nextToken
+	}
 }

@@ -1,5 +1,5 @@
 query status {
-  getSubscribedStatus{
-    subscribed
-  } 
+	getSubscribedStatus {
+		subscribed
+	}
 }

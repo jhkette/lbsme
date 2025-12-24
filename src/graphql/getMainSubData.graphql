@@ -1,40 +1,37 @@
-
-
-
 query getSubscriptions($status: SubscriptionStatusEnum!) {
-  getSubscriptions(status: $status) {
-    subscriptions {
-      merchant {
-        icon
-        id
-        name
-      }
+	getSubscriptions(status: $status) {
+		subscriptions {
+			merchant {
+				icon
+				id
+				name
+			}
 
-      category {
-        PK
-        SK
-        category
-        searchCategory
-        searchSubCategory
-        subCategory
-      }
-      dates {
-        endsInDays
-        endsInPercent
-        lastPaymentDate
-        renewalDate
-      }
-      
-      displayName
-      cancellationStatus
-      monthlyCost
-   
-      paymentMethod
-      priceChange
-      providerName
-      subscriptionId
-      type
-      saveUp
-    }
-  }
+			category {
+				PK
+				SK
+				category
+				searchCategory
+				searchSubCategory
+				subCategory
+			}
+			dates {
+				endsInDays
+				endsInPercent
+				lastPaymentDate
+				renewalDate
+			}
+
+			displayName
+			cancellationStatus
+			monthlyCost
+
+			paymentMethod
+			priceChange
+			providerName
+			subscriptionId
+			type
+			saveUp
+		}
+	}
 }

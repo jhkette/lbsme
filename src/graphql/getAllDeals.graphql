@@ -1,14 +1,14 @@
 query getAllDeals {
-  getAllDeals {
-    deals {
-      currency
-      description
-      logo
-      name
-      price
-      url
-      summary
-    }
-    category
-  }
+	getAllDeals {
+		deals {
+			currency
+			description
+			logo
+			name
+			price
+			url
+			summary
+		}
+		category
+	}
 }

@@ -4,38 +4,41 @@ import Image from "next/image";
 import { useState } from "react";
 
 type SidebarItemProps = {
-  iconName: string;
-  label: string;
-  active: boolean;
-  path: string
+	iconName: string;
+	label: string;
+	active: boolean;
+	path: string;
 };
 
-export default function SidebarItem({ iconName, label, active, path }: SidebarItemProps) {
-  const [hover, setHover] = useState(false);
+export default function SidebarItem({
+	iconName,
+	label,
+	active,
+	path,
+}: SidebarItemProps) {
+	const [hover, setHover] = useState(false);
 
-  const imageSrc = hover || active
-    ? `/images/sidebar/green/${iconName}`
-    : `/images/sidebar/${iconName}`;
+	const imageSrc =
+		hover || active
+			? `/images/sidebar/green/${iconName}`
+			: `/images/sidebar/${iconName}`;
 
-  const baseClasses =
-    "p-6 flex flex-col items-center justify-center text-base font-semibold cursor w-full border-1 border-r-1 border-lbgreen duration-300 ease-in-out";
-  const activeOrHoverStyles = active
-    ? "bg-white text-lbgreen"
-    : "text-white hover:bg-white hover:text-lbgreen";
+	const baseClasses =
+		"p-6 flex flex-col items-center justify-center text-base font-semibold cursor w-full border-1 border-r-1 border-lbgreen duration-300 ease-in-out";
+	const activeOrHoverStyles = active
+		? "bg-white text-lbgreen"
+		: "text-white hover:bg-white hover:text-lbgreen";
 
-  return (
-    <Link
-      href={path}
-      className="m-0 cursor-pointer"
-    >
-      <div
-        className={`${baseClasses} ${activeOrHoverStyles} cursor-pointer`}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <Image src={imageSrc} alt={label} width={30} height={30} />
-        {label}
-      </div>
-    </Link>
-  );
+	return (
+		<Link href={path} className="m-0 cursor-pointer">
+			<div
+				className={`${baseClasses} ${activeOrHoverStyles} cursor-pointer`}
+				onMouseEnter={() => setHover(true)}
+				onMouseLeave={() => setHover(false)}
+			>
+				<Image src={imageSrc} alt={label} width={30} height={30} />
+				{label}
+			</div>
+		</Link>
+	);
 }

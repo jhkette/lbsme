@@ -1,6 +1,6 @@
 query getStatusConnection {
-  getStatusConnection {
-    connected
-    connectedAt
-  }
+	getStatusConnection {
+		connected
+		connectedAt
+	}
 }

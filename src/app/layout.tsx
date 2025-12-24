@@ -13,46 +13,44 @@ import MobileCheck from "@/components/mobileCheck/MobileCheck";
 import AmplifyProvider from "@/components/amplify/AmplifyConnect";
 
 const mulishSans = Mulish({
-  variable: "--font-mulish-sans",
-  subsets: ["latin"],
+	variable: "--font-mulish-sans",
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Little Birdie",
-  description: "The UK's top subscription & bill management app",
+	title: "Little Birdie",
+	description: "The UK's top subscription & bill management app",
 };
 
 export default async function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className={`${mulishSans.variable} antialiased`}>
-      <Head>
-        {/*  hide from search engines as it is a demo REMOVE if you want the site to be visible
+	return (
+		<html lang="en" className={`${mulishSans.variable} antialiased`}>
+			<Head>
+				{/*  hide from search engines as it is a demo REMOVE if you want the site to be visible
         to search engines.  */}
-        <meta name="robots" content="noindex,nofollow" />
-      </Head>
-      <body className="antialiased">
-        <MobileCheck>
-          <AmplifyProvider>
-            <ApolloProviderWrapper>
-              <UserSignupProvider>
-                <SubscriptionStatusProvider>
-                 
-                    <UserProvider>
-                      <main>{children}</main>
-                    </UserProvider>
-                  
-                </SubscriptionStatusProvider>
-              </UserSignupProvider>
-            </ApolloProviderWrapper>
-          </AmplifyProvider>
-        </MobileCheck>
+				<meta name="robots" content="noindex,nofollow" />
+			</Head>
+			<body className="antialiased">
+				<MobileCheck>
+					<AmplifyProvider>
+						<ApolloProviderWrapper>
+							<UserSignupProvider>
+								<SubscriptionStatusProvider>
+									<UserProvider>
+										<main>{children}</main>
+									</UserProvider>
+								</SubscriptionStatusProvider>
+							</UserSignupProvider>
+						</ApolloProviderWrapper>
+					</AmplifyProvider>
+				</MobileCheck>
 
-        <Analytics />
-      </body>
-    </html>
-  );
+				<Analytics />
+			</body>
+		</html>
+	);
 }

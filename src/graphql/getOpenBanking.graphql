@@ -1,18 +1,18 @@
 query getProviderlessUserAuthGateway($web: Boolean) {
-  getProviderlessUserAuthGateway(web: $web) {
-    url
-  }
+	getProviderlessUserAuthGateway(web: $web) {
+		url
+	}
 }
 
 query getStatusConnection {
-  getStatusConnection {
-    connected
-    connectedAt
-  }
+	getStatusConnection {
+		connected
+		connectedAt
+	}
 }
 
 query getRefreshUserAuthGateway {
-    getRefreshUserAuthGateway {
-      url
-    }
-  }
+	getRefreshUserAuthGateway {
+		url
+	}
+}

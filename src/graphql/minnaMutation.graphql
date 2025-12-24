@@ -1,7 +1,7 @@
 mutation fetchMinnaWebUI($subscriptionId: String!) {
-  fetchMinnaWebUI(subscriptionId: $subscriptionId) {
-    url
-    authToken
-    validTo
-  }
+	fetchMinnaWebUI(subscriptionId: $subscriptionId) {
+		url
+		authToken
+		validTo
+	}
 }
