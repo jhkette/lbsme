@@ -64,8 +64,9 @@ export default function Password() {
         !phoneNumber ||
         !given_name ||
         !family_name ||
-        !terms_and_conditions ||
-        !userCredentials?.companyDetails.company_number
+        !terms_and_conditions 
+        // ||
+        // !userCredentials?.companyDetails.company_number
       ) {
         throw new Error("Missing required user details.");
       }
@@ -80,8 +81,8 @@ export default function Password() {
             given_name: given_name,
             family_name: family_name,
             "custom:terms_and_conditions": terms_and_conditions,
-            "custom:businessId": userCredentials?.companyDetails.company_number,
-            "custom:business_name": userCredentials?.companyDetails.title,
+            // "custom:businessId": userCredentials?.companyDetails.company_number,
+            // "custom:business_name": userCredentials?.companyDetails.title,
           },
         },
       });
