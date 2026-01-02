@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 // Middleware to protect dashboard routes
 // and redirect unauthenticated users to the login page
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
 	const cookieStore = await cookies();
 	const token = cookieStore.get("token");
 	const user = cookieStore.get("user");
