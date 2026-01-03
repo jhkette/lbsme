@@ -37,7 +37,7 @@ export default function LineChartPayment() {
 					data?.getSubscriptions?.subscriptions.map((sub) =>
 						client
 							.query({
-								query: GetSubscriptionDocument, 
+								query: GetSubscriptionDocument,
 								variables: { id: sub.subscriptionId },
 								fetchPolicy: "cache-first",
 							})
@@ -102,7 +102,7 @@ export default function LineChartPayment() {
 	const currentDate = new Date();
 	const currentMonth = currentDate.getUTCMonth(); // 0 = January, 11 = December
 	const currentYear = currentDate.getUTCFullYear();
-	
+
 	// If it's January, show data from previous year instead
 	const targetYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
@@ -125,23 +125,25 @@ export default function LineChartPayment() {
 		// If showing previous year data (January), include all months. Otherwise, include months up to current month
 		const maxMonthIndex = currentMonth === 0 ? 12 : currentMonth;
 		let runningTotal = 0;
-        // returns data
-		return monthMap
-		// maps through each month
-			.map((month, index) => {
-				// Skip months beyond the current month
-				if (index >= maxMonthIndex) {
-					return null; // Skip months beyond the cutoff
-				}
-                 // add to running total from monthTotals object - calculated above
-				runningTotal += monthTotals[month]; // add the month's total to the running total in monthTotals index for each month
-				// Return the month and its cumulative spend - formatted for line graph
-				return {
-					month: month.charAt(0).toUpperCase() + month.slice(1), // Capitalize first letter
-					spend: parseFloat(runningTotal.toFixed(2)),
-				};
-			})
-			.filter(Boolean); // remove nulls
+		// returns data
+		return (
+			monthMap
+				// maps through each month
+				.map((month, index) => {
+					// Skip months beyond the current month
+					if (index >= maxMonthIndex) {
+						return null; // Skip months beyond the cutoff
+					}
+					// add to running total from monthTotals object - calculated above
+					runningTotal += monthTotals[month]; // add the month's total to the running total in monthTotals index for each month
+					// Return the month and its cumulative spend - formatted for line graph
+					return {
+						month: month.charAt(0).toUpperCase() + month.slice(1), // Capitalize first letter
+						spend: parseFloat(runningTotal.toFixed(2)),
+					};
+				})
+				.filter(Boolean)
+		); // remove nulls
 	})();
 
 	if (detailedDescriptions.length > 0) {

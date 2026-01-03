@@ -1,15 +1,21 @@
-import * as Types from '../graphql-types/generated/types';
+import * as Types from "../graphql-types/generated/types";
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
+import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 const defaultOptions = {} as const;
 export type FetchMinnaWebUiMutationVariables = Types.Exact<{
-  subscriptionId: Types.Scalars['String']['input'];
+	subscriptionId: Types.Scalars["String"]["input"];
 }>;
 
-
-export type FetchMinnaWebUiMutation = { __typename?: 'Mutation', fetchMinnaWebUI?: { __typename?: 'fetchMinnaWebUIResult', url?: string | null, authToken?: string | null, validTo?: string | null } | null };
-
+export type FetchMinnaWebUiMutation = {
+	__typename?: "Mutation";
+	fetchMinnaWebUI?: {
+		__typename?: "fetchMinnaWebUIResult";
+		url?: string | null;
+		authToken?: string | null;
+		validTo?: string | null;
+	} | null;
+};
 
 export const FetchMinnaWebUiDocument = gql`
     mutation fetchMinnaWebUI($subscriptionId: String!) {
@@ -20,7 +26,10 @@ export const FetchMinnaWebUiDocument = gql`
   }
 }
     `;
-export type FetchMinnaWebUiMutationFn = Apollo.MutationFunction<FetchMinnaWebUiMutation, FetchMinnaWebUiMutationVariables>;
+export type FetchMinnaWebUiMutationFn = Apollo.MutationFunction<
+	FetchMinnaWebUiMutation,
+	FetchMinnaWebUiMutationVariables
+>;
 
 /**
  * __useFetchMinnaWebUiMutation__
@@ -39,10 +48,24 @@ export type FetchMinnaWebUiMutationFn = Apollo.MutationFunction<FetchMinnaWebUiM
  *   },
  * });
  */
-export function useFetchMinnaWebUiMutation(baseOptions?: Apollo.MutationHookOptions<FetchMinnaWebUiMutation, FetchMinnaWebUiMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<FetchMinnaWebUiMutation, FetchMinnaWebUiMutationVariables>(FetchMinnaWebUiDocument, options);
-      }
-export type FetchMinnaWebUiMutationHookResult = ReturnType<typeof useFetchMinnaWebUiMutation>;
-export type FetchMinnaWebUiMutationResult = Apollo.MutationResult<FetchMinnaWebUiMutation>;
-export type FetchMinnaWebUiMutationOptions = Apollo.BaseMutationOptions<FetchMinnaWebUiMutation, FetchMinnaWebUiMutationVariables>;
+export function useFetchMinnaWebUiMutation(
+	baseOptions?: Apollo.MutationHookOptions<
+		FetchMinnaWebUiMutation,
+		FetchMinnaWebUiMutationVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<
+		FetchMinnaWebUiMutation,
+		FetchMinnaWebUiMutationVariables
+	>(FetchMinnaWebUiDocument, options);
+}
+export type FetchMinnaWebUiMutationHookResult = ReturnType<
+	typeof useFetchMinnaWebUiMutation
+>;
+export type FetchMinnaWebUiMutationResult =
+	Apollo.MutationResult<FetchMinnaWebUiMutation>;
+export type FetchMinnaWebUiMutationOptions = Apollo.BaseMutationOptions<
+	FetchMinnaWebUiMutation,
+	FetchMinnaWebUiMutationVariables
+>;

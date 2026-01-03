@@ -11,26 +11,21 @@ import { useStatusQuery } from "@/graphql/getSubscribedStatus.generated";
 import { url } from "inspector";
 import { useEffect } from "react";
 
-
 export default function ConnectAccounts() {
 	// const { data: subData, loading: subLoading } = useStatusQuery({
 	// 	fetchPolicy: "no-cache",
 	// 	notifyOnNetworkStatusChange: true,
 	// });
 
-	const { data: urlData, loading: urlLoading, error: urlError } =
-		useGetProviderlessUserAuthGatewayQuery({
-			fetchPolicy: "network-only", // always get fresh data
-			// variables: { web: true },
-		});
+	const {
+		data: urlData,
+		loading: urlLoading,
+		error: urlError,
+	} = useGetProviderlessUserAuthGatewayQuery({
+		fetchPolicy: "network-only", // always get fresh data
+		// variables: { web: true },
+	});
 
-	
-
-      useEffect(() => {
-		console.log("Open Banking URL Data:", urlData);
-		console.log("Open Banking URL Loading:", urlLoading);
-		console.log("Open Banking URL Error:", urlError);
-	  }, [urlData, urlLoading, urlError]);
 	const { loading, error, data, refetch } = useGetBankAccountQuery({
 		errorPolicy: "all",
 
@@ -111,25 +106,30 @@ export default function ConnectAccounts() {
 				</div>
 				<div className=" w-1/2  py-4 ">
 					{/* { subData?.getSubscribedStatus.subscribed && ( */}
-						<div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbpaleblue rounded-2xl  mx-18 my-6 p-14">
-							<p className="text-center">
-								{accountInfoList[0]?.status === "Active"
-									? "Please click add another account to connect another bank account to Little Birdie."
-									: "Please click connect to Open Banking to connect your bank account to Little Birdie."}
-							</p>
-							<div>
-								{!urlLoading &&  !urlError &&  	(
+					<div className="flex flex-col items-center justify-center text-lg font-semibold text-lbtext  bg-lbpaleblue rounded-2xl  mx-18 my-6 p-14">
+						<p className="text-center">
+							{accountInfoList[0]?.status === "Active"
+								? "Please click add another account to connect another bank account to Little Birdie."
+								: "Please click connect to Open Banking to connect your bank account to Little Birdie."}
+						</p>
+						<div>
+							{!urlLoading && !urlError && (
 								<button
-									onClick={() => window.open(urlData?.getProviderlessUserAuthGateway?.url, "_blank")}
+									onClick={() =>
+										window.open(
+											urlData?.getProviderlessUserAuthGateway?.url,
+											"_blank",
+										)
+									}
 									className="w-fit px-8 py-2 shadow-lg rounded-lg my-4 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
 								>
 									{accountInfoList[0]?.status === "Active"
 										? "Add another account"
 										: "Connect to Open Banking"}
-								</button>)
-}
-							</div>
+								</button>
+							)}
 						</div>
+					</div>
 					{/* )} */}
 				</div>
 			</div>
