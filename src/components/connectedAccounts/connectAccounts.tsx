@@ -2,20 +2,14 @@
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { useUser } from "@/contexts/UserContext/UserProvider";
-
+;
 import { useGetBankAccountQuery } from "@/graphql/getBankAccount.generated";
 import { useGetProviderlessUserAuthGatewayQuery } from "@/graphql/getOpenBanking.generated";
 import { Landmark } from "lucide-react";
 
-import { useStatusQuery } from "@/graphql/getSubscribedStatus.generated";
-import { url } from "inspector";
-import { useEffect } from "react";
 
-export default function ConnectAccounts() {
-	// const { data: subData, loading: subLoading } = useStatusQuery({
-	// 	fetchPolicy: "no-cache",
-	// 	notifyOnNetworkStatusChange: true,
-	// });
+export default function ConnectAccounts({subscribed}: {subscribed: boolean}) {
+	
 
 	const {
 		data: urlData,
@@ -59,16 +53,15 @@ export default function ConnectAccounts() {
 								{user?.givenName} {user?.familyName}
 							</span>
 						</p>
-						{/* <p className="text-lg font-semibold text-lbtext">
+						<p className="text-lg font-semibold text-lbtext">
 							Subscribed status:{" "}
 							<span className="text-lbtextdark font-normal">
-								{subLoading
-									? "Loading..."
-									: subData?.getSubscribedStatus.subscribed
+								
+									{ subscribed
 										? "Active"
 										: "Inactive"}
 							</span>
-						</p> */}
+						</p>
 						{accountInfoList.map((account, index) => (
 							<div key={index} className="flex flex-col gap-7">
 								<p className="text-lg font-semibold text-lbtext">
@@ -113,7 +106,7 @@ export default function ConnectAccounts() {
 								: "Please click connect to Open Banking to connect your bank account to Little Birdie."}
 						</p>
 						<div>
-							{!urlLoading && !urlError && (
+							{!urlLoading && !urlError ? (
 								<button
 									onClick={() =>
 										window.open(
@@ -126,6 +119,11 @@ export default function ConnectAccounts() {
 									{accountInfoList[0]?.status === "Active"
 										? "Add another account"
 										: "Connect to Open Banking"}
+								</button>
+							) :(
+								<button disabled className="w-fit px-8 py-2 shadow-lg rounded-lg my-4 text-lg bg-lbtext text-white"
+								>
+									Loading...
 								</button>
 							)}
 						</div>
