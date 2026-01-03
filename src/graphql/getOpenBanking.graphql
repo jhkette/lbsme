@@ -1,5 +1,5 @@
-query getProviderlessUserAuthGateway() {
-	getProviderlessUserAuthGateway() {
+query getProviderlessUserAuthGateway {
+	getProviderlessUserAuthGateway {
 		url
 	}
 }
