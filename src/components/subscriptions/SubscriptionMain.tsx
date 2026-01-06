@@ -13,7 +13,7 @@ import { SubscriptionsTable } from "@/components/suspense/SuspenseComponents";
 import { useRouter } from "next/navigation";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import Circle from "@/components/lbcoreui/Circle";
-
+import { PopoverComponent } from "./PopOverComponent";
 export default function SubscriptionMain() {
 	// State variables to manage subscriptions, grouped subscriptions, and search
 	// and category selection

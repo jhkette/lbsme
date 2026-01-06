@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-
-import { Search, X } from "lucide-react";
+import { Switch } from "@/components/ui/switch"
+import Link from "next/link";
+import { ArrowLeft, Search, X } from "lucide-react";
 import { useMerchantQueryLazyQuery } from "@/graphql/getMerchants.generated";
 import {
 	Popover,
@@ -10,6 +11,9 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import DatePickerComponent  from "./DatePickerComponent";
+import { useBlur } from "@/contexts/BlurContext/BlurContext";
+
 
 interface MerchantResultV2 {
 	__typename: "MerchantResultV2";
