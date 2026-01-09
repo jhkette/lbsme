@@ -15,7 +15,7 @@ To get a development version of the project please run the command below with th
 
 At the moment I am running the project in a development container. However, there is a file to produce a production container in the project if needed.
 
-I am using docker solely to solve issues so that all developers have a reproducible development environment. However, if you don't have docker installed on your system - simply installing the dependenciesm running build and then run dev will start the website. 
+I am using docker solely to solve issues so that all developers have a reproducible development environment. However, if you don't have docker installed on your system - simply install the dependenciesm run pnpm build and then run pnpm run dev - this will start the website. 
 
 This alternatively - if you don't want to use docker run: 
 ```pnpm install``` 
