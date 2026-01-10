@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { LoaderCircle } from "lucide-react";
 import { Search } from "lucide-react";
 import { useUserSignup } from "@/contexts/UserCredentials/UserSignUpContext";
 import { searchCompanyName } from "@/actions/companySearch";
