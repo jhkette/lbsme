@@ -5,18 +5,7 @@ import BirdLead from "@/components/auth/BirdLead";
 import Link from "next/link";
 
 export default function Home() {
-	useEffect(() => {
-		const isMobile = () => {
-			if (typeof window === "undefined") return false;
-			const ua =
-				navigator.userAgent || navigator.vendor || (window as any).opera;
-			return /android|iphone|ipad|ipod/i.test(ua);
-		};
-
-		if (isMobile()) {
-			// setShowModal(true);
-		}
-	}, []);
+	
 
 	return (
 		<div className="w-full">

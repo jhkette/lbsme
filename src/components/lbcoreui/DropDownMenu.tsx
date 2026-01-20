@@ -33,7 +33,7 @@ export function DropdownMenuComponent() {
 				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent
-				className="w-100 mx-4 z-300"
+				className="w-100 mx-4 z-500"
 				align="start"
 				side="bottom"
 			>

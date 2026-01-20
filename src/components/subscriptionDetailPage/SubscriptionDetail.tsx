@@ -170,7 +170,7 @@ export default function SubscriptionDetail({
 				</div>
 			</Link>
 
-			<h1 className="relative text-3xl md:text-4xl font-bold text-lbtext mb-4 flex flex-row justify-start items-center z-500">
+			<h1 className="relative text-3xl md:text-4xl font-bold text-lbtext mb-4 flex flex-row justify-start items-center z-300">
 				Subscription <ChevronRight color="#29235c" className="w-9 h-9 mt-1 " />
 				{loading ? (
 					<span className="blur-sm text-gray-400 select-none">

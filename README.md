@@ -15,7 +15,11 @@ To get a development version of the project please run the command below with th
 
 At the moment I am running the project in a development container. However, there is a file to produce a production container in the project if needed.
 
-Alternatively - if you don't want to use docker run:  
+I am using docker solely to solve issues so that all developers have a reproducible development environment. However, if you don't have docker installed on your system - simply install the dependenciesm run pnpm build and then run pnpm run dev - this will start the website. 
+
+This alternatively - if you don't want to use docker run: 
+```pnpm install``` 
+```pnpm run build``` 
 ```pnpm run dev```
 
 
@@ -85,6 +89,9 @@ A cms is available at /studio and you can login with an allowed email
 At the moment the site is hidden from search engines using -  
 ```<meta name="robots" content="noindex,nofollow" />```
 If the site is visiting on a mobile it redirects to a download the app page - but the link has not been added. 
+
+## Branches
+There is another branch call feature/addsub which is the start of a new feature which allows the addition of manual subscriptions - like in the app. 
 
 ### Deployed on Vercel
 
