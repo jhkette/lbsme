@@ -42,11 +42,19 @@ export function PopoverComponent() {
 	const [step, setStep] = useState(1);
 	const [open, setOpen] = useState(false);
 
+	const { isBlurred, setIsBlurred } = useBlur();
+
+
+
 	useEffect(() => {
 		if (open === false) {
 			setFilterValue("");
 		}
 	}, [open]);
+
+	useEffect(() => {
+		setIsBlurred(open);
+	}, [open, setIsBlurred]);
 
 	useEffect(() => {
 		// if (search.length <= 2 && search.length !== 0) return;
@@ -68,7 +76,7 @@ export function PopoverComponent() {
 					Add subscription +
 				</button>
 			</PopoverTrigger>
-			<PopoverContent className="w-172 relative -top-48 -left-32 z-400">
+			<PopoverContent className="w-172 relative -top-48 -left-[500px] z-400">
 				<div className="flex flex-row items-center px-8 my-2 bg-white">
 					<h2 className="text-2xl font-semibold pb-2 border-b-2 border-lbtext">
 						Add a subscription

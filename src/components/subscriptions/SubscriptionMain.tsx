@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { mkConfig, generateCsv, download } from "export-to-csv";
 import Circle from "@/components/lbcoreui/Circle";
 import { PopoverComponent } from "./PopOverComponent";
+
 export default function SubscriptionMain() {
 	// State variables to manage subscriptions, grouped subscriptions, and search
 	// and category selection
@@ -151,6 +152,7 @@ export default function SubscriptionMain() {
 					/>
 					<Search className="relative -left-10 " color="#787787" />
 				</div>
+					
 				<div className="flex flex-row items-center justify-start">
 					<button
 						className={clsx(
@@ -175,6 +177,10 @@ export default function SubscriptionMain() {
 						Inactive
 					</button>
 				</div>
+				<div className="flex flex-row items-center justify-start">
+					<PopoverComponent
+						/>
+					</div>
 				<div
 					className="bg-lbgray rounded-lg p-2 block w-fit justify-start bg-lbgray rounded-lg  hover:bg-lbgreen text-lbtextgrey hover:text-white cursor-pointer ease-in-out"
 					onClick={exportDataToCSV}
