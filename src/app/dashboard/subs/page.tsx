@@ -8,7 +8,7 @@ export default function page() {
 	const { isBlurred } = useBlur();
 	return (
 	
-		<div className={cn("px-16 w-full mt-12 relative", isBlurred && "blur-sm")}>
+		<div className={cn("px-16 w-full mt-12 relative ease-in-out duration-100", isBlurred && "blur-sm")}>
 			<h1 className="font-bold text-4xl mt-14 mb-8 text-lbtext">
 				Subscriptions
 			</h1>
