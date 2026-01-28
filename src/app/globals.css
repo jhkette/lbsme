@@ -21,25 +21,32 @@ html, body {
 }
 /* little birdie theme colours */
 @theme {
+  /* Primary palette */
   --color-lbgreen: #00b1c4;
-  --color-lbtext: #29235c;
+  --color-lbdarkblue: #29235c;
+  
+  /* Blues */
   --color-lbblue: #dfe9f2;
-   --color-lbblue2: #b7d0e4ff;
-   --color-lbpaleblue: #edf7ff;
-  --color-lbgray: #edecec;
-  --color-lblgreen: #c4f9ff;
-  --color-lbtextgrey: #787787;
-  --color-lbtextdark: #323f4b;
+  --color-lbblue2: #b7d0e4;
+  --color-lbpaleblue: #edf7ff;
   --color-lblightblue: #f2f7fb;
   --color-lbbgblue: #426da9;
+  
+  /* Grays & Greens */
+  --color-lbgray: #edecec;
+  --color-lblgreen: #c4f9ff;
   --color-bggrey: #e9e9e9;
-  --color-lbdarkblue: #29235C;
+  
+  /* Text colors */
+  --color-lbtext: #29235c;
+  --color-lbtextgrey: #787787;
+  --color-lbtextdark: #323f4b;
 }
 
 /* i'm trying to ensure app works well for small desktops to large desktops
 so adjusting accordingly */
 @theme {
-  --breakpoint-sm: 1024px;  /* Small laptops (13" or so) */
+  --breakpoint-sm: 1024px;  /* Small laptops  */
   --breakpoint-md: 1280px;  /* Standard laptops / small desktops */
   --breakpoint-lg: 1536px;  /* Large desktops or ultrawide monitors */
 }

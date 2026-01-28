@@ -3,7 +3,7 @@ import { Mulish } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext/UserProvider";
-import { BlurProvider } from "@/contexts/BlurContext/BlurContext";
+
 
 import ApolloProviderWrapper from "@/components/apollo/ApolloWrapper";
 
