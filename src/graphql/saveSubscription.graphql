@@ -1,0 +1,16 @@
+mutation saveSubscription($subscription: SaveSubscriptionInput!) {
+	saveSubscription(subscription: $subscription) {
+		id
+		success
+		error
+	}
+}
+
+mutation deleteManualSubscriptions(
+	$subscriptionId: String!
+	$status: SubscriptionStatusEnum!
+) {
+	deleteManualSubscriptions(subscriptionId: $subscriptionId, status: $status) {
+		success
+	}
+}

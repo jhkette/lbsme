@@ -126,7 +126,7 @@ export function PopoverComponent() {
           Add subscription +
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-160 relative -top-48 -left-[500px] z-400 shadow-md">
+      <PopoverContent className="w-148 relative -top-48 -left-[500px] z-400 shadow-md">
         <div className="flex flex-row items-center px-8 my-2 bg-white">
           <h2 className="text-2xl font-semibold pb-2 text-lbtext">
             Add a subscription
