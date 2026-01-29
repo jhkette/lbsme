@@ -217,7 +217,7 @@ export function PopoverComponent() {
                   type="text"
                   id="provider"
                   placeholder="Provider name"
-                 
+                  {...register("provider")}
                   className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200"
                 />
                 {errors.provider && (
@@ -238,7 +238,7 @@ export function PopoverComponent() {
                   type="text"
                   placeholder="Category"
                   id="category"
-                
+                  {...register("category")}
                   className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200"
                 />
                 {errors.category && (
