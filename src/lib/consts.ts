@@ -76,3 +76,5 @@ export const FIXED_DEALS = [
 		url: "https://www.awin1.com/cread.php?awinmid=25756&awinaffid=1070447&ued=https%3A%2F%2Fwww.moneysupermarket.com%2Fmobile-phones%2F",
 	},
 ];
+
+export const costRegex = /^£\d+([,.]\d{1,2})?$/;

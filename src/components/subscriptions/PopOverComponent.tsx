@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-
+import { costSchema } from "@/schemas/costSchema";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Search, X } from "lucide-react";
 import { useMerchantQueryLazyQuery } from "@/graphql/getMerchants.generated";
 import {
@@ -13,6 +14,8 @@ import { cn } from "@/lib/utils";
 import DatePickerComponent from "./DatePickerComponent";
 import { useBlur } from "@/contexts/BlurContext/BlurContext";
 import { useSaveSubscriptionMutation } from "@/graphql/saveSubscription.generated";
+import { SubscriptionPriceTypeEnum } from "@/interfaces/PriceTypeEnum"
+
 
 interface MerchantResultV2 {
   __typename: "MerchantResultV2";
@@ -24,20 +27,13 @@ interface MerchantResultV2 {
 }
 
 interface SubscriptionFormData {
-  provider: string;
-  category: string;
+  provider?: string;
+  category?: string;
   cost: string;
   frequency: SubscriptionPriceTypeEnum;
-  phoneNumber: string;
-  termsAccepted: boolean;
 }
 
-export enum SubscriptionPriceTypeEnum {
-  Monthly = "monthly",
-  Quarterly = "quarterly",
-  Weekly = "weekly",
-  Yearly = "yearly",
-}
+
 
 export function PopoverComponent() {
   const [filterValue, setFilterValue] = useState("");
@@ -50,16 +46,16 @@ export function PopoverComponent() {
     formState: { errors },
     reset,
     setValue,
-  
+   
   } = useForm<SubscriptionFormData>({
     defaultValues: {
       provider: selectedMerchant?.name ?? "",
       category: selectedMerchant?.subCategory ?? "",
       cost: "",
       frequency: SubscriptionPriceTypeEnum.Monthly,
-      phoneNumber: "",
-      termsAccepted: false,
+    
     },
+    resolver: zodResolver(costSchema),
   });
 
   useEffect(() => {
@@ -143,7 +139,7 @@ export function PopoverComponent() {
       </PopoverTrigger>
       <PopoverContent
         className=
-          "w-148 relative -top-48 -left-[500px] z-400 shadow-md bg-white"
+          "w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white"
          
         
       >
@@ -221,7 +217,7 @@ export function PopoverComponent() {
                   type="text"
                   id="provider"
                   placeholder="Provider name"
-                  {...register("provider")}
+                 
                   className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200"
                 />
                 {errors.provider && (
@@ -242,7 +238,7 @@ export function PopoverComponent() {
                   type="text"
                   placeholder="Category"
                   id="category"
-                  {...register("category")}
+                
                   className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200"
                 />
                 {errors.category && (
@@ -317,22 +313,7 @@ export function PopoverComponent() {
                 </div>
               </div>
 
-              {/* Terms and Conditions */}
-              <label className="flex items-center gap-2 mt-4">
-                <input
-                  type="checkbox"
-                  id="termsAccepted"
-                  {...register("termsAccepted")}
-                />
-                <span className="text-sm text-gray-700">
-                  I accept the terms and conditions
-                </span>
-              </label>
-              {errors.termsAccepted && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.termsAccepted.message}
-                </p>
-              )}
+             
 
               {/* Submit */}
               <input
