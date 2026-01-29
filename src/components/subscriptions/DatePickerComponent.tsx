@@ -14,7 +14,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
  
-export default function DatePickerComponent({setNextPayment}:{setNextPayment: (date: Date) => void}) {
+export default function DatePickerComponent({
+  onDateChange,
+}: {
+  onDateChange?: (date: Date) => void
+}) {
   const [date, setDate] = useState<Date>()
  
   return (
@@ -36,7 +40,7 @@ export default function DatePickerComponent({setNextPayment}:{setNextPayment: (d
           onSelect={(selectedDate) => {
             setDate(selectedDate);
             if (selectedDate) {
-              setNextPayment(selectedDate);
+              onDateChange?.(selectedDate);
             }
           }}
         />

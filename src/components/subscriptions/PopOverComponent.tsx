@@ -94,6 +94,8 @@ export function PopoverComponent() {
     });
   const [step, setStep] = useState(1);
   const [open, setOpen] = useState(false);
+  const [contractEndPayment, setContractEndPayment] = useState<Date | null>(null);
+  const [nextPayment, setNextPayment] = useState<Date | null>(null);
 
   
 
@@ -120,9 +122,9 @@ export function PopoverComponent() {
 
   console.log(merchantData?.getMerchant);
 
-  const setNextPayment = (date: Date) => {
-    console.log("Selected next payment date:", date);
-  }
+  // const setNextPayment = (date: Date) => {
+  //   console.log("Selected next payment date:", date);
+  // }
   // Function to clear form values and reset state
   // when user closes the popover
   const clearValues = () => {
@@ -305,13 +307,13 @@ export function PopoverComponent() {
                   <label className="text-sm w-full text-lbgreen font-semibold text-left align-start w-fit">
                     Next Payment Date
                   </label>
-                  <DatePickerComponent setNextPayment={setNextPayment} />
+                  <DatePickerComponent onDateChange={setNextPayment} />
                 </div>
                 <div className="w-2/4 ml-4 flex flex-col">
                   <label className="text-sm w-full text-lbgreen font-semibold text-left align-start w-fit">
                     Contract End Date (optional)
                   </label>
-                  <DatePickerComponent setNextPayment={setNextPayment} />
+                  <DatePickerComponent onDateChange={setContractEndPayment} />
                 </div>
               </div>
 
