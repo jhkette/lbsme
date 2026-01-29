@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { costSchema } from "@/schemas/costSchema";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Search, X } from "lucide-react";
 import { useMerchantQueryLazyQuery } from "@/graphql/getMerchants.generated";
@@ -77,10 +77,7 @@ export function PopoverComponent() {
     }
   }, [selectedMerchant, setValue]);
 
-  const onSubmit = (data: SubscriptionFormData) => {
-    console.log("Form Data:", data);
-    // Handle form submission here
-  };
+ 
 
   const [getMerchant, { data: merchantData, error, loading }] =
     useMerchantQueryLazyQuery({
@@ -128,6 +125,11 @@ export function PopoverComponent() {
     setSelectedMerchant(null);
     setOpen(false); 
     setStep(1); 
+  }
+
+
+  const onSubmit: SubmitHandler<SubscriptionFormData> = async (data) => {
+    console.log("Form submitted with data:", data);
   }
 
   return (
@@ -318,7 +320,7 @@ export function PopoverComponent() {
               {/* Submit */}
               <input
                 type="submit"
-                value="Continue"
+                value="Add Subscription"
                 className="w-3/4 p-3 shadow-lg rounded-lg my-6 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
               />
             </form>

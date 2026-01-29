@@ -77,4 +77,4 @@ export const FIXED_DEALS = [
 	},
 ];
 
-export const costRegex = /^£\d+([,.]\d{1,2})?$/;
+export const costRegex = /^\d+([,.]\d{1,2})?$/;
