@@ -132,9 +132,9 @@ export default function RegisterCompany() {
 						<p className="text-red-500 text-sm">{formError} </p>
 					)}
 				</div>
-				<div className="min-h-[290px] w-full flex flex-col items-center justify-center">
+				<div className="min-h-[290px]  w-full flex flex-col items-center justify-center">
 					{!!searchResults.length && (
-						<div className="w-3/5 align start ">
+						<div className="w-2/4 align-start">
 							<h2 className="text-lbtext text-lg font-semibold pb-2 text-left">
 								Select your company details from the list below:
 							</h2>
