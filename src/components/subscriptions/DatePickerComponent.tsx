@@ -23,13 +23,13 @@ export default function DatePickerComponent({setNextPayment}:{setNextPayment: (d
         <Button
           variant="outline"
           data-empty={!date}
-          className="data-[empty=true]:text-muted-foreground h-12 w-full cursor-pointer justify-start text-left font-normal"
+          className="data-[empty=true]:text-muted-foreground border border-gray-300 h-12 my-2 w-full cursor-pointer justify-start text-left font-normal"
         >
           <CalendarIcon />
           {date ? format(date, "yyyy-MM-dd") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full text-left p-0 z-1000 relative left-0">
+      <PopoverContent className="w-full text-left p-0 z-1000 relative left-0 border border-gray-300">
         <Calendar
           mode="single"
           selected={date}

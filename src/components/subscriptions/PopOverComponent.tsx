@@ -2,9 +2,6 @@
 import { useState, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import Link from "next/link";
 import { ArrowLeft, Search, X } from "lucide-react";
 import { useMerchantQueryLazyQuery } from "@/graphql/getMerchants.generated";
 import {
@@ -15,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import DatePickerComponent from "./DatePickerComponent";
 import { useBlur } from "@/contexts/BlurContext/BlurContext";
-import { set } from "date-fns";
+
 
 interface MerchantResultV2 {
   __typename: "MerchantResultV2";
@@ -29,29 +26,37 @@ interface MerchantResultV2 {
 interface SubscriptionFormData {
   provider: string;
   category: string;
-  email: string;
+  cost: string;
+  frequency: SubscriptionPriceTypeEnum;
   phoneNumber: string;
   termsAccepted: boolean;
+}
+
+export enum SubscriptionPriceTypeEnum {
+  Monthly = "monthly",
+  Quarterly = "quarterly",
+  Weekly = "weekly",
+  Yearly = "yearly",
 }
 
 export function PopoverComponent() {
   const [filterValue, setFilterValue] = useState("");
   const [selectedMerchant, setSelectedMerchant] =
     useState<MerchantResultV2 | null>(null);
-
-  console.log(selectedMerchant, "selectedMerchant");
-
+  const { isBlurred, setIsBlurred } = useBlur();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
     setValue,
+  
   } = useForm<SubscriptionFormData>({
     defaultValues: {
       provider: selectedMerchant?.name ?? "",
       category: selectedMerchant?.subCategory ?? "",
-      email: "",
+      cost: "",
+      frequency: SubscriptionPriceTypeEnum.Monthly,
       phoneNumber: "",
       termsAccepted: false,
     },
@@ -90,18 +95,18 @@ export function PopoverComponent() {
   const [step, setStep] = useState(1);
   const [open, setOpen] = useState(false);
 
-  const { isBlurred, setIsBlurred } = useBlur();
+  
 
   useEffect(() => {
     if (open === false) {
       setFilterValue("");
     }
   }, [open]);
-
+  // Handle blur effect when popover is opened or closed
   useEffect(() => {
     setIsBlurred(open);
   }, [open, setIsBlurred]);
-
+  // Fetch merchants when filterValue changes
   useEffect(() => {
     // if (search.length <= 2 && search.length !== 0) return;
     (async () => {
@@ -118,6 +123,14 @@ export function PopoverComponent() {
   const setNextPayment = (date: Date) => {
     console.log("Selected next payment date:", date);
   }
+  // Function to clear form values and reset state
+  // when user closes the popover
+  const clearValues = () => {
+    reset();
+    setSelectedMerchant(null);
+    setOpen(false); 
+    setStep(1); 
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -126,7 +139,12 @@ export function PopoverComponent() {
           Add subscription +
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-148 relative -top-48 -left-[500px] z-400 shadow-md">
+      <PopoverContent
+        className=
+          "w-148 relative -top-48 -left-[500px] z-400 shadow-md bg-white"
+         
+        
+      >
         <div className="flex flex-row items-center px-8 my-2 bg-white">
           <h2 className="text-2xl font-semibold pb-2 text-lbtext">
             Add a subscription
@@ -135,12 +153,12 @@ export function PopoverComponent() {
             <X
               className="text-lbtext hover:text-lbgreen"
               size={32}
-              onClick={() => setOpen(false)}
+              onClick={() => { clearValues(); }}
             />
           </div>
         </div>
         {step === 1 && (
-          <div className="px-8">
+          <div className="px-12 ">
             <div className="w-full flex justify-start items-center relative">
               <input
                 type="text"
@@ -180,7 +198,7 @@ export function PopoverComponent() {
         {step === 2 && (
           <div className="grid gap-2">
             <div
-              className="px-18 py-4 flex flex-row items-center cursor-pointer text-lbgreen font-semibold"
+              className="px-12 py-4 flex flex-row items-center cursor-pointer text-lbgreen font-semibold"
               onClick={() => setStep(1)}
             >
               <ArrowLeft onClick={() => setStep(1)} /> Go back
@@ -232,39 +250,68 @@ export function PopoverComponent() {
                 )}
               </div>
 
-              {/* Email */}
-              <div className="w-3/4 flex flex-col">
-                <label
-                  htmlFor="email"
-                  className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Company email address"
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200"
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-sm">{errors.email.message}</p>
-                )}
+              {/* Cost + Frequency */}
+              <div className="w-3/4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="cost"
+                    className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+                  >
+                    Cost
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-500">£</span>
+                    <input
+                      type="text"
+                      id="cost"
+                      placeholder="0.00"
+                      inputMode="decimal"
+                      {...register("cost", {
+                        required: "Cost is required",
+                      })}
+                      className="w-full p-3 pl-8 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200"
+                    />
+                  </div>
+                  {errors.cost && (
+                    <p className="text-red-500 text-sm">{errors.cost.message}</p>
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="frequency"
+                    className="text-sm  w-full text-lbgreen font-semibold text-left align-start w-fit"
+                  >
+                    Frequency
+                  </label>
+                  <select
+                    id="frequency"
+                    {...register("frequency", { required: "Frequency is required" })}
+                    className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200 bg-white"
+                  >
+                    <option value={SubscriptionPriceTypeEnum.Monthly}>Monthly</option>
+                    <option value={SubscriptionPriceTypeEnum.Quarterly}>Quarterly</option>
+                    <option value={SubscriptionPriceTypeEnum.Weekly}>Weekly</option>
+                    <option value={SubscriptionPriceTypeEnum.Yearly}>Yearly</option>
+                  </select>
+                  {errors.frequency && (
+                    <p className="text-red-500 text-sm">{errors.frequency.message}</p>
+                  )}
+                </div>
               </div>
 
-              {/* Phone Number */}
+              {/* Dates */}
               <div className="w-3/4 flex flex-row items-center justify-start border-red-500">
-                <div className="w-1/3 mr-8">
-                  <DatePickerComponent  setNextPayment={setNextPayment}/>
+                <div className="w-2/4 mr-4 flex flex-col">
+                  <label className="text-sm w-full text-lbgreen font-semibold text-left align-start w-fit">
+                    Next Payment Date
+                  </label>
+                  <DatePickerComponent setNextPayment={setNextPayment} />
                 </div>
-                <div className="w-1/3">
-                  <DatePickerComponent setNextPayment={setNextPayment}/>
+                <div className="w-2/4 ml-4 flex flex-col">
+                  <label className="text-sm w-full text-lbgreen font-semibold text-left align-start w-fit">
+                    Contract End Date (optional)
+                  </label>
+                  <DatePickerComponent setNextPayment={setNextPayment} />
                 </div>
               </div>
 
