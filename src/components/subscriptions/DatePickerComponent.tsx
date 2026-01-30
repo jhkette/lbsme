@@ -1,7 +1,7 @@
 "use client"
  
-import {useState} from "react"
-import { format } from "date-fns"
+import {useMemo, useState} from "react"
+import { addDays, format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
  
 import { cn } from "@/lib/utils"
@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+
  
 export default function DatePickerComponent({
   onDateChange,
@@ -20,6 +21,7 @@ export default function DatePickerComponent({
   onDateChange?: (date: Date) => void
 }) {
   const [date, setDate] = useState<Date>()
+  const minDate = useMemo(() => addDays(new Date(), 1), []);
  
   return (
     <Popover>
@@ -37,6 +39,9 @@ export default function DatePickerComponent({
         <Calendar
           mode="single"
           selected={date}
+          fromDate={minDate}
+          disabled={{ before: minDate }}
+          
           onSelect={(selectedDate) => {
             setDate(selectedDate);
             if (selectedDate) {
