@@ -1,9 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { costSchema } from "@/schemas/costSchema";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Search, X } from "lucide-react";
+import { addDays } from "date-fns";
+import { useApolloClient } from "@apollo/client";
 import { useMerchantQueryLazyQuery } from "@/graphql/getMerchants.generated";
 import {
   Popover,
@@ -13,13 +15,17 @@ import {
 import { cn } from "@/lib/utils";
 import DatePickerComponent from "./DatePickerComponent";
 import { useBlur } from "@/contexts/BlurContext/BlurContext";
+import {SaveSubscriptionInput }from "@/graphql-types/generated/types"
 import { useSaveSubscriptionMutation } from "@/graphql/saveSubscription.generated";
 import { SubscriptionPriceTypeEnum } from "@/interfaces/PriceTypeEnum"
+import { Switch } from "@/components/ui/switch";
+import { format } from "date-fns";
 
 
 interface MerchantResultV2 {
   __typename: "MerchantResultV2";
   SK: string;
+  PK: string;
   id: string;
   name: string;
   subCategory: string;
@@ -33,6 +39,32 @@ interface SubscriptionFormData {
   frequency: SubscriptionPriceTypeEnum;
 }
 
+// const saveSubscriptionData: SaveSubscriptionInput = {
+// 				subscriptionId: subscriptionDetailsData?.subscriptionId,
+// 				category: { PK: selectedSubCategory.PK, SK: selectedSubCategory.SK },
+// 				merchant: {
+// 					id: contextMerchant?.id || (route.params.customValue?.id as string),
+// 					name:
+// 						contextMerchant?.name || (route.params.customValue?.name as string),
+// 				},
+// 				displayName: data.name ?? "",
+// 				amount,
+// 				type: selectedFrequency,
+// 				freeTrial: isSwitchOn,
+// 				renewalDate:
+// 					renewalDate &&
+// 					renewalDate instanceof Date &&
+// 					!isNaN(renewalDate.getTime())
+// 						? format(renewalDate, "yyyy-MM-dd")
+// 						: null,
+// 				contractEndDate:
+// 					contractEndDateSelected &&
+// 					contractEndDate &&
+// 					contractEndDate instanceof Date &&
+// 					!isNaN(contractEndDate.getTime())
+// 						? format(contractEndDate, "yyyy-MM-dd")
+// 						: null,
+// 			};
 
 
 export function PopoverComponent() {
@@ -89,7 +121,11 @@ export function PopoverComponent() {
   const [open, setOpen] = useState(false);
   const [contractEndPayment, setContractEndPayment] = useState<Date | null>(null);
   const [nextPayment, setNextPayment] = useState<Date | null>(null);
-
+  const [isFreeTrial, setIsFreeTrial] = useState(false);
+  const minDate = useMemo(() => addDays(new Date(), 1), []);
+  const [saveSubscription] = useSaveSubscriptionMutation();
+  // client needed for manual refetch updates after mutation
+  const client = useApolloClient();
   
 
   useEffect(() => {
@@ -130,6 +166,54 @@ export function PopoverComponent() {
 
   const onSubmit: SubmitHandler<SubscriptionFormData> = async (data) => {
     console.log("Form submitted with data:", data);
+    console.log("Selected Merchant:", selectedMerchant);
+   const saveSubscriptionData: SaveSubscriptionInput = {
+
+  
+				category: { PK: selectedMerchant?.PK as string, SK: selectedMerchant?.SK as string },
+				merchant: {
+					id: selectedMerchant?.id as string, 
+					name:
+						selectedMerchant?.name as string, 
+				},
+        amount: parseFloat(data.cost),
+        type: data.frequency,
+        freeTrial: isFreeTrial,
+        displayName: selectedMerchant?.name ?? "",
+        renewalDate:
+          nextPayment instanceof Date
+            ? format(nextPayment, "yyyy-MM-dd")
+            : null,
+
+       contractEndDate: contractEndPayment instanceof Date
+          ? format(contractEndPayment, "yyyy-MM-dd")
+          : null
+      }
+     
+
+      console.log("Prepared subscription data:", saveSubscriptionData);
+
+      try {
+				const result = await saveSubscription({
+					variables: { subscription: saveSubscriptionData },
+				});
+
+				if (result.data) {
+					setSaveResultId(result.data.saveSubscription.id);
+
+					// Clear cache to refresh subscriptions list
+					await client.refetchQueries({
+						include: ["GetSubscriptions"], // Query name
+					});
+
+					
+				}
+			} catch (e) {
+				console.log("Unexpected error saving subscription:", e);
+			
+			}
+		}
+
   }
 
   return (
@@ -141,9 +225,7 @@ export function PopoverComponent() {
       </PopoverTrigger>
       <PopoverContent
         className=
-          "w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white"
-         
-        
+          "w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white"  
       >
         <div className="flex flex-row items-center px-8 my-2 bg-white">
           <h2 className="text-2xl font-semibold pb-2 text-lbtext">
@@ -167,7 +249,6 @@ export function PopoverComponent() {
                 onChange={(e) => setFilterValue(e.target.value)}
                 className="w-4/4 p-2  rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200 focus:shadow-md focus:border-blue-400"
               />
-
               <Search
                 color="#cfceceff"
                 size={26}
@@ -315,8 +396,15 @@ export function PopoverComponent() {
                 </div>
               </div>
 
-             
-
+              <div className="w-3/4 flex items-center justify-between py-2">
+                <label className="text-sm text-lbgreen font-semibold">
+                  Free trial
+                </label>
+                <Switch
+                  checked={isFreeTrial}
+                  onCheckedChange={setIsFreeTrial}
+                />
+              </div>
               {/* Submit */}
               <input
                 type="submit"
