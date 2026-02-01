@@ -163,7 +163,7 @@ export function PopoverComponent() {
    const saveSubscriptionData: SaveSubscriptionInput = {
 
   
-				category: { PK: selectedMerchant?.PK as string, SK: selectedMerchant?.SK as string },
+				category: { PK: selectedMerchant?.category.PK as string, SK: selectedMerchant?.SK as string },
 				merchant: {
 					id: selectedMerchant?.id as string, 
 					name:
