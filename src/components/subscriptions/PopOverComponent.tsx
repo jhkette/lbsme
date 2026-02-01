@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Search, X } from "lucide-react";
 import { addDays } from "date-fns";
 import { useApolloClient } from "@apollo/client";
-import { useMerchantQueryLazyQuery } from "@/graphql/getMerchants.generated";
+import { useGetMerchantLazyQuery, useGetSubCategoryLazyQuery } from "@/graphql/getMerchants.generated";
 import {
   Popover,
   PopoverContent,
@@ -20,17 +20,8 @@ import { useSaveSubscriptionMutation } from "@/graphql/saveSubscription.generate
 import { SubscriptionPriceTypeEnum } from "@/interfaces/PriceTypeEnum"
 import { Switch } from "@/components/ui/switch";
 import { format } from "date-fns";
+import { MerchantResultV2 } from "@/graphql-types/generated/types";
 
-
-interface MerchantResultV2 {
-  __typename: "MerchantResultV2";
-  SK: string;
-  PK: string;
-  id: string;
-  name: string;
-  subCategory: string;
-  category: string | null;
-}
 
 interface SubscriptionFormData {
   provider?: string;
@@ -39,33 +30,12 @@ interface SubscriptionFormData {
   frequency: SubscriptionPriceTypeEnum;
 }
 
-// const saveSubscriptionData: SaveSubscriptionInput = {
-// 				subscriptionId: subscriptionDetailsData?.subscriptionId,
-// 				category: { PK: selectedSubCategory.PK, SK: selectedSubCategory.SK },
-// 				merchant: {
-// 					id: contextMerchant?.id || (route.params.customValue?.id as string),
-// 					name:
-// 						contextMerchant?.name || (route.params.customValue?.name as string),
-// 				},
-// 				displayName: data.name ?? "",
-// 				amount,
-// 				type: selectedFrequency,
-// 				freeTrial: isSwitchOn,
-// 				renewalDate:
-// 					renewalDate &&
-// 					renewalDate instanceof Date &&
-// 					!isNaN(renewalDate.getTime())
-// 						? format(renewalDate, "yyyy-MM-dd")
-// 						: null,
-// 				contractEndDate:
-// 					contractEndDateSelected &&
-// 					contractEndDate &&
-// 					contractEndDate instanceof Date &&
-// 					!isNaN(contractEndDate.getTime())
-// 						? format(contractEndDate, "yyyy-MM-dd")
-// 						: null,
-// 			};
+const extractPKFromSubCategory = (value?: string | null): string | null => {
+  if (!value) return null;
 
+  const match = value.match(/PK\s*[=:]\s*([^,}]+)/);
+  return match?.[1]?.trim() ?? null;
+};
 
 export function PopoverComponent() {
   const [filterValue, setFilterValue] = useState("");
@@ -112,7 +82,7 @@ export function PopoverComponent() {
  
 
   const [getMerchant, { data: merchantData, error, loading }] =
-    useMerchantQueryLazyQuery({
+    useGetMerchantLazyQuery({
       variables: { filter: filterValue },
 
       fetchPolicy: "cache-and-network",
@@ -124,6 +94,29 @@ export function PopoverComponent() {
   const [isFreeTrial, setIsFreeTrial] = useState(false);
   const minDate = useMemo(() => addDays(new Date(), 1), []);
   const [saveSubscription] = useSaveSubscriptionMutation();
+
+ 	const [
+		getSubCategory,
+		{ data: subCategoryData, loading: subCategoryLoading },
+	] = useGetSubCategoryLazyQuery({
+		fetchPolicy: "cache-and-network",
+	});
+
+  
+  useEffect(() => {
+    const subCategoryPK = selectedMerchant?.category?.PK 
+    if (!subCategoryPK) return;
+
+    (async () => {
+      try {
+        await getSubCategory({ variables: { SK: subCategoryPK } });
+      } catch (e) {
+        console.log("Failed to fetch subcategory:", e);
+      }
+    })();
+  }, [getSubCategory,  selectedMerchant?.category?.PK , selectedMerchant?.subCategory]);
+
+  console.log(subCategoryData?.getSubCategory, "SUBCATEGORY DATA IMPO");
   // client needed for manual refetch updates after mutation
   const client = useApolloClient();
   
@@ -199,7 +192,7 @@ export function PopoverComponent() {
 				});
 
 				if (result.data) {
-					setSaveResultId(result.data.saveSubscription.id);
+					// setSaveResultId(result.data.saveSubscription.id);
 
 					// Clear cache to refresh subscriptions list
 					await client.refetchQueries({
@@ -208,13 +201,10 @@ export function PopoverComponent() {
 
 					
 				}
-			} catch (e) {
-				console.log("Unexpected error saving subscription:", e);
-			
-			}
-		}
-
-  }
+      } catch (e) {
+        console.log("Unexpected error saving subscription:", e);
+      }
+    };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -223,10 +213,7 @@ export function PopoverComponent() {
           Add subscription +
         </button>
       </PopoverTrigger>
-      <PopoverContent
-        className=
-          "w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white"  
-      >
+      <PopoverContent className="w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white">
         <div className="flex flex-row items-center px-8 my-2 bg-white">
           <h2 className="text-2xl font-semibold pb-2 text-lbtext">
             Add a subscription

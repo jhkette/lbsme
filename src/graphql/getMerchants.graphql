@@ -1,13 +1,15 @@
-query MerchantQuery($filter: String) {
-	getMerchant(filter: $filter) {
-		SK
-		id
-		name
-		subCategory
+query getMerchant($category: String, $subCategory: String, $filter: String) {
+	getMerchant(category: $category, subCategory: $subCategory, filter: $filter) {
 		category {
+			searchName
 			name
-			icon
+			PK
+			SK
 		}
+		SK
+		subCategory
+		name
+		id
 	}
 }
 

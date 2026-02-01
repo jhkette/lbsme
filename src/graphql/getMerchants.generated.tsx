@@ -3,12 +3,14 @@ import * as Types from '../graphql-types/generated/types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type MerchantQueryQueryVariables = Types.Exact<{
+export type GetMerchantQueryVariables = Types.Exact<{
+  category?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  subCategory?: Types.InputMaybe<Types.Scalars['String']['input']>;
   filter?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
-export type MerchantQueryQuery = { __typename?: 'Query', getMerchant?: Array<{ __typename?: 'MerchantResultV2', SK: string, id: string, name: string, subCategory: string, category?: { __typename?: 'CategoryResult', name: string, icon: string } | null }> | null };
+export type GetMerchantQuery = { __typename?: 'Query', getMerchant?: Array<{ __typename?: 'MerchantResultV2', SK: string, subCategory: string, name: string, id: string, category?: { __typename?: 'CategoryResult', searchName: string, name: string, PK: string, SK: string } | null }> | null };
 
 export type GetSubCategoryQueryVariables = Types.Exact<{
   SK: Types.Scalars['ID']['input'];
@@ -18,56 +20,60 @@ export type GetSubCategoryQueryVariables = Types.Exact<{
 export type GetSubCategoryQuery = { __typename?: 'Query', getSubCategory: Array<{ __typename?: 'SubCategoryResult', searchName: string, name: string, PK: string, SK: string }> };
 
 
-export const MerchantQueryDocument = gql`
-    query MerchantQuery($filter: String) {
-  getMerchant(filter: $filter) {
-    SK
-    id
-    name
-    subCategory
+export const GetMerchantDocument = gql`
+    query getMerchant($category: String, $subCategory: String, $filter: String) {
+  getMerchant(category: $category, subCategory: $subCategory, filter: $filter) {
     category {
+      searchName
       name
-      icon
+      PK
+      SK
     }
+    SK
+    subCategory
+    name
+    id
   }
 }
     `;
 
 /**
- * __useMerchantQueryQuery__
+ * __useGetMerchantQuery__
  *
- * To run a query within a React component, call `useMerchantQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useMerchantQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetMerchantQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMerchantQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMerchantQueryQuery({
+ * const { data, loading, error } = useGetMerchantQuery({
  *   variables: {
+ *      category: // value for 'category'
+ *      subCategory: // value for 'subCategory'
  *      filter: // value for 'filter'
  *   },
  * });
  */
-export function useMerchantQueryQuery(baseOptions?: Apollo.QueryHookOptions<MerchantQueryQuery, MerchantQueryQueryVariables>) {
+export function useGetMerchantQuery(baseOptions?: Apollo.QueryHookOptions<GetMerchantQuery, GetMerchantQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MerchantQueryQuery, MerchantQueryQueryVariables>(MerchantQueryDocument, options);
+        return Apollo.useQuery<GetMerchantQuery, GetMerchantQueryVariables>(GetMerchantDocument, options);
       }
-export function useMerchantQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MerchantQueryQuery, MerchantQueryQueryVariables>) {
+export function useGetMerchantLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMerchantQuery, GetMerchantQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MerchantQueryQuery, MerchantQueryQueryVariables>(MerchantQueryDocument, options);
+          return Apollo.useLazyQuery<GetMerchantQuery, GetMerchantQueryVariables>(GetMerchantDocument, options);
         }
 // @ts-ignore
-export function useMerchantQuerySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<MerchantQueryQuery, MerchantQueryQueryVariables>): Apollo.UseSuspenseQueryResult<MerchantQueryQuery, MerchantQueryQueryVariables>;
-export function useMerchantQuerySuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<MerchantQueryQuery, MerchantQueryQueryVariables>): Apollo.UseSuspenseQueryResult<MerchantQueryQuery | undefined, MerchantQueryQueryVariables>;
-export function useMerchantQuerySuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<MerchantQueryQuery, MerchantQueryQueryVariables>) {
+export function useGetMerchantSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetMerchantQuery, GetMerchantQueryVariables>): Apollo.UseSuspenseQueryResult<GetMerchantQuery, GetMerchantQueryVariables>;
+export function useGetMerchantSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetMerchantQuery, GetMerchantQueryVariables>): Apollo.UseSuspenseQueryResult<GetMerchantQuery | undefined, GetMerchantQueryVariables>;
+export function useGetMerchantSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetMerchantQuery, GetMerchantQueryVariables>) {
           const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<MerchantQueryQuery, MerchantQueryQueryVariables>(MerchantQueryDocument, options);
+          return Apollo.useSuspenseQuery<GetMerchantQuery, GetMerchantQueryVariables>(GetMerchantDocument, options);
         }
-export type MerchantQueryQueryHookResult = ReturnType<typeof useMerchantQueryQuery>;
-export type MerchantQueryLazyQueryHookResult = ReturnType<typeof useMerchantQueryLazyQuery>;
-export type MerchantQuerySuspenseQueryHookResult = ReturnType<typeof useMerchantQuerySuspenseQuery>;
-export type MerchantQueryQueryResult = Apollo.QueryResult<MerchantQueryQuery, MerchantQueryQueryVariables>;
+export type GetMerchantQueryHookResult = ReturnType<typeof useGetMerchantQuery>;
+export type GetMerchantLazyQueryHookResult = ReturnType<typeof useGetMerchantLazyQuery>;
+export type GetMerchantSuspenseQueryHookResult = ReturnType<typeof useGetMerchantSuspenseQuery>;
+export type GetMerchantQueryResult = Apollo.QueryResult<GetMerchantQuery, GetMerchantQueryVariables>;
 export const GetSubCategoryDocument = gql`
     query getSubCategory($SK: ID!) {
   getSubCategory(SK: $SK) {

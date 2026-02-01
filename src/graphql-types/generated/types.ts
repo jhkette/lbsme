@@ -22,8 +22,6 @@ export type AccountDetailsType = {
   secondaryIdentification?: Maybe<Scalars['String']['output']>;
 };
 
-
-
 export type AccountType = {
   __typename?: 'AccountType';
   details: Array<AccountDetailsType>;
