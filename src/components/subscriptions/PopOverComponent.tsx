@@ -393,8 +393,8 @@ export function PopoverComponent() {
                 </div>
               </div>
 
-              <div className="w-3/4 flex items-center justify-between py-2">
-                <label className="text-sm text-lbgreen font-semibold">
+              <div className="w-full flex px-18 flex-col items-start justify-start py-2">
+                <label className="text-sm text-lbgreen font-semibold pb-2">
                   Free trial
                 </label>
                 <Switch
