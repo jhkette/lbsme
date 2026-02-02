@@ -94,6 +94,7 @@ export function PopoverComponent() {
   const minDate = useMemo(() => addDays(new Date(), 1), []);
   const [saveSubscription] = useSaveSubscriptionMutation();
   const [subSubmitting, setSubSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
  
 
@@ -124,9 +125,7 @@ export function PopoverComponent() {
 
   console.log(merchantData?.getMerchant);
 
-  // const setNextPayment = (date: Date) => {
-  //   console.log("Selected next payment date:", date);
-  // }
+  
   // Function to clear form values and reset state
   // when user closes the popover
   const clearValues = () => {
@@ -134,6 +133,7 @@ export function PopoverComponent() {
     setSelectedMerchant(null);
     setOpen(false);
     setStep(1);
+    setFormError(null);
   };
 
   const onSubmit: SubmitHandler<SubscriptionFormData> = async (data) => {
@@ -162,7 +162,7 @@ export function PopoverComponent() {
           : null,
     };
 
-    console.log("Prepared subscription data:", saveSubscriptionData);
+
 
     try {
       const result = await saveSubscription({
@@ -175,8 +175,12 @@ export function PopoverComponent() {
           router.push(`/dashboard/subs/${encodeURIComponent(savedId)}`);
         }
       }
-    } catch (e) {
+    } catch (e: unknown) {
+      setSubSubmitting(false);
       console.log("Unexpected error saving subscription:", e);
+      const errorMessage =
+        e instanceof Error ? e.message : "An unexpected error occurred.";
+      setFormError(errorMessage);
     }
   };
 
@@ -242,7 +246,7 @@ export function PopoverComponent() {
         {step === 2 && (
           <div className="grid gap-2">
             <div
-              className="px-12 py-4 flex flex-row items-center cursor-pointer text-lbgreen font-semibold"
+              className="px-16 py-4 flex flex-row items-center cursor-pointer text-lbgreen font-semibold"
               onClick={() => setStep(1)}
             >
               <ArrowLeft onClick={() => setStep(1)} /> Go back
@@ -381,7 +385,7 @@ export function PopoverComponent() {
                 </label>
                 <Switch
                   checked={isFreeTrial}
-                  onCheckedChange={setIsFreeTrial}
+                  onCheckedChange={(checked) => setIsFreeTrial(checked)}
                 />
               </div>
               {/* Submit */}
@@ -393,6 +397,11 @@ export function PopoverComponent() {
               {subSubmitting &&
                 <LoaderCircle className="size-10  text-lbgreen animate-spin" />
              }
+              {formError && (
+                <p className="text-red-500 text-sm">
+                  {formError}
+                </p>
+              )}
             </form>
           </div>
         )}
