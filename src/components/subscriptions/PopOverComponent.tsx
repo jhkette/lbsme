@@ -161,7 +161,7 @@ export function PopoverComponent() {
           ? format(contractEndPayment, "yyyy-MM-dd")
           : null,
     };
-
+   console.log("Prepared saveSubscriptionData:", saveSubscriptionData);
 
 
     try {
@@ -365,13 +365,13 @@ export function PopoverComponent() {
 
               {/* Dates */}
               <div className="w-3/4 flex flex-row items-center justify-start border-red-500">
-                <div className="w-2/4 mr-4 flex flex-col">
+                <div className="w-2/4 mr-3 flex flex-col">
                   <label className="text-sm w-full text-lbgreen font-semibold text-left align-start w-fit">
                     Next Payment Date
                   </label>
                   <DatePickerComponent onDateChange={setNextPayment} />
                 </div>
-                <div className="w-2/4 ml-4 flex flex-col">
+                <div className="w-2/4 ml-3 flex flex-col">
                   <label className="text-sm w-full text-lbgreen font-semibold text-left align-start w-fit">
                     Contract End Date (optional)
                   </label>
