@@ -36,6 +36,18 @@ interface SubscriptionFormData {
 export function PopoverComponent() {
   const router = useRouter();
   const [filterValue, setFilterValue] = useState("");
+    const [step, setStep] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [contractEndPayment, setContractEndPayment] = useState<Date | null>(
+    null,
+  );
+  const [nextPayment, setNextPayment] = useState<Date | null>(null);
+  const [isFreeTrial, setIsFreeTrial] = useState(false);
+  const minDate = useMemo(() => addDays(new Date(), 1), []);
+  const [saveSubscription] = useSaveSubscriptionMutation();
+  const [subSubmitting, setSubSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
   const [selectedMerchant, setSelectedMerchant] =
     useState<MerchantResultV2 | null>(null);
   const { isBlurred, setIsBlurred } = useBlur();
@@ -84,23 +96,11 @@ export function PopoverComponent() {
 
       fetchPolicy: "cache-and-network",
     });
-  const [step, setStep] = useState(1);
-  const [open, setOpen] = useState(false);
-  const [contractEndPayment, setContractEndPayment] = useState<Date | null>(
-    null,
-  );
-  const [nextPayment, setNextPayment] = useState<Date | null>(null);
-  const [isFreeTrial, setIsFreeTrial] = useState(false);
-  const minDate = useMemo(() => addDays(new Date(), 1), []);
-  const [saveSubscription] = useSaveSubscriptionMutation();
-  const [subSubmitting, setSubSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
 
  
 
 
-  // client needed for manual refetch updates after mutation
-  const client = useApolloClient();
+
 
   useEffect(() => {
     if (open === false) {
@@ -139,7 +139,13 @@ export function PopoverComponent() {
   const onSubmit: SubmitHandler<SubscriptionFormData> = async (data) => {
     console.log("Form submitted with data:", data);
     console.log("Selected Merchant:", selectedMerchant);
+
     setSubSubmitting(true);
+    if (!(nextPayment instanceof Date) && isFreeTrial) {
+      setSubSubmitting(false);
+      setFormError("Next payment date is required and must be a valid date.");
+      return;
+    }
     const saveSubscriptionData: SaveSubscriptionInput = {
       category: {
         PK: selectedMerchant?.category.PK as string,
