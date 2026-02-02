@@ -6,7 +6,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Search, X } from "lucide-react";
 import { addDays } from "date-fns";
-import { useApolloClient } from "@apollo/client";
 import {
   useGetMerchantLazyQuery,
 } from "@/graphql/getMerchants.generated";
@@ -141,24 +140,33 @@ export function PopoverComponent() {
     console.log("Selected Merchant:", selectedMerchant);
 
     setSubSubmitting(true);
-    if (!(nextPayment instanceof Date) && isFreeTrial) {
+    if (!(nextPayment instanceof Date)) {
       setSubSubmitting(false);
       setFormError("Next payment date is required and must be a valid date.");
       return;
     }
+    if (
+      !selectedMerchant ||
+      !selectedMerchant.category?.PK ||
+      !selectedMerchant.SK
+    ) {
+      setSubSubmitting(false);
+      setFormError("Please select a valid merchant before submitting.");
+      return;
+    }
     const saveSubscriptionData: SaveSubscriptionInput = {
       category: {
-        PK: selectedMerchant?.category.PK as string,
-        SK: selectedMerchant?.SK as string,
+        PK: selectedMerchant.category.PK,
+        SK: selectedMerchant.SK,
       },
       merchant: {
-        id: selectedMerchant?.id as string,
-        name: selectedMerchant?.name as string,
+        id: selectedMerchant.id,
+        name: selectedMerchant.name,
       },
       amount: parseFloat(data.cost),
       type: data.frequency,
       freeTrial: isFreeTrial,
-      displayName: selectedMerchant?.name ?? "",
+      displayName: selectedMerchant.name ?? "",
       renewalDate:
         nextPayment instanceof Date ? format(nextPayment, "yyyy-MM-dd") : null,
 
