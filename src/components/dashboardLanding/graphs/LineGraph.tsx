@@ -103,8 +103,8 @@ export default function LineChartPayment() {
 	const currentMonth = currentDate.getUTCMonth(); // 0 = January, 11 = December
 	const currentYear = currentDate.getUTCFullYear();
 
-	// If it's January, show data from previous year instead
-	const targetYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+	// If it's January or February, show data from previous year instead
+	const targetYear = currentMonth === 0 || currentMonth === 1 ? currentYear - 1 : currentYear;
 
 	for (const subArray of detailedDescriptions) {
 		for (const tx of subArray) {
@@ -122,8 +122,8 @@ export default function LineChartPayment() {
 	// get cumulative data for the graph
 	// this will be used to show the cumulative spend for each month
 	const cumulativeData = (() => {
-		// If showing previous year data (January), include all months. Otherwise, include months up to current month
-		const maxMonthIndex = currentMonth === 0 ? 12 : currentMonth;
+		// If showing previous year data (January or February), include all months. Otherwise, include months up to current month
+		const maxMonthIndex = currentMonth === 0 || currentMonth === 1 ? 12 : currentMonth;
 		let runningTotal = 0;
 		// returns data
 		return (
