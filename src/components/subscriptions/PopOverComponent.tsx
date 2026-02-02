@@ -1,27 +1,30 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { costSchema } from "@/schemas/costSchema";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Search, X } from "lucide-react";
 import { addDays } from "date-fns";
 import { useApolloClient } from "@apollo/client";
-import { useGetMerchantLazyQuery, useGetSubCategoryLazyQuery } from "@/graphql/getMerchants.generated";
+import {
+  useGetMerchantLazyQuery,
+} from "@/graphql/getMerchants.generated";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import DatePickerComponent from "./DatePickerComponent";
 import { useBlur } from "@/contexts/BlurContext/BlurContext";
-import {SaveSubscriptionInput }from "@/graphql-types/generated/types"
+import { SaveSubscriptionInput } from "@/graphql-types/generated/types";
 import { useSaveSubscriptionMutation } from "@/graphql/saveSubscription.generated";
-import { SubscriptionPriceTypeEnum } from "@/interfaces/PriceTypeEnum"
+import { SubscriptionPriceTypeEnum } from "@/interfaces/PriceTypeEnum";
 import { Switch } from "@/components/ui/switch";
 import { format } from "date-fns";
 import { MerchantResultV2 } from "@/graphql-types/generated/types";
-
 
 interface SubscriptionFormData {
   provider?: string;
@@ -30,14 +33,8 @@ interface SubscriptionFormData {
   frequency: SubscriptionPriceTypeEnum;
 }
 
-const extractPKFromSubCategory = (value?: string | null): string | null => {
-  if (!value) return null;
-
-  const match = value.match(/PK\s*[=:]\s*([^,}]+)/);
-  return match?.[1]?.trim() ?? null;
-};
-
 export function PopoverComponent() {
+  const router = useRouter();
   const [filterValue, setFilterValue] = useState("");
   const [selectedMerchant, setSelectedMerchant] =
     useState<MerchantResultV2 | null>(null);
@@ -48,14 +45,12 @@ export function PopoverComponent() {
     formState: { errors },
     reset,
     setValue,
-   
   } = useForm<SubscriptionFormData>({
     defaultValues: {
       provider: selectedMerchant?.name ?? "",
       category: selectedMerchant?.subCategory ?? "",
       cost: "",
       frequency: SubscriptionPriceTypeEnum.Monthly,
-    
     },
     resolver: zodResolver(costSchema),
   });
@@ -63,13 +58,17 @@ export function PopoverComponent() {
   useEffect(() => {
     if (selectedMerchant) {
       setValue("provider", selectedMerchant.name);
-      
+
       // Handle subCategory - sometimes it's a proper string, sometimes it's a malformed string like "{SK=SUBCATEGORY#OTHER...}"
       let categoryValue = "Other";
       if (selectedMerchant.subCategory) {
         const subCat = selectedMerchant.subCategory;
         // Check if it's a malformed string containing "SK=" or "SUBCATEGORY#"
-        if (subCat.includes("SK=") || subCat.includes("SUBCATEGORY#") || subCat.includes("PK=")) {
+        if (
+          subCat.includes("SK=") ||
+          subCat.includes("SUBCATEGORY#") ||
+          subCat.includes("PK=")
+        ) {
           categoryValue = "Other";
         } else {
           categoryValue = subCat;
@@ -79,8 +78,6 @@ export function PopoverComponent() {
     }
   }, [selectedMerchant, setValue]);
 
- 
-
   const [getMerchant, { data: merchantData, error, loading }] =
     useGetMerchantLazyQuery({
       variables: { filter: filterValue },
@@ -89,37 +86,20 @@ export function PopoverComponent() {
     });
   const [step, setStep] = useState(1);
   const [open, setOpen] = useState(false);
-  const [contractEndPayment, setContractEndPayment] = useState<Date | null>(null);
+  const [contractEndPayment, setContractEndPayment] = useState<Date | null>(
+    null,
+  );
   const [nextPayment, setNextPayment] = useState<Date | null>(null);
   const [isFreeTrial, setIsFreeTrial] = useState(false);
   const minDate = useMemo(() => addDays(new Date(), 1), []);
   const [saveSubscription] = useSaveSubscriptionMutation();
+  const [subSubmitting, setSubSubmitting] = useState(false);
 
- 	const [
-		getSubCategory,
-		{ data: subCategoryData, loading: subCategoryLoading },
-	] = useGetSubCategoryLazyQuery({
-		fetchPolicy: "cache-and-network",
-	});
+ 
 
-  
-  useEffect(() => {
-    const subCategoryPK = selectedMerchant?.category?.PK 
-    if (!subCategoryPK) return;
 
-    (async () => {
-      try {
-        await getSubCategory({ variables: { SK: subCategoryPK } });
-      } catch (e) {
-        console.log("Failed to fetch subcategory:", e);
-      }
-    })();
-  }, [getSubCategory,  selectedMerchant?.category?.PK , selectedMerchant?.subCategory]);
-
-  console.log(subCategoryData?.getSubCategory, "SUBCATEGORY DATA IMPO");
   // client needed for manual refetch updates after mutation
   const client = useApolloClient();
-  
 
   useEffect(() => {
     if (open === false) {
@@ -152,59 +132,53 @@ export function PopoverComponent() {
   const clearValues = () => {
     reset();
     setSelectedMerchant(null);
-    setOpen(false); 
-    setStep(1); 
-  }
-
+    setOpen(false);
+    setStep(1);
+  };
 
   const onSubmit: SubmitHandler<SubscriptionFormData> = async (data) => {
     console.log("Form submitted with data:", data);
     console.log("Selected Merchant:", selectedMerchant);
-   const saveSubscriptionData: SaveSubscriptionInput = {
+    setSubSubmitting(true);
+    const saveSubscriptionData: SaveSubscriptionInput = {
+      category: {
+        PK: selectedMerchant?.category.PK as string,
+        SK: selectedMerchant?.SK as string,
+      },
+      merchant: {
+        id: selectedMerchant?.id as string,
+        name: selectedMerchant?.name as string,
+      },
+      amount: parseFloat(data.cost),
+      type: data.frequency,
+      freeTrial: isFreeTrial,
+      displayName: selectedMerchant?.name ?? "",
+      renewalDate:
+        nextPayment instanceof Date ? format(nextPayment, "yyyy-MM-dd") : null,
 
-  
-				category: { PK: selectedMerchant?.category.PK as string, SK: selectedMerchant?.SK as string },
-				merchant: {
-					id: selectedMerchant?.id as string, 
-					name:
-						selectedMerchant?.name as string, 
-				},
-        amount: parseFloat(data.cost),
-        type: data.frequency,
-        freeTrial: isFreeTrial,
-        displayName: selectedMerchant?.name ?? "",
-        renewalDate:
-          nextPayment instanceof Date
-            ? format(nextPayment, "yyyy-MM-dd")
-            : null,
-
-       contractEndDate: contractEndPayment instanceof Date
+      contractEndDate:
+        contractEndPayment instanceof Date
           ? format(contractEndPayment, "yyyy-MM-dd")
-          : null
-      }
-     
-
-      console.log("Prepared subscription data:", saveSubscriptionData);
-
-      try {
-				const result = await saveSubscription({
-					variables: { subscription: saveSubscriptionData },
-				});
-
-				if (result.data) {
-					// setSaveResultId(result.data.saveSubscription.id);
-
-					// Clear cache to refresh subscriptions list
-					await client.refetchQueries({
-						include: ["GetSubscriptions"], // Query name
-					});
-
-					
-				}
-      } catch (e) {
-        console.log("Unexpected error saving subscription:", e);
-      }
+          : null,
     };
+
+    console.log("Prepared subscription data:", saveSubscriptionData);
+
+    try {
+      const result = await saveSubscription({
+        variables: { subscription: saveSubscriptionData },
+      });
+
+      if (result.data) {
+        const savedId = result.data.saveSubscription.id;
+        if (savedId) {
+          router.push(`/dashboard/subs/${encodeURIComponent(savedId)}`);
+        }
+      }
+    } catch (e) {
+      console.log("Unexpected error saving subscription:", e);
+    }
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -222,7 +196,9 @@ export function PopoverComponent() {
             <X
               className="text-lbtext hover:text-lbgreen"
               size={32}
-              onClick={() => { clearValues(); }}
+              onClick={() => {
+                clearValues();
+              }}
             />
           </div>
         </div>
@@ -328,7 +304,9 @@ export function PopoverComponent() {
                     Cost
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-500">£</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-500">
+                      £
+                    </span>
                     <input
                       type="text"
                       id="cost"
@@ -341,7 +319,9 @@ export function PopoverComponent() {
                     />
                   </div>
                   {errors.cost && (
-                    <p className="text-red-500 text-sm">{errors.cost.message}</p>
+                    <p className="text-red-500 text-sm">
+                      {errors.cost.message}
+                    </p>
                   )}
                 </div>
                 <div className="flex flex-col">
@@ -353,16 +333,28 @@ export function PopoverComponent() {
                   </label>
                   <select
                     id="frequency"
-                    {...register("frequency", { required: "Frequency is required" })}
+                    {...register("frequency", {
+                      required: "Frequency is required",
+                    })}
                     className="w-full p-3 rounded-lg my-2 text-lg border border-gray-300 outline-none transition-all duration-200 bg-white"
                   >
-                    <option value={SubscriptionPriceTypeEnum.Monthly}>Monthly</option>
-                    <option value={SubscriptionPriceTypeEnum.Quarterly}>Quarterly</option>
-                    <option value={SubscriptionPriceTypeEnum.Weekly}>Weekly</option>
-                    <option value={SubscriptionPriceTypeEnum.Yearly}>Yearly</option>
+                    <option value={SubscriptionPriceTypeEnum.Monthly}>
+                      Monthly
+                    </option>
+                    <option value={SubscriptionPriceTypeEnum.Quarterly}>
+                      Quarterly
+                    </option>
+                    <option value={SubscriptionPriceTypeEnum.Weekly}>
+                      Weekly
+                    </option>
+                    <option value={SubscriptionPriceTypeEnum.Yearly}>
+                      Yearly
+                    </option>
                   </select>
                   {errors.frequency && (
-                    <p className="text-red-500 text-sm">{errors.frequency.message}</p>
+                    <p className="text-red-500 text-sm">
+                      {errors.frequency.message}
+                    </p>
                   )}
                 </div>
               </div>
@@ -398,6 +390,9 @@ export function PopoverComponent() {
                 value="Add Subscription"
                 className="w-3/4 p-3 shadow-lg rounded-lg my-6 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
               />
+              {subSubmitting &&
+                <LoaderCircle className="size-10  text-lbgreen animate-spin" />
+             }
             </form>
           </div>
         )}
