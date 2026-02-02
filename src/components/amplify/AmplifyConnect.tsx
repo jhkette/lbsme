@@ -2,8 +2,8 @@
 
 import { Amplify } from "aws-amplify";
 import { ReactNode } from "react";
-
-const amplifyConfigured = (() => {
+// Configure Amplify with Cognito settings from environment variables - self-invoking function
+ (() => {
 	Amplify.configure({
 		Auth: {
 			Cognito: {
