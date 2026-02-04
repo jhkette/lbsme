@@ -17,7 +17,7 @@ export default function ConnectAccounts({subscribed}: {subscribed: boolean}) {
 		error: urlError,
 	} = useGetProviderlessUserAuthGatewayQuery({
 		fetchPolicy: "network-only", // always get fresh data
-		// variables: { web: true },
+		variables: { web: true },
 	});
 
 	const { loading, error, data, refetch } = useGetBankAccountQuery({

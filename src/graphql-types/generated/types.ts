@@ -575,6 +575,11 @@ export type QueryGetNotificationsSettingsArgs = {
 };
 
 
+export type QueryGetProviderlessUserAuthGatewayArgs = {
+  web?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type QueryGetProvidersArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };

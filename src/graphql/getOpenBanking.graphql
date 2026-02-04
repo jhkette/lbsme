@@ -1,5 +1,5 @@
-query getProviderlessUserAuthGateway {
-	getProviderlessUserAuthGateway {
+query getProviderlessUserAuthGateway($web: Boolean) {
+	getProviderlessUserAuthGateway(web: $web) {
 		url
 	}
 }
