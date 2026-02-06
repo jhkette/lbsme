@@ -24,6 +24,8 @@ import { SubscriptionPriceTypeEnum } from "@/interfaces/PriceTypeEnum";
 import { Switch } from "@/components/ui/switch";
 import { format } from "date-fns";
 import { MerchantResultV2 } from "@/graphql-types/generated/types";
+import {useGetSubCategoryLazyQuery} from "@/graphql/getMerchants.generated"
+import { get } from "http";
 
 interface SubscriptionFormData {
   provider?: string;
@@ -89,6 +91,17 @@ export function PopoverComponent() {
     }
   }, [selectedMerchant, setValue]);
 
+  // useGetSubCategoryLazyQuery({
+  //   variables: { SK: selectedMerchant?.SK ?? "" },
+  // })
+
+
+  
+   
+
+
+   
+
   const [getMerchant, { data: merchantData, error, loading }] =
     useGetMerchantLazyQuery({
       variables: { filter: filterValue },
@@ -138,7 +151,6 @@ export function PopoverComponent() {
   const onSubmit: SubmitHandler<SubscriptionFormData> = async (data) => {
     console.log("Form submitted with data:", data);
     console.log("Selected Merchant:", selectedMerchant);
-
     setSubSubmitting(true);
     if (!(nextPayment instanceof Date)) {
       setSubSubmitting(false);
@@ -205,7 +217,7 @@ export function PopoverComponent() {
           Add subscription +
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white">
+      <PopoverContent className="w-148 relative -top-56 -left-[500px] z-400 shadow-md bg-white pt-8">
         <div className="flex flex-row items-center px-8 my-2 bg-white">
           <h2 className="text-2xl font-semibold pb-2 text-lbtext">
             Add a subscription
@@ -233,7 +245,7 @@ export function PopoverComponent() {
               <Search
                 color="#cfceceff"
                 size={26}
-                className="absolute right-8 top-6 "
+                className="absolute right-6 top-6 "
               />
             </div>
             <div className=" h-[450px] lg:h-[550px] overflow-y-auto scrollbar-nice">
@@ -408,14 +420,17 @@ export function PopoverComponent() {
                 value="Add Subscription"
                 className="w-3/4 p-3 shadow-lg rounded-lg my-6 text-lg bg-lbgreen text-white cursor-pointer hover:bg-lbtext transition duration-300"
               />
+              <div className="min-h-8" >
               {subSubmitting &&
                 <LoaderCircle className="size-10  text-lbgreen animate-spin" />
              }
+             
               {formError && (
                 <p className="text-red-500 text-sm">
                   {formError}
                 </p>
               )}
+              </div>
             </form>
           </div>
         )}

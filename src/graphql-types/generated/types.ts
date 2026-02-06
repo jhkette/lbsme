@@ -12,6 +12,11 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  AWSDate: { input: any; output: any; }
+  AWSEmail: { input: any; output: any; }
+  AWSJSON: { input: any; output: any; }
+  AWSPhone: { input: any; output: any; }
+  AWSURL: { input: any; output: any; }
 };
 
 export type AccountDetailsType = {
@@ -50,12 +55,6 @@ export type AssignedCategory = {
   searchCategory: Scalars['String']['output'];
   searchSubCategory: Scalars['String']['output'];
   subCategory: Scalars['String']['output'];
-};
-
-export type AssignedCategoryV2 = {
-  __typename?: 'AssignedCategoryV2';
-  l1: Scalars['String']['output'];
-  l2: Scalars['String']['output'];
 };
 
 export type BankAccountLinkDetails = {
@@ -135,11 +134,6 @@ export type CreateAdministratorInput = {
   givenName: Scalars['String']['input'];
   phoneNumber: Scalars['String']['input'];
 };
-
-export enum CreditDebitIndicator {
-  Credit = 'Credit',
-  Debit = 'Debit'
-}
 
 export type CustomerDataResult = {
   __typename?: 'CustomerDataResult';
@@ -295,13 +289,6 @@ export type MerchantResultV2 = {
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
   subCategory: Scalars['String']['output'];
-};
-
-export type MerchantV2 = {
-  __typename?: 'MerchantV2';
-  id: Scalars['String']['output'];
-  logo?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -500,6 +487,7 @@ export type Query = {
   getMerchant?: Maybe<Array<MerchantResultV2>>;
   getNotifications: NotificationsPaginatedResult;
   getNotificationsSettings: NotificationsSettingsResult;
+  getPartnerRecommendations?: Maybe<Scalars['AWSJSON']['output']>;
   getProviderlessUserAuthGateway?: Maybe<UserAuthGatewayResult>;
   getProviders: Array<ProviderResult>;
   getRefreshUserAuthGateway?: Maybe<UserAuthGatewayResult>;
@@ -522,6 +510,7 @@ export type Query = {
   refreshTransaction?: Maybe<UserAuthGatewayResult>;
   sendWelcomeEmail?: Maybe<Scalars['Boolean']['output']>;
   setUserStatus?: Maybe<Scalars['Boolean']['output']>;
+  smartSuggest: SmartSuggestResult;
 };
 
 
@@ -572,6 +561,11 @@ export type QueryGetNotificationsSettingsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   nextToken?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<NotificationTypeEnum>;
+};
+
+
+export type QueryGetPartnerRecommendationsArgs = {
+  userId: Scalars['ID']['input'];
 };
 
 
@@ -725,7 +719,6 @@ export type Subscription = {
   priceChange: Scalars['Float']['output'];
   providerName: Scalars['String']['output'];
   saveUp: Scalars['Float']['output'];
-  status: SubscriptionStatusEnum;
   subscriptionId: Scalars['ID']['output'];
   type: SubscriptionPriceTypeEnum;
 };
@@ -790,20 +783,9 @@ export enum SubscriptionPriceTypeEnum {
 export enum SubscriptionStatusEnum {
   Active = 'ACTIVE',
   AwaitPayment = 'AWAIT_PAYMENT',
-  Deactive = 'DEACTIVE'
+  Deactive = 'DEACTIVE',
+  Inactive = 'INACTIVE'
 }
-
-export type SubscriptionV2 = {
-  __typename?: 'SubscriptionV2';
-  PK: Scalars['String']['output'];
-  SK: Scalars['String']['output'];
-  categories?: Maybe<AssignedCategoryV2>;
-  displayName: Scalars['String']['output'];
-  merchant?: Maybe<MerchantV2>;
-  period?: Maybe<SubscriptionPriceTypeEnum>;
-  status?: Maybe<SubscriptionStatusEnum>;
-  transactions?: Maybe<TransactionDataV2>;
-};
 
 export enum SubscriptionsSortKeyEnum {
   DealsSavings = 'DEALS_SAVINGS',
@@ -850,17 +832,6 @@ export type TransactionData = {
   provider?: Maybe<ProviderData>;
   title?: Maybe<Scalars['String']['output']>;
   transactionId?: Maybe<Scalars['String']['output']>;
-};
-
-export type TransactionDataV2 = {
-  __typename?: 'TransactionDataV2';
-  account_id?: Maybe<Scalars['String']['output']>;
-  amount?: Maybe<TransactionAmount>;
-  credit_debit_indicator?: Maybe<CreditDebitIndicator>;
-  date?: Maybe<Scalars['String']['output']>;
-  provider?: Maybe<Scalars['String']['output']>;
-  transaction_description?: Maybe<Scalars['String']['output']>;
-  transaction_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type UpcomingRenewals = {
@@ -954,4 +925,9 @@ export type GetSubscribedStatusResult = {
 export type GetSubscriptionPeriodResult = {
   __typename?: 'getSubscriptionPeriodResult';
   period?: Maybe<Scalars['String']['output']>;
+};
+
+export type SmartSuggestResult = {
+  __typename?: 'smartSuggestResult';
+  message: Scalars['String']['output'];
 };
