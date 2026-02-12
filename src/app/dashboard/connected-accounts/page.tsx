@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useGetProviderlessUserAuthGatewayLazyQuery } from "@/graphql/getOpenBanking.generated";
 
 import ConnectAccounts from "@/components/connectedAccounts/connectAccounts";
@@ -15,6 +15,8 @@ export default function Page() {
     fetchPolicy: "no-cache",
     notifyOnNetworkStatusChange: true,
   });
+
+  useEffect(() => {console.log("Subscription status:", subData?.getSubscribedStatus); }, [subData]);
 
   return (
     <div className="px-16 w-full mt-14 relative">

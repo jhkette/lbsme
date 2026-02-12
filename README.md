@@ -90,9 +90,17 @@ At the moment the site is hidden from search engines using -
 ```<meta name="robots" content="noindex,nofollow" />```
 If the site is visiting on a mobile it redirects to a download the app page - but the link has not been added. 
 
-## Branches
-There is another branch call feature/addsub which is the start of a new feature which allows the addition of manual subscriptions - like in the app. 
 
 ### Deployed on Vercel
 
 This app is deployed as a demo on vercel.
+
+## notes
+
+When running on the development environment you can run this query - to differentiate between web and mobile versions of sme app. This allows openbanking link to return to site on completion. The set up for the query can be found on the backend repository. 
+
+query getProviderlessUserAuthGateway($web: Boolean) {
+	getProviderlessUserAuthGateway(web: $web) {
+		url
+	}
+}

@@ -6,6 +6,7 @@ import { useUser } from "@/contexts/UserContext/UserProvider";
 import { useGetBankAccountQuery } from "@/graphql/getBankAccount.generated";
 import { useGetProviderlessUserAuthGatewayQuery } from "@/graphql/getOpenBanking.generated";
 import { Landmark } from "lucide-react";
+import { use, useEffect } from "react";
 
 
 export default function ConnectAccounts({subscribed}: {subscribed: boolean}) {
@@ -17,7 +18,7 @@ export default function ConnectAccounts({subscribed}: {subscribed: boolean}) {
 		error: urlError,
 	} = useGetProviderlessUserAuthGatewayQuery({
 		fetchPolicy: "network-only", // always get fresh data
-		variables: { web: true },
+		//variables: { web: true },
 	});
 
 	const { loading, error, data, refetch } = useGetBankAccountQuery({
@@ -25,6 +26,8 @@ export default function ConnectAccounts({subscribed}: {subscribed: boolean}) {
 
 		fetchPolicy: "cache-and-network",
 	});
+
+	useEffect(() => {console.log(urlData, urlError) }, [urlData, urlError]);
 
 	const accounts = data?.getBankAccount || [];
 
