@@ -81,6 +81,7 @@ export default function Password() {
 						given_name: given_name,
 						family_name: family_name,
 						"custom:terms_and_conditions": terms_and_conditions,
+						// uncheck when using development environment that has business table to handle this data
 						// "custom:businessId": userCredentials?.companyDetails.company_number,
 						// "custom:business_name": userCredentials?.companyDetails.title,
 					},

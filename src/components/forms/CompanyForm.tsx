@@ -64,9 +64,7 @@ export default function RegisterCompany() {
 	): Promise<void> => {
 		event.preventDefault();
 		if (
-			!selectedCompany?.title ||
-			!selectedCompany?.address_snippet ||
-			!selectedCompany?.company_number
+			!selectedCompany?.title 
 		) {
 			console.log("There are errors in the form");
 			setFormError(
@@ -83,8 +81,8 @@ export default function RegisterCompany() {
 			phoneNumber: userCredentials?.phoneNumber || "",
 			companyDetails: {
 				title: selectedCompany?.title,
-				address_snippet: selectedCompany?.address_snippet,
-				company_number: selectedCompany?.company_number,
+				address_snippet: selectedCompany?.address_snippet || "",
+				company_number: selectedCompany?.company_number || "",
 			},
 		});
 
