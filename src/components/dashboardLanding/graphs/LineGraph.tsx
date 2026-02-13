@@ -69,21 +69,6 @@ export default function LineChartPayment() {
 		| "nov"
 		| "dec";
 
-	const monthTotals: Record<MonthKey, number> = {
-		jan: 0,
-		feb: 0,
-		mar: 0,
-		apr: 0,
-		may: 0,
-		jun: 0,
-		jul: 0,
-		aug: 0,
-		sep: 0,
-		oct: 0,
-		nov: 0,
-		dec: 0,
-	};
-
 	const monthMap: MonthKey[] = [
 		"jan",
 		"feb",
@@ -103,18 +88,37 @@ export default function LineChartPayment() {
 	const currentMonth = currentDate.getUTCMonth(); // 0 = January, 11 = December
 	const currentYear = currentDate.getUTCFullYear();
 
-	// If it's January or February, show data from previous year instead
-	const targetYear = currentMonth === 0 || currentMonth === 1 ? currentYear - 1 : currentYear;
+	// Calculate the start date (12 months ago from current month)
+	const startDate = new Date(currentYear, currentMonth - 11, 1);
+	startDate.setUTCHours(0, 0, 0, 0);
 
+	// Generate array of last 12 months in chronological order
+	const last12Months: { month: string; year: number; total: number }[] = [];
+	for (let i = 0; i < 12; i++) {
+		const date = new Date(currentYear, currentMonth - 11 + i, 1);
+		const monthIndex = date.getMonth();
+		const year = date.getFullYear();
+		last12Months.push({
+			month: monthMap[monthIndex],
+			year: year,
+			total: 0,
+		});
+	}
+
+	// Aggregate transactions for the last 12 months
 	for (const subArray of detailedDescriptions) {
 		for (const tx of subArray) {
-			const date = new Date(tx.bookingTime);
-			const year = date.getUTCFullYear();
-			if (year !== targetYear) continue;
+			const txDate = new Date(tx.bookingTime);
+			
+			// Find which of the last 12 months this transaction belongs to
+			const monthMatch = last12Months.find(
+				(m) =>
+					txDate.getFullYear() === m.year &&
+					monthMap[txDate.getUTCMonth()] === m.month
+			);
 
-			const monthName = monthMap[date.getUTCMonth()];
-			if (monthName && tx.amount && typeof tx.amount.amount === "number") {
-				monthTotals[monthName] += tx.amount.amount;
+			if (monthMatch && tx.amount && typeof tx.amount.amount === "number") {
+				monthMatch.total += tx.amount.amount;
 			}
 		}
 	}
@@ -122,28 +126,14 @@ export default function LineChartPayment() {
 	// get cumulative data for the graph
 	// this will be used to show the cumulative spend for each month
 	const cumulativeData = (() => {
-		// If showing previous year data (January or February), include all months. Otherwise, include months up to current month
-		const maxMonthIndex = currentMonth === 0 || currentMonth === 1 ? 12 : currentMonth;
 		let runningTotal = 0;
-		// returns data
-		return (
-			monthMap
-				// maps through each month
-				.map((month, index) => {
-					// Skip months beyond the current month
-					if (index >= maxMonthIndex) {
-						return null; // Skip months beyond the cutoff
-					}
-					// add to running total from monthTotals object - calculated above
-					runningTotal += monthTotals[month]; // add the month's total to the running total in monthTotals index for each month
-					// Return the month and its cumulative spend - formatted for line graph
-					return {
-						month: month.charAt(0).toUpperCase() + month.slice(1), // Capitalize first letter
-						spend: parseFloat(runningTotal.toFixed(2)),
-					};
-				})
-				.filter(Boolean)
-		); // remove nulls
+		return last12Months.map((monthData) => {
+			runningTotal += monthData.total;
+			return {
+				month: monthData.month.charAt(0).toUpperCase() + monthData.month.slice(1), // Capitalize first letter
+				spend: parseFloat(runningTotal.toFixed(2)),
+			};
+		});
 	})();
 
 	if (detailedDescriptions.length > 0) {

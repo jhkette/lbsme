@@ -27,6 +27,7 @@ export default function MobileCheck({ children }: { children: ReactNode }) {
 	}, [router]);
 
 	// Don't render children until we've checked for mobile
+	// could add spinner
 	if (isChecking) {
 		return null; 
 	}

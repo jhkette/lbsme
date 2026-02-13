@@ -85,18 +85,20 @@ The person how made this repo was Joseph Ketterer. To get in contact with him pl
 ## CMS
 A cms is available at /studio and you can login with an allowed email
 
-## Additional info
-At the moment the site is hidden from search engines using -  
-```<meta name="robots" content="noindex,nofollow" />```
-If the site is visiting on a mobile it redirects to a download the app page - but the link has not been added. 
+
 
 
 ### Deployed on Vercel
 
 This app is deployed as a demo on vercel.
 
-## notes
+## Additional info
+1
+At the moment the site is hidden from search engines using -  
+```<meta name="robots" content="noindex,nofollow" />```
+If the site is visiting on a mobile it redirects to a download the app page - but the link has not been added. 
 
+2 -
 When running on the development environment you can run this query - to differentiate between web and mobile versions of sme app. This allows openbanking link to return to site on completion. The set up for the query can be found on the backend repository. 
 
 query getProviderlessUserAuthGateway($web: Boolean) {
@@ -104,3 +106,6 @@ query getProviderlessUserAuthGateway($web: Boolean) {
 		url
 	}
 }
+
+3-
+The linegraph feature would be better implemented
