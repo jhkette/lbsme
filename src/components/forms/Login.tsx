@@ -90,24 +90,26 @@ export default function Login() {
 					<p className="text-red-500 text-sm">{errors.email.message}</p>
 				)}
 			</div>
-			<input
-				type={type}
-				{...register("password")}
-				placeholder="Enter your Little birdie password"
-				className={cn(
-					"w-2/4 p-3 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
-					errors.password
-						? "bg-red-100 border-red-400 shadow-sm"
-						: "focus:shadow-md focus:border-blue-400",
-				)}
-			/>
-			<button
-				type="button"
-				className="absolute right-42 md:right-52 lg:right-58 mb-4  cursor-pointer"
-				onClick={togglePasswordVisibility}
-			>
-				<Icon className="stroke-muted-foreground size-5 lg:size-6" />
-			</button>
+			<div className="relative w-2/4">
+				<input
+					type={type}
+					{...register("password")}
+					placeholder="Enter your Little birdie password"
+					className={cn(
+						"w-full p-3 pr-12 rounded-lg my-4 text-lg border border-gray-300 outline-none transition-all duration-200",
+						errors.password
+							? "bg-red-100 border-red-400 shadow-sm"
+							: "focus:shadow-md focus:border-blue-400",
+					)}
+				/>
+				<button
+					type="button"
+					className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+					onClick={togglePasswordVisibility}
+				>
+					<Icon className="stroke-muted-foreground size-6 lg:size-7" />
+				</button>
+			</div>
 			<div className=" w-3/4 h-4">
 				{errors.password && (
 					<p className="text-red-500 text-sm">{errors.password.message}</p>
