@@ -1,7 +1,23 @@
 "use server";
 import { cookies } from "next/headers";
 import { AES } from "crypto-js";
-import { signIn } from "aws-amplify/auth";
+
+type LoginResponseData = {
+	access_token?: string;
+	username?: string;
+	email?: string;
+	emailVerified?: boolean;
+	familyName?: string;
+	givenName?: string;
+	phoneNumber?: string;
+	postcode?: string;
+};
+
+type LoginResponse = {
+	error?: string;
+	message?: string;
+	data?: LoginResponseData;
+};
 
 /**
  * Handles user login by sending a POST request to the login URL with encrypted credentials.
@@ -27,19 +43,41 @@ export const handleLogin = async (email: string, password: string) => {
 		// post request to the login URL with encrypted password and email
 		const res = await fetch(loginUrl, {
 			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
 				email: email,
 				password: AES.encrypt(password, encryptionKey).toString(),
 			}),
 		});
 
-		const result = await res
+		const result = (await res
 			.json()
-			.catch(() => ({ error: "Could not parse response" }));
-
+			.catch(() => ({ error: "Could not parse response" }))) as LoginResponse;
+        /* Handle various error cases and return appropriate error messages */
 		if (result.error) {
 			return { error: result.error };
 		}
+
+		if (!res.ok) {
+			return {
+				error: result.message || "Login request failed",
+			};
+		}
+
+		if (!result.data) {
+			return {
+				error: result.message || "Login response did not include user data",
+			};
+		}
+
+		if (!result.data.access_token) {
+			return {
+				error: result.message || "Login response did not include an access token",
+			};
+		}
+
 		const twoHours = 2 * 60 * 60 * 1000;
 		(await cookies()).set("user", JSON.stringify(result.data), {
 			expires: Date.now() + twoHours,
@@ -55,5 +93,6 @@ export const handleLogin = async (email: string, password: string) => {
 		return result;
 	} catch (error) {
 		console.error("Login failed:", error);
+		return { error: "Unexpected login error" };
 	}
 };

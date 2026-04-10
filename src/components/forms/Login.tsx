@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UserSchema, SignInData } from "@/schemas/signinSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { LoaderCircle } from "lucide-react";
 import { handleLogin } from "@/actions/login";
 import { useUser } from "@/contexts/UserContext/UserProvider";
@@ -26,7 +26,7 @@ export default function Login() {
 	const [loginError, setLoginError] = useState<string | null>(null); // State to hold login error messages
 	const [loading, setLoading] = useState(false); // State to manage loading /not loading
 
-	const [isPending, startTransition] = useTransition();
+	const [, startTransition] = useTransition();
 	// get user data from UserContext
 	const { setUser } = useUser();
 
@@ -44,14 +44,15 @@ export default function Login() {
 		setLoading(true); // Set loading state to true
 		if (errors.email || errors.password) {
 			console.log("There are errors in the form");
+			setLoading(false);
 			return;
 		}
 		clearErrors(); // clear any previous errors
 		setLoginError(null); // Clear previous login error
 		const logdata = await handleLogin(data.email, data.password);
 
-		if (logdata.error) {
-			console.log("Login failed:", logdata.error);
+		if (!logdata || logdata.error || !logdata.data) {
+			console.log("Login failed:", logdata?.error);
 			setLoginError("Login failed. Please check your credentials.");
 			setLoading(false); // Set loading state to false
 			return;
@@ -70,6 +71,7 @@ export default function Login() {
 
 			router.push("/dashboard");
 		});
+		setLoading(false);
 	};
 	return (
 		<form
