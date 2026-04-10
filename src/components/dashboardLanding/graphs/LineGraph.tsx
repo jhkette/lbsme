@@ -7,6 +7,7 @@ import {
 	YAxis,
 	Tooltip,
 	ResponsiveContainer,
+	TooltipValueType
 } from "recharts";
 import { useGetSubscriptionsQuery } from "@/graphql/getMainSubData.generated";
 import { LoaderCircle } from "lucide-react";
@@ -159,8 +160,8 @@ export default function LineChartPayment() {
 							<XAxis dataKey="month" />
 							<YAxis tickFormatter={(value) => `£${value}`} />
 							<Tooltip
-								formatter={(value: number | undefined) => [
-									`£${(value ?? 0).toFixed(2)}`,
+								formatter={(value: TooltipValueType|undefined) => [
+									`£${(value as number ?? 0).toFixed(2)}`,
 									"Cumulative Spend",
 								]}
 							/>

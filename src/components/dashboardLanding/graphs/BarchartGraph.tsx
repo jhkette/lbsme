@@ -7,6 +7,7 @@ import {
 	YAxis,
 	Tooltip,
 	ResponsiveContainer,
+	TooltipValueType
 } from "recharts";
 import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -41,8 +42,8 @@ export default function BarchartGraph({
 					<XAxis dataKey="displayName" tick={false} />
 					<YAxis tickFormatter={(value) => `£${value}`} />
 					<Tooltip
-						formatter={(value: number | undefined) => [
-							`£${(value ?? 0).toFixed(2)}`,
+						formatter={(value: TooltipValueType|undefined) => [
+							`£${(value as number ?? 0).toFixed(2)}`,
 							"Monthly Cost",
 						]}
 					/>
