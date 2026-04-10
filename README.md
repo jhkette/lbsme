@@ -86,7 +86,8 @@ The person how made this repo was Joseph Ketterer. To get in contact with him pl
 A cms is available at /studio and you can login with an allowed email
 
 
-
+## Small technical to-do
+Husky precommit checks are not working correctly. Not that important but it can be useful. 
 
 ### Deployed on Vercel
 
@@ -108,4 +109,4 @@ query getProviderlessUserAuthGateway($web: Boolean) {
 }
 
 3-
-The linegraph feature would be better implemented
+Husky precommit checks aren't working - didn't have time to fix
