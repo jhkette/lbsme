@@ -3,7 +3,9 @@ import * as Types from '../graphql-types/generated/types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-export type GetProviderlessUserAuthGatewayQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetProviderlessUserAuthGatewayQueryVariables = Types.Exact<{
+  web?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
+}>;
 
 
 export type GetProviderlessUserAuthGatewayQuery = { __typename?: 'Query', getProviderlessUserAuthGateway?: { __typename?: 'UserAuthGatewayResult', url: string } | null };
@@ -20,8 +22,8 @@ export type GetRefreshUserAuthGatewayQuery = { __typename?: 'Query', getRefreshU
 
 
 export const GetProviderlessUserAuthGatewayDocument = gql`
-    query getProviderlessUserAuthGateway {
-  getProviderlessUserAuthGateway {
+    query getProviderlessUserAuthGateway($web: Boolean) {
+  getProviderlessUserAuthGateway(web: $web) {
     url
   }
 }
@@ -39,6 +41,7 @@ export const GetProviderlessUserAuthGatewayDocument = gql`
  * @example
  * const { data, loading, error } = useGetProviderlessUserAuthGatewayQuery({
  *   variables: {
+ *      web: // value for 'web'
  *   },
  * });
  */

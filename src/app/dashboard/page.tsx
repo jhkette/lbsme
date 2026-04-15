@@ -33,10 +33,10 @@ export default function Home() {
 		fetchPolicy: "cache-and-network",
 	});
 
-	const subs = data?.getSubscriptions?.subscriptions as Subscription[];
+	const subs = (data?.getSubscriptions?.subscriptions ?? []) as Subscription[];
 
 	// handle logging in with no subscriptions to show
-	if (!loading && data?.getSubscriptions?.subscriptions?.length === 0) {
+	if (!loading && !error && subs.length === 0) {
 		return (
 			<div className="px-16 w-full mt-14 relative">
 				<IntroHome />
@@ -48,6 +48,30 @@ export default function Home() {
 					className="absolute -top-2 z-0 right-40 "
 				/>
 				<DashboardNoSubs />
+			</div>
+		);
+	}
+
+	if (!loading && (error || !data?.getSubscriptions)) {
+		return (
+			<div className="px-16 w-full mt-14 relative">
+				<IntroHome />
+				<Image
+					src="/images/main/lbgraphic.png"
+					height={250}
+					width={400}
+					alt="graphic"
+					className="absolute -top-2 z-0 right-40 "
+				/>
+				<div className="rounded-2xl border border-gray-300 bg-white p-6 shadow-2xl">
+					<p className="text-lg font-semibold text-lbtext">
+						Unable to load dashboard data.
+					</p>
+					<p className="mt-2 text-sm text-lbtextgrey">
+						Your session may be valid for login but not authorized for the current
+						GraphQL endpoint.
+					</p>
+				</div>
 			</div>
 		);
 	}
